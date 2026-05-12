@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary": "#00450d",
+                    "secondary-fixed-dim": "#a2d3a4",
+                    "primary-fixed": "#acf4a4",
+                    "on-primary-container": "#90d689",
+                    "on-primary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "inverse-on-surface": "#f0f1f1",
+                    "inverse-surface": "#2f3131",
+                    "tertiary": "#5f2c00",
+                    "on-tertiary-fixed-variant": "#723600",
+                    "on-tertiary-container": "#ffb481",
+                    "error-container": "#ffdad6",
+                    "surface-container-lowest": "#ffffff",
+                    "background": "#f9f9f9",
+                    "on-secondary-fixed-variant": "#24502c",
+                    "outline": "#717a6d",
+                    "on-background": "#1a1c1c",
+                    "on-tertiary-fixed": "#311300",
+                    "error": "#ba1a1a",
+                    "on-surface": "#1a1c1c",
+                    "surface-dim": "#dadada",
+                    "primary-fixed-dim": "#91d78a",
+                    "on-secondary-container": "#426e47",
+                    "outline-variant": "#c0c9bb",
+                    "surface-container-low": "#f3f3f4",
+                    "secondary-fixed": "#bdefbe",
+                    "secondary": "#3c6842",
+                    "surface-container-highest": "#e2e2e2",
+                    "primary-container": "#1b5e20",
+                    "on-primary-fixed": "#002203",
+                    "tertiary-fixed-dim": "#ffb786",
+                    "tertiary-fixed": "#ffdcc6",
+                    "on-secondary": "#ffffff",
+                    "on-surface-variant": "#41493e",
+                    "surface-tint": "#2a6b2c",
+                    "inverse-primary": "#91d78a",
+                    "on-error": "#ffffff",
+                    "tertiary-container": "#823f00",
+                    "surface-bright": "#f9f9f9",
+                    "on-tertiary": "#ffffff",
+                    "surface-variant": "#e2e2e2",
+                    "secondary-container": "#bdefbe",
+                    "surface-container-high": "#e8e8e8",
+                    "on-secondary-fixed": "#002109",
+                    "surface-container": "#eeeeee",
+                    "surface": "#f9f9f9",
+                    "on-primary-fixed-variant": "#0c5216"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "base": "8px",
+                    "xs": "4px",
+                    "margin-mobile": "16px",
+                    "sm": "12px",
+                    "margin-desktop": "48px",
+                    "lg": "24px",
+                    "gutter": "16px",
+                    "xl": "32px",
+                    "md": "16px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Public Sans"],
+                    "label-bold": ["Public Sans"],
+                    "title-md": ["Public Sans"],
+                    "body-lg": ["Public Sans"],
+                    "body-md": ["Public Sans"],
+                    "label-sm": ["Public Sans"],
+                    "body-accent": ["Public Sans"],
+                    "headline-lg": ["Public Sans"],
+                    "display-lg": ["Public Sans"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "label-bold": ["14px", {"lineHeight": "20px", "fontWeight": "700"}],
+                    "title-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "body-accent": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                    "display-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body-md min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="sticky top-0 w-full z-50 flex justify-between items-center px-margin-mobile py-base bg-surface dark:bg-surface-dim border-b border-outline-variant">
+<div class="flex items-center gap-md">
+<button class="material-symbols-outlined text-primary dark:text-primary-fixed active:opacity-80 transition-opacity">arrow_back</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary dark:text-primary-fixed">Analysis Result</h1>
+</div>
+<button class="material-symbols-outlined text-primary dark:text-primary-fixed active:opacity-80 transition-opacity">share</button>
+</header>
+<main class="px-margin-mobile pt-lg space-y-lg">
+<!-- 1. Uploaded Image Card -->
+<section class="relative">
+<div class="rounded-xl overflow-hidden border border-outline-variant shadow-sm aspect-video w-full bg-surface-variant">
+<img class="w-full h-full object-cover" data-alt="A macro close-up photograph of a diseased tomato leaf showing distinct dark brown concentric rings typical of Early Blight. The lighting is bright and natural, representative of an outdoor farm setting. The image is crisp and professional, fitting a high-tech agricultural diagnostic application. The overall aesthetic is clean and educational, focusing on the botanical symptoms." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDN4AGUSpyLFLqz-8xWOpm60uS19PKjObWN_0k8CWWeBH1rxfWN-rBRHDiSD-eclX1V83L7zhlOracLSJksn_e3E7Tf3zkWqvzNu2Pklo2c0eEnF1LzJdkb80jYZ_6vUVwTaZYLMpm-VLWRKedmp99C50E7LOf33MJGpeHmvL0dk3tF51NWU_nyAi7y1kN04DZ5edMP2j8T3ziYE2A6F4uNL7ZTs7PMgRynlkEoEOMp391by6UgiZA1Z3bURQmkLyoS6SJVgEfCrh9j"/>
+<div class="absolute top-sm left-sm">
+<span class="bg-surface/90 text-primary px-sm py-xs rounded-full font-label-bold text-label-sm shadow-sm flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">psychology</span>
+                        Tomato Leaf
+                    </span>
+</div>
+</div>
+</section>
+<!-- 2. Disease Card -->
+<section class="p-md rounded-xl border border-error bg-[#FFEBEE] space-y-sm">
+<div class="flex justify-between items-start">
+<div>
+<h2 class="font-title-md text-title-md text-on-error-container">Early Blight Detected</h2>
+<p class="font-body-md text-body-md italic text-on-surface-variant">Alternaria solani</p>
+</div>
+<span class="bg-tertiary-container text-on-tertiary-container px-sm py-xs rounded-full font-label-bold text-label-sm">
+                    87% Confident
+                </span>
+</div>
+</section>
+<!-- 3. Severity Card -->
+<section class="p-md rounded-xl border border-outline-variant bg-surface space-y-md">
+<div class="flex justify-between items-center">
+<span class="font-body-md text-body-md text-on-surface-variant">Severity Level</span>
+<span class="font-label-bold text-label-bold text-tertiary">Moderate</span>
+</div>
+<div class="w-full bg-surface-variant rounded-full h-3 overflow-hidden">
+<div class="bg-tertiary h-full rounded-full" style="width: 55%"></div>
+</div>
+</section>
+<!-- 4. Treatment Steps (Bento-ish Grid) -->
+<section class="space-y-md">
+<h3 class="font-title-md text-title-md text-primary">Treatment Plan</h3>
+<div class="grid grid-cols-1 gap-base">
+<div class="flex gap-md p-md bg-surface-container-low rounded-xl border border-outline-variant items-start">
+<div class="bg-primary-container text-on-primary-container h-8 w-8 rounded-full flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">content_cut</span>
+</div>
+<div>
+<p class="font-label-bold text-label-bold">1. Prune Infected Leaves</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Remove lower leaves touching the soil.</p>
+</div>
+</div>
+<div class="flex gap-md p-md bg-surface-container-low rounded-xl border border-outline-variant items-start">
+<div class="bg-primary-container text-on-primary-container h-8 w-8 rounded-full flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">water_drop</span>
+</div>
+<div>
+<p class="font-label-bold text-label-bold">2. Water at Base</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Avoid wetting foliage to prevent spread.</p>
+</div>
+</div>
+<div class="flex gap-md p-md bg-surface-container-low rounded-xl border border-outline-variant items-start">
+<div class="bg-primary-container text-on-primary-container h-8 w-8 rounded-full flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">eco</span>
+</div>
+<div>
+<p class="font-label-bold text-label-bold">3. Apply Fungicide</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Use copper-based sprays every 7 days.</p>
+</div>
+</div>
+<div class="flex gap-md p-md bg-surface-container-low rounded-xl border border-outline-variant items-start">
+<div class="bg-primary-container text-on-primary-container h-8 w-8 rounded-full flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">layers</span>
+</div>
+<div>
+<p class="font-label-bold text-label-bold">4. Add Mulch</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Layer organic mulch to prevent spore splash.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- 5. Language Toggle -->
+<section class="flex justify-center gap-base p-xs bg-surface-container rounded-full border border-outline-variant mx-auto max-w-fit">
+<button class="px-lg py-xs rounded-full font-label-bold text-label-sm text-on-surface-variant hover:bg-surface-container-high transition-colors">EN</button>
+<button class="px-lg py-xs rounded-full font-label-bold text-label-sm bg-primary text-on-primary shadow-sm">ಕನ್ನಡ</button>
+<button class="px-lg py-xs rounded-full font-label-bold text-label-sm text-on-surface-variant hover:bg-surface-container-high transition-colors">हिं</button>
+</section>
+<!-- 6 & 7 Buttons -->
+<section class="space-y-base pt-md">
+<button class="w-full bg-primary-container text-on-primary-container py-md rounded-full font-label-bold flex items-center justify-center gap-sm active:scale-95 transition-transform">
+<span class="material-symbols-outlined">volume_up</span>
+                Hear Diagnosis in Kannada
+            </button>
+<button class="w-full border-2 border-primary text-primary py-md rounded-full font-label-bold flex items-center justify-center gap-sm active:opacity-80 transition-opacity">
+<span class="material-symbols-outlined">ios_share</span>
+                Share Result
+            </button>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-xs py-sm bg-surface dark:bg-surface-dim border-t border-outline-variant">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-highest transition-all active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-4 py-1 active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined">document_scanner</span>
+<span class="font-label-sm text-label-sm">Scan</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-highest transition-all active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined">bar_chart</span>
+<span class="font-label-sm text-label-sm">Yield</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-highest transition-all active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined">more_horiz</span>
+<span class="font-label-sm text-label-sm">More</span>
+</a>
+</nav>
+</body></html>

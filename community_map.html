@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline-variant": "#c0c9bb",
+                    "outline": "#717a6d",
+                    "primary-container": "#1b5e20",
+                    "surface-variant": "#e2e2e2",
+                    "secondary-fixed-dim": "#a2d3a4",
+                    "on-error": "#ffffff",
+                    "secondary-fixed": "#bdefbe",
+                    "on-tertiary": "#ffffff",
+                    "surface-container": "#eeeeee",
+                    "secondary": "#3c6842",
+                    "surface-tint": "#2a6b2c",
+                    "on-tertiary-fixed": "#311300",
+                    "tertiary": "#5f2c00",
+                    "surface-dim": "#dadada",
+                    "surface-bright": "#f9f9f9",
+                    "surface-container-highest": "#e2e2e2",
+                    "inverse-primary": "#91d78a",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary-container": "#823f00",
+                    "surface": "#f9f9f9",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-container": "#ffb481",
+                    "primary-fixed": "#acf4a4",
+                    "on-surface-variant": "#41493e",
+                    "on-tertiary-fixed-variant": "#723600",
+                    "on-secondary-fixed": "#002109",
+                    "on-primary-fixed": "#002203",
+                    "on-primary-container": "#90d689",
+                    "inverse-surface": "#2f3131",
+                    "primary-fixed-dim": "#91d78a",
+                    "on-error-container": "#93000a",
+                    "error-container": "#ffdad6",
+                    "on-secondary": "#ffffff",
+                    "on-surface": "#1a1c1c",
+                    "on-secondary-fixed-variant": "#24502c",
+                    "surface-container-high": "#e8e8e8",
+                    "primary": "#00450d",
+                    "background": "#f9f9f9",
+                    "tertiary-fixed": "#ffdcc6",
+                    "tertiary-fixed-dim": "#ffb786",
+                    "inverse-on-surface": "#f0f1f1",
+                    "secondary-container": "#bdefbe",
+                    "on-background": "#1a1c1c",
+                    "error": "#ba1a1a",
+                    "on-primary-fixed-variant": "#0c5216",
+                    "surface-container-low": "#f3f3f4",
+                    "on-secondary-container": "#426e47"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-desktop": "48px",
+                    "base": "8px",
+                    "md": "16px",
+                    "xl": "32px",
+                    "lg": "24px",
+                    "gutter": "16px",
+                    "xs": "4px",
+                    "margin-mobile": "16px",
+                    "sm": "12px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Public Sans"],
+                    "headline-lg-mobile": ["Public Sans"],
+                    "body-lg": ["Public Sans"],
+                    "headline-lg": ["Public Sans"],
+                    "label-sm": ["Public Sans"],
+                    "body-md": ["Public Sans"],
+                    "title-md": ["Public Sans"],
+                    "label-bold": ["Public Sans"],
+                    "body-accent": ["Public Sans"]
+            },
+            "fontSize": {
+                    "display-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "title-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "label-bold": ["14px", {"lineHeight": "20px", "fontWeight": "700"}],
+                    "body-accent": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .heat-map-container {
+            height: 320px;
+            background-color: #1a1c1c; /* Dark map theme */
+            position: relative;
+            overflow: hidden;
+        }
+        .marker-red { background-color: #ba1a1a; }
+        .marker-orange { background-color: #823f00; }
+        .marker-green { background-color: #2a6b2c; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background font-body-md text-on-background min-h-screen flex flex-col">
+<!-- Top Bar: Shared Component - KisanAI -->
+<header class="sticky top-0 w-full z-50 flex justify-between items-center px-margin-mobile py-base bg-primary text-white border-b border-outline-variant">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined cursor-pointer">menu</span>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-bold">Disease Heatmap</h1>
+</div>
+<span class="material-symbols-outlined cursor-pointer">language</span>
+</header>
+<!-- Sub-header -->
+<div class="px-margin-mobile py-md bg-primary/5">
+<p class="text-on-surface-variant font-label-bold text-label-bold">Live disease reports from Karnataka farmers</p>
+</div>
+<!-- Map Canvas Area -->
+<main class="flex-grow relative">
+<div class="heat-map-container w-full relative">
+<!-- Simplified Map Representation -->
+<img class="w-full h-full object-cover opacity-40 grayscale contrast-125" data-alt="A dark, high-contrast digital map interface showing the geographical boundaries of Karnataka, India. The style is minimalist and professional, featuring a deep charcoal background with subtle light-grey district lines. Vibrant glowing markers in red, orange, and green are scattered across the map to represent different levels of crop disease intensity. The lighting is low-key, emphasizing the data points against the dark terrain." data-location="Karnataka" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDb3Ez2qQN7rchBEwXpl8t0ORBhdUiXCYdXXwt8dCdKRzjNw5LraudJpLtiEzr__SAu7ly5IBW9Zmf2mZ7XvIQqoOAQealL4S-x3XAIkR-32TWJ3qp_4yTulKTLyfj-3mOroorRsq3poU93UvJzFYnnRhAGE8_PE2HcxVXtp3XaOLQJSpVvk8TmSq1rwS1m67APc7f1XVxkbkxwz30jZ3oacEb_XR6KdbtkbhXqwdikTdux86eGgZbP6RDl6vWXPzMlIBAHNS9nGCF4"/>
+<!-- Map Markers & Labels (Asymmetric Professional Layout) -->
+<!-- Mandya: High (Red 24) -->
+<div class="absolute top-[60%] left-[45%] flex flex-col items-center">
+<div class="marker-red w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-xs shadow-lg animate-pulse">24</div>
+<span class="text-white text-[10px] font-bold mt-1 bg-black/40 px-1 rounded">Mandya</span>
+</div>
+<!-- Mysuru: High (Red 18) -->
+<div class="absolute top-[75%] left-[38%] flex flex-col items-center">
+<div class="marker-red w-7 h-7 rounded-full flex items-center justify-center text-white font-bold text-[10px] shadow-lg">18</div>
+<span class="text-white text-[10px] font-bold mt-1 bg-black/40 px-1 rounded">Mysuru</span>
+</div>
+<!-- Tumkur: Medium (Orange 11) -->
+<div class="absolute top-[40%] left-[55%] flex flex-col items-center">
+<div class="marker-orange w-6 h-6 rounded-full flex items-center justify-center text-white font-bold text-[10px] shadow-lg">11</div>
+<span class="text-white text-[10px] font-bold mt-1 bg-black/40 px-1 rounded">Tumkur</span>
+</div>
+<!-- Hassan: Medium (Orange 7) -->
+<div class="absolute top-[50%] left-[30%] flex flex-col items-center">
+<div class="marker-orange w-5 h-5 rounded-full flex items-center justify-center text-white font-bold text-[10px] shadow-lg">7</div>
+<span class="text-white text-[10px] font-bold mt-1 bg-black/40 px-1 rounded">Hassan</span>
+</div>
+<!-- Bengaluru: Low (Green 3) -->
+<div class="absolute top-[55%] left-[65%] flex flex-col items-center">
+<div class="marker-green w-4 h-4 rounded-full flex items-center justify-center text-white font-bold text-[8px] shadow-lg">3</div>
+<span class="text-white text-[10px] font-bold mt-1 bg-black/40 px-1 rounded">Bengaluru</span>
+</div>
+<!-- Legend Overlay -->
+<div class="absolute top-md right-md bg-inverse-surface/90 p-base rounded-lg border border-outline/30 space-y-xs">
+<div class="flex items-center gap-xs">
+<div class="w-3 h-3 marker-red rounded-full"></div>
+<span class="text-[10px] text-white">High</span>
+</div>
+<div class="flex items-center gap-xs">
+<div class="w-3 h-3 marker-orange rounded-full"></div>
+<span class="text-[10px] text-white">Medium</span>
+</div>
+<div class="flex items-center gap-xs">
+<div class="w-3 h-3 marker-green rounded-full"></div>
+<span class="text-[10px] text-white">Low</span>
+</div>
+</div>
+</div>
+<!-- Bottom Sheet Panel -->
+<div class="bg-surface-container-lowest rounded-t-[20px] -mt-5 relative z-10 px-margin-mobile pt-lg pb-32 border-t border-outline-variant shadow-[0_-4px_12px_rgba(0,0,0,0.05)]">
+<div class="w-12 h-1 bg-outline-variant rounded-full mx-auto mb-lg"></div>
+<div class="flex justify-between items-center mb-lg">
+<h2 class="font-title-md text-title-md font-bold text-on-surface">Mandya District</h2>
+<span class="bg-error-container text-on-error-container px-sm py-xs rounded-full font-label-bold text-label-bold">24 reports</span>
+</div>
+<!-- Most Reported Disease Card -->
+<div class="bg-surface-container-low border border-outline-variant p-md rounded-xl mb-lg">
+<div class="flex items-center gap-sm mb-xs">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">coronavirus</span>
+<p class="font-label-bold text-label-bold text-on-surface-variant">MOST REPORTED DISEASE</p>
+</div>
+<div class="flex justify-between items-end">
+<p class="font-headline-lg-mobile text-headline-lg-mobile text-primary">Tomato Early Blight</p>
+<p class="font-display-lg text-title-md text-on-surface-variant">67%</p>
+</div>
+<div class="w-full bg-outline-variant h-2 rounded-full mt-sm overflow-hidden">
+<div class="bg-primary h-full w-[67%] rounded-full"></div>
+</div>
+</div>
+<!-- Warning Card -->
+<div class="bg-[#FFF3E0] border border-amber-200 p-md rounded-xl mb-xl">
+<div class="flex gap-md">
+<span class="material-symbols-outlined text-amber-700">warning</span>
+<p class="text-amber-900 font-body-md">
+<strong>Disease spreading from Mysuru toward Mandya.</strong> Apply preventive fungicide this week.
+                    </p>
+</div>
+</div>
+<!-- Primary Action -->
+<button class="w-full bg-primary-container text-on-primary-container py-md rounded-full font-label-bold text-body-lg flex items-center justify-center gap-sm active:scale-95 transition-transform">
+<span class="material-symbols-outlined">shield</span>
+                Protect My Crops Now
+            </button>
+</div>
+</main>
+<!-- Bottom Navigation Bar: Shared Component -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-xs py-sm bg-surface border-t border-outline-variant">
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-highest transition-all active:scale-95 duration-150">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-highest transition-all active:scale-95 duration-150">
+<span class="material-symbols-outlined" data-icon="document_scanner">document_scanner</span>
+<span class="font-label-sm text-label-sm">Scan</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-4 py-1 hover:bg-surface-container-highest transition-all active:scale-95 duration-150">
+<span class="material-symbols-outlined" data-icon="bar_chart" style="font-variation-settings: 'FILL' 1;">bar_chart</span>
+<span class="font-label-sm text-label-sm">Yield</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-highest transition-all active:scale-95 duration-150">
+<span class="material-symbols-outlined" data-icon="more_horiz">more_horiz</span>
+<span class="font-label-sm text-label-sm">More</span>
+</div>
+</nav>
+</body></html>

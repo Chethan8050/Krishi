@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#00450d",
+                        "secondary-fixed-dim": "#a2d3a4",
+                        "primary-fixed": "#acf4a4",
+                        "on-primary-container": "#90d689",
+                        "on-primary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "inverse-on-surface": "#f0f1f1",
+                        "inverse-surface": "#2f3131",
+                        "tertiary": "#5f2c00",
+                        "on-tertiary-fixed-variant": "#723600",
+                        "on-tertiary-container": "#ffb481",
+                        "error-container": "#ffdad6",
+                        "surface-container-lowest": "#ffffff",
+                        "background": "#f9f9f9",
+                        "on-secondary-fixed-variant": "#24502c",
+                        "outline": "#717a6d",
+                        "on-background": "#1a1c1c",
+                        "on-tertiary-fixed": "#311300",
+                        "error": "#ba1a1a",
+                        "on-surface": "#1a1c1c",
+                        "surface-dim": "#dadada",
+                        "primary-fixed-dim": "#91d78a",
+                        "on-secondary-container": "#426e47",
+                        "outline-variant": "#c0c9bb",
+                        "surface-container-low": "#f3f3f4",
+                        "secondary-fixed": "#bdefbe",
+                        "secondary": "#3c6842",
+                        "surface-container-highest": "#e2e2e2",
+                        "primary-container": "#1b5e20",
+                        "on-primary-fixed": "#002203",
+                        "tertiary-fixed-dim": "#ffb786",
+                        "tertiary-fixed": "#ffdcc6",
+                        "on-secondary": "#ffffff",
+                        "on-surface-variant": "#41493e",
+                        "surface-tint": "#2a6b2c",
+                        "inverse-primary": "#91d78a",
+                        "on-error": "#ffffff",
+                        "tertiary-container": "#823f00",
+                        "surface-bright": "#f9f9f9",
+                        "on-tertiary": "#ffffff",
+                        "surface-variant": "#e2e2e2",
+                        "secondary-container": "#bdefbe",
+                        "surface-container-high": "#e8e8e8",
+                        "on-secondary-fixed": "#002109",
+                        "surface-container": "#eeeeee",
+                        "surface": "#f9f9f9",
+                        "on-primary-fixed-variant": "#0c5216"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "8px",
+                        "xs": "4px",
+                        "margin-mobile": "16px",
+                        "sm": "12px",
+                        "margin-desktop": "48px",
+                        "lg": "24px",
+                        "gutter": "16px",
+                        "xl": "32px",
+                        "md": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Public Sans"],
+                        "label-bold": ["Public Sans"],
+                        "title-md": ["Public Sans"],
+                        "body-lg": ["Public Sans"],
+                        "body-md": ["Public Sans"],
+                        "label-sm": ["Public Sans"],
+                        "body-accent": ["Public Sans"],
+                        "headline-lg": ["Public Sans"],
+                        "display-lg": ["Public Sans"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "label-bold": ["14px", {"lineHeight": "20px", "fontWeight": "700"}],
+                        "title-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "body-accent": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                        "display-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body-md min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="sticky top-0 w-full z-50 flex justify-between items-center px-margin-mobile py-base bg-primary text-on-primary docked full-width border-b border-outline-variant">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined cursor-pointer">menu</span>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile">Yield Result</h1>
+</div>
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined cursor-pointer">language</span>
+</div>
+</header>
+<main class="px-margin-mobile mt-lg space-y-lg">
+<!-- Result Hero Card (Bento Style Item 1) -->
+<section class="relative overflow-hidden rounded-xl bg-gradient-to-br from-primary-container to-primary p-xl text-on-primary shadow-sm">
+<div class="absolute top-0 right-0 p-lg opacity-10">
+<span class="material-symbols-outlined !text-[80px]" style="font-variation-settings: 'FILL' 1;">agriculture</span>
+</div>
+<div class="relative z-10">
+<div class="flex items-center gap-xs mb-xs">
+<span class="material-symbols-outlined text-secondary-fixed" style="font-variation-settings: 'FILL' 1;">potted_plant</span>
+<span class="font-label-bold text-label-bold uppercase tracking-wider">Estimated Yield</span>
+</div>
+<div class="flex items-baseline gap-xs">
+<span class="font-display-lg text-white text-[64px] leading-none">28.5</span>
+<span class="font-title-md text-on-primary-container opacity-90">Quintals / Acre</span>
+</div>
+<div class="grid grid-cols-3 gap-md mt-xl pt-lg border-t border-white/20">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-primary-container">Total</span>
+<span class="font-label-bold text-label-bold">71.25 Q</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-primary-container">Grade</span>
+<span class="font-label-bold text-label-bold">A+</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-primary-container">Season</span>
+<span class="font-label-bold text-label-bold">Kharif</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Comparison Bar Chart Card -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md">
+<div class="flex justify-between items-center mb-lg">
+<h3 class="font-title-md text-title-md">Regional Comparison</h3>
+<span class="text-secondary font-label-bold text-label-bold">+29% above district average</span>
+</div>
+<div class="space-y-lg">
+<div class="space-y-xs">
+<div class="flex justify-between font-label-sm text-label-sm">
+<span>Your Estimate</span>
+<span class="font-bold">28.5 Q/A</span>
+</div>
+<div class="h-4 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary-container rounded-full" style="width: 100%;"></div>
+</div>
+</div>
+<div class="space-y-xs">
+<div class="flex justify-between font-label-sm text-label-sm">
+<span>District Avg (Dharwad)</span>
+<span class="font-bold text-on-surface-variant">22.0 Q/A</span>
+</div>
+<div class="h-4 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-outline-variant rounded-full" style="width: 77%;"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Inputs Summary Card -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden">
+<div class="px-md py-sm border-b border-outline-variant bg-surface-container-low flex justify-between items-center">
+<span class="font-label-bold text-label-bold text-on-surface-variant">INPUT PARAMETERS</span>
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">edit</span>
+</div>
+<div class="p-md grid grid-cols-2 gap-md">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">water_drop</span>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Irrigation</p>
+<p class="font-label-bold text-label-bold">Drip System</p>
+</div>
+</div>
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">compost</span>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Fertilizer</p>
+<p class="font-label-bold text-label-bold">NPK 19:19:19</p>
+</div>
+</div>
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">straighten</span>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Area</p>
+<p class="font-label-bold text-label-bold">2.5 Acres</p>
+</div>
+</div>
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">category</span>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Variety</p>
+<p class="font-label-bold text-label-bold">Hybrid Maize</p>
+</div>
+</div>
+</div>
+</section>
+<!-- AI Comment Card -->
+<section class="bg-secondary-container rounded-xl p-md border border-primary-fixed-dim relative">
+<div class="absolute -top-3 -right-3">
+<div class="w-10 h-10 bg-primary-container rounded-full flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-white text-[20px]" style="font-variation-settings: 'FILL' 1;">eco</span>
+</div>
+</div>
+<div class="flex gap-md">
+<div class="space-y-sm">
+<h4 class="font-label-bold text-label-bold text-on-secondary-container">KisanAI INSIGHTS</h4>
+<p class="text-on-secondary-container font-body-md leading-relaxed">
+                        Excellent yield expected due to optimal soil moisture and consistent fertilizer application. Your crop health index is 15% better than regional competitors. Consider late-stage pest monitoring for peak quality.
+                    </p>
+</div>
+</div>
+</section>
+<!-- Actions -->
+<div class="flex flex-col gap-md pt-base pb-lg">
+<button class="w-full bg-primary text-on-primary py-lg rounded-full font-label-bold flex items-center justify-center gap-sm active:scale-95 transition-transform">
+<span class="material-symbols-outlined">volume_up</span>
+                Hear Result in Kannada
+            </button>
+<button class="w-full border-2 border-primary text-primary py-lg rounded-full font-label-bold flex items-center justify-center gap-sm active:opacity-80 transition-opacity">
+                Try Different Inputs
+            </button>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-xs py-sm bg-surface docked full-width border-t border-outline-variant">
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-highest transition-all active:scale-95 duration-150">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-highest transition-all active:scale-95 duration-150">
+<span class="material-symbols-outlined">document_scanner</span>
+<span class="font-label-sm text-label-sm">Scan</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-4 py-1 hover:bg-surface-container-highest transition-all active:scale-95 duration-150">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">bar_chart</span>
+<span class="font-label-sm text-label-sm">Yield</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-highest transition-all active:scale-95 duration-150">
+<span class="material-symbols-outlined">more_horiz</span>
+<span class="font-label-sm text-label-sm">More</span>
+</div>
+</nav>
+</body></html>

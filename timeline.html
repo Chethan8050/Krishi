@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Crop Health Timeline</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline-variant": "#c0c9bb",
+                        "outline": "#717a6d",
+                        "primary-container": "#1b5e20",
+                        "surface-variant": "#e2e2e2",
+                        "secondary-fixed-dim": "#a2d3a4",
+                        "on-error": "#ffffff",
+                        "secondary-fixed": "#bdefbe",
+                        "on-tertiary": "#ffffff",
+                        "surface-container": "#eeeeee",
+                        "secondary": "#3c6842",
+                        "surface-tint": "#2a6b2c",
+                        "on-tertiary-fixed": "#311300",
+                        "tertiary": "#5f2c00",
+                        "surface-dim": "#dadada",
+                        "surface-bright": "#f9f9f9",
+                        "surface-container-highest": "#e2e2e2",
+                        "inverse-primary": "#91d78a",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-container": "#823f00",
+                        "surface": "#f9f9f9",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-container": "#ffb481",
+                        "primary-fixed": "#acf4a4",
+                        "on-surface-variant": "#41493e",
+                        "on-tertiary-fixed-variant": "#723600",
+                        "on-secondary-fixed": "#002109",
+                        "on-primary-fixed": "#002203",
+                        "on-primary-container": "#90d689",
+                        "inverse-surface": "#2f3131",
+                        "primary-fixed-dim": "#91d78a",
+                        "on-error-container": "#93000a",
+                        "error-container": "#ffdad6",
+                        "on-secondary": "#ffffff",
+                        "on-surface": "#1a1c1c",
+                        "on-secondary-fixed-variant": "#24502c",
+                        "surface-container-high": "#e8e8e8",
+                        "primary": "#00450d",
+                        "background": "#f9f9f9",
+                        "tertiary-fixed": "#ffdcc6",
+                        "tertiary-fixed-dim": "#ffb786",
+                        "inverse-on-surface": "#f0f1f1",
+                        "secondary-container": "#bdefbe",
+                        "on-background": "#1a1c1c",
+                        "error": "#ba1a1a",
+                        "on-primary-fixed-variant": "#0c5216",
+                        "surface-container-low": "#f3f3f4",
+                        "on-secondary-container": "#426e47"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "48px",
+                        "base": "8px",
+                        "md": "16px",
+                        "xl": "32px",
+                        "lg": "24px",
+                        "gutter": "16px",
+                        "xs": "4px",
+                        "margin-mobile": "16px",
+                        "sm": "12px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Public Sans"],
+                        "headline-lg-mobile": ["Public Sans"],
+                        "body-lg": ["Public Sans"],
+                        "headline-lg": ["Public Sans"],
+                        "label-sm": ["Public Sans"],
+                        "body-md": ["Public Sans"],
+                        "title-md": ["Public Sans"],
+                        "label-bold": ["Public Sans"],
+                        "body-accent": ["Public Sans"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "title-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "label-bold": ["14px", {"lineHeight": "20px", "fontWeight": "700"}],
+                        "body-accent": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .chart-path {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 0;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body-md min-h-screen flex flex-col">
+<!-- TopAppBar Replacement based on Requirements -->
+<header class="sticky top-0 w-full z-50 flex flex-col">
+<div class="bg-[#2E7D32] flex justify-between items-center px-margin-mobile py-base text-white">
+<span class="material-symbols-outlined cursor-pointer">arrow_back</span>
+<h1 class="font-title-md text-title-md font-bold">Crop Health Timeline</h1>
+<span class="material-symbols-outlined cursor-pointer">filter_list</span>
+</div>
+<div class="bg-[#388E3C] px-margin-mobile py-base">
+<p class="text-white font-label-sm italic opacity-90">Track if your treatment is working</p>
+</div>
+</header>
+<main class="flex-1 px-margin-mobile py-lg space-y-lg pb-32">
+<!-- Crop Selector Row -->
+<section class="flex overflow-x-auto pb-xs gap-sm scrollbar-hide">
+<button class="flex-none bg-primary text-on-primary font-label-bold py-base px-lg rounded-full flex items-center gap-xs">
+                Tomato Field A <span class="material-symbols-outlined text-sm" style="font-size: 16px;">check</span>
+</button>
+<button class="flex-none bg-surface-container-high text-on-surface-variant font-label-bold py-base px-lg rounded-full">
+                Potato Field B
+            </button>
+<button class="flex-none bg-surface-container-high text-on-surface-variant font-label-bold py-base px-lg rounded-full">
+                Corn Field C
+            </button>
+</section>
+<!-- Status Banner -->
+<section class="bg-secondary-container rounded-xl p-md flex items-start gap-md">
+<div class="bg-primary rounded-full p-xs mt-xs">
+<span class="material-symbols-outlined text-white" style="font-size: 20px;">check</span>
+</div>
+<div class="flex flex-col">
+<h2 class="text-on-secondary-container font-label-bold text-lg">Improving!</h2>
+<p class="text-on-secondary-container font-body-md">Severity dropped 35% in 5 days</p>
+<p class="text-on-secondary-container opacity-80 font-label-sm">Keep applying treatment</p>
+</div>
+</section>
+<!-- Chart Card -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md shadow-sm">
+<h3 class="font-title-md text-title-md mb-lg">Severity Over Time</h3>
+<div class="relative h-48 w-full mb-lg">
+<!-- Simple SVG Line Chart Mockup -->
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 100 40">
+<!-- Grid Lines -->
+<line stroke="#E0E0E0" stroke-width="0.2" x1="0" x2="100" y1="10" y2="10"></line>
+<line stroke="#E0E0E0" stroke-width="0.2" x1="0" x2="100" y1="20" y2="20"></line>
+<line stroke="#E0E0E0" stroke-width="0.2" x1="0" x2="100" y1="30" y2="30"></line>
+<!-- Trend Line -->
+<path class="chart-path" d="M 0 5 L 15 8 L 30 18 L 45 22 L 60 28 L 80 32 L 100 35" fill="none" stroke="#2E7D32" stroke-width="1.5"></path>
+<!-- Legend Points -->
+<circle cx="0" cy="5" fill="#ba1a1a" r="1.5"></circle> <!-- Disease detected -->
+<circle cx="100" cy="35" fill="#2E7D32" r="1.5"></circle> <!-- Improving -->
+</svg>
+<!-- Y-Axis Labels -->
+<div class="absolute top-0 left-0 text-[10px] text-outline">85%</div>
+<div class="absolute bottom-0 left-0 text-[10px] text-outline">32%</div>
+</div>
+<div class="flex gap-lg">
+<div class="flex items-center gap-xs">
+<span class="w-2.5 h-2.5 bg-error rounded-full"></span>
+<span class="text-label-sm font-label-sm">Disease detected</span>
+</div>
+<div class="flex items-center gap-xs">
+<span class="w-2.5 h-2.5 bg-primary rounded-full"></span>
+<span class="text-label-sm font-label-sm">Improving</span>
+</div>
+</div>
+</section>
+<!-- Scan History List -->
+<section class="space-y-base">
+<h3 class="font-title-md text-title-md px-xs">Scan History</h3>
+<div class="space-y-sm">
+<!-- Row 1 -->
+<div class="bg-surface-container-low rounded-lg p-md flex justify-between items-center border border-outline-variant/30">
+<div>
+<p class="font-label-bold text-on-surface">Oct 24, 2023</p>
+<p class="font-body-md text-on-surface-variant">Late Blight</p>
+</div>
+<div class="bg-primary-fixed text-on-primary-fixed-variant px-sm py-xs rounded-full font-label-bold">
+                        32%
+                    </div>
+</div>
+<!-- Row 2 -->
+<div class="bg-surface-container-low rounded-lg p-md flex justify-between items-center border border-outline-variant/30">
+<div>
+<p class="font-label-bold text-on-surface">Oct 21, 2023</p>
+<p class="font-body-md text-on-surface-variant">Late Blight</p>
+</div>
+<div class="bg-tertiary-fixed-dim text-on-tertiary-fixed-variant px-sm py-xs rounded-full font-label-bold">
+                        51%
+                    </div>
+</div>
+<!-- Row 3 -->
+<div class="bg-surface-container-low rounded-lg p-md flex justify-between items-center border border-outline-variant/30">
+<div>
+<p class="font-label-bold text-on-surface">Oct 18, 2023</p>
+<p class="font-body-md text-on-surface-variant">Late Blight</p>
+</div>
+<div class="bg-error-container text-on-error-container px-sm py-xs rounded-full font-label-bold">
+                        78%
+                    </div>
+</div>
+</div>
+</section>
+</main>
+<!-- Fixed Bottom Button -->
+<div class="fixed bottom-0 left-0 w-full p-margin-mobile bg-gradient-to-t from-background via-background to-transparent pt-lg">
+<button class="w-full bg-[#1B5E20] text-white py-lg rounded-full font-label-bold shadow-lg flex items-center justify-center gap-base active:scale-95 transition-transform">
+<span class="material-symbols-outlined">add</span>
+            + Add Today's Scan
+        </button>
+</div>
+<!-- Hidden Drawer for UI Completeness (based on JSON) -->
+<nav class="hidden md:flex fixed bottom-0 left-0 w-full z-50 justify-around items-center px-xs py-sm bg-surface border-t border-outline-variant" id="bottom-nav">
+<div class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-4 py-1">
+<span class="material-symbols-outlined">home</span>
+<span class="text-label-sm font-label-sm">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1">
+<span class="material-symbols-outlined">document_scanner</span>
+<span class="text-label-sm font-label-sm">Scan</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1">
+<span class="material-symbols-outlined">bar_chart</span>
+<span class="text-label-sm font-label-sm">Yield</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1">
+<span class="material-symbols-outlined">more_horiz</span>
+<span class="text-label-sm font-label-sm">More</span>
+</div>
+</nav>
+</body></html>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Weather Risk Alert - KisanAI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline-variant": "#c0c9bb",
+                        "outline": "#717a6d",
+                        "primary-container": "#1b5e20",
+                        "surface-variant": "#e2e2e2",
+                        "secondary-fixed-dim": "#a2d3a4",
+                        "on-error": "#ffffff",
+                        "secondary-fixed": "#bdefbe",
+                        "on-tertiary": "#ffffff",
+                        "surface-container": "#eeeeee",
+                        "secondary": "#3c6842",
+                        "surface-tint": "#2a6b2c",
+                        "on-tertiary-fixed": "#311300",
+                        "tertiary": "#5f2c00",
+                        "surface-dim": "#dadada",
+                        "surface-bright": "#f9f9f9",
+                        "surface-container-highest": "#e2e2e2",
+                        "inverse-primary": "#91d78a",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-container": "#823f00",
+                        "surface": "#f9f9f9",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-container": "#ffb481",
+                        "primary-fixed": "#acf4a4",
+                        "on-surface-variant": "#41493e",
+                        "on-tertiary-fixed-variant": "#723600",
+                        "on-secondary-fixed": "#002109",
+                        "on-primary-fixed": "#002203",
+                        "on-primary-container": "#90d689",
+                        "inverse-surface": "#2f3131",
+                        "primary-fixed-dim": "#91d78a",
+                        "on-error-container": "#93000a",
+                        "error-container": "#ffdad6",
+                        "on-secondary": "#ffffff",
+                        "on-surface": "#1a1c1c",
+                        "on-secondary-fixed-variant": "#24502c",
+                        "surface-container-high": "#e8e8e8",
+                        "primary": "#00450d",
+                        "background": "#f9f9f9",
+                        "tertiary-fixed": "#ffdcc6",
+                        "tertiary-fixed-dim": "#ffb786",
+                        "inverse-on-surface": "#f0f1f1",
+                        "secondary-container": "#bdefbe",
+                        "on-background": "#1a1c1c",
+                        "error": "#ba1a1a",
+                        "on-primary-fixed-variant": "#0c5216",
+                        "surface-container-low": "#f3f3f4",
+                        "on-secondary-container": "#426e47"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "48px",
+                        "base": "8px",
+                        "md": "16px",
+                        "xl": "32px",
+                        "lg": "24px",
+                        "gutter": "16px",
+                        "xs": "4px",
+                        "margin-mobile": "16px",
+                        "sm": "12px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Public Sans"],
+                        "headline-lg-mobile": ["Public Sans"],
+                        "body-lg": ["Public Sans"],
+                        "headline-lg": ["Public Sans"],
+                        "label-sm": ["Public Sans"],
+                        "body-md": ["Public Sans"],
+                        "title-md": ["Public Sans"],
+                        "label-bold": ["Public Sans"],
+                        "body-accent": ["Public Sans"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "title-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "label-bold": ["14px", {"lineHeight": "20px", "fontWeight": "700"}],
+                        "body-accent": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        @keyframes pulse-green {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+        }
+        .blinking-dot {
+            animation: pulse-green 2s infinite;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body-md min-h-screen pb-24">
+<!-- Top App Bar -->
+<header class="sticky top-0 w-full z-50 flex justify-between items-center px-margin-mobile py-base bg-primary-container text-on-primary-container border-b border-outline-variant">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined cursor-pointer" data-icon="menu">menu</span>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-white">Weather Risk Alert</h1>
+</div>
+<span class="material-symbols-outlined cursor-pointer" data-icon="language">language</span>
+</header>
+<!-- Location Strip -->
+<div class="bg-surface-container-low px-margin-mobile py-sm flex justify-between items-center">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary" data-icon="location_on">location_on</span>
+<span class="font-label-bold text-label-bold text-on-surface">Mandya, Karnataka</span>
+</div>
+<div class="flex items-center gap-xs">
+<div class="w-2 h-2 rounded-full bg-green-500 blinking-dot"></div>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Live data</span>
+</div>
+</div>
+<main class="p-margin-mobile space-y-lg">
+<!-- Today's Conditions Card -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md">
+<h2 class="font-title-md text-title-md text-on-surface mb-md">Today's Conditions</h2>
+<div class="grid grid-cols-3 gap-md">
+<div class="flex flex-col items-center p-sm bg-surface-container rounded-lg">
+<span class="material-symbols-outlined text-primary mb-xs" data-icon="device_thermostat">device_thermostat</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Temp</span>
+<span class="font-title-md text-title-md text-primary">32°C</span>
+</div>
+<div class="flex flex-col items-center p-sm bg-surface-container rounded-lg">
+<span class="material-symbols-outlined text-[#F59E0B] mb-xs" data-icon="humidity_percentage">humidity_percentage</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Humidity</span>
+<span class="font-title-md text-title-md text-[#F59E0B]">84%</span>
+</div>
+<div class="flex flex-col items-center p-sm bg-surface-container rounded-lg">
+<span class="material-symbols-outlined text-blue-600 mb-xs" data-icon="rainy">rainy</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Rainfall</span>
+<span class="font-title-md text-title-md text-blue-600">12mm</span>
+</div>
+</div>
+</section>
+<!-- Risk Alert Card -->
+<section class="bg-[#FFEBEE] border border-error/20 rounded-xl p-md">
+<div class="flex items-center justify-between mb-sm">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-error text-[28px]" data-icon="warning" data-weight="fill" style="font-variation-settings: 'FILL' 1;">warning</span>
+<h3 class="font-label-bold text-[15px] text-error">HIGH DISEASE RISK</h3>
+</div>
+<span class="bg-error text-white text-[10px] px-2 py-0.5 rounded-full font-bold uppercase">Alert Active</span>
+</div>
+<div class="space-y-sm">
+<p class="font-body-md text-on-surface-variant leading-relaxed">
+                    Current humidity levels (84%) combined with high daytime temperatures (32°C) create optimal conditions for <span class="font-bold text-on-surface">Early and Late Blight</span> in your <span class="font-bold text-on-surface">Tomato and Potato</span> crops.
+                </p>
+<div class="bg-white/50 p-sm rounded-lg flex items-start gap-sm">
+<span class="material-symbols-outlined text-primary shrink-0" data-icon="info">info</span>
+<p class="text-label-sm font-label-sm text-on-surface">Fungal spores thrive in these conditions. Immediate preventive measures are recommended to protect yield.</p>
+</div>
+</div>
+</section>
+<!-- Action Row -->
+<div class="flex flex-col gap-sm">
+<button class="w-full py-md bg-primary text-on-primary font-label-bold rounded-full shadow-sm active:scale-[0.98] transition-transform">
+                Apply Fungicide Tonight
+            </button>
+<button class="w-full py-md bg-surface-container-high text-on-surface-variant font-label-bold rounded-full border border-outline-variant active:scale-[0.98] transition-transform">
+                See Treatment Plan
+            </button>
+</div>
+<!-- 3-Day Forecast -->
+<section>
+<h2 class="font-title-md text-title-md text-on-surface mb-md">Disease Risk Forecast</h2>
+<div class="grid grid-cols-3 gap-sm">
+<!-- Tomorrow -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-sm flex flex-col items-center text-center">
+<span class="font-label-sm text-on-surface-variant">Tomorrow</span>
+<span class="material-symbols-outlined text-error my-xs" data-icon="coronavirus">coronavirus</span>
+<span class="font-label-bold text-error">High Risk</span>
+<div class="mt-xs w-full h-1 bg-error rounded-full"></div>
+</div>
+<!-- Thu -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-sm flex flex-col items-center text-center">
+<span class="font-label-sm text-on-surface-variant">Thu</span>
+<span class="material-symbols-outlined text-[#F59E0B] my-xs" data-icon="sick">sick</span>
+<span class="font-label-bold text-[#F59E0B]">Med Risk</span>
+<div class="mt-xs w-full h-1 bg-[#F59E0B] rounded-full"></div>
+</div>
+<!-- Fri -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-sm flex flex-col items-center text-center">
+<span class="font-label-sm text-on-surface-variant">Fri</span>
+<span class="material-symbols-outlined text-primary my-xs" data-icon="health_and_safety">health_and_safety</span>
+<span class="font-label-bold text-primary">Low Risk</span>
+<div class="mt-xs w-full h-1 bg-primary rounded-full"></div>
+</div>
+</div>
+</section>
+<!-- Insights Bento Section -->
+<section class="grid grid-cols-2 gap-sm">
+<div class="col-span-2 bg-surface-variant/30 rounded-xl p-md border border-outline-variant flex items-center gap-md">
+<img alt="Potato field" class="w-20 h-20 rounded-lg object-cover" data-alt="A macro close-up of potato leaves showing early signs of blight with small dark spots. The lighting is natural morning sunlight in a lush green field, emphasizing the texture of the diseased foliage. The aesthetic is documentary-style and high-detail, fitting a professional agricultural diagnostic tool." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIwGuwHj9lw2E1ZESLBmWEesiUNC_BUrY2VLN0aWUTPq2pGa-pYD_1htgTMALzilB13brsXulyx1IAJvjQFLTaf_jEOtt21skg7hatna7p_qIrWsnlnPHNwC27NovlP_YuQhZ0kRwWE0GDaxLHmaR8WQBNGOt9eheptvexQyGXTQJrxj-A8sKHX28bWFWwAn04wnUM861X8m5FUSmEpFHpdINCyAkLQkYl4Q33JW0C9vGpvTgp7my_3i8-Gm9H9pP8-KCS_FFIMHzK"/>
+<div>
+<h4 class="font-label-bold text-on-surface">Blight Identification</h4>
+<p class="text-label-sm text-on-surface-variant">Learn to spot signs before they spread.</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-xs py-sm bg-surface dark:bg-surface-dim border-t border-outline-variant">
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-highest transition-all active:scale-95 duration-150">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-4 py-1 active:scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined" data-icon="document_scanner">document_scanner</span>
+<span class="font-label-sm text-label-sm">Scan</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-highest transition-all active:scale-95 duration-150">
+<span class="material-symbols-outlined" data-icon="bar_chart">bar_chart</span>
+<span class="font-label-sm text-label-sm">Yield</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-highest transition-all active:scale-95 duration-150">
+<span class="material-symbols-outlined" data-icon="more_horiz">more_horiz</span>
+<span class="font-label-sm text-label-sm">More</span>
+</button>
+</nav>
+</body></html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KisanAI - Install App</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline-variant": "#c0c9bb",
+                    "outline": "#717a6d",
+                    "primary-container": "#1b5e20",
+                    "surface-variant": "#e2e2e2",
+                    "secondary-fixed-dim": "#a2d3a4",
+                    "on-error": "#ffffff",
+                    "secondary-fixed": "#bdefbe",
+                    "on-tertiary": "#ffffff",
+                    "surface-container": "#eeeeee",
+                    "secondary": "#3c6842",
+                    "surface-tint": "#2a6b2c",
+                    "on-tertiary-fixed": "#311300",
+                    "tertiary": "#5f2c00",
+                    "surface-dim": "#dadada",
+                    "surface-bright": "#f9f9f9",
+                    "surface-container-highest": "#e2e2e2",
+                    "inverse-primary": "#91d78a",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary-container": "#823f00",
+                    "surface": "#f9f9f9",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-container": "#ffb481",
+                    "primary-fixed": "#acf4a4",
+                    "on-surface-variant": "#41493e",
+                    "on-tertiary-fixed-variant": "#723600",
+                    "on-secondary-fixed": "#002109",
+                    "on-primary-fixed": "#002203",
+                    "on-primary-container": "#90d689",
+                    "inverse-surface": "#2f3131",
+                    "primary-fixed-dim": "#91d78a",
+                    "on-error-container": "#93000a",
+                    "error-container": "#ffdad6",
+                    "on-secondary": "#ffffff",
+                    "on-surface": "#1a1c1c",
+                    "on-secondary-fixed-variant": "#24502c",
+                    "surface-container-high": "#e8e8e8",
+                    "primary": "#00450d",
+                    "background": "#f9f9f9",
+                    "tertiary-fixed": "#ffdcc6",
+                    "tertiary-fixed-dim": "#ffb786",
+                    "inverse-on-surface": "#f0f1f1",
+                    "secondary-container": "#bdefbe",
+                    "on-background": "#1a1c1c",
+                    "error": "#ba1a1a",
+                    "on-primary-fixed-variant": "#0c5216",
+                    "surface-container-low": "#f3f3f4",
+                    "on-secondary-container": "#426e47"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-desktop": "48px",
+                    "base": "8px",
+                    "md": "16px",
+                    "xl": "32px",
+                    "lg": "24px",
+                    "gutter": "16px",
+                    "xs": "4px",
+                    "margin-mobile": "16px",
+                    "sm": "12px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Public Sans"],
+                    "headline-lg-mobile": ["Public Sans"],
+                    "body-lg": ["Public Sans"],
+                    "headline-lg": ["Public Sans"],
+                    "label-sm": ["Public Sans"],
+                    "body-md": ["Public Sans"],
+                    "title-md": ["Public Sans"],
+                    "label-bold": ["Public Sans"],
+                    "body-accent": ["Public Sans"]
+            },
+            "fontSize": {
+                    "display-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "title-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "label-bold": ["14px", {"lineHeight": "20px", "fontWeight": "700"}],
+                    "body-accent": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .bottom-sheet-backdrop {
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(4px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body-md overflow-hidden h-screen w-full relative">
+<!-- Mock Home Screen Content (Blurred Background) -->
+<header class="sticky top-0 w-full z-10 flex justify-between items-center px-margin-mobile py-base bg-surface border-b border-outline-variant">
+<div class="flex items-center gap-base">
+<span class="material-symbols-outlined text-primary" data-icon="menu">menu</span>
+<span class="font-display-lg text-title-md text-primary">KisanAI</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="language">language</span>
+</header>
+<main class="px-margin-mobile pt-lg space-y-lg">
+<div class="p-md rounded-xl border border-outline-variant bg-surface-container-lowest">
+<div class="flex items-center justify-between mb-md">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">My Farm</h2>
+<span class="material-symbols-outlined text-primary" data-icon="agriculture">agriculture</span>
+</div>
+<div class="grid grid-cols-2 gap-md">
+<div class="aspect-square rounded-lg bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover opacity-50" data-alt="A lush green field of healthy wheat stalks under a bright morning sun. The lighting is warm and golden, emphasizing the vibrant green textures of the crop. This professional agricultural photography captures a sense of prosperity and careful farm management in a modern, light-mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBoXfcMSc4WqqhkkzFbTXhREHXPOwdh9iDb-1lAkpyGuhmkN9L-_FU1bZN0d6NCQO47Jq8CnXwZA2-TyBYLooHfXNemvery18QS47WR2LFCBmkJZRNQ0FWK0OH3V5TKgBr0b87g-3-cDrgcGgAQACJc-BD-PGgvrHFwxE4HhwJZb80e4TR73bGXc5CGVX_aLYGFMdxw_Am-y-0GReuFTs61HkgTZPYAqUa5sJ7XJ-Iy75R4_02-6GJzEqzkM-YpS4welgaMAnztUu9G"/>
+</div>
+<div class="aspect-square rounded-lg bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover opacity-50" data-alt="Close-up of healthy maize leaves with deep green hues and distinct patterns. The setting is a clean, modern agricultural research environment with soft, high-key lighting. The overall mood is scientific, professional, and optimistic, highlighting the success of smart crop management." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAALdEEiAJ-n06CuJ_voLLIRuyk06J09a5eTHqCLDxNU6G5EkozCeoswfJiSljVbNnhUZoKQKgI6iZdwx-9q_NR5UzP-PoJL--zDWymzX--fuamVOS08LJuj7NKz1vUAE5RtTZUmwc81TZdU6s8P1-oFIccuo3PkxCvt48TmDDStOdQVN1YRDnB5wRmCLnz_QaqCem5ErU6dugIP1yfXeh3-yD6xoWQrFIBAZ5suMoVttIYpPmmXKWPiihU_9DhtCjt75Vt-NzUtHot"/>
+</div>
+</div>
+</div>
+</main>
+<!-- PWA Install Prompt Bottom Sheet -->
+<div class="fixed inset-0 z-50 bottom-sheet-backdrop flex flex-col justify-end">
+<!-- Bottom Sheet Container -->
+<div class="bg-surface-container-lowest rounded-t-[24px] w-full max-h-[795px] overflow-y-auto shadow-2xl flex flex-col animate-slide-up">
+<!-- Drag Handle -->
+<div class="w-full flex justify-center py-sm">
+<div class="w-8 h-1.5 bg-outline-variant rounded-full"></div>
+</div>
+<!-- Header Content -->
+<div class="px-lg pb-lg flex items-center gap-md">
+<div class="w-[60px] h-[60px] bg-primary rounded-full flex items-center justify-center shadow-lg">
+<span class="material-symbols-outlined text-white text-[32px]" data-icon="eco" style="font-variation-settings: 'FILL' 1;">eco</span>
+</div>
+<div>
+<h1 class="font-headline-lg text-headline-lg-mobile text-primary">KisanAI</h1>
+<p class="text-on-surface-variant font-body-md">Smart Crop Doctor</p>
+</div>
+</div>
+<!-- Benefits List -->
+<div class="px-lg space-y-lg">
+<!-- Benefit Item -->
+<div class="flex gap-md items-start">
+<div class="w-6 h-6 rounded-full bg-secondary-container flex items-center justify-center flex-shrink-0 mt-1">
+<span class="material-symbols-outlined text-on-secondary-container text-[18px]" data-icon="check">check</span>
+</div>
+<div>
+<h3 class="font-label-bold text-label-bold text-on-surface">Works without internet</h3>
+<p class="text-on-surface-variant text-label-sm">Access crop history and disease guides in the field without signal.</p>
+</div>
+</div>
+<!-- Benefit Item -->
+<div class="flex gap-md items-start">
+<div class="w-6 h-6 rounded-full bg-secondary-container flex items-center justify-center flex-shrink-0 mt-1">
+<span class="material-symbols-outlined text-on-secondary-container text-[18px]" data-icon="check">check</span>
+</div>
+<div>
+<h3 class="font-label-bold text-label-bold text-on-surface">Installs like a native app</h3>
+<p class="text-on-surface-variant text-label-sm">Add to your home screen for quick one-tap access anytime.</p>
+</div>
+</div>
+<!-- Benefit Item -->
+<div class="flex gap-md items-start">
+<div class="w-6 h-6 rounded-full bg-secondary-container flex items-center justify-center flex-shrink-0 mt-1">
+<span class="material-symbols-outlined text-on-secondary-container text-[18px]" data-icon="check">check</span>
+</div>
+<div>
+<h3 class="font-label-bold text-label-bold text-on-surface">Instant loading</h3>
+<p class="text-on-surface-variant text-label-sm">Optimized performance that launches 3x faster than the website.</p>
+</div>
+</div>
+<!-- Benefit Item -->
+<div class="flex gap-md items-start">
+<div class="w-6 h-6 rounded-full bg-secondary-container flex items-center justify-center flex-shrink-0 mt-1">
+<span class="material-symbols-outlined text-on-secondary-container text-[18px]" data-icon="check">check</span>
+</div>
+<div>
+<h3 class="font-label-bold text-label-bold text-on-surface">Free forever</h3>
+<p class="text-on-surface-variant text-label-sm">All core offline diagnostics features are included for free.</p>
+</div>
+</div>
+</div>
+<!-- Storage Info & CTA Section -->
+<div class="p-lg mt-md space-y-md border-t border-surface-variant">
+<div class="flex items-center justify-center gap-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]" data-icon="storage">storage</span>
+<span class="text-label-sm">Requires ~25MB of storage space</span>
+</div>
+<div class="space-y-sm">
+<!-- Primary Button -->
+<button class="w-full h-[52px] bg-primary text-on-primary rounded-full font-label-bold flex items-center justify-center gap-base active:opacity-80 transition-opacity">
+                        Install KisanAI App
+                        <span class="material-symbols-outlined" data-icon="download">download</span>
+</button>
+<!-- Secondary Button -->
+<button class="w-full h-[48px] bg-transparent text-on-surface-variant rounded-full font-label-bold flex items-center justify-center active:bg-surface-container transition-colors">
+                        Maybe Later
+                    </button>
+</div>
+</div>
+<!-- Safe Area Spacer -->
+<div class="h-base"></div>
+</div>
+</div>
+<!-- Hidden Bottom Nav for Context (suppressed because modal is active) -->
+<nav class="fixed bottom-0 left-0 w-full z-0 flex justify-around items-center px-xs py-sm bg-surface border-t border-outline-variant opacity-20 pointer-events-none">
+<div class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-4 py-1">
+<span class="material-symbols-outlined" data-icon="home" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1">
+<span class="material-symbols-outlined" data-icon="document_scanner">document_scanner</span>
+<span class="font-label-sm text-label-sm">Scan</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1">
+<span class="material-symbols-outlined" data-icon="bar_chart">bar_chart</span>
+<span class="font-label-sm text-label-sm">Yield</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1">
+<span class="material-symbols-outlined" data-icon="more_horiz">more_horiz</span>
+<span class="font-label-sm text-label-sm">More</span>
+</div>
+</nav>
+</body></html>

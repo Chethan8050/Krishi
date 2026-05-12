@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>About KisanAI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Public Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#00450d",
+                        "secondary-fixed-dim": "#a2d3a4",
+                        "primary-fixed": "#acf4a4",
+                        "on-primary-container": "#90d689",
+                        "on-primary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "inverse-on-surface": "#f0f1f1",
+                        "inverse-surface": "#2f3131",
+                        "tertiary": "#5f2c00",
+                        "on-tertiary-fixed-variant": "#723600",
+                        "on-tertiary-container": "#ffb481",
+                        "error-container": "#ffdad6",
+                        "surface-container-lowest": "#ffffff",
+                        "background": "#f9f9f9",
+                        "on-secondary-fixed-variant": "#24502c",
+                        "outline": "#717a6d",
+                        "on-background": "#1a1c1c",
+                        "on-tertiary-fixed": "#311300",
+                        "error": "#ba1a1a",
+                        "on-surface": "#1a1c1c",
+                        "surface-dim": "#dadada",
+                        "primary-fixed-dim": "#91d78a",
+                        "on-secondary-container": "#426e47",
+                        "outline-variant": "#c0c9bb",
+                        "surface-container-low": "#f3f3f4",
+                        "secondary-fixed": "#bdefbe",
+                        "secondary": "#3c6842",
+                        "surface-container-highest": "#e2e2e2",
+                        "primary-container": "#1b5e20",
+                        "on-primary-fixed": "#002203",
+                        "tertiary-fixed-dim": "#ffb786",
+                        "tertiary-fixed": "#ffdcc6",
+                        "on-secondary": "#ffffff",
+                        "on-surface-variant": "#41493e",
+                        "surface-tint": "#2a6b2c",
+                        "inverse-primary": "#91d78a",
+                        "on-error": "#ffffff",
+                        "tertiary-container": "#823f00",
+                        "surface-bright": "#f9f9f9",
+                        "on-tertiary": "#ffffff",
+                        "surface-variant": "#e2e2e2",
+                        "secondary-container": "#bdefbe",
+                        "surface-container-high": "#e8e8e8",
+                        "on-secondary-fixed": "#002109",
+                        "surface-container": "#eeeeee",
+                        "surface": "#f9f9f9",
+                        "on-primary-fixed-variant": "#0c5216"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "8px",
+                        "xs": "4px",
+                        "margin-mobile": "16px",
+                        "sm": "12px",
+                        "margin-desktop": "48px",
+                        "lg": "24px",
+                        "gutter": "16px",
+                        "xl": "32px",
+                        "md": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Public Sans"],
+                        "label-bold": ["Public Sans"],
+                        "title-md": ["Public Sans"],
+                        "body-lg": ["Public Sans"],
+                        "body-md": ["Public Sans"],
+                        "label-sm": ["Public Sans"],
+                        "body-accent": ["Public Sans"],
+                        "headline-lg": ["Public Sans"],
+                        "display-lg": ["Public Sans"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "label-bold": ["14px", {"lineHeight": "20px", "fontWeight": "700"}],
+                        "title-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "body-accent": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                        "display-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="sticky top-0 w-full z-50 flex justify-between items-center px-margin-mobile py-base bg-surface dark:bg-surface-dim border-b border-outline-variant">
+<div class="flex items-center gap-md">
+<button class="material-symbols-outlined text-primary dark:text-primary-fixed hover:bg-surface-container-low transition-colors rounded-full p-2" data-icon="arrow_back">arrow_back</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary dark:text-primary-fixed">About KisanAI</h1>
+</div>
+<button class="material-symbols-outlined text-primary dark:text-primary-fixed hover:bg-surface-container-low transition-colors rounded-full p-2" data-icon="language">language</button>
+</header>
+<main class="flex-grow max-w-screen-xl mx-auto w-full px-margin-mobile pt-xl pb-32">
+<!-- Branding Block -->
+<section class="flex flex-col items-center text-center mb-xl">
+<div class="w-24 h-24 bg-primary-container rounded-full flex items-center justify-center mb-md">
+<span class="material-symbols-outlined text-on-primary-container text-5xl" data-icon="eco" style="font-variation-settings: 'FILL' 1;">eco</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-primary mb-xs">KisanAI</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Your AI-powered crop doctor.</p>
+</section>
+<!-- Impact Stats Row (Bento Grid Style) -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-md mb-xl">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg flex flex-col items-center text-center">
+<span class="material-symbols-outlined text-primary mb-base" data-icon="coronavirus">coronavirus</span>
+<p class="font-display-lg text-headline-lg text-primary">38</p>
+<p class="font-label-bold text-label-bold text-on-surface-variant">Diseases Detected</p>
+</div>
+<div class="bg-secondary-container border border-outline-variant rounded-xl p-lg flex flex-col items-center text-center">
+<span class="material-symbols-outlined text-on-secondary-container mb-base" data-icon="translate">translate</span>
+<p class="font-display-lg text-headline-lg text-on-secondary-container">3</p>
+<p class="font-label-bold text-label-bold text-on-secondary-container">Languages Supported</p>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg flex flex-col items-center text-center">
+<span class="material-symbols-outlined text-tertiary mb-base" data-icon="payments">payments</span>
+<p class="font-display-lg text-headline-lg text-tertiary">₹0</p>
+<p class="font-label-bold text-label-bold text-on-surface-variant">Total Cost</p>
+</div>
+</section>
+<!-- Structured Sections -->
+<div class="space-y-lg">
+<!-- Built With -->
+<section class="bg-surface-container-low rounded-xl p-lg border border-outline-variant">
+<div class="flex items-center gap-base mb-md">
+<span class="material-symbols-outlined text-primary" data-icon="architecture">architecture</span>
+<h3 class="font-title-md text-title-md text-primary">Built With</h3>
+</div>
+<div class="flex flex-wrap gap-sm">
+<span class="bg-surface-container-highest text-on-surface px-md py-xs rounded-full font-label-bold text-label-sm border border-outline-variant">TensorFlow</span>
+<span class="bg-surface-container-highest text-on-surface px-md py-xs rounded-full font-label-bold text-label-sm border border-outline-variant">PlantVillage Dataset</span>
+<span class="bg-surface-container-highest text-on-surface px-md py-xs rounded-full font-label-bold text-label-sm border border-outline-variant">Tailwind CSS</span>
+<span class="bg-surface-container-highest text-on-surface px-md py-xs rounded-full font-label-bold text-label-sm border border-outline-variant">Python</span>
+</div>
+</section>
+<!-- Built For -->
+<section class="bg-primary-container text-on-primary-container rounded-xl p-lg overflow-hidden relative">
+<div class="relative z-10">
+<div class="flex items-center gap-base mb-md">
+<span class="material-symbols-outlined text-on-primary" data-icon="volunteer_activism">volunteer_activism</span>
+<h3 class="font-title-md text-title-md text-on-primary">Built For</h3>
+</div>
+<p class="font-body-md text-body-md text-on-primary opacity-90 leading-relaxed max-w-2xl">
+                        Dedicated to the betterment of Indian farmers, KisanAI leverages state-of-the-art computer vision to bridge the gap between agricultural expertise and local fields. Our mission is to ensure every farmer has a digital doctor in their pocket to secure their livelihood and increase yield.
+                    </p>
+</div>
+<!-- Subtle watermark pattern -->
+<span class="material-symbols-outlined absolute -bottom-4 -right-4 text-9xl text-white opacity-10 rotate-12" data-icon="agriculture">agriculture</span>
+</section>
+<!-- Team -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg">
+<div class="flex items-center gap-base mb-lg">
+<span class="material-symbols-outlined text-primary" data-icon="groups">groups</span>
+<h3 class="font-title-md text-title-md text-primary">The Team</h3>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-md">
+<div class="flex items-center gap-md p-base hover:bg-surface-container-low rounded-lg transition-colors border border-transparent hover:border-outline-variant">
+<div class="w-12 h-12 bg-surface-variant rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="person">person</span>
+</div>
+<div>
+<p class="font-label-bold text-label-bold text-on-surface">Preetham S M</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Lead Developer</p>
+</div>
+</div>
+<div class="flex items-center gap-md p-base hover:bg-surface-container-low rounded-lg transition-colors border border-transparent hover:border-outline-variant">
+<div class="w-12 h-12 bg-surface-variant rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="person">person</span>
+</div>
+<div>
+<p class="font-label-bold text-label-bold text-on-surface">Rohit Gowda</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">AI Researcher</p>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- App Metadata -->
+<div class="mt-xl pt-lg border-t border-outline-variant text-center">
+<p class="font-label-sm text-label-sm text-on-surface-variant">Version 1.2.0 • Build 2024.10</p>
+</div>
+</main>
+<!-- Navigation Shell (Manual Suppression Check: Top-level About page sits under "More" but usually presented as a task-focused sub-page. Keeping Navigation for accessibility to return home) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-xs py-sm bg-surface dark:bg-surface-dim border-t border-outline-variant">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-highest transition-all active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-highest transition-all active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="document_scanner">document_scanner</span>
+<span class="font-label-sm text-label-sm">Scan</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-highest transition-all active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="bar_chart">bar_chart</span>
+<span class="font-label-sm text-label-sm">Yield</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-4 py-1 active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="more_horiz" style="font-variation-settings: 'FILL' 1;">more_horiz</span>
+<span class="font-label-sm text-label-sm">More</span>
+</a>
+</nav>
+<!-- Footer -->
+<footer class="mb-24 flex justify-center pb-md">
+<p class="font-label-bold text-label-bold text-on-surface-variant">Made with ❤️ for Indian farmers.</p>
+</footer>
+</body></html>

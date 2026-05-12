@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KisanAI - Alerts &amp; Tips</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary": "#00450d",
+                    "secondary-fixed-dim": "#a2d3a4",
+                    "primary-fixed": "#acf4a4",
+                    "on-primary-container": "#90d689",
+                    "on-primary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "inverse-on-surface": "#f0f1f1",
+                    "inverse-surface": "#2f3131",
+                    "tertiary": "#5f2c00",
+                    "on-tertiary-fixed-variant": "#723600",
+                    "on-tertiary-container": "#ffb481",
+                    "error-container": "#ffdad6",
+                    "surface-container-lowest": "#ffffff",
+                    "background": "#f9f9f9",
+                    "on-secondary-fixed-variant": "#24502c",
+                    "outline": "#717a6d",
+                    "on-background": "#1a1c1c",
+                    "on-tertiary-fixed": "#311300",
+                    "error": "#ba1a1a",
+                    "on-surface": "#1a1c1c",
+                    "surface-dim": "#dadada",
+                    "primary-fixed-dim": "#91d78a",
+                    "on-secondary-container": "#426e47",
+                    "outline-variant": "#c0c9bb",
+                    "surface-container-low": "#f3f3f4",
+                    "secondary-fixed": "#bdefbe",
+                    "secondary": "#3c6842",
+                    "surface-container-highest": "#e2e2e2",
+                    "primary-container": "#1b5e20",
+                    "on-primary-fixed": "#002203",
+                    "tertiary-fixed-dim": "#ffb786",
+                    "tertiary-fixed": "#ffdcc6",
+                    "on-secondary": "#ffffff",
+                    "on-surface-variant": "#41493e",
+                    "surface-tint": "#2a6b2c",
+                    "inverse-primary": "#91d78a",
+                    "on-error": "#ffffff",
+                    "tertiary-container": "#823f00",
+                    "surface-bright": "#f9f9f9",
+                    "on-tertiary": "#ffffff",
+                    "surface-variant": "#e2e2e2",
+                    "secondary-container": "#bdefbe",
+                    "surface-container-high": "#e8e8e8",
+                    "on-secondary-fixed": "#002109",
+                    "surface-container": "#eeeeee",
+                    "surface": "#f9f9f9",
+                    "on-primary-fixed-variant": "#0c5216"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "base": "8px",
+                    "xs": "4px",
+                    "margin-mobile": "16px",
+                    "sm": "12px",
+                    "margin-desktop": "48px",
+                    "lg": "24px",
+                    "gutter": "16px",
+                    "xl": "32px",
+                    "md": "16px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Public Sans"],
+                    "label-bold": ["Public Sans"],
+                    "title-md": ["Public Sans"],
+                    "body-lg": ["Public Sans"],
+                    "body-md": ["Public Sans"],
+                    "label-sm": ["Public Sans"],
+                    "body-accent": ["Public Sans"],
+                    "headline-lg": ["Public Sans"],
+                    "display-lg": ["Public Sans"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "label-bold": ["14px", {"lineHeight": "20px", "fontWeight": "700"}],
+                    "title-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "body-accent": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                    "display-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body-md min-h-screen flex flex-col pb-24">
+<!-- TopAppBar -->
+<header class="sticky top-0 w-full z-50 flex justify-between items-center px-margin-mobile py-base bg-surface dark:bg-surface-dim border-b border-outline-variant">
+<div class="flex items-center gap-base">
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-low transition-colors p-xs rounded-full">arrow_back</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary dark:text-primary-fixed">Alerts &amp; Tips</h1>
+</div>
+<button class="font-label-bold text-label-bold text-primary dark:text-primary-fixed active:opacity-80 transition-opacity">Mark all read</button>
+</header>
+<!-- Main Content -->
+<main class="flex-1 px-margin-mobile py-lg max-w-2xl mx-auto w-full">
+<!-- Section Today -->
+<section class="mb-xl">
+<h2 class="text-[13px] font-bold uppercase tracking-wider text-on-surface-variant mb-md">Today</h2>
+<div class="space-y-md">
+<!-- Notification Card 1: Unread Leaf -->
+<div class="bg-surface-container-lowest border-l-4 border-primary p-md rounded-lg shadow-sm flex gap-md">
+<div class="bg-primary-container text-on-primary-container w-10 h-10 rounded-full flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined" data-icon="leaf">energy_savings_leaf</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h3 class="font-label-bold text-label-bold text-on-surface">Scan result ready</h3>
+<span class="text-label-sm font-medium text-on-surface-variant">10m ago</span>
+</div>
+<p class="text-body-md text-on-surface-variant mt-xs">Your wheat crop scan from 9:00 AM has been processed. Tap to see the health report.</p>
+</div>
+<div class="w-2 h-2 bg-primary rounded-full mt-2"></div>
+</div>
+<!-- Notification Card 2: Unread Warning -->
+<div class="bg-surface-container-lowest border-l-4 border-[#FF8F00] p-md rounded-lg shadow-sm flex gap-md">
+<div class="bg-tertiary-container text-on-tertiary-container w-10 h-10 rounded-full flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined" data-icon="warning">warning</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h3 class="font-label-bold text-label-bold text-on-surface">Disease Alert</h3>
+<span class="text-label-sm font-medium text-on-surface-variant">2h ago</span>
+</div>
+<p class="text-body-md text-on-surface-variant mt-xs">Yellow Rust detected in neighboring farms. We recommend checking your crops immediately.</p>
+</div>
+<div class="w-2 h-2 bg-[#FF8F00] rounded-full mt-2"></div>
+</div>
+</div>
+</section>
+<!-- Section Yesterday -->
+<section>
+<h2 class="text-[13px] font-bold uppercase tracking-wider text-on-surface-variant mb-md">Yesterday</h2>
+<div class="space-y-md">
+<!-- Notification Card 3: Read Info -->
+<div class="bg-surface-container-low border-l-4 border-outline p-md rounded-lg flex gap-md opacity-80">
+<div class="bg-surface-container-highest text-on-surface-variant w-10 h-10 rounded-full flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined" data-icon="info">info</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h3 class="font-label-bold text-label-bold text-on-surface">Weekly Farming Tip</h3>
+<span class="text-label-sm font-medium text-on-surface-variant">Yesterday</span>
+</div>
+<p class="text-body-md text-on-surface-variant mt-xs">Optimizing irrigation schedules during the flowering stage can increase yield by 15%.</p>
+</div>
+</div>
+<!-- Notification Card 4: Read Chart -->
+<div class="bg-surface-container-low border-l-4 border-outline p-md rounded-lg flex gap-md opacity-80">
+<div class="bg-surface-container-highest text-on-surface-variant w-10 h-10 rounded-full flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined" data-icon="bar_chart">bar_chart</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h3 class="font-label-bold text-label-bold text-on-surface">Yield Report Ready</h3>
+<span class="text-label-sm font-medium text-on-surface-variant">Yesterday</span>
+</div>
+<p class="text-body-md text-on-surface-variant mt-xs">Your monthly yield summary for September is now available for download.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Contextual Illustration (Bento Style) -->
+<div class="mt-xl grid grid-cols-1 md:grid-cols-2 gap-md">
+<div class="bg-secondary-container rounded-xl p-lg flex flex-col justify-end min-h-[160px] relative overflow-hidden">
+<img class="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-30" data-alt="A wide angle landscape of a lush green agricultural field at dawn. The morning sun casts a warm golden glow over the crops, highlighting the morning dew. The style is professional and clean, using a natural color palette dominated by deep greens and soft ambers. The atmosphere is peaceful, emphasizing productivity and growth." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7NBzuy6nbJYGcBh6dum6l8p95e8O_jg4pSgrp9LMPoO-ucp0BwxvB1E8QL0hmG_7NVNCIbL3he5TzUj3kxkkybf1aRTv_ZMEcRK88NjW08NX72kXcVjAG5Z_aUlyRhVy79IjNaY6r8X97P4hiT0LH9fNnTbkZ3uAqGs_Wz3p0kkIrYhgO6tlelqDqH7jd5pkzKifr0CzXHIbHlWs3svMBuqgGWKd8wOWywqCxIQo0mAQEsKrYJiUD424GGFSK8ck9bZK5q6qgD3zu"/>
+<h4 class="font-title-md text-title-md text-on-secondary-container relative z-10">Smart Farm Insights</h4>
+<p class="text-label-sm text-on-secondary-container relative z-10">Real-time alerts help you make better decisions.</p>
+</div>
+<div class="bg-primary-container rounded-xl p-lg flex items-center justify-between min-h-[160px]">
+<div class="flex flex-col">
+<h4 class="font-title-md text-title-md text-on-primary-container">AI Advisor</h4>
+<p class="text-label-sm text-on-primary-container">Always watching your fields.</p>
+<button class="mt-md bg-on-primary text-primary px-md py-xs rounded-full font-label-bold w-fit">Ask Advice</button>
+</div>
+<span class="material-symbols-outlined text-[64px] text-on-primary-container opacity-40">psychology</span>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-xs py-sm bg-surface dark:bg-surface-dim border-t border-outline-variant">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-highest transition-all active:scale-95" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-highest transition-all active:scale-95" href="#">
+<span class="material-symbols-outlined">document_scanner</span>
+<span class="font-label-sm text-label-sm">Scan</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-highest transition-all active:scale-95" href="#">
+<span class="material-symbols-outlined">bar_chart</span>
+<span class="font-label-sm text-label-sm">Yield</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-4 py-1 active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">more_horiz</span>
+<span class="font-label-sm text-label-sm">More</span>
+</a>
+</nav>
+</body></html>

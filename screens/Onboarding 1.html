@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KisanAI - Onboarding</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Public Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#00450d",
+                        "secondary-fixed-dim": "#a2d3a4",
+                        "primary-fixed": "#acf4a4",
+                        "on-primary-container": "#90d689",
+                        "on-primary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "inverse-on-surface": "#f0f1f1",
+                        "inverse-surface": "#2f3131",
+                        "tertiary": "#5f2c00",
+                        "on-tertiary-fixed-variant": "#723600",
+                        "on-tertiary-container": "#ffb481",
+                        "error-container": "#ffdad6",
+                        "surface-container-lowest": "#ffffff",
+                        "background": "#f9f9f9",
+                        "on-secondary-fixed-variant": "#24502c",
+                        "outline": "#717a6d",
+                        "on-background": "#1a1c1c",
+                        "on-tertiary-fixed": "#311300",
+                        "error": "#ba1a1a",
+                        "on-surface": "#1a1c1c",
+                        "surface-dim": "#dadada",
+                        "primary-fixed-dim": "#91d78a",
+                        "on-secondary-container": "#426e47",
+                        "outline-variant": "#c0c9bb",
+                        "surface-container-low": "#f3f3f4",
+                        "secondary-fixed": "#bdefbe",
+                        "secondary": "#3c6842",
+                        "surface-container-highest": "#e2e2e2",
+                        "primary-container": "#1b5e20",
+                        "on-primary-fixed": "#002203",
+                        "tertiary-fixed-dim": "#ffb786",
+                        "tertiary-fixed": "#ffdcc6",
+                        "on-secondary": "#ffffff",
+                        "on-surface-variant": "#41493e",
+                        "surface-tint": "#2a6b2c",
+                        "inverse-primary": "#91d78a",
+                        "on-error": "#ffffff",
+                        "tertiary-container": "#823f00",
+                        "surface-bright": "#f9f9f9",
+                        "on-tertiary": "#ffffff",
+                        "surface-variant": "#e2e2e2",
+                        "secondary-container": "#bdefbe",
+                        "surface-container-high": "#e8e8e8",
+                        "on-secondary-fixed": "#002109",
+                        "surface-container": "#eeeeee",
+                        "surface": "#f9f9f9",
+                        "on-primary-fixed-variant": "#0c5216"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "8px",
+                        "xs": "4px",
+                        "margin-mobile": "16px",
+                        "sm": "12px",
+                        "margin-desktop": "48px",
+                        "lg": "24px",
+                        "gutter": "16px",
+                        "xl": "32px",
+                        "md": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Public Sans"],
+                        "label-bold": ["Public Sans"],
+                        "title-md": ["Public Sans"],
+                        "body-lg": ["Public Sans"],
+                        "body-md": ["Public Sans"],
+                        "label-sm": ["Public Sans"],
+                        "body-accent": ["Public Sans"],
+                        "headline-lg": ["Public Sans"],
+                        "display-lg": ["Public Sans"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "label-bold": ["14px", {"lineHeight": "20px", "fontWeight": "700"}],
+                        "title-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "body-accent": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                        "display-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface">
+<div class="relative min-h-screen flex flex-col overflow-hidden">
+<header class="w-full flex justify-end items-center px-margin-mobile py-lg fixed top-0 z-10">
+<button class="border border-outline-variant text-on-surface-variant font-label-bold text-label-sm px-6 py-2 rounded-full hover:bg-surface-container-low transition-colors">
+                Skip
+            </button>
+</header>
+<main class="flex-1 flex flex-col justify-center items-center pt-24 pb-12 px-margin-mobile bg-white">
+<div class="relative w-full max-w-md aspect-square flex items-center justify-center">
+<img alt="Farmer scanning crop" class="w-full h-full object-contain" data-alt="A clean, modern flat vector illustration of a professional farmer in a sunlit field, holding a sleek smartphone directed at a vibrant green plant. The scene uses a sophisticated palette of deep forest greens, warm amber tones for the sunlight, and clean white accents. The lighting is soft and high-key, conveying a trustworthy and professional corporate aesthetic suited for a modern agricultural AI application. The farmer is depicted with a confident posture, emphasizing ease of use and reliability in an outdoor setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7QSOLlRWaCfP7_HMjBdCB185vzdAXO_IVgFtXbkauKmxp2IoKMsSnN4HSJz-NUQ-b5oZ66CdEydHTB7oxw71uvrNOlyCvMWZ8nKoUF0TvHX8D2iGBMZkWGLyTvBhh_C4AQy2jazs5Ocprrqm8pXkX_KEe2b15yskQn-X00QyWkSv-ojzPsTA1wMF6VP3Q2oQyfufuNACkwTgKPJIcr-SVzc0VbGmEJfhShbBNa784aiTlhOZlav6K7ql29qNw-NpDOXt_XmO9VDIM"/>
+</div>
+</main>
+<section class="h-[45%] w-full bg-surface-container-lowest rounded-t-[24px] shadow-[0_-4px_20px_rgba(0,0,0,0.05)] px-margin-mobile py-xl flex flex-col justify-between items-center text-center z-20">
+<div class="w-full">
+<div class="flex justify-center space-x-2 mb-xl">
+<div class="w-2.5 h-2.5 rounded-full bg-primary-container"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-outline-variant"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-outline-variant"></div>
+</div>
+<h1 class="font-headline-lg-mobile text-[22px] leading-tight text-on-surface mb-md">
+                    Detect Crop Disease Instantly
+                </h1>
+<p class="font-body-md text-[13px] text-on-surface-variant max-w-xs mx-auto">
+                    Just take a photo of your plant. Our AI identifies the disease in seconds — no agronomist needed.
+                </p>
+</div>
+<div class="w-full max-w-md mt-auto">
+<button class="w-full bg-primary-container text-on-primary font-label-bold text-body-md py-4 rounded-full flex justify-center items-center gap-2 active:scale-95 transition-transform">
+                    Next
+                    <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</section>
+</div>
+</body></html>
