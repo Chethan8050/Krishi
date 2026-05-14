@@ -5,5 +5,5 @@ Pillow==10.1.0
 numpy==1.26.2
 
 # Uncomment the line below for the framework you decide to use for your custom model
-tensorflow==2.15.0
+tensorflow==2.16.1
 # torch==2.1.1 torchvision==0.16.1

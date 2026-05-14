@@ -1,146 +1,153 @@
 'use client';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import BottomNav from '../../components/BottomNav';
+import { motion } from 'framer-motion';
+import MapComponent from '../../components/MapComponent';
+import { useAppStore } from '../store/useAppStore';
+import { createT } from '../../lib/i18n';
 
 export default function CommunityMapPage() {
   const router = useRouter();
+  const [mounted, setMounted] = useState(false);
+  const { language } = useAppStore();
+  const t = createT(language);
+
+  useEffect(() => { setMounted(true); }, []);
+
+  if (!mounted) return null;
 
   return (
-    <div className="bg-background font-body-md text-on-background min-h-screen flex flex-col pb-24 overflow-x-hidden">
-      {/* Top Bar */}
-      <header className="sticky top-0 w-full z-50 flex justify-between items-center px-margin-mobile py-base bg-primary text-white border-b border-outline-variant">
-        <div className="flex items-center gap-md">
-          <button onClick={() => router.back()} className="material-symbols-outlined cursor-pointer hover:bg-white/10 p-1 rounded-full transition-colors">menu</button>
-          <h1 className="font-headline-lg-mob text-headline-lg-mob font-bold">Disease Heatmap</h1>
+    <div className="bg-[#f8fafc] text-[#0f172a] min-h-screen flex flex-col font-[var(--font-inter)]">
+      {/* Premium Header - Glassmorphism */}
+      <header className="sticky top-0 w-full z-50 glass px-6 py-5 flex justify-between items-center border-b border-slate-200/50">
+        <div className="flex items-center gap-4">
+          <button 
+            onClick={() => router.back()} 
+            className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-100 transition-colors text-slate-600"
+          >
+            <span className="material-symbols-outlined">arrow_back</span>
+          </button>
+          <h1 className="text-xl font-black tracking-tight text-[#065f46] font-[var(--font-outfit)] uppercase tracking-[0.05em]">{t('dash.diseaseMap')}</h1>
         </div>
-        <span className="material-symbols-outlined cursor-pointer hover:bg-white/10 p-1 rounded-full transition-colors">language</span>
+        <button className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-100 transition-colors text-slate-400">
+          <span className="material-symbols-outlined">satellite_alt</span>
+        </button>
       </header>
 
-      {/* Sub-header */}
-      <div className="px-margin-mobile py-md bg-primary/5">
-        <p className="text-on-surface-variant font-label-bold text-label-bold uppercase tracking-wider">Live disease reports from Karnataka farmers</p>
-      </div>
-
-      {/* Map Canvas Area */}
-      <main className="flex-grow relative overflow-hidden">
-        <div className="h-[360px] bg-inverse-surface w-full relative overflow-hidden shadow-inner">
-          {/* Karnataka Map Image */}
-          <img 
-            className="w-full h-full object-cover opacity-30 grayscale contrast-125" 
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDb3Ez2qQN7rchBEwXpl8t0ORBhdUiXCYdXXwt8dCdKRzjNw5LraudJpLtiEzr__SAu7ly5IBW9Zmf2mZ7XvIQqoOAQealL4S-x3XAIkR-32TWJ3qp_4yTulKTLyfj-3mOroorRsq3poU93UvJzFYnnRhAGE8_PE2HcxVXtp3XaOLQJSpVvk8TmSq1rwS1m67APc7f1XVxkbkxwz30jZ3oacEb_XR6KdbtkbhXqwdikTdux86eGgZbP6RDl6vWXPzMlIBAHNS9nGCF4"
-            alt="Karnataka Map"
+      {/* Main Map Viewport */}
+      <main className="flex-grow relative flex flex-col">
+        {/* Map Canvas - Expanded Height */}
+        <div className="h-[450px] w-full relative overflow-hidden shadow-inner bg-slate-100">
+          <MapComponent 
+            center={{ lat: 12.52, lng: 76.90 }} 
+            zoom={10} 
+            markers={[
+              { lat: 12.5222, lng: 76.8958, title: 'Mandya', count: 24 },
+              { lat: 12.2958, lng: 76.6394, title: 'Mysuru', count: 18 },
+              { lat: 13.3392, lng: 77.1140, title: 'Tumkur', count: 11 },
+            ]}
           />
           
-          {/* Heatmap Overlay (Mocked) */}
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_45%_65%,rgba(186,26,26,0.3)_0%,transparent_35%),radial-gradient(circle_at_38%_75%,rgba(186,26,26,0.2)_0%,transparent_30%),radial-gradient(circle_at_55%_45%,rgba(255,143,0,0.2)_0%,transparent_25%)]"></div>
-
-          {/* District Markers */}
-          <div className="absolute top-[60%] left-[45%] flex flex-col items-center group">
-            <div className="bg-error w-9 h-9 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-xl animate-pulse ring-4 ring-error/20">24</div>
-            <span className="text-white text-[11px] font-bold mt-1.5 bg-black/50 px-2 py-0.5 rounded backdrop-blur-sm">Mandya</span>
+          {/* Floating Status Bar - Premium Design */}
+          <div className="absolute top-6 left-6 right-6">
+             <div className="glass px-6 py-3 rounded-full border border-white/20 shadow-premium-lg flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                   <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                   <p className="text-[10px] font-black text-[#065f46] uppercase tracking-[0.2em]">Real-time Outbreak Intel</p>
+                </div>
+                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Karnataka Region</p>
+             </div>
           </div>
 
-          <div className="absolute top-[75%] left-[38%] flex flex-col items-center">
-            <div className="bg-error w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-xs shadow-lg ring-4 ring-error/10">18</div>
-            <span className="text-white text-[11px] font-bold mt-1.5 bg-black/50 px-2 py-0.5 rounded backdrop-blur-sm">Mysuru</span>
-          </div>
-
-          <div className="absolute top-[40%] left-[55%] flex flex-col items-center">
-            <div className="bg-tertiary-container w-7 h-7 rounded-full flex items-center justify-center text-on-tertiary-container font-bold text-xs shadow-lg">11</div>
-            <span className="text-white text-[11px] font-bold mt-1.5 bg-black/50 px-2 py-0.5 rounded backdrop-blur-sm">Tumkur</span>
-          </div>
-
-          <div className="absolute top-[50%] left-[30%] flex flex-col items-center">
-            <div className="bg-tertiary-container w-6 h-6 rounded-full flex items-center justify-center text-on-tertiary-container font-bold text-[10px] shadow-lg">7</div>
-            <span className="text-white text-[11px] font-bold mt-1.5 bg-black/50 px-2 py-0.5 rounded backdrop-blur-sm">Hassan</span>
-          </div>
-
-          <div className="absolute top-[55%] left-[65%] flex flex-col items-center">
-            <div className="bg-primary-fixed w-5 h-5 rounded-full flex items-center justify-center text-on-primary-fixed font-bold text-[9px] shadow-lg">3</div>
-            <span className="text-white text-[11px] font-bold mt-1.5 bg-black/50 px-2 py-0.5 rounded backdrop-blur-sm">Bengaluru</span>
-          </div>
-
-          {/* Map Controls Floating */}
-          <div className="absolute top-md right-md flex flex-col gap-sm">
-            <button className="w-10 h-10 bg-white/10 backdrop-blur-md rounded-lg flex items-center justify-center text-white border border-white/20 active:scale-90 transition-transform">
-              <span className="material-symbols-outlined text-[20px]">layers</span>
-            </button>
-            <button className="w-10 h-10 bg-white/10 backdrop-blur-md rounded-lg flex items-center justify-center text-white border border-white/20 active:scale-90 transition-transform">
-              <span className="material-symbols-outlined text-[20px]">my_location</span>
-            </button>
-          </div>
-
-          {/* Legend Overlay */}
-          <div className="absolute bottom-12 left-md bg-inverse-surface/80 backdrop-blur-md p-md rounded-2xl border border-outline/30 space-y-sm shadow-2xl">
-            <h4 className="font-bold text-[10px] text-white/60 uppercase tracking-widest px-0.5">Outbreak Risk</h4>
-            <div className="space-y-base">
-              <div className="flex items-center gap-base">
-                <div className="w-3 h-3 bg-error rounded-full shadow-sm shadow-error/40"></div>
-                <span className="text-[11px] font-bold text-white">High</span>
+          {/* Legend Overlay - Modern Glass */}
+          <div className="absolute bottom-16 left-6 glass-dark p-6 rounded-[32px] border border-white/10 space-y-4 shadow-2xl backdrop-blur-xl">
+            <h4 className="font-black text-[10px] text-white/50 uppercase tracking-[0.2em] px-1">{t('community.risk')}</h4>
+            <div className="space-y-3">
+              <div className="flex items-center gap-3">
+                <div className="w-3 h-3 bg-red-500 rounded-full shadow-[0_0_12px_rgba(239,68,68,0.5)]"></div>
+                <span className="text-xs font-black text-white uppercase tracking-widest">{t('community.high')}</span>
               </div>
-              <div className="flex items-center gap-base">
-                <div className="w-3 h-3 bg-tertiary-container rounded-full shadow-sm shadow-tertiary/40"></div>
-                <span className="text-[11px] font-bold text-white">Moderate</span>
+              <div className="flex items-center gap-3">
+                <div className="w-3 h-3 bg-amber-500 rounded-full shadow-[0_0_12px_rgba(245,158,11,0.5)]"></div>
+                <span className="text-xs font-black text-white/80 uppercase tracking-widest">{t('community.moderate')}</span>
               </div>
-              <div className="flex items-center gap-base">
-                <div className="w-3 h-3 bg-primary-fixed rounded-full shadow-sm shadow-primary/40"></div>
-                <span className="text-[11px] font-bold text-white">Safe</span>
+              <div className="flex items-center gap-3">
+                <div className="w-3 h-3 bg-emerald-500 rounded-full shadow-[0_0_12px_rgba(16,185,129,0.5)]"></div>
+                <span className="text-xs font-black text-white/60 uppercase tracking-widest">{t('community.safe')}</span>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Bottom Sheet Panel */}
-        <div className="bg-surface-container-lowest rounded-t-[32px] -mt-10 relative z-10 px-margin-mobile pt-lg pb-32 border-t border-outline-variant shadow-[0_-12px_32px_rgba(0,0,0,0.15)] max-w-2xl mx-auto w-full">
-          {/* Drag Handle */}
-          <div className="w-12 h-1.5 bg-outline-variant rounded-full mx-auto mb-lg opacity-60"></div>
+        {/* Bottom Detail Panel - Pull Up Experience */}
+        <motion.div 
+          initial={{ y: 100, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          className="bg-white rounded-t-[48px] -mt-12 relative z-10 px-8 pt-8 pb-40 border-t border-slate-100 shadow-premium-up max-w-4xl mx-auto w-full"
+        >
+          <div className="w-16 h-1.5 bg-slate-100 rounded-full mx-auto mb-10"></div>
           
-          <div className="flex justify-between items-center mb-xl">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-10">
             <div>
-              <p className="text-label-sm font-bold text-on-surface-variant uppercase tracking-widest mb-xs">Current Selection</p>
-              <h2 className="text-display-lg text-primary">Mandya District</h2>
+              <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em] mb-2">{t('community.selection')}</p>
+              <h2 className="text-4xl font-black text-slate-800 font-[var(--font-outfit)] tracking-tight">Mandya District</h2>
             </div>
-            <div className="bg-error-container text-on-error-container px-6 py-2 rounded-2xl font-bold text-title-md shadow-sm border border-error/10">
-              24 <span className="text-label-sm font-medium opacity-80 ml-1">Reports</span>
+            <div className="bg-red-50 text-red-600 px-8 py-3 rounded-[24px] font-black text-2xl shadow-sm border border-red-100/50 flex items-center gap-2">
+              24 <span className="text-xs font-bold uppercase tracking-widest opacity-60">{t('community.reports')}</span>
             </div>
           </div>
 
-          {/* Most Reported Disease Card */}
-          <div className="bg-surface-container-low border border-outline-variant p-lg rounded-2xl mb-lg relative overflow-hidden group">
-            <div className="flex items-center gap-base mb-md">
-              <span className="material-symbols-outlined text-primary text-[20px]" style={{ fontVariationSettings: "'FILL' 1" }}>coronavirus</span>
-              <p className="font-bold text-label-bold text-on-surface-variant uppercase tracking-wide">Top Threat</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+            {/* Top Threat Card - High Fidelity */}
+            <div className="bg-slate-50 border border-slate-100 p-8 rounded-[40px] relative overflow-hidden group">
+              <div className="flex items-center gap-3 mb-6 relative z-10">
+                <div className="w-10 h-10 rounded-2xl bg-white flex items-center justify-center shadow-sm">
+                   <span className="material-symbols-outlined text-emerald-600 text-xl" style={{ fontVariationSettings: "'FILL' 1" }}>coronavirus</span>
+                </div>
+                <p className="font-black text-[10px] text-slate-400 uppercase tracking-[0.2em]">{t('community.topThreat')}</p>
+              </div>
+              <div className="space-y-4 relative z-10">
+                <div className="flex justify-between items-end">
+                  <p className="text-xl font-black text-slate-800 tracking-tight">Tomato Early Blight</p>
+                  <p className="text-2xl font-black text-emerald-600">67%</p>
+                </div>
+                <div className="w-full bg-slate-200 h-3 rounded-full overflow-hidden shadow-inner">
+                  <motion.div 
+                    initial={{ width: 0 }}
+                    animate={{ width: "67%" }}
+                    transition={{ duration: 1.5, ease: "easeOut" }}
+                    className="bg-gradient-to-r from-emerald-500 to-emerald-600 h-full rounded-full shadow-lg"
+                  ></motion.div>
+                </div>
+              </div>
+              <div className="absolute top-0 right-0 w-32 h-32 bg-white/40 rounded-full blur-2xl -mr-16 -mt-16"></div>
             </div>
-            <div className="flex justify-between items-end relative z-10">
-              <p className="text-headline-lg font-bold text-primary">Tomato Early Blight</p>
-              <p className="text-display-lg text-on-surface opacity-80">67%</p>
+
+            {/* Warning Insight Card */}
+            <div className="bg-amber-50 border border-amber-100/50 p-8 rounded-[40px] flex flex-col gap-5 shadow-sm">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 bg-amber-500 rounded-[20px] flex items-center justify-center shadow-lg shadow-amber-500/20">
+                  <span className="material-symbols-outlined text-white font-black">warning</span>
+                </div>
+                <p className="text-amber-800 font-black text-[10px] uppercase tracking-[0.2em]">Regional Warning</p>
+              </div>
+              <p className="text-amber-900/70 font-medium text-sm leading-relaxed">
+                <strong>{t('community.warning')}:</strong> Disease clusters detected in neighboring Mysuru moving North-East. Apply preventive measures this week.
+              </p>
             </div>
-            <div className="w-full bg-outline-variant h-2.5 rounded-full mt-md overflow-hidden shadow-inner">
-              <div className="bg-primary h-full w-[67%] rounded-full shadow-md animate-in slide-in-from-left duration-1000"></div>
-            </div>
-            <span className="material-symbols-outlined absolute -bottom-4 -right-4 text-[100px] text-primary opacity-5 group-hover:scale-110 transition-transform">agriculture</span>
           </div>
 
-          {/* Warning Banner */}
-          <div className="bg-tertiary-container/30 border border-tertiary/20 p-lg rounded-2xl mb-xl flex gap-lg items-center shadow-sm">
-            <div className="w-12 h-12 bg-tertiary rounded-full flex items-center justify-center shrink-0 shadow-md">
-              <span className="material-symbols-outlined text-white">warning</span>
-            </div>
-            <p className="text-on-tertiary-container font-body-md leading-relaxed">
-              <strong>Spread Warning:</strong> Disease moving from Mysuru toward your area. Apply preventive fungicide this week to secure your crop.
-            </p>
-          </div>
-
-          {/* Primary Action */}
-          <button className="btn btn-primary btn-full flex items-center justify-center gap-md shadow-xl py-5 text-body-lg group active:scale-[0.98]">
-            <span className="material-symbols-outlined group-hover:rotate-12 transition-transform">shield_with_house</span>
-            Protect My Crops Now
-          </button>
-        </div>
+          <motion.button 
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="w-full bg-[#065f46] text-white py-6 rounded-[32px] font-black text-xl flex items-center justify-center gap-4 shadow-2xl shadow-emerald-900/30 transition-all border-b-4 border-[#044d38]"
+          >
+            <span className="material-symbols-outlined text-2xl">shield_with_house</span>
+            {t('community.protectBtn')}
+          </motion.button>
+        </motion.div>
       </main>
-
-      <BottomNav />
     </div>
   );
 }

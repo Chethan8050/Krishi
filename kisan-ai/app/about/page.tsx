@@ -1,7 +1,6 @@
 'use client';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import BottomNav from '../../components/BottomNav';
 
 export default function AboutPage() {
   const router = useRouter();
@@ -119,7 +118,6 @@ export default function AboutPage() {
         <p className="text-label-bold text-on-surface-variant">Made with ❤️ for Indian farmers.</p>
       </footer>
 
-      <BottomNav />
-    </div>
+          </div>
   );
 }

@@ -1,111 +1,124 @@
 'use client';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import BottomNav from '../../components/BottomNav';
+import { motion } from 'framer-motion';
+import { useAppStore } from '../store/useAppStore';
+import { createT } from '../../lib/i18n';
 
-export default function SettingsPage() {
+export default function Settings() {
   const router = useRouter();
+  const { language, theme, toggleTheme } = useAppStore();
+  const t = createT(language);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => { setMounted(true); }, []);
+
+  if (!mounted) return null;
+
+  const settingsItems = [
+    { icon: 'person', label: t('settings.profile'), href: '/profile', color: 'bg-emerald-50 text-emerald-600' },
+    { icon: 'notifications', label: t('settings.notifications'), href: '/notifications', color: 'bg-amber-50 text-amber-600' },
+    { icon: 'language', label: 'Language / ಭಾಷೆ / भाषा', href: '/language', color: 'bg-indigo-50 text-indigo-600' },
+    { 
+      icon: theme === 'dark' ? 'dark_mode' : 'light_mode', 
+      label: theme === 'dark' ? 'Dark Mode' : 'Light Mode', 
+      isToggle: true, 
+      color: theme === 'dark' ? 'bg-slate-800 text-amber-400' : 'bg-amber-50 text-amber-600' 
+    },
+    { icon: 'help', label: t('settings.help'), href: '/support', color: 'bg-blue-50 text-blue-600' },
+    { icon: 'info', label: t('settings.about'), href: '/about', color: 'bg-slate-50 text-slate-600' },
+  ];
 
   return (
-    <div className="bg-[#f9f9f9] text-[#1a1c1c] font-body-md min-h-screen flex flex-col pb-24">
-      {/* Header */}
-      <header className="sticky top-0 w-full z-50 flex justify-between items-center px-4 py-2 bg-[#f9f9f9] border-b border-[#c0c9bb]">
-        <div className="flex items-center gap-2">
-          <button onClick={() => router.back()} className="material-symbols-outlined text-[#41493e] hover:bg-[#f3f3f4] transition-colors p-1 rounded-full">arrow_back</button>
-          <h1 className="font-bold text-[24px] text-[#00450d]">Settings</h1>
+    <div className="bg-[var(--color-background)] text-[var(--color-on-background)] min-h-screen flex flex-col font-[var(--font-inter)]">
+      {/* Premium Header */}
+      <header className="sticky top-0 w-full z-50 glass px-6 py-5 flex justify-between items-center border-b border-slate-200/50">
+        <div className="flex items-center gap-4">
+          <button 
+            onClick={() => router.back()} 
+            className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-slate-600 dark:text-slate-300"
+          >
+            <span className="material-symbols-outlined">arrow_back</span>
+          </button>
+          <h1 className="text-xl font-black tracking-tight text-[var(--color-primary)] font-[var(--font-outfit)]">{t('settings.title')}</h1>
         </div>
       </header>
 
-      {/* Main Content */}
-      <main className="flex-1 px-margin-mobile py-lg space-y-xl max-w-2xl mx-auto w-full pb-32">
-        {/* Profile Card */}
-        <section className="bg-surface-container-lowest border border-outline-variant rounded-2xl p-lg flex items-center gap-lg shadow-sm">
-          <div className="w-20 h-20 bg-primary-container rounded-full flex items-center justify-center shadow-lg relative">
-            <span className="material-symbols-outlined text-on-primary-container text-[40px]">person</span>
-            <div className="absolute bottom-0 right-0 w-6 h-6 bg-secondary border-2 border-surface rounded-full flex items-center justify-center">
-              <span className="material-symbols-outlined text-white text-[12px]">edit</span>
-            </div>
+      <main className="flex-1 px-6 py-8 space-y-8 pb-32 max-w-2xl mx-auto w-full">
+        {/* Profile Card - Premium */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-[var(--color-surface)] dark:bg-[var(--color-surface-variant)] border border-slate-100 dark:border-slate-800 rounded-[32px] p-6 flex items-center gap-5 shadow-premium"
+        >
+          <div className="w-20 h-20 rounded-[28px] bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center text-white shadow-lg shadow-emerald-900/20">
+             <span className="text-3xl font-black font-[var(--font-outfit)]">P</span>
           </div>
-          <div>
-            <h2 className="text-headline-lg-mob font-bold text-primary leading-tight">Preetham S M</h2>
-            <p className="text-body-md text-on-surface-variant opacity-80">Farmer ID: #44021</p>
-            <div className="flex items-center gap-xs mt-1 text-secondary font-bold text-label-sm">
-              <span className="material-symbols-outlined text-[16px]">verified</span>
-              Verified Professional
-            </div>
+          <div className="flex-1">
+            <h2 className="font-black text-xl text-slate-800 dark:text-slate-200 tracking-tight">Preetham S.M</h2>
+            <p className="text-sm font-medium text-slate-400 dark:text-slate-500 uppercase tracking-widest mt-1">+91 98765 43210</p>
           </div>
+          <button className="w-12 h-12 rounded-2xl bg-slate-50 dark:bg-slate-800 flex items-center justify-center text-slate-400 dark:text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
+            <span className="material-symbols-outlined">edit</span>
+          </button>
+        </motion.div>
+
+        {/* Settings List */}
+        <section className="space-y-3">
+          {settingsItems.map((item, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: index * 0.05 }}
+            >
+              {item.isToggle ? (
+                <button 
+                  onClick={toggleTheme}
+                  className="w-full flex items-center gap-5 p-5 bg-[var(--color-surface)] dark:bg-[var(--color-surface-variant)] border border-slate-50 dark:border-slate-800 rounded-[24px] hover:border-emerald-200 dark:hover:border-emerald-800 transition-all shadow-sm active:scale-[0.98]"
+                >
+                  <div className={`w-12 h-12 rounded-2xl ${item.color} dark:bg-opacity-20 flex items-center justify-center flex-shrink-0`}>
+                    <span className="material-symbols-outlined">{item.icon}</span>
+                  </div>
+                  <span className="font-bold text-slate-700 dark:text-slate-200 flex-1 text-left">{item.label}</span>
+                  <div className={`w-12 h-6 rounded-full relative transition-colors ${theme === 'dark' ? 'bg-emerald-500' : 'bg-slate-200 dark:bg-slate-700'}`}>
+                    <motion.div 
+                      animate={{ x: theme === 'dark' ? 24 : 4 }}
+                      className="absolute top-1 w-4 h-4 bg-white rounded-full shadow-sm"
+                    />
+                  </div>
+                </button>
+              ) : (
+                <Link 
+                  href={item.href || '#'}
+                  className="flex items-center gap-5 p-5 bg-[var(--color-surface)] dark:bg-[var(--color-surface-variant)] border border-slate-50 dark:border-slate-800 rounded-[24px] hover:border-emerald-200 dark:hover:border-emerald-800 transition-all shadow-sm active:scale-[0.98]"
+                >
+                  <div className={`w-12 h-12 rounded-2xl ${item.color} dark:bg-opacity-20 flex items-center justify-center flex-shrink-0`}>
+                    <span className="material-symbols-outlined">{item.icon}</span>
+                  </div>
+                  <span className="font-bold text-slate-700 dark:text-slate-200 flex-1">{item.label}</span>
+                  <span className="material-symbols-outlined text-slate-300 dark:text-slate-600">chevron_right</span>
+                </Link>
+              )}
+            </motion.div>
+          ))}
         </section>
 
-        {/* Settings Groups */}
-        <div className="space-y-lg">
-          {/* General Section */}
-          <section>
-            <h3 className="text-label-sm font-bold text-on-surface-variant uppercase tracking-widest mb-md px-1">General Settings</h3>
-            <div className="bg-surface-container-lowest border border-outline-variant rounded-2xl divide-y divide-outline-variant shadow-sm overflow-hidden">
-              {[
-                { icon: 'language', label: 'App Language', value: 'English', action: () => router.push('/language') },
-                { icon: 'notifications_active', label: 'Notifications', value: 'Enabled', toggle: true, active: true },
-                { icon: 'dark_mode', label: 'Dark Mode', value: 'Off', toggle: true, active: false },
-                { icon: 'location_on', label: 'Field Location', value: 'Hassan, Karnataka' },
-              ].map((item, idx) => (
-                <div key={idx} onClick={item.action} className="flex items-center justify-between p-lg hover:bg-surface-container-low transition-colors cursor-pointer group">
-                  <div className="flex items-center gap-md">
-                    <div className="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center group-hover:scale-110 transition-transform">
-                      <span className="material-symbols-outlined text-on-surface-variant text-[20px]">{item.icon}</span>
-                    </div>
-                    <span className="font-bold text-body-md text-on-surface">{item.label}</span>
-                  </div>
-                  <div className="flex items-center gap-base">
-                    {item.toggle ? (
-                      <div className={`w-11 h-6 rounded-full relative p-1 shadow-inner transition-colors ${item.active ? 'bg-primary/20' : 'bg-outline-variant/40'}`}>
-                        <div className={`w-4 h-4 rounded-full absolute top-1 shadow-md transition-all ${item.active ? 'bg-primary right-1' : 'bg-on-surface-variant left-1'}`}></div>
-                      </div>
-                    ) : (
-                      <div className="flex items-center gap-xs">
-                        <span className="text-label-sm font-medium text-on-surface-variant opacity-60">{item.value}</span>
-                        <span className="material-symbols-outlined text-on-surface-variant opacity-40">chevron_right</span>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
+        {/* Logout Button */}
+        <button className="w-full bg-red-50 dark:bg-red-900/10 text-red-600 dark:text-red-400 py-5 rounded-[24px] font-black tracking-tight flex items-center justify-center gap-3 active:scale-95 transition-all border border-red-100/50 dark:border-red-900/50 shadow-sm">
+          <span className="material-symbols-outlined">logout</span>
+          {t('settings.logout')}
+        </button>
 
-          {/* Account & Safety Section */}
-          <section>
-            <h3 className="text-label-sm font-bold text-on-surface-variant uppercase tracking-widest mb-md px-1">Account & Safety</h3>
-            <div className="bg-surface-container-lowest border border-outline-variant rounded-2xl divide-y divide-outline-variant shadow-sm overflow-hidden">
-              {[
-                { icon: 'security', label: 'Data Privacy', color: 'text-on-surface' },
-                { icon: 'contact_support', label: 'Get Help', color: 'text-on-surface' },
-                { icon: 'logout', label: 'Logout', color: 'text-error' },
-              ].map((item, idx) => (
-                <div key={idx} className="flex items-center justify-between p-lg hover:bg-surface-container-low transition-colors cursor-pointer group">
-                  <div className="flex items-center gap-md">
-                    <div className="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center group-hover:scale-110 transition-transform">
-                      <span className={`material-symbols-outlined text-[20px] ${item.color}`}>{item.icon}</span>
-                    </div>
-                    <span className={`font-bold text-body-md ${item.color}`}>{item.label}</span>
-                  </div>
-                  <span className="material-symbols-outlined text-on-surface-variant opacity-40">chevron_right</span>
-                </div>
-              ))}
-            </div>
-          </section>
-        </div>
-
-        {/* Footer info */}
-        <div className="text-center py-xl">
-          <div className="inline-flex items-center gap-base mb-base">
-            <span className="material-symbols-outlined text-primary text-[20px]">eco</span>
-            <span className="font-bold text-primary tracking-widest uppercase text-label-bold">KisanAI</span>
+        <div className="text-center space-y-1 py-4">
+          <p className="text-[10px] font-black text-slate-300 dark:text-slate-700 uppercase tracking-[0.3em]">KisanAI v1.2.0 • Build 2026.05</p>
+          <div className="flex justify-center gap-4 text-[10px] font-black text-emerald-600/40 uppercase tracking-widest">
+             <span>Terms</span>
+             <span>Privacy</span>
           </div>
-          <p className="text-label-sm text-on-surface-variant opacity-60">Handcrafted for Bharat • © 2024</p>
         </div>
       </main>
-
-      <BottomNav />
     </div>
   );
 }

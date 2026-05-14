@@ -1,12 +1,19 @@
 import type { Metadata, Viewport } from "next";
-import { Public_Sans } from "next/font/google";
+import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
+import PageTransition from "@/components/PageTransition";
+import NavbarWrapper from "@/components/NavbarWrapper";
+import ThemeProvider from "@/components/ThemeProvider";
 
-const publicSans = Public_Sans({
-  variable: "--font-public-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-  style: ["normal", "italic"],
+  display: "swap",
+});
+
+const outfit = Outfit({
+  variable: "--font-outfit",
+  subsets: ["latin"],
   display: "swap",
 });
 
@@ -26,7 +33,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#00450d",
+  themeColor: "#065f46",
 };
 
 export default function RootLayout({
@@ -35,7 +42,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={publicSans.variable}>
+    <html lang="en" className={`${inter.variable} ${outfit.variable}`} suppressHydrationWarning>
       <head>
         {/* Material Symbols icon font */}
         <link
@@ -43,20 +50,18 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="min-h-screen bg-[#f3f3f4] flex flex-col font-[var(--font-public-sans)] antialiased">
-        {/* Truly Responsive Container */}
-        <div className="relative mx-auto w-full flex-grow flex flex-col bg-[var(--color-background)] text-[var(--color-on-background)] 
-          /* Desktop/Laptop: Full Webpage width with centered max-width for content */
-          lg:max-w-screen-2xl
-          /* Tablet: Wider 'Tab' centered view */
-          md:max-w-[768px] md:shadow-lg md:my-4 md:rounded-xl md:border md:border-outline-variant
-          /* Mobile: Full viewport app-style */
-          sm:max-w-full sm:my-0 sm:rounded-none sm:border-none
-        ">
-          <div className="flex-grow overflow-y-auto overflow-x-hidden relative scrollbar-hide">
-            {children}
+      <body className="min-h-screen bg-[#f1f5f9] flex flex-col antialiased" suppressHydrationWarning>
+        <ThemeProvider>
+          {/* Truly Responsive Container */}
+          <div className="relative mx-auto w-full flex-grow flex flex-col bg-[var(--color-background)] text-[var(--color-on-background)] overflow-hidden">
+            <PageTransition>
+              <div className="flex-grow overflow-y-auto overflow-x-hidden relative scrollbar-hide">
+                {children}
+              </div>
+            </PageTransition>
+            <NavbarWrapper />
           </div>
-        </div>
+        </ThemeProvider>
       </body>
     </html>
   );

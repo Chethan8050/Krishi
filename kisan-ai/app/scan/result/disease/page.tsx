@@ -3,13 +3,17 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAppStore } from '../../../store/useAppStore';
 import { useEffect, useState } from 'react';
+import { createT } from '../../../../lib/i18n';
 
 export default function ResultDiseasePage() {
   const router = useRouter();
-  const { recentScanResult, selectedImage } = useAppStore();
+  const [mounted, setMounted] = useState(false);
+  const { recentScanResult, selectedImage, language } = useAppStore();
+  const t = createT(language);
   const [imageUrl, setImageUrl] = useState<string>('');
 
   useEffect(() => {
+    setMounted(true);
     if (!recentScanResult) {
       router.push('/scan');
       return;
@@ -21,14 +25,26 @@ export default function ResultDiseasePage() {
     }
   }, [recentScanResult, selectedImage, router]);
 
-  if (!recentScanResult) return null;
+  const speakResult = () => {
+    if (!recentScanResult) return;
+    const utterance = new SpeechSynthesisUtterance();
+    utterance.text = `${recentScanResult.crop}. ${recentScanResult.disease} ${t('result.detected')}. ${t('result.severity')}: ${recentScanResult.severity}. ${t('result.treatment')}: ${recentScanResult.treatment.join('. ')}`;
+    utterance.lang = language === 'kn' ? 'kn-IN' : language === 'hi' ? 'hi-IN' : 'en-IN';
+    window.speechSynthesis.speak(utterance);
+  };
+
+  if (!mounted || !recentScanResult) return (
+    <div className="bg-[#f9f9f9] min-h-screen flex items-center justify-center">
+      <span className="material-symbols-outlined text-[#00450d] text-[48px] animate-spin">sync</span>
+    </div>
+  );
 
   return (
     <div className="bg-[#f9f9f9] text-[#1a1c1c] min-h-screen pb-32">
-      <header className="sticky top-0 w-full z-50 flex justify-between items-center px-4 py-2 bg-[#f9f9f9] border-b border-[#c0c9bb]">
+      <header className="sticky top-0 w-full z-50 flex justify-between items-center px-4 py-2 bg-white border-b border-[#c0c9bb] shadow-sm">
         <div className="flex items-center gap-4">
-          <button onClick={() => router.back()} className="material-symbols-outlined text-[#00450d] active:opacity-80 transition-opacity">arrow_back</button>
-          <h1 className="font-bold text-[24px] text-[#00450d]">Analysis Result</h1>
+          <button onClick={() => router.back()} className="material-symbols-outlined text-[#00450d] hover:bg-[#f3f3f4] p-1 rounded-full transition-colors">arrow_back</button>
+          <h1 className="font-bold text-[24px] text-[#00450d]">{t('result.title')}</h1>
         </div>
         <button className="material-symbols-outlined text-[#00450d]">share</button>
       </header>
@@ -49,22 +65,22 @@ export default function ResultDiseasePage() {
         </section>
 
         {/* Disease Card */}
-        <section className="p-4 rounded-xl border border-[#ba1a1a] bg-[#FFEBEE] space-y-3">
+        <section className="p-4 rounded-xl border border-[#ba1a1a] bg-[#ffdad6]/30 space-y-3">
           <div className="flex justify-between items-start">
             <div>
-              <h2 className="font-semibold text-[20px] text-[#93000a]">{recentScanResult.disease} Detected</h2>
-              <p className="text-[16px] italic text-[#41493e]">Action required immediately</p>
+              <h2 className="font-bold text-[20px] text-[#93000a]">{recentScanResult.disease} {t('result.detected')}</h2>
+              <p className="text-[16px] italic text-[#41493e]">{t('result.actionReq')}</p>
             </div>
             <span className="bg-[#823f00] text-[#ffb481] px-3 py-1 rounded-full font-bold text-[12px]">
-              {Math.round(recentScanResult.confidence * 100)}% Match
+              {Math.round(recentScanResult.confidence * 100)}% {t('result.match')}
             </span>
           </div>
         </section>
 
         {/* Severity */}
-        <section className="p-4 rounded-xl border border-[#c0c9bb] bg-[#f9f9f9] space-y-4">
+        <section className="p-4 rounded-xl border border-[#c0c9bb] bg-white space-y-4 shadow-sm">
           <div className="flex justify-between items-center">
-            <span className="text-[16px] text-[#41493e]">Severity Level</span>
+            <span className="text-[16px] text-[#41493e]">{t('result.severity')}</span>
             <span className="font-bold text-[14px] text-[#5f2c00]">{recentScanResult.severity}</span>
           </div>
           <div className="w-full bg-[#e2e2e2] rounded-full h-3 overflow-hidden">
@@ -74,18 +90,18 @@ export default function ResultDiseasePage() {
 
         {/* Treatment */}
         <section className="space-y-4">
-          <h3 className="font-semibold text-[20px] text-[#00450d]">Treatment Plan</h3>
-          <div className="grid grid-cols-1 gap-2">
+          <h3 className="font-bold text-[20px] text-[#00450d]">{t('result.treatment')}</h3>
+          <div className="grid grid-cols-1 gap-3">
             {recentScanResult.treatment.map((step: string, i: number) => (
-              <div key={i} className="flex gap-4 p-4 bg-[#f3f3f4] rounded-xl border border-[#c0c9bb] items-start">
-                <div className="bg-[#1b5e20] text-[#90d689] h-8 w-8 rounded-full flex items-center justify-center shrink-0">
+              <div key={i} className="flex gap-4 p-4 bg-white rounded-xl border border-[#c0c9bb] items-start shadow-sm hover:border-[#1b5e20] transition-colors">
+                <div className="bg-[#1b5e20] text-white h-8 w-8 rounded-full flex items-center justify-center shrink-0 shadow-md">
                   <span className="material-symbols-outlined text-[20px]">
                     {['content_cut', 'water_drop', 'eco', 'layers'][i % 4]}
                   </span>
                 </div>
                 <div>
-                  <p className="font-bold text-[14px]">Step {i + 1}</p>
-                  <p className="text-[16px] text-[#41493e]">{step}</p>
+                  <p className="font-bold text-[14px] text-[#00450d]">{t('result.step')} {i + 1}</p>
+                  <p className="text-[16px] text-[#41493e] leading-relaxed">{step}</p>
                 </div>
               </div>
             ))}
@@ -93,23 +109,22 @@ export default function ResultDiseasePage() {
         </section>
 
         {/* CTA Buttons */}
-        <section className="space-y-2 pt-4">
-          <button className="w-full bg-[#1b5e20] text-white py-4 rounded-full font-bold flex items-center justify-center gap-3 active:scale-95 transition-transform">
-            <span className="material-symbols-outlined">volume_up</span> Hear Diagnosis in Local Language
+        <section className="space-y-3 pt-4">
+          <button onClick={speakResult} className="w-full bg-[#1b5e20] text-white py-5 rounded-full font-bold flex items-center justify-center gap-3 active:scale-95 transition-transform shadow-lg">
+            <span className="material-symbols-outlined">volume_up</span> {t('result.hearDiag')}
           </button>
-          <button className="w-full border-2 border-[#00450d] text-[#00450d] py-4 rounded-full font-bold flex items-center justify-center gap-3 active:opacity-80 transition-opacity">
-            <span className="material-symbols-outlined">ios_share</span> Share Result
+          <button className="w-full border-2 border-[#00450d] text-[#00450d] py-5 rounded-full font-bold flex items-center justify-center gap-3 active:opacity-80 transition-opacity">
+            <span className="material-symbols-outlined">ios_share</span> {t('result.share')}
           </button>
         </section>
       </main>
 
-      {/* Bottom Nav */}
-      <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] z-50 flex justify-around items-center px-1 py-3 bg-[#f9f9f9] border-t border-[#c0c9bb]">
+      <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] z-50 flex justify-around items-center px-1 py-3 bg-white border-t border-[#c0c9bb] shadow-[0_-4px_16px_rgba(0,0,0,0.05)]">
         {[
-          { icon: 'home', label: 'Home', href: '/dashboard' },
-          { icon: 'document_scanner', label: 'Scan', href: '/scan', active: true },
-          { icon: 'bar_chart', label: 'Yield', href: '/yield' },
-          { icon: 'more_horiz', label: 'More', href: '/about' },
+          { icon: 'home', label: t('nav.home'), href: '/dashboard' },
+          { icon: 'document_scanner', label: t('nav.scan'), href: '/scan', active: true },
+          { icon: 'bar_chart', label: t('nav.yield'), href: '/yield' },
+          { icon: 'more_horiz', label: t('nav.more'), href: '/community' },
         ].map(item => (
           <Link key={item.label} href={item.href} className={`flex flex-col items-center justify-center px-4 py-1 active:scale-95 transition-transform rounded-full ${item.active ? 'bg-[#bdefbe] text-[#426e47]' : 'text-[#41493e]'}`}>
             <span className="material-symbols-outlined">{item.icon}</span>

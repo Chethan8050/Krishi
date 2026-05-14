@@ -28,6 +28,10 @@ interface AppState {
   setYieldInputs: (inputs: Partial<AppState['yieldInputs']>) => void;
   recentYieldResult: any | null;
   setRecentYieldResult: (result: any) => void;
+
+  // Theme
+  theme: 'light' | 'dark';
+  toggleTheme: () => void;
 }
 
 export const useAppStore = create<AppState>()(
@@ -54,6 +58,9 @@ export const useAppStore = create<AppState>()(
       setYieldInputs: (inputs) => set((state) => ({ yieldInputs: { ...state.yieldInputs, ...inputs } })),
       recentYieldResult: null,
       setRecentYieldResult: (result) => set({ recentYieldResult: result }),
+
+      theme: 'light',
+      toggleTheme: () => set((state) => ({ theme: state.theme === 'light' ? 'dark' : 'light' })),
     }),
     {
       name: 'kisan-ai-storage', // local storage key

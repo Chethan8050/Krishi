@@ -1,14 +1,19 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useAppStore } from '../../store/useAppStore';
+import { createT } from '../../../lib/i18n';
 
 export default function AnalyzingPage() {
   const router = useRouter();
-  const { setRecentScanResult, selectedImage } = useAppStore();
+  const [mounted, setMounted] = useState(false);
+  const { setRecentScanResult, selectedImage, language } = useAppStore();
+  const t = createT(language);
   const [currentStep, setCurrentStep] = useState(2); // 0=uploaded, 1=preprocess, 2=running, 3=generating
 
   useEffect(() => {
+    setMounted(true);
     let isMounted = true;
     
     const analyze = async () => {
@@ -16,6 +21,8 @@ export default function AnalyzingPage() {
         router.push('/scan');
         return;
       }
+
+      setRecentScanResult(null);
 
       try {
         const formData = new FormData();
@@ -25,25 +32,30 @@ export default function AnalyzingPage() {
           method: 'POST',
           body: formData
         });
+        
+        if (!res.ok) {
+          const errData = await res.json();
+          throw new Error(errData.error || 'Prediction failed');
+        }
+
         const data = await res.json();
         
         if (!isMounted) return;
         
-        setCurrentStep(3); // Moving to final step visually
+        setCurrentStep(3);
         setRecentScanResult(data);
         
-        // Short delay for visual effect
         setTimeout(() => {
           if (data.status === 'healthy') {
             router.push('/scan/result/healthy');
           } else {
             router.push('/scan/result/disease');
           }
-        }, 800);
-      } catch (err) {
-        console.error(err);
-        // Fallback for demo
-        router.push('/scan/result/disease');
+        }, 1200);
+      } catch (err: any) {
+        console.error('[Scan Error]:', err);
+        alert(`Scan failed: ${err.message}`);
+        router.push('/scan');
       }
     };
     
@@ -52,64 +64,100 @@ export default function AnalyzingPage() {
   }, [router, setRecentScanResult, selectedImage]);
 
   const steps = [
-    { label: 'Image uploaded', done: currentStep >= 0 },
-    { label: 'Preprocessing image', done: currentStep >= 1 },
-    { label: 'Running detection', active: currentStep === 2, done: currentStep > 2 },
-    { label: 'Generating treatment', active: currentStep === 3, pending: currentStep < 3 },
+    { label: t('analyzing.step1'), done: currentStep >= 0 },
+    { label: t('analyzing.step2'), done: currentStep >= 1 },
+    { label: t('analyzing.step3'), active: currentStep === 2, done: currentStep > 2 },
+    { label: t('analyzing.step4'), active: currentStep === 3, pending: currentStep < 3 },
   ];
 
+  if (!mounted) return null;
+
   return (
-    <div className="bg-white min-h-screen flex flex-col text-[#1a1c1c]">
-      <header className="sticky top-0 w-full z-50 flex justify-between items-center px-4 py-2 bg-[#f9f9f9] border-b border-[#c0c9bb]">
+    <div className="bg-[#f8fafc] min-h-screen flex flex-col text-[#0f172a] font-[var(--font-inter)]">
+      <header className="sticky top-0 w-full z-50 glass px-4 py-4 flex justify-between items-center border-b border-slate-200/50">
         <div className="flex items-center gap-4">
-          <span className="material-symbols-outlined text-[#717a6d] opacity-50 cursor-not-allowed">arrow_back</span>
-          <h1 className="font-bold text-[24px] leading-[32px] text-[#00450d]">Analysing...</h1>
+          <span className="material-symbols-outlined text-slate-300">arrow_back</span>
+          <h1 className="text-xl font-black tracking-tight text-[#065f46] font-[var(--font-outfit)]">{t('analyzing.title')}</h1>
         </div>
-        <span className="material-symbols-outlined text-[#00450d]">language</span>
+        <span className="material-symbols-outlined text-[#065f46] animate-pulse">cloud_upload</span>
       </header>
 
-      <main className="flex-grow flex flex-col items-center justify-center px-4 py-8">
-        {/* Progress Ring */}
-        <div className="relative flex items-center justify-center mb-8">
-          <svg className="w-48 h-48">
-            <circle className="text-[#e2e2e2]" cx="96" cy="96" fill="transparent" r="80" stroke="currentColor" strokeWidth="8" />
-            <circle className="text-[#1b5e20]" cx="96" cy="96" fill="transparent" r="80" stroke="currentColor"
-              strokeDasharray="502.65" strokeDashoffset="175.92" strokeLinecap="round" strokeWidth="8"
-              style={{ transform: 'rotate(-90deg)', transformOrigin: '50% 50%' }} />
-          </svg>
-          <div className="absolute flex flex-col items-center">
-            <span className="material-symbols-outlined text-[#00450d] text-[48px]" style={{ fontVariationSettings: "'FILL' 1" }}>eco</span>
+      <main className="flex-grow flex flex-col items-center justify-center px-6 py-12 max-w-2xl mx-auto w-full">
+        {/* Modern Progress Indicator */}
+        <div className="relative mb-12">
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+            className="w-56 h-56 rounded-full border-[6px] border-emerald-100 border-t-emerald-600 shadow-xl"
+          />
+          <div className="absolute inset-0 flex flex-col items-center justify-center space-y-2">
+            <motion.div
+              animate={{ scale: [1, 1.2, 1] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="w-20 h-20 bg-emerald-50 rounded-[30px] flex items-center justify-center shadow-lg"
+            >
+              <span className="material-symbols-outlined text-[#065f46] text-5xl" style={{ fontVariationSettings: "'FILL' 1" }}>eco</span>
+            </motion.div>
+            <p className="text-xs font-black text-emerald-600 uppercase tracking-widest">AI Core Active</p>
           </div>
         </div>
 
-        <div className="text-center space-y-1 mb-8">
-          <h2 className="font-bold text-[24px] text-[#1a1c1c]">AI is analysing your crop</h2>
-          <p className="text-[16px] text-[#41493e]">Scanning for 38 possible diseases...</p>
+        <div className="text-center space-y-2 mb-10">
+          <h2 className="text-2xl font-black tracking-tight font-[var(--font-outfit)]">{t('analyzing.heading')}</h2>
+          <p className="text-slate-500 font-medium">{t('analyzing.scanning')}</p>
         </div>
 
-        <div className="w-full max-w-md space-y-4">
-          {steps.map(step => (
-            <div key={step.label} className={`flex items-center gap-4 p-4 rounded-xl border ${step.active ? 'bg-[#bdefbe] border-[#3c6842]' : step.done ? 'bg-[#f9f9f9] border-[#c0c9bb]' : 'bg-[#f9f9f9] border-[#c0c9bb] opacity-50'}`}>
-              {step.done && <span className="material-symbols-outlined text-[#00450d]" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>}
-              {step.active && <span className="material-symbols-outlined text-[#3c6842] animate-spin">sync</span>}
-              {step.pending && <span className="material-symbols-outlined text-[#717a6d]">radio_button_unchecked</span>}
-              <span className={`font-bold text-[14px] ${step.active ? 'text-[#426e47]' : step.done ? 'text-[#1a1c1c]' : 'text-[#41493e]'}`}>{step.label}</span>
-            </div>
+        <div className="w-full space-y-3 mb-10">
+          {steps.map((step, idx) => (
+            <motion.div 
+              key={step.label}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: idx * 0.1 }}
+              className={`flex items-center gap-4 p-5 rounded-[24px] border-2 transition-all duration-500 ${
+                step.active 
+                  ? 'bg-emerald-50 border-emerald-500/30 shadow-premium scale-[1.02]' 
+                  : step.done 
+                    ? 'bg-white border-slate-100 opacity-100' 
+                    : 'bg-white/50 border-slate-100/50 opacity-40'
+              }`}
+            >
+              <div className="flex-shrink-0">
+                {step.done ? (
+                  <span className="material-symbols-outlined text-emerald-500 text-2xl" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
+                ) : step.active ? (
+                  <div className="w-6 h-6 border-2 border-emerald-600 border-t-transparent rounded-full animate-spin"></div>
+                ) : (
+                  <span className="material-symbols-outlined text-slate-300 text-2xl">radio_button_unchecked</span>
+                )}
+              </div>
+              <span className={`font-bold text-sm ${step.active ? 'text-emerald-900' : step.done ? 'text-slate-700' : 'text-slate-400'}`}>
+                {step.label}
+              </span>
+            </motion.div>
           ))}
         </div>
 
-        <div className="mt-8 w-full max-w-md overflow-hidden rounded-xl border border-[#c0c9bb] aspect-video relative">
-          <img className="w-full h-full object-cover grayscale-[20%]"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQeDRc2BInUIbiMZ4TMzaBo9hnpV0vcIm3WtYxf66t8lmWTUlqJapBvXh8QaIIQgttrrCPqvIQdPMSl7GWC5rn5N0rvCSGSnH-YK4u2QwUj5n4DWOuwRcHtdcKeDFViBxk9gG345MOU42Onh1LEUSRh6bvrRit_BzFeCep7NzuHna-kjzuogiNjlqwqCPCYvDAbyT_RfmECRAEhMZaaqaUc3v64uAl15lmH1CGvFRtVfU2Pc0OBGY_tlmETL8DA9x7eKy4hgtss6QF"
-            alt="Crop being analyzed" />
-          <div className="absolute inset-0 bg-[#00450d]/10 flex items-center justify-center">
-            <div className="w-full h-1 bg-[#1b5e20]/40 shadow-[0_0_15px_rgba(27,94,32,0.8)] absolute top-1/2 -translate-y-1/2" />
-          </div>
+        {/* Visual Scan Effect */}
+        <div className="w-full relative rounded-[32px] overflow-hidden border-4 border-white shadow-premium-lg aspect-[16/10] bg-slate-200">
+           {selectedImage ? (
+              <img src={URL.createObjectURL(selectedImage)} alt="Scan Preview" className="w-full h-full object-cover grayscale-[30%]" />
+           ) : (
+              <div className="w-full h-full flex items-center justify-center bg-slate-100">
+                <span className="material-symbols-outlined text-slate-300 text-6xl">image</span>
+              </div>
+           )}
+           <motion.div 
+            animate={{ top: ['0%', '100%', '0%'] }}
+            transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+            className="absolute left-0 w-full h-1 bg-emerald-400 shadow-[0_0_20px_rgba(52,211,153,0.8)] z-10"
+           />
+           <div className="absolute inset-0 bg-gradient-to-b from-emerald-900/10 to-transparent pointer-events-none" />
         </div>
       </main>
 
-      <footer className="p-4 text-center">
-        <p className="text-[12px] text-[#41493e] italic">This usually takes 3–5 seconds</p>
+      <footer className="p-8 text-center">
+        <p className="text-xs text-slate-400 font-bold uppercase tracking-widest italic">{t('analyzing.footer')}</p>
       </footer>
     </div>
   );
