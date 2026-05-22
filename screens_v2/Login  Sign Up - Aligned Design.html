@@ -1,0 +1,184 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Login - KrishiDrishti</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-primary-fixed-variant": "#005236",
+                        "tertiary-fixed": "#cee5ff",
+                        "surface-tint": "#4edea3",
+                        "surface": "#111416",
+                        "secondary-fixed": "#d6e4f4",
+                        "inverse-on-surface": "#2f3034",
+                        "tertiary-container": "#4ca9f1",
+                        "surface-container-low": "#1a1c1f",
+                        "on-secondary-fixed": "#0f1d28",
+                        "on-primary-fixed": "#002113",
+                        "error-container": "#93000a",
+                        "surface-variant": "#333538",
+                        "surface-container-highest": "#333538",
+                        "secondary": "#bac8d7",
+                        "primary-container": "#10b981",
+                        "surface-bright": "#37393c",
+                        "secondary-container": "#3b4855",
+                        "outline-variant": "#3c4a42",
+                        "on-primary-container": "#00422b",
+                        "on-background": "#e2e2e6",
+                        "tertiary": "#96ccff",
+                        "on-surface": "#e2e2e6",
+                        "primary-fixed-dim": "#4edea3",
+                        "on-tertiary-fixed-variant": "#004a75",
+                        "on-secondary": "#24323e",
+                        "outline": "#86948a",
+                        "on-tertiary-container": "#003c60",
+                        "surface-container-high": "#282a2d",
+                        "error": "#ffb4ab",
+                        "surface-container-lowest": "#0c0e11",
+                        "on-surface-variant": "#bbcabf",
+                        "tertiary-fixed-dim": "#96ccff",
+                        "glass-stroke": "rgba(255, 255, 255, 0.1)",
+                        "primary": "#4edea3",
+                        "on-tertiary": "#003353",
+                        "on-error-container": "#ffdad6",
+                        "on-primary": "#003824",
+                        "surface-dark": "#1E1E1E",
+                        "primary-fixed": "#6ffbbe",
+                        "on-secondary-container": "#a9b7c6",
+                        "surface-dim": "#111416",
+                        "secondary-fixed-dim": "#bac8d7",
+                        "on-tertiary-fixed": "#001d32",
+                        "surface-container": "#1e2023",
+                        "text-muted": "#A9B7C6",
+                        "background": "#111416",
+                        "on-error": "#690005",
+                        "inverse-surface": "#e2e2e6",
+                        "on-secondary-fixed-variant": "#3b4855",
+                        "inverse-primary": "#006c49"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "gutter": "16px",
+                        "margin-mobile": "16px",
+                        "card-padding": "18px",
+                        "base": "8px",
+                        "margin-desktop": "32px",
+                        "section-gap": "40px"
+                    },
+                    fontFamily: {
+                        "body-sm": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "display-lg": ["Inter"]
+                    },
+                    fontSize: {
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "300" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "display-lg": ["60px", { "lineHeight": "60px", "letterSpacing": "-0.025em", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .bg-glass-pattern {
+            background-image: radial-gradient(circle at 15% 50%, rgba(16, 185, 129, 0.08), transparent 25%),
+                              radial-gradient(circle at 85% 30%, rgba(78, 222, 163, 0.05), transparent 25%);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen flex items-center justify-center p-margin-mobile md:p-margin-desktop relative overflow-hidden bg-glass-pattern">
+<!-- Atmospheric Background Image -->
+<div class="absolute inset-0 z-0 opacity-20 bg-cover bg-center" data-alt="A sweeping aerial view of a meticulously gridded, high-tech agricultural field at twilight. The scene is bathed in deep, moody greens and shadows, illuminated by subtle digital overlays and soft, glowing emerald nodes that suggest an advanced farm intelligence network. The aesthetic is highly professional, cinematic, and seamlessly blends organic earth with cutting-edge Glassmorphic tech." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAEFKmD4tkvl-CrrHJTSpMR-UEUIMmEIKkliC-Acr6b670w8gLogBurXv2ch1izJKrLMCgv9agtzVXtLRQGQc2ZCIBgtuJ_p6fQtGioHhvptYOJJ_mi72TVrkUQRE4Tn5w3XqZxA2ItdaVYp50BYmpWeBb1MN2eVRbqmzcfPIvAqS0Z2hMQKNllLz_H8XXRFSix96FIrkqQGggxrmPur351RSbuF9E6CXmMqeV8Lq9YsgOUo72QZLzD0hFzEdWRz9Ap5FpX5NmjxS_h');">
+</div>
+<!-- Gradient Overlay for depth -->
+<div class="absolute inset-0 z-0 bg-gradient-to-b from-background/80 via-background/95 to-background"></div>
+<!-- Login Container -->
+<div class="relative z-10 w-full max-w-md flex flex-col items-center justify-center">
+<!-- Glass Shell Gradient Border wrapper -->
+<div class="rounded-[16px] p-[1px] bg-gradient-to-br from-white/10 to-transparent shadow-2xl w-full">
+<!-- Glass Card -->
+<div class="bg-[#2B2D30]/80 backdrop-blur-[24px] rounded-[16px] p-8 flex flex-col items-center">
+<!-- Logo -->
+<div class="mb-4 flex flex-col items-center gap-4">
+<img alt="KrishiDrishti Logo" class="w-16 h-16 rounded-lg object-cover shadow-lg shadow-primary-container/20 ring-1 ring-glass-stroke" src="https://lh3.googleusercontent.com/aida/ADBb0uhK_PKJK8NzipA0TUbAk6ihUmwDw_YGbUwDfTbIZUG8CNUrRU7VFsGHiJ_kNcxBvuMhiHz22rFEng4a4XRTprkaBmOJZmIWHKU4OIjf489Bl7G7DfKYEOumJRqz6zD9mhaPQ_Dk5FrTa1Er5peEbDPZ75FhvPZ7NtmUuGayOKRcM-UtCkT_rIrN26Zo35iPupkgbNtqLKwfncvAh4rvL2CYiGI9FJKlsITj36712jMoTeiJIC2xkbFd5Tz2">
+<h1 class="font-display-lg text-[32px] leading-[40px] font-semibold text-primary text-center">
+                        KrishiDrishti
+                    </h1>
+</div>
+<!-- Headers -->
+<div class="text-center mb-8 w-full flex flex-col gap-2">
+<h2 class="font-body-lg text-body-lg text-on-surface font-medium">Welcome to your digital field</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Sign in to access AI crop analysis and marketplace.</p>
+</div>
+<!-- Form / Actions -->
+<div class="w-full flex flex-col gap-4">
+<!-- Input Field -->
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-label-md text-on-surface-variant sr-only" for="phone">Phone Number</label>
+<div class="relative">
+<span class="absolute inset-y-0 left-0 flex items-center pl-3 text-on-surface-variant">
+<span class="material-symbols-outlined" style="font-size: 20px;">call</span>
+</span>
+<input class="w-full bg-surface-dark border-0 border-b border-glass-stroke focus:border-primary-container focus:ring-0 text-on-surface font-body-md text-body-md py-3 pl-10 pr-4 rounded-t-lg transition-colors placeholder:text-surface-variant" id="phone" placeholder="Phone Number" type="tel">
+</div>
+</div>
+<!-- Primary Action -->
+<button class="w-full py-3 px-4 bg-primary-container text-on-primary-container font-body-md text-body-md font-medium rounded-full hover:bg-primary transition-colors shadow-lg shadow-primary-container/20 flex justify-center items-center gap-2 group relative overflow-hidden h-[48px]">
+<div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out"></div>
+<span class="relative">Send OTP</span>
+<span class="material-symbols-outlined relative" style="font-size: 18px;">arrow_forward</span>
+</button>
+<!-- Divider -->
+<div class="flex items-center justify-center gap-4 py-2">
+<div class="h-px bg-glass-stroke flex-1"></div>
+<span class="font-label-md text-label-md text-on-surface-variant lowercase">or</span>
+<div class="h-px bg-glass-stroke flex-1"></div>
+</div>
+<!-- Social Logins -->
+<div class="flex flex-col gap-4">
+<button class="w-full py-3 px-4 bg-surface-variant/50 border border-glass-stroke text-on-surface font-body-md text-body-md rounded-full hover:bg-surface-variant transition-colors flex items-center justify-center gap-3 h-[48px]">
+<svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M22.56 12.25C22.56 11.47 22.49 10.72 22.36 10H12V14.26H17.92C17.66 15.63 16.88 16.78 15.7 17.57V20.34H19.27C21.36 18.42 22.56 15.6 22.56 12.25Z" fill="#4285F4"></path>
+<path d="M12 23C14.97 23 17.46 22.02 19.27 20.34L15.7 17.57C14.72 18.23 13.47 18.63 12 18.63C9.16 18.63 6.76 16.71 5.9 14.14H2.22V16.99C4.02 20.57 7.71 23 12 23Z" fill="#34A853"></path>
+<path d="M5.9 14.14C5.68 13.49 5.56 12.76 5.56 12C5.56 11.24 5.68 10.51 5.9 9.86V7.01H2.22C1.48 8.49 1.05 10.18 1.05 12C1.05 13.82 1.48 15.51 2.22 16.99L5.9 14.14Z" fill="#FBBC05"></path>
+<path d="M12 5.38C13.62 5.38 15.06 5.93 16.2 7.02L19.34 3.88C17.46 2.13 14.97 1 12 1C7.71 1 4.02 3.43 2.22 7.01L5.9 9.86C6.76 7.29 9.16 5.38 12 5.38Z" fill="#EA4335"></path>
+</svg>
+                            Continue with Google
+                        </button>
+</div>
+</div>
+<!-- Footer -->
+<p class="mt-8 font-label-md text-label-md text-on-surface-variant text-center max-w-[280px]">
+                    By continuing, you agree to our 
+                    <a class="text-primary hover:text-primary-fixed transition-colors underline decoration-glass-stroke underline-offset-2" href="#">Terms of Service</a>.
+                </p>
+</div>
+</div>
+</div>
+
+
+</body></html>

@@ -1,192 +1,219 @@
 'use client';
-import { useState, useEffect, useRef } from 'react';
+
+import React, { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useAppStore } from '../store/useAppStore';
-import { createT } from '../../lib/i18n';
 
-const initialMessages = [
-  { id: 1, text: 'Hello! I am Dr. Somanna, your AI crop expert. How can I help you today?', sender: 'expert', time: '10:00 AM' },
-];
+type Message = {
+  role: 'user' | 'assistant';
+  content: string;
+  time: string;
+};
 
-export default function Chat() {
+export default function ChatPage() {
   const router = useRouter();
-  const { language } = useAppStore();
-  const t = createT(language);
-  const [mounted, setMounted] = useState(false);
-  const [messages, setMessages] = useState(initialMessages);
-  const [inputValue, setInputValue] = useState('');
+  const [messages, setMessages] = useState<Message[]>([
+    {
+      role: 'assistant',
+      content: 'Namaskara! I am Dr. Somanna. How can I help you with your crops today?',
+      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+    }
+  ]);
+  const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => { 
-    setMounted(true); 
-    const params = new URLSearchParams(window.location.search);
-    const query = params.get('query');
-    if (query) {
-      setInputValue(query);
-    }
-  }, []);
-  
-  useEffect(() => {
+  const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages, isLoading]);
+  };
 
-  const handleSend = async () => {
-    if (!inputValue.trim() || isLoading) return;
-    const newMessage = {
-      id: Date.now(),
-      text: inputValue,
-      sender: 'user',
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
+  const handleSend = async (quickReply?: string) => {
+    const textToSend = quickReply || input;
+    if (!textToSend.trim()) return;
+
+    const userMessage: Message = {
+      role: 'user',
+      content: textToSend,
       time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     };
-    setMessages(prev => [...prev, newMessage]);
-    setInputValue('');
+
+    setMessages((prev) => [...prev, userMessage]);
+    if (!quickReply) setInput('');
     setIsLoading(true);
 
     try {
-      const response = await fetch('/api/chat', {
+      // Send history (only role and content)
+      const messageHistory = messages.concat(userMessage).map(m => ({
+        role: m.role,
+        content: m.content
+      }));
+
+      const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          messages: messages.map(m => ({
-            role: m.sender === 'user' ? 'user' : 'assistant',
-            content: m.text
-          })).concat({ role: 'user', content: inputValue })
-        })
+        body: JSON.stringify({ messages: messageHistory })
       });
 
-      const data = await response.json();
+      const data = await res.json();
       
-      const expertMessage = {
-        id: Date.now() + 1,
-        text: data.message,
-        sender: 'expert',
-        time: data.time || new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-      };
-
-      setMessages(prev => [...prev, expertMessage]);
-    } catch (error) {
-      console.error('Chat failed:', error);
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: 'assistant',
+          content: data.message || 'Sorry, I am having trouble connecting.',
+          time: data.time || new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+        }
+      ]);
+    } catch (err) {
+      console.error(err);
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: 'assistant',
+          content: 'Sorry, an error occurred while connecting to my central brain.',
+          time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+        }
+      ]);
     } finally {
       setIsLoading(false);
     }
   };
 
-  if (!mounted) return null;
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSend();
+    }
+  };
 
   return (
-    <div className="bg-[#f8fafc] text-[#0f172a] h-screen flex flex-col font-[var(--font-inter)]">
-      {/* Premium Chat Header */}
-      <header className="sticky top-0 w-full z-50 glass px-4 py-4 flex justify-between items-center border-b border-slate-200/50">
-        <div className="flex items-center gap-4">
-          <button 
-            onClick={() => router.back()} 
-            className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-100 transition-colors text-slate-600"
-          >
+    <div className="flex flex-col h-[calc(100vh-4rem)] pt-16 pb-20 md:pb-0 bg-surface">
+      {/* Chat Header */}
+      <div className="h-16 border-b border-glass-stroke bg-surface-container/50 backdrop-blur-md flex items-center justify-between px-4 md:px-6 shrink-0">
+        <div className="flex items-center gap-3">
+          <button onClick={() => router.back()} className="md:hidden p-2 -ml-2 text-on-surface-variant hover:text-primary rounded-full transition-colors flex items-center justify-center">
             <span className="material-symbols-outlined">arrow_back</span>
           </button>
-          <div className="flex items-center gap-3">
-            <div className="relative">
-              <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-500 to-emerald-700 flex items-center justify-center shadow-lg shadow-emerald-900/20">
-                <span className="material-symbols-outlined text-white text-[28px]">support_agent</span>
-              </div>
-              <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 border-2 border-white rounded-full"></div>
+          <div className="relative hidden sm:block">
+            <div className="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container font-bold text-lg border border-glass-stroke">
+              S
             </div>
-            <div>
-              <h1 className="text-lg font-black tracking-tight leading-tight font-[var(--font-outfit)]">Dr. Somanna</h1>
-              <p className="text-[11px] font-bold text-emerald-600 uppercase tracking-widest flex items-center gap-1">
-                <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span>
-                AI Agricultural Expert
-              </p>
-            </div>
+            <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-primary rounded-full border border-surface"></span>
+          </div>
+          <div>
+            <h2 className="font-headline-md text-body-md text-on-surface flex items-center gap-2">
+              Dr. Somanna
+              <span className="px-1.5 py-0.5 rounded text-[10px] bg-tertiary-container/20 text-tertiary font-label-md uppercase tracking-wider border border-tertiary/20">AI Expert</span>
+            </h2>
+            <p className="font-label-md text-label-md text-primary/80">Online now • KrishiDrishti</p>
           </div>
         </div>
-        <button className="w-10 h-10 flex items-center justify-center rounded-full bg-emerald-50 text-emerald-600 hover:bg-emerald-100 transition-colors">
-          <span className="material-symbols-outlined">call</span>
-        </button>
-      </header>
+        <div className="flex items-center gap-2">
+          <button className="p-2 text-on-surface-variant hover:text-primary transition-colors rounded-full hover:bg-surface-variant/50">
+            <span className="material-symbols-outlined">call</span>
+          </button>
+          <button className="p-2 text-on-surface-variant hover:text-primary transition-colors rounded-full hover:bg-surface-variant/50">
+            <span className="material-symbols-outlined">info</span>
+          </button>
+        </div>
+      </div>
 
-      {/* Messages area */}
-      <main className="flex-1 overflow-y-auto px-4 py-6 space-y-6 pb-32 scrollbar-hide">
-        <AnimatePresence initial={false}>
-          {messages.map((msg, idx) => (
-            <motion.div 
-              key={msg.id}
-              initial={{ opacity: 0, y: 10, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ duration: 0.3, ease: 'easeOut' }}
-              className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
-            >
-              <div className={`relative max-w-[85%] group`}>
-                <div className={`rounded-[24px] px-5 py-4 shadow-sm ${
-                  msg.sender === 'user' 
-                    ? 'bg-[#065f46] text-white rounded-tr-none' 
-                    : 'bg-white border border-slate-100 text-slate-800 rounded-tl-none shadow-premium'
-                }`}>
-                  <p className="text-[15px] leading-relaxed font-medium">{msg.text}</p>
+      {/* Messages Stream */}
+      <div className="flex-1 overflow-y-auto p-4 md:p-6 space-y-6 scroll-smooth bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-surface-container-low/20 via-surface to-surface">
+        <div className="flex justify-center">
+          <span className="px-3 py-1 rounded-full bg-surface-variant/50 border border-glass-stroke font-label-md text-label-md text-text-muted backdrop-blur-sm">Today</span>
+        </div>
+
+        {messages.map((msg, idx) => (
+          msg.role === 'assistant' ? (
+            /* Message (Incoming) */
+            <div key={idx} className="flex items-end gap-2 max-w-[85%] md:max-w-2xl">
+              <div className="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container font-bold text-sm shrink-0 hidden sm:flex border border-glass-stroke">
+                S
+              </div>
+              <div className="flex flex-col gap-1 items-start">
+                <div className="px-4 py-2.5 rounded-2xl rounded-bl-sm glass-panel text-on-surface font-body-sm text-body-sm border-glass-stroke shadow-sm whitespace-pre-wrap">
+                  {msg.content}
                 </div>
-                <div className={`flex items-center gap-2 mt-1.5 px-2 ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
-                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">{msg.time}</p>
-                  {msg.sender === 'user' && (
-                    <span className="material-symbols-outlined text-[14px] text-emerald-500">done_all</span>
-                  )}
+                <span className="font-label-md text-label-md text-text-muted px-1">{msg.time}</span>
+              </div>
+            </div>
+          ) : (
+            /* Message (Outgoing) */
+            <div key={idx} className="flex items-end gap-2 max-w-[85%] md:max-w-2xl ml-auto justify-end">
+              <div className="flex flex-col gap-1 items-end">
+                <div className="px-4 py-2.5 rounded-2xl rounded-br-sm bg-primary-container/20 text-on-surface font-body-sm text-body-sm border border-primary/30 shadow-sm relative overflow-hidden whitespace-pre-wrap">
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent pointer-events-none"></div>
+                  {msg.content}
+                </div>
+                <div className="flex items-center gap-1 px-1">
+                  <span className="font-label-md text-label-md text-text-muted">{msg.time}</span>
+                  <span className="material-symbols-outlined text-[14px] text-primary">done_all</span>
                 </div>
               </div>
-            </motion.div>
-          ))}
-        </AnimatePresence>
+            </div>
+          )
+        ))}
 
         {isLoading && (
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="flex justify-start"
-          >
-            <div className="bg-white border border-slate-100 rounded-[20px] rounded-tl-none px-5 py-4 shadow-premium flex gap-1.5 items-center">
-              <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-bounce"></span>
-              <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-bounce [animation-delay:0.2s]"></span>
-              <span className="w-1.5 h-1.5 bg-emerald-600 rounded-full animate-bounce [animation-delay:0.4s]"></span>
-              <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-2">Thinking...</span>
-            </div>
-          </motion.div>
-        )}
-        <div ref={messagesEndRef} />
-      </main>
-
-      {/* Input Area - Redesigned */}
-      <div className="fixed bottom-[88px] left-0 w-full px-4 z-40">
-        <div className="max-w-3xl mx-auto glass p-3 rounded-[32px] shadow-premium-lg border border-white/50 flex items-center gap-3">
-          <button className="w-10 h-10 flex items-center justify-center rounded-full bg-slate-50 text-slate-500 hover:bg-slate-100 transition-colors">
-            <span className="material-symbols-outlined">attach_file</span>
-          </button>
-          
-          <div className="flex-1 relative">
-            <input 
-              type="text" 
-              placeholder={t('chat.placeholder')}
-              className="w-full bg-slate-50 border-none outline-none px-5 py-3 rounded-2xl text-[15px] font-medium text-slate-700 placeholder:text-slate-400 focus:ring-2 focus:ring-emerald-500/20 transition-all"
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
-              onKeyPress={(e) => e.key === 'Enter' && handleSend()}
-            />
-            <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-2">
-               <button className="material-symbols-outlined text-slate-400 hover:text-emerald-600 transition-colors">mic</button>
+          <div className="flex items-end gap-2 max-w-[85%] md:max-w-2xl">
+            <div className="flex flex-col gap-1 items-start">
+              <div className="px-4 py-2.5 rounded-2xl rounded-bl-sm glass-panel text-on-surface font-body-sm text-body-sm flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-primary animate-bounce"></span>
+                <span className="w-2 h-2 rounded-full bg-primary animate-bounce" style={{ animationDelay: '0.2s' }}></span>
+                <span className="w-2 h-2 rounded-full bg-primary animate-bounce" style={{ animationDelay: '0.4s' }}></span>
+              </div>
             </div>
           </div>
+        )}
 
-          <motion.button 
-            whileTap={{ scale: 0.9 }}
-            onClick={handleSend}
-            disabled={!inputValue.trim() || isLoading}
-            className={`w-12 h-12 flex items-center justify-center rounded-2xl transition-all ${
-              inputValue.trim() && !isLoading 
-                ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-900/20' 
-                : 'bg-slate-100 text-slate-300'
-            }`}
+        <div ref={messagesEndRef} />
+      </div>
+
+      {/* Input Area */}
+      <div className="p-4 bg-surface/90 backdrop-blur-xl border-t border-glass-stroke shrink-0">
+        {/* Quick Replies */}
+        <div className="flex gap-2 mb-3 overflow-x-auto pb-1 no-scrollbar scroll-smooth">
+          {['Early signs of Blight?', 'Recommended fungicides for Tomato?', 'How to improve soil moisture?'].map((reply) => (
+            <button 
+              key={reply} 
+              onClick={() => handleSend(reply)}
+              className="shrink-0 px-3 py-1.5 rounded-full bg-surface-variant/40 border border-glass-stroke hover:border-primary/50 hover:bg-surface-variant transition-colors font-label-md text-label-md text-on-surface whitespace-nowrap flex items-center gap-1 group"
+            >
+              <span className="material-symbols-outlined text-[14px] text-primary opacity-70 group-hover:opacity-100">eco</span>
+              {reply}
+            </button>
+          ))}
+        </div>
+        
+        {/* Input Field */}
+        <div className="flex items-end gap-2">
+          <button className="p-2.5 text-on-surface-variant hover:text-primary bg-surface-container rounded-full border border-glass-stroke transition-colors shrink-0">
+            <span className="material-symbols-outlined">attach_file</span>
+          </button>
+          <div className="flex-1 relative glass-panel rounded-2xl glow-primary flex items-end border-glass-stroke">
+            <textarea 
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={handleKeyDown}
+              className="w-full bg-transparent border-none py-3 px-4 text-body-sm font-body-sm text-on-surface placeholder:text-text-muted focus:ring-0 resize-none max-h-32 overflow-y-auto min-h-[44px] outline-none" 
+              placeholder="Type a message..." 
+              rows={1}
+            />
+            <button className="p-2 m-1 text-on-surface-variant hover:text-primary transition-colors shrink-0">
+              <span className="material-symbols-outlined">mood</span>
+            </button>
+          </div>
+          <button 
+            onClick={() => handleSend()}
+            disabled={isLoading || !input.trim()}
+            className="p-3 bg-primary text-on-primary-fixed rounded-full hover:bg-primary-fixed-dim transition-colors shrink-0 shadow-[0_0_15px_rgba(16,185,129,0.3)] flex items-center justify-center disabled:opacity-50 disabled:shadow-none"
           >
-            <span className="material-symbols-outlined text-[28px]">{isLoading ? 'hourglass_top' : 'send'}</span>
-          </motion.button>
+            <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>send</span>
+          </button>
         </div>
       </div>
     </div>

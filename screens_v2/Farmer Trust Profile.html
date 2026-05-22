@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Farmer Trust Profile - KrishiDrishti</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-dim": "#111416",
+                      "background": "#111416",
+                      "surface-container-high": "#282a2d",
+                      "on-tertiary-fixed-variant": "#004a75",
+                      "tertiary-fixed": "#cee5ff",
+                      "inverse-surface": "#e2e2e6",
+                      "on-tertiary": "#003353",
+                      "surface-container-lowest": "#0c0e11",
+                      "outline": "#86948a",
+                      "error-container": "#93000a",
+                      "on-secondary-container": "#a9b7c6",
+                      "on-surface-variant": "#bbcabf",
+                      "primary-fixed": "#6ffbbe",
+                      "on-error": "#690005",
+                      "primary-fixed-dim": "#4edea3",
+                      "tertiary": "#96ccff",
+                      "on-tertiary-container": "#003c60",
+                      "secondary": "#bac8d7",
+                      "on-primary-fixed-variant": "#005236",
+                      "secondary-fixed-dim": "#bac8d7",
+                      "tertiary-fixed-dim": "#96ccff",
+                      "on-secondary": "#24323e",
+                      "surface-tint": "#4edea3",
+                      "surface-variant": "#333538",
+                      "surface-container-highest": "#333538",
+                      "surface-container-low": "#1a1c1f",
+                      "outline-variant": "#3c4a42",
+                      "tertiary-container": "#4ca9f1",
+                      "on-surface": "#e2e2e6",
+                      "on-secondary-fixed": "#0f1d28",
+                      "on-background": "#e2e2e6",
+                      "primary": "#4edea3",
+                      "on-primary-fixed": "#002113",
+                      "secondary-container": "#3b4855",
+                      "surface-bright": "#37393c",
+                      "on-tertiary-fixed": "#001d32",
+                      "on-primary": "#003824",
+                      "on-secondary-fixed-variant": "#3b4855",
+                      "surface-dark": "#1E1E1E",
+                      "inverse-primary": "#006c49",
+                      "secondary-fixed": "#d6e4f4",
+                      "glass-stroke": "rgba(255, 255, 255, 0.1)",
+                      "primary-container": "#10b981",
+                      "text-muted": "#A9B7C6",
+                      "inverse-on-surface": "#2f3034",
+                      "on-primary-container": "#00422b",
+                      "on-error-container": "#ffdad6",
+                      "surface-container": "#1e2023",
+                      "surface": "#111416",
+                      "error": "#ffb4ab"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "gutter": "16px",
+                      "margin-mobile": "16px",
+                      "margin-desktop": "32px",
+                      "card-padding": "18px",
+                      "section-gap": "40px",
+                      "base": "8px"
+              },
+              "fontFamily": {
+                      "body-md": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "label-md": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "body-sm": ["Inter"],
+                      "display-lg": ["Inter"],
+                      "headline-lg-mobile": ["Inter"],
+                      "headline-lg": ["Inter"]
+              },
+              "fontSize": {
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "300"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "400"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "display-lg": ["60px", {"lineHeight": "60px", "letterSpacing": "-0.025em", "fontWeight": "500"}],
+                      "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        .glass-panel {
+            background-color: rgba(43, 45, 48, 0.7);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            position: relative;
+        }
+        .glass-panel::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+        .glow-effect {
+            box-shadow: 0 0 24px 0 rgba(16, 185, 129, 0.15);
+        }
+        
+        /* Hide scrollbar for gallery */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen font-body-md pb-24 md:pb-0 pt-16 md:pt-20">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-margin-mobile md:px-margin-desktop h-16 bg-surface/70 backdrop-blur-xl border-b border-glass-stroke">
+<div class="flex items-center gap-4">
+<h1 class="font-display-lg text-headline-lg-mobile md:text-headline-lg text-primary tracking-tight">KrishiDrishti</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-primary-fixed transition-colors active:scale-95 duration-150">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">translate</span>
+</button>
+<button class="text-primary font-bold hover:text-primary-fixed transition-colors active:scale-95 duration-150">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">account_circle</span>
+</button>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop space-y-section-gap py-8">
+<!-- Profile Header Bento -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Main Info -->
+<div class="glass-panel rounded-xl p-card-padding md:col-span-8 flex flex-col md:flex-row gap-6 items-start md:items-center">
+<div class="w-24 h-24 rounded-full overflow-hidden shrink-0 border-2 border-primary/30 relative">
+<img alt="Ramesh Kumar Profile" class="w-full h-full object-cover" data-alt="A portrait of an experienced Indian farmer wearing traditional subtle clothing, standing in a field. The lighting is natural and slightly overcast, creating a professional and trustworthy mood. The image fits a glassmorphic minimal dark aesthetic with emerald accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDD7gChcf6ChhW9BNQsIx9M7AeyzYE8Udf9JqYdnyttOEM7KjGtQhhwt41-0mQYM2gNJN9mldvBO3fbCcBOrjYpOb8F6CJtF0DjPzBCZAE-2Dc3x-7J7LlPuUa1vQeeBf5OKckirspevOjJUPly4Dm3I8ZVruIKVQW4hX77SgV9KCSoh3PVxDafkKW7baVhHo47fEXH6k0bL-3z-RHCrXMRRsSGsM6xXBpCbluM6wgIqN7sUE4XZQnLB2YVvxa8vFX8fGiANk5gW2fx"/>
+<div class="absolute bottom-0 right-0 bg-primary-container text-on-primary-container rounded-full p-1 border border-background">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+</div>
+<div class="flex-grow space-y-2">
+<div class="flex items-center gap-3">
+<h2 class="font-headline-md text-headline-md text-on-background">Ramesh Kumar</h2>
+<span class="bg-primary-container/10 text-primary-container px-3 py-1 rounded-full font-label-md text-label-md border border-primary-container/20">Verified Partner</span>
+</div>
+<div class="flex items-center text-on-surface-variant font-body-sm text-body-sm gap-1">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+<span>Nashik District, Maharashtra</span>
+</div>
+<div class="flex items-center gap-4 pt-2">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-text-muted uppercase">Experience</span>
+<span class="font-body-md text-body-md text-on-background font-medium">15+ Years</span>
+</div>
+<div class="w-px h-8 bg-glass-stroke"></div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-text-muted uppercase">Farm Size</span>
+<span class="font-body-md text-body-md text-on-background font-medium">12 Acres</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Trust Score -->
+<div class="glass-panel rounded-xl p-card-padding md:col-span-4 flex flex-col justify-center items-center text-center glow-effect">
+<span class="font-label-md text-label-md text-text-muted uppercase tracking-wider mb-2">Trust Score</span>
+<div class="flex items-baseline gap-1 text-primary">
+<span class="font-display-lg text-[48px] font-semibold leading-none">4.8</span>
+<span class="font-headline-md text-headline-md text-primary/50">/5</span>
+</div>
+<div class="flex gap-1 mt-3">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">star_half</span>
+</div>
+<span class="font-body-sm text-body-sm text-text-muted mt-2">Based on 34 buyer reviews</span>
+</div>
+</section>
+<!-- Main Content Area -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+<!-- Left Column: Certifications & Crops -->
+<div class="lg:col-span-2 space-y-gutter">
+<!-- Certifications -->
+<section class="glass-panel rounded-xl p-card-padding">
+<h3 class="font-headline-md text-[20px] font-medium mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">workspace_premium</span>
+                        Verification Details
+                    </h3>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div class="bg-surface-dark rounded-lg p-4 border border-glass-stroke flex items-start gap-3">
+<div class="p-2 bg-primary/10 rounded-full text-primary shrink-0">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">eco</span>
+</div>
+<div>
+<h4 class="font-body-md text-body-md text-on-background font-medium mb-1">Organic Certified</h4>
+<p class="font-body-sm text-body-sm text-text-muted">Certified by NPOP India. Valid until Dec 2024.</p>
+</div>
+</div>
+<div class="bg-surface-dark rounded-lg p-4 border border-glass-stroke flex items-start gap-3">
+<div class="p-2 bg-primary/10 rounded-full text-primary shrink-0">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">science</span>
+</div>
+<div>
+<h4 class="font-body-md text-body-md text-on-background font-medium mb-1">Soil Health Card</h4>
+<p class="font-body-sm text-body-sm text-text-muted">A+ rating for Nitrogen &amp; Potassium levels.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Active Crops -->
+<section class="glass-panel rounded-xl p-card-padding">
+<h3 class="font-headline-md text-[20px] font-medium mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">agriculture</span>
+                        Active Crops
+                    </h3>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-glass-stroke">
+<th class="py-3 px-2 font-label-md text-label-md text-text-muted uppercase font-medium">Crop</th>
+<th class="py-3 px-2 font-label-md text-label-md text-text-muted uppercase font-medium">Area</th>
+<th class="py-3 px-2 font-label-md text-label-md text-text-muted uppercase font-medium">Est. Yield</th>
+<th class="py-3 px-2 font-label-md text-label-md text-text-muted uppercase font-medium">Harvest Date</th>
+<th class="py-3 px-2 font-label-md text-label-md text-text-muted uppercase font-medium text-right">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-glass-stroke/50">
+<tr class="hover:bg-surface-bright/30 transition-colors">
+<td class="py-4 px-2 font-body-md text-body-md font-medium text-on-background">Onion (Nashik Red)</td>
+<td class="py-4 px-2 font-body-sm text-body-sm text-on-surface-variant">4 Acres</td>
+<td class="py-4 px-2 font-body-sm text-body-sm text-on-surface-variant">400 Quintals</td>
+<td class="py-4 px-2 font-body-sm text-body-sm text-on-surface-variant">Mid-April 2024</td>
+<td class="py-4 px-2 text-right">
+<span class="inline-flex items-center px-2 py-1 rounded-full bg-primary/10 text-primary font-label-md text-[10px] border border-primary/20">Growing</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-bright/30 transition-colors">
+<td class="py-4 px-2 font-body-md text-body-md font-medium text-on-background">Grapes (Thompson)</td>
+<td class="py-4 px-2 font-body-sm text-body-sm text-on-surface-variant">3 Acres</td>
+<td class="py-4 px-2 font-body-sm text-body-sm text-on-surface-variant">150 Quintals</td>
+<td class="py-4 px-2 font-body-sm text-body-sm text-on-surface-variant">Late Feb 2024</td>
+<td class="py-4 px-2 text-right">
+<span class="inline-flex items-center px-2 py-1 rounded-full bg-tertiary-container/20 text-tertiary font-label-md text-[10px] border border-tertiary-container/30">Near Harvest</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Photo Gallery -->
+<section class="glass-panel rounded-xl p-card-padding">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline-md text-[20px] font-medium flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">photo_library</span>
+                            Farm Photos
+                        </h3>
+<button class="font-body-sm text-body-sm text-primary hover:text-primary-fixed transition-colors flex items-center gap-1">
+                            View All <span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+<div class="flex gap-4 overflow-x-auto hide-scrollbar pb-2 snap-x">
+<div class="w-64 h-40 shrink-0 rounded-lg overflow-hidden snap-start relative group">
+<img alt="Farm Field 1" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A lush green agricultural field under a clear blue sky. The image is taken during golden hour, casting long, soft shadows. It represents a healthy, well-maintained farm suitable for a professional agricultural platform in dark mode with emerald accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDo_6P0-KOB52RV6BvZOaXESAglVmK8E_N-nG7cdnXjIpF_XNnL_lls4BUOgbrHhmzqQpC89bibjNgtVafoBQmNDBML8LhxuK9KrebVniTgz9eFQsBcIAWZru_3dpEd10vWV4lJj4GvX62qkutTUhn7kcjr2HVztvXuwFDDtCRusYRawJrKLwUC3a1zM-n1EOzi-P1Fi24JWr69gfX_VOGmYSy5ARV15aISKcpSozYqRtdeZRo5oQblqdO1Bl-53_EHDCztg1JLReM0"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
+<span class="font-body-sm text-body-sm text-white">Onion Field - Jan '24</span>
+</div>
+</div>
+<div class="w-64 h-40 shrink-0 rounded-lg overflow-hidden snap-start relative group">
+<img alt="Farm Field 2" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Close up of healthy grapevines in a vineyard with dark soil. The lighting highlights the texture of the leaves and the rich color of the earth. The aesthetic is clean, sharp, and professional, fitting an industrial farming tech platform with a dark theme." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNCUzd6MAf1BBP-ENJGDOthFZdD6r8IfiAuLAW6N3kG4FRaGVcmkCPA9kJFw7C2H9Ds-nD521sWSXg4RztznzyOJc8XmL4ebyDSxWXHHLP0w3LmiFVe9M5yUktmwW6a88sci3VfGXTsEd16BMctHdyTStH-VAdmwgxSjE1lZ2qr49Lfp_OW9K5SmEJuDpuQdt9PTCATI3Cp-wOKj00vAGKFzSOR7H4KY2kUEeI_6ex9bSqR44777G8V6kNgytNIk7txpjIkDBTZlOq"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
+<span class="font-body-sm text-body-sm text-white">Vineyard - Dec '23</span>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Documents & Actions -->
+<div class="space-y-gutter">
+<!-- Certificates -->
+<section class="glass-panel rounded-xl p-card-padding">
+<h3 class="font-headline-md text-[20px] font-medium mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">description</span>
+                        Documents
+                    </h3>
+<div class="space-y-3">
+<a class="flex items-center p-3 rounded-lg bg-surface-dark border border-glass-stroke hover:border-primary/50 transition-colors group" href="#">
+<div class="p-2 bg-surface-variant rounded text-on-surface-variant group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined">picture_as_pdf</span>
+</div>
+<div class="ml-3 flex-grow">
+<h4 class="font-body-sm text-body-sm text-on-background font-medium">Organic Certificate.pdf</h4>
+<span class="font-label-md text-[10px] text-text-muted">2.4 MB • Updated Jan 2024</span>
+</div>
+<span class="material-symbols-outlined text-text-muted group-hover:text-primary transition-colors">download</span>
+</a>
+<a class="flex items-center p-3 rounded-lg bg-surface-dark border border-glass-stroke hover:border-primary/50 transition-colors group" href="#">
+<div class="p-2 bg-surface-variant rounded text-on-surface-variant group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined">picture_as_pdf</span>
+</div>
+<div class="ml-3 flex-grow">
+<h4 class="font-body-sm text-body-sm text-on-background font-medium">Soil Test Report.pdf</h4>
+<span class="font-label-md text-[10px] text-text-muted">1.1 MB • Updated Nov 2023</span>
+</div>
+<span class="material-symbols-outlined text-text-muted group-hover:text-primary transition-colors">download</span>
+</a>
+</div>
+</section>
+<!-- Contact Action -->
+<section class="glass-panel rounded-xl p-card-padding flex flex-col items-center text-center">
+<div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-primary text-[24px]">handshake</span>
+</div>
+<h3 class="font-headline-md text-[18px] font-medium mb-2">Interested in Procurement?</h3>
+<p class="font-body-sm text-body-sm text-text-muted mb-6">Connect directly with Ramesh to discuss bulk orders and future harvests.</p>
+<button class="w-full py-3 px-4 rounded-full bg-surface-variant border border-glass-stroke text-on-background font-body-md text-body-md font-medium hover:bg-primary hover:text-on-primary hover:border-primary transition-all duration-300">
+                        Initiate Contact
+                    </button>
+</section>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 flex justify-around items-center px-4 pb-safe h-20 bg-surface-container/80 backdrop-blur-2xl border-t border-glass-stroke shadow-lg shadow-primary/5">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined">home_max</span>
+<span class="font-label-md text-label-md mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined">sensors</span>
+<span class="font-label-md text-label-md mt-1">Detection</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary bg-primary/10 rounded-xl py-1 px-3 transform scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">analytics</span>
+<span class="font-label-md text-label-md mt-1 font-bold">Intelligence</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md mt-1">Settings</span>
+</a>
+</nav>
+</body></html>

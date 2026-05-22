@@ -1,0 +1,288 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Settings - KrishiDrishti</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-dim": "#111416",
+                        "surface-container-high": "#282a2d",
+                        "secondary": "#bac8d7",
+                        "on-tertiary-fixed-variant": "#004a75",
+                        "error-container": "#93000a",
+                        "surface-container-highest": "#333538",
+                        "surface": "#111416",
+                        "tertiary-container": "#4ca9f1",
+                        "error": "#ffb4ab",
+                        "tertiary-fixed": "#cee5ff",
+                        "on-secondary": "#24323e",
+                        "background": "#111416",
+                        "on-primary-fixed-variant": "#005236",
+                        "inverse-primary": "#006c49",
+                        "surface-tint": "#4edea3",
+                        "on-tertiary": "#003353",
+                        "secondary-container": "#3b4855",
+                        "on-error-container": "#ffdad6",
+                        "glass-stroke": "rgba(255, 255, 255, 0.1)",
+                        "surface-dark": "#1E1E1E",
+                        "on-error": "#690005",
+                        "outline-variant": "#3c4a42",
+                        "on-secondary-container": "#a9b7c6",
+                        "on-tertiary-fixed": "#001d32",
+                        "text-muted": "#A9B7C6",
+                        "surface-container-lowest": "#0c0e11",
+                        "primary": "#4edea3",
+                        "outline": "#86948a",
+                        "secondary-fixed-dim": "#bac8d7",
+                        "tertiary": "#96ccff",
+                        "surface-bright": "#37393c",
+                        "primary-container": "#10b981",
+                        "surface-container": "#1e2023",
+                        "tertiary-fixed-dim": "#96ccff",
+                        "surface-variant": "#333538",
+                        "on-background": "#e2e2e6",
+                        "secondary-fixed": "#d6e4f4",
+                        "inverse-surface": "#e2e2e6",
+                        "inverse-on-surface": "#2f3034",
+                        "primary-fixed": "#6ffbbe",
+                        "on-surface-variant": "#bbcabf",
+                        "on-primary-fixed": "#002113",
+                        "surface-container-low": "#1a1c1f",
+                        "on-primary-container": "#00422b",
+                        "on-tertiary-container": "#003c60",
+                        "primary-fixed-dim": "#4edea3",
+                        "on-secondary-fixed": "#0f1d28",
+                        "on-secondary-fixed-variant": "#3b4855",
+                        "on-primary": "#003824",
+                        "on-surface": "#e2e2e6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "card-padding": "18px",
+                        "margin-desktop": "32px",
+                        "gutter": "16px",
+                        "base": "8px",
+                        "section-gap": "40px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "display-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "300" }],
+                        "display-lg": ["60px", { "lineHeight": "60px", "letterSpacing": "-0.025em", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Custom styles for toggle switch to match brand */
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: #10b981;
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: #10b981;
+        }
+        
+        /* Custom range slider */
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            background: #4edea3;
+            cursor: pointer;
+            margin-top: -6px;
+            box-shadow: 0 0 10px rgba(78, 222, 163, 0.5);
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body class="bg-surface-dim text-on-surface min-h-screen font-body-md text-body-md antialiased relative overflow-x-hidden selection:bg-primary/30 selection:text-primary">
+<!-- Background Atmospheric Glow -->
+<div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+<div class="absolute top-[-10%] right-[-5%] w-[50vw] h-[50vw] rounded-full bg-primary/5 blur-[120px]"></div>
+</div>
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-margin-mobile md:px-margin-desktop h-16 bg-surface/70 backdrop-blur-xl border-b border-glass-stroke shadow-none">
+<div class="flex items-center gap-4"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAouVukyFsmO43gK-ZIcNi3AycUnZPNFfoP47X_WKoMwmL-_q8UfFwm7ffTX5S4vsXjr2qOWHdA02bwgDKF6rjhtyuh523Rwamko9BrTSMZBrzIcZB-_IYOHnx3AOOtUPTnZStLzSdpkhlgDuq2YJW_VqZMhV8IEqjBPwF5QlLQZmzmvclwOwyFZ_j3taKVkefB_Kfu-UQ5m0PFML-fkTV_3cmpS03Qr1fvY2O0t4t1s_ZRoAY2jej0_84LVtBhbX0Ibdyc_F01nsp_" alt="KrishiDrishti" class="h-8 w-auto object-contain"></div>
+<div class="flex items-center gap-4 text-on-surface-variant"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAouVukyFsmO43gK-ZIcNi3AycUnZPNFfoP47X_WKoMwmL-_q8UfFwm7ffTX5S4vsXjr2qOWHdA02bwgDKF6rjhtyuh523Rwamko9BrTSMZBrzIcZB-_IYOHnx3AOOtUPTnZStLzSdpkhlgDuq2YJW_VqZMhV8IEqjBPwF5QlLQZmzmvclwOwyFZ_j3taKVkefB_Kfu-UQ5m0PFML-fkTV_3cmpS03Qr1fvY2O0t4t1s_ZRoAY2jej0_84LVtBhbX0Ibdyc_F01nsp_" alt="KrishiDrishti" class="h-8 w-auto object-contain"></div>
+</header>
+<!-- Main Content Canvas -->
+<main class="relative z-10 pt-24 pb-32 md:pb-24 px-margin-mobile md:px-margin-desktop max-w-3xl mx-auto space-y-section-gap">
+<!-- Header -->
+<div class="space-y-2">
+<h1 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">Settings</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Manage your platform preferences and data settings.</p>
+</div>
+<!-- Section: Preferences -->
+<section class="space-y-4">
+<h2 class="font-headline-md text-headline-md text-primary px-2">Preferences</h2>
+<div class="bg-surface-container/70 backdrop-blur-2xl rounded-2xl border border-glass-stroke overflow-hidden shadow-lg shadow-black/20">
+<!-- Language Item -->
+<div class="flex items-center justify-between p-card-padding border-b border-glass-stroke hover:bg-surface-bright/30 transition-colors cursor-pointer group">
+<div class="flex items-center gap-4">
+<div class="p-2 rounded-lg bg-surface-container-high group-hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors" style="font-variation-settings: 'wght' 300;">language</span>
+</div>
+<div>
+<div class="font-body-lg text-body-lg text-on-surface">Language</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">English (US)</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
+</div>
+<!-- Notifications Toggle -->
+<div class="flex items-center justify-between p-card-padding border-b border-glass-stroke hover:bg-surface-bright/30 transition-colors">
+<div class="flex items-center gap-4">
+<div class="p-2 rounded-lg bg-surface-container-high">
+<span class="material-symbols-outlined text-on-surface-variant" style="font-variation-settings: 'wght' 300;">notifications_active</span>
+</div>
+<div>
+<div class="font-body-lg text-body-lg text-on-surface">System Notifications</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Alerts and system status updates</div>
+</div>
+</div>
+<div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 border-surface-container-high appearance-none cursor-pointer transition-all duration-300 z-10 top-0" id="toggle-notifications" name="toggle" type="checkbox">
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-surface-container-highest cursor-pointer" for="toggle-notifications"></label>
+</div>
+</div>
+<!-- Voice Speed Slider -->
+<div class="flex flex-col gap-4 p-card-padding hover:bg-surface-bright/30 transition-colors">
+<div class="flex items-center gap-4">
+<div class="p-2 rounded-lg bg-surface-container-high">
+<span class="material-symbols-outlined text-on-surface-variant" style="font-variation-settings: 'wght' 300;">speed</span>
+</div>
+<div class="flex-1">
+<div class="font-body-lg text-body-lg text-on-surface">Voice Readout Speed</div>
+<div class="flex justify-between items-center mt-3">
+<span class="font-label-md text-label-md text-on-surface-variant">0.5x</span>
+<input class="w-2/3 appearance-none bg-transparent" max="2" min="0.5" step="0.1" type="range" value="1">
+<span class="font-label-md text-label-md text-on-surface-variant">2.0x</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section: Data & Privacy -->
+<section class="space-y-4">
+<h2 class="font-headline-md text-headline-md text-primary px-2">Data &amp; Privacy</h2>
+<div class="bg-surface-container/70 backdrop-blur-2xl rounded-2xl border border-glass-stroke overflow-hidden shadow-lg shadow-black/20">
+<!-- Location Toggle -->
+<div class="flex items-center justify-between p-card-padding border-b border-glass-stroke hover:bg-surface-bright/30 transition-colors">
+<div class="flex items-center gap-4">
+<div class="p-2 rounded-lg bg-surface-container-high">
+<span class="material-symbols-outlined text-on-surface-variant" style="font-variation-settings: 'wght' 300;">my_location</span>
+</div>
+<div>
+<div class="font-body-lg text-body-lg text-on-surface">Location Services</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Provide field-specific intelligence</div>
+</div>
+</div>
+<div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 border-surface-container-high appearance-none cursor-pointer transition-all duration-300 z-10 top-0" id="toggle-location" name="toggle_location" type="checkbox">
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-surface-container-highest cursor-pointer" for="toggle-location"></label>
+</div>
+</div>
+<!-- Export Data -->
+<div class="flex items-center justify-between p-card-padding border-b border-glass-stroke hover:bg-surface-bright/30 transition-colors cursor-pointer group">
+<div class="flex items-center gap-4">
+<div class="p-2 rounded-lg bg-surface-container-high group-hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors" style="font-variation-settings: 'wght' 300;">download</span>
+</div>
+<div>
+<div class="font-body-lg text-body-lg text-on-surface">Export Intelligence Data</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Download reports as CSV/PDF</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
+</div>
+<!-- Clear History (Destructive) -->
+<div class="flex items-center justify-between p-card-padding hover:bg-error-container/10 transition-colors cursor-pointer group">
+<div class="flex items-center gap-4">
+<div class="p-2 rounded-lg bg-surface-container-high group-hover:bg-error/10 transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-error transition-colors" style="font-variation-settings: 'wght' 300;">delete_sweep</span>
+</div>
+<div>
+<div class="font-body-lg text-body-lg text-on-surface group-hover:text-error transition-colors">Clear Local History</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant group-hover:text-error/70">Remove cached detection data</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section: About -->
+<section class="space-y-4">
+<div class="bg-transparent rounded-2xl border border-glass-stroke overflow-hidden flex items-center justify-between p-card-padding hover:bg-surface-bright/10 transition-colors">
+<div class="flex items-center gap-4">
+<div class="p-2 rounded-lg bg-surface-container-high">
+<span class="material-symbols-outlined text-on-surface-variant" style="font-variation-settings: 'wght' 300;">info</span>
+</div>
+<div>
+<div class="font-body-lg text-body-lg text-on-surface">KrishiDrishti Core</div>
+</div>
+</div>
+<div class="font-label-md text-label-md text-on-surface-variant px-3 py-1 bg-surface-container-highest rounded-full border border-glass-stroke">
+                    Version 1.0.4
+                </div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Mobile Only per instructions logic context, but rendering as requested for the shell) -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 pb-safe h-20 bg-surface-container/80 backdrop-blur-2xl border-t border-glass-stroke shadow-lg shadow-primary/5 md:hidden">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all group" href="#">
+<span class="material-symbols-outlined mb-1 group-hover:scale-110 transition-transform" style="font-variation-settings: 'FILL' 0, 'wght' 300;">home_max</span>
+<span class="font-label-md text-label-md">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all group" href="#">
+<span class="material-symbols-outlined mb-1 group-hover:scale-110 transition-transform" style="font-variation-settings: 'FILL' 0, 'wght' 300;">sensors</span>
+<span class="font-label-md text-label-md">Detection</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all group" href="#">
+<span class="material-symbols-outlined mb-1 group-hover:scale-110 transition-transform" style="font-variation-settings: 'FILL' 0, 'wght' 300;">analytics</span>
+<span class="font-label-md text-label-md">Intelligence</span>
+</a>
+<!-- Active Tab -->
+<a class="flex flex-col items-center justify-center text-primary bg-primary/10 rounded-xl py-1 px-3 transform scale-90 duration-200" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1, 'wght' 400;">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+</nav>
+
+
+</body></html>

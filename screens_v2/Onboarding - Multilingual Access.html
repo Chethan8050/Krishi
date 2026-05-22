@@ -1,0 +1,230 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Multilingual Support - KrishiDrishti</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-dim": "#111416",
+                        "secondary": "#bac8d7",
+                        "on-secondary-container": "#a9b7c6",
+                        "error": "#ffb4ab",
+                        "surface-bright": "#37393c",
+                        "surface-dark": "#1E1E1E",
+                        "tertiary-container": "#4ca9f1",
+                        "primary-fixed": "#6ffbbe",
+                        "primary": "#4edea3",
+                        "surface-container-highest": "#333538",
+                        "on-surface-variant": "#bbcabf",
+                        "on-background": "#e2e2e6",
+                        "outline-variant": "#3c4a42",
+                        "inverse-primary": "#006c49",
+                        "tertiary-fixed": "#cee5ff",
+                        "surface-container-high": "#282a2d",
+                        "outline": "#86948a",
+                        "surface": "#111416",
+                        "on-secondary": "#24323e",
+                        "glass-stroke": "rgba(255, 255, 255, 0.1)",
+                        "on-tertiary-fixed-variant": "#004a75",
+                        "on-error-container": "#ffdad6",
+                        "inverse-surface": "#e2e2e6",
+                        "secondary-fixed-dim": "#bac8d7",
+                        "inverse-on-surface": "#2f3034",
+                        "surface-variant": "#333538",
+                        "on-secondary-fixed": "#0f1d28",
+                        "on-primary-fixed-variant": "#005236",
+                        "surface-container-lowest": "#0c0e11",
+                        "on-tertiary-fixed": "#001d32",
+                        "on-surface": "#e2e2e6",
+                        "primary-fixed-dim": "#4edea3",
+                        "surface-container-low": "#1a1c1f",
+                        "on-secondary-fixed-variant": "#3b4855",
+                        "on-error": "#690005",
+                        "error-container": "#93000a",
+                        "primary-container": "#10b981",
+                        "tertiary": "#96ccff",
+                        "on-primary-fixed": "#002113",
+                        "secondary-fixed": "#d6e4f4",
+                        "surface-tint": "#4edea3",
+                        "on-tertiary-container": "#003c60",
+                        "on-primary-container": "#00422b",
+                        "background": "#111416",
+                        "surface-container": "#1e2023",
+                        "text-muted": "#A9B7C6",
+                        "tertiary-fixed-dim": "#96ccff",
+                        "on-tertiary": "#003353",
+                        "on-primary": "#003824",
+                        "secondary-container": "#3b4855"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "16px",
+                        "margin-desktop": "32px",
+                        "base": "8px",
+                        "section-gap": "40px",
+                        "card-padding": "18px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["60px", { "lineHeight": "60px", "letterSpacing": "-0.025em", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "300" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(43, 45, 48, 0.7);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid transparent;
+            background-image: linear-gradient(rgba(43, 45, 48, 0.7), rgba(43, 45, 48, 0.7)), linear-gradient(to bottom right, rgba(255, 255, 255, 0.1), transparent);
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+        }
+        .glow-effect {
+            box-shadow: 0 0 24px rgba(16, 185, 129, 0.2);
+        }
+        
+        /* Sound wave animation */
+        @keyframes soundwave {
+            0%, 100% { height: 10px; }
+            50% { height: 40px; }
+        }
+        .bar {
+            animation: soundwave 1.5s ease-in-out infinite;
+        }
+        .bar:nth-child(1) { animation-delay: 0.1s; }
+        .bar:nth-child(2) { animation-delay: 0.3s; }
+        .bar:nth-child(3) { animation-delay: 0.5s; }
+        .bar:nth-child(4) { animation-delay: 0.2s; }
+        .bar:nth-child(5) { animation-delay: 0.4s; }
+        .bar:nth-child(6) { animation-delay: 0.6s; }
+        .bar:nth-child(7) { animation-delay: 0.3s; }
+        
+        /* Background ambient animation */
+        @keyframes drift {
+            0% { transform: translateY(0) scale(1); opacity: 0.3; }
+            50% { transform: translateY(-20px) scale(1.05); opacity: 0.5; }
+            100% { transform: translateY(0) scale(1); opacity: 0.3; }
+        }
+        .ambient-orb {
+            animation: drift 8s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="bg-surface-dim text-on-surface min-h-screen flex flex-col items-center justify-center relative overflow-hidden font-body-md">
+<!-- Ambient Background -->
+<div class="absolute inset-0 overflow-hidden pointer-events-none">
+<div class="ambient-orb absolute top-[20%] left-[10%] w-64 h-64 rounded-full bg-primary-container/10 blur-[100px]"></div>
+<div class="ambient-orb absolute bottom-[20%] right-[10%] w-80 h-80 rounded-full bg-tertiary-container/10 blur-[100px]" style="animation-delay: -4s;"></div>
+</div>
+<!-- Main Container -->
+<main class="w-full max-w-[400px] px-margin-mobile flex flex-col min-h-[819px] md:min-h-[600px] z-10 relative">
+<!-- Progress Indicator -->
+<div class="flex justify-center items-center gap-2 mb-section-gap pt-8">
+<div class="w-8 h-1 rounded-full bg-surface-variant"></div>
+<div class="w-8 h-1 rounded-full bg-primary glow-effect"></div>
+<div class="w-8 h-1 rounded-full bg-surface-variant"></div>
+</div>
+<!-- Visual/Hero Section -->
+<div class="flex-1 flex flex-col items-center justify-center w-full mb-section-gap">
+<div class="relative w-48 h-48 mb-8 flex items-center justify-center">
+<!-- Glowing central element -->
+<div class="absolute inset-0 bg-primary-container/20 rounded-full blur-xl glow-effect"></div>
+<!-- Glassy language sphere -->
+<div class="w-32 h-32 rounded-full glass-panel flex items-center justify-center z-10 relative border border-glass-stroke shadow-xl">
+<span class="material-symbols-outlined text-primary" style="font-size: 48px; font-variation-settings: 'FILL' 1;">
+                        translate
+                    </span>
+<!-- Sound waves wrapping the sphere conceptually -->
+<div class="absolute -bottom-6 left-1/2 -translate-x-1/2 flex items-end gap-1 h-12 w-full justify-center opacity-80">
+<div class="bar w-1.5 bg-primary rounded-t-sm" style="height: 15px;"></div>
+<div class="bar w-1.5 bg-primary rounded-t-sm" style="height: 30px;"></div>
+<div class="bar w-1.5 bg-primary rounded-t-sm" style="height: 45px;"></div>
+<div class="bar w-1.5 bg-tertiary-container rounded-t-sm" style="height: 25px;"></div>
+<div class="bar w-1.5 bg-primary rounded-t-sm" style="height: 40px;"></div>
+<div class="bar w-1.5 bg-primary rounded-t-sm" style="height: 20px;"></div>
+<div class="bar w-1.5 bg-primary rounded-t-sm" style="height: 10px;"></div>
+</div>
+</div>
+</div>
+<!-- Typography -->
+<div class="text-center w-full mb-8">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-4 tracking-tight">Speak Your Language</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Access critical agricultural intelligence in your preferred dialect with seamless audio support.</p>
+</div>
+<!-- Features Bento Grid -->
+<div class="grid grid-cols-2 gap-gutter w-full">
+<!-- Feature 1 -->
+<div class="glass-panel rounded-xl p-4 flex flex-col items-center justify-center text-center gap-2">
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-1">
+<span class="material-symbols-outlined text-primary text-[20px]">
+                            record_voice_over
+                        </span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Voice Output</span>
+</div>
+<!-- Feature 2 -->
+<div class="glass-panel rounded-xl p-4 flex flex-col items-center justify-center text-center gap-2">
+<div class="w-10 h-10 rounded-full bg-tertiary-container/10 flex items-center justify-center mb-1">
+<span class="material-symbols-outlined text-tertiary-container text-[20px]">
+                            graphic_eq
+                        </span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Audio Diagnosis</span>
+</div>
+<!-- Feature 3 (Spans 2 columns) -->
+<div class="glass-panel rounded-xl p-4 flex items-center justify-center gap-3 col-span-2">
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-[20px]">
+                            language
+                        </span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Real-time Translation</span>
+</div>
+</div>
+</div>
+<!-- Action Area -->
+<div class="mt-auto pb-safe flex justify-between items-center w-full pb-8">
+<button class="font-body-md text-body-md text-on-surface-variant hover:text-on-surface px-4 py-2 transition-colors">
+                Skip
+            </button>
+<button class="bg-surface-container rounded-full px-8 py-3 font-headline-md text-headline-md text-on-surface border border-glass-stroke hover:bg-primary-container hover:text-on-primary-container transition-all duration-300 flex items-center gap-2 group">
+                Next
+                <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">
+                    arrow_forward
+                </span>
+</button>
+</div>
+</main>
+</body></html>

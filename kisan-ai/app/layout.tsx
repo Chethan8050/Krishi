@@ -3,7 +3,9 @@ import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
 import PageTransition from "@/components/PageTransition";
 import NavbarWrapper from "@/components/NavbarWrapper";
+import TopAppBar from "@/components/TopAppBar";
 import ThemeProvider from "@/components/ThemeProvider";
+import { AuthProvider } from "./components/AuthProvider";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -42,7 +44,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${outfit.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`dark ${inter.variable} ${outfit.variable}`} suppressHydrationWarning>
       <head>
         {/* Material Symbols icon font */}
         <link
@@ -50,17 +52,15 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="min-h-screen bg-[#f1f5f9] flex flex-col antialiased" suppressHydrationWarning>
+      <body className="bg-background text-on-surface antialiased min-h-screen selection:bg-primary/30 selection:text-primary pb-28 md:pb-0" suppressHydrationWarning>
         <ThemeProvider>
-          {/* Truly Responsive Container */}
-          <div className="relative mx-auto w-full flex-grow flex flex-col bg-[var(--color-background)] text-[var(--color-on-background)] overflow-hidden">
+          <AuthProvider>
+            <TopAppBar />
             <PageTransition>
-              <div className="flex-grow overflow-y-auto overflow-x-hidden relative scrollbar-hide">
-                {children}
-              </div>
+              {children}
             </PageTransition>
             <NavbarWrapper />
-          </div>
+          </AuthProvider>
         </ThemeProvider>
       </body>
     </html>

@@ -1,0 +1,384 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>KrishiDrishti - Home Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container": "#1e2023",
+                        "on-tertiary-container": "#003c60",
+                        "surface-variant": "#333538",
+                        "inverse-on-surface": "#2f3034",
+                        "surface": "#111416",
+                        "on-primary-container": "#00422b",
+                        "surface-container-low": "#1a1c1f",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-fixed-variant": "#004a75",
+                        "on-secondary-fixed-variant": "#3b4855",
+                        "tertiary": "#96ccff",
+                        "on-background": "#e2e2e6",
+                        "surface-container-high": "#282a2d",
+                        "primary-fixed": "#6ffbbe",
+                        "background": "#111416",
+                        "on-primary": "#003824",
+                        "inverse-surface": "#e2e2e6",
+                        "on-tertiary-fixed": "#001d32",
+                        "tertiary-fixed-dim": "#96ccff",
+                        "surface-container-lowest": "#0c0e11",
+                        "on-secondary-fixed": "#0f1d28",
+                        "glass-stroke": "rgba(255, 255, 255, 0.1)",
+                        "error-container": "#93000a",
+                        "on-secondary": "#24323e",
+                        "secondary-container": "#3b4855",
+                        "on-secondary-container": "#a9b7c6",
+                        "text-muted": "#A9B7C6",
+                        "secondary-fixed": "#d6e4f4",
+                        "primary-container": "#10b981",
+                        "error": "#ffb4ab",
+                        "on-primary-fixed-variant": "#005236",
+                        "surface-dark": "#1E1E1E",
+                        "on-primary-fixed": "#002113",
+                        "surface-dim": "#111416",
+                        "primary": "#4edea3",
+                        "on-tertiary": "#003353",
+                        "outline": "#86948a",
+                        "outline-variant": "#3c4a42",
+                        "tertiary-container": "#4ca9f1",
+                        "on-surface": "#e2e2e6",
+                        "tertiary-fixed": "#cee5ff",
+                        "primary-fixed-dim": "#4edea3",
+                        "inverse-primary": "#006c49",
+                        "on-surface-variant": "#bbcabf",
+                        "secondary-fixed-dim": "#bac8d7",
+                        "secondary": "#bac8d7",
+                        "on-error": "#690005",
+                        "surface-container-highest": "#333538",
+                        "surface-bright": "#37393c",
+                        "surface-tint": "#4edea3"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "card-padding": "18px",
+                        "gutter": "16px",
+                        "base": "8px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "32px",
+                        "section-gap": "40px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "300" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "display-lg": ["60px", { "lineHeight": "60px", "letterSpacing": "-0.025em", "fontWeight": "500" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Gradient Shell Border Utility */
+        .glass-panel {
+            position: relative;
+            background: rgba(43, 45, 48, 0.4); /* Slightly lighter than surface-container for depth */
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+        }
+        .glass-panel::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+        
+        /* Subtle glow for prominent elements */
+        .glow-primary {
+            box-shadow: 0 0 24px rgba(16, 185, 129, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface antialiased min-h-screen selection:bg-primary/30 selection:text-primary pb-28 md:pb-0">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-margin-mobile h-16 bg-surface/70 backdrop-blur-xl border-b border-glass-stroke shadow-none transition-transform duration-150">
+<div class="flex items-center">
+<span class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-primary tracking-tight font-bold">KrishiDrishti</span>
+</div>
+<div class="flex items-center gap-4">
+<button aria-label="translate" class="text-on-surface-variant hover:text-primary-fixed transition-colors">
+<span class="material-symbols-outlined">translate</span>
+</button>
+<button aria-label="account_circle" class="text-on-surface-variant hover:text-primary-fixed transition-colors">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-24 px-margin-mobile md:px-margin-desktop max-w-7xl mx-auto flex flex-col gap-section-gap">
+<!-- Header Section -->
+<section class="flex flex-col gap-2">
+<h1 class="font-display-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">Dashboard Overview</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Real-time intelligence for your fields.</p>
+</section>
+<!-- Top Metrics Grid -->
+<section class="grid grid-cols-2 md:grid-cols-4 gap-gutter">
+<!-- Metric 1: Farm Health -->
+<div class="glass-panel rounded-xl p-card-padding flex flex-col gap-3 glow-primary">
+<div class="flex justify-between items-start">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Farm Health</span>
+<span class="material-symbols-outlined text-primary">monitor_heart</span>
+</div>
+<div class="flex items-end gap-2">
+<span class="font-display-lg text-headline-lg text-primary leading-none">82</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant pb-1">/100</span>
+</div>
+<div class="w-full bg-surface-variant h-1 rounded-full overflow-hidden mt-1">
+<div class="bg-primary h-full rounded-full" style="width: 82%"></div>
+</div>
+</div>
+<!-- Metric 2: Weather -->
+<div class="glass-panel rounded-xl p-card-padding flex flex-col justify-between gap-3">
+<div class="flex justify-between items-start">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Weather</span>
+<span class="material-symbols-outlined text-tertiary">clear_day</span>
+</div>
+<div>
+<div class="font-display-lg text-headline-lg text-on-surface leading-none">32°C</div>
+<div class="font-body-sm text-body-sm text-tertiary mt-1">Sunny &amp; Clear</div>
+</div>
+</div>
+<!-- Metric 3: Alerts -->
+<div class="glass-panel rounded-xl p-card-padding flex flex-col justify-between gap-3 border border-error-container/30">
+<div class="flex justify-between items-start">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Active Alerts</span>
+<span class="material-symbols-outlined text-error">warning</span>
+</div>
+<div>
+<div class="font-display-lg text-headline-lg text-error leading-none">2</div>
+<div class="font-body-sm text-body-sm text-error/80 mt-1">Disease Detected</div>
+</div>
+</div>
+<!-- Metric 4: Market -->
+<div class="glass-panel rounded-xl p-card-padding flex flex-col justify-between gap-3">
+<div class="flex justify-between items-start">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Market Opp</span>
+<span class="material-symbols-outlined text-primary">trending_up</span>
+</div>
+<div>
+<div class="font-display-lg text-headline-lg text-on-surface leading-none">+₹600</div>
+<div class="font-body-sm text-body-sm text-primary mt-1">Cotton / Quintal</div>
+</div>
+</div>
+</section>
+<!-- Bento Layout: Main Content -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Left Col (Wider) -->
+<div class="md:col-span-8 flex flex-col gap-gutter">
+<!-- AI Recommendation Priority Card -->
+<div class="glass-panel rounded-xl p-card-padding glow-primary flex flex-col gap-4 relative overflow-hidden">
+<!-- Decorative background element -->
+<div class="absolute -right-20 -top-20 w-64 h-64 bg-primary/5 rounded-full blur-3xl pointer-events-none"></div>
+<div class="flex items-center gap-3 z-10">
+<div class="bg-primary/10 p-2 rounded-lg">
+<span class="material-symbols-outlined text-primary icon-fill">neurology</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Intelligence Insight</h2>
+</div>
+<div class="z-10 pl-1">
+<p class="font-body-lg text-body-lg text-on-surface mb-2">High humidity detected in Sector B. Optimal conditions for fungal spread.</p>
+<div class="flex items-start gap-3 mt-4">
+<span class="material-symbols-outlined text-tertiary mt-0.5">check_circle</span>
+<p class="font-body-md text-body-md text-on-surface-variant">Recommended Action: Initiate foliar spray application tomorrow morning between 06:00 and 08:00 AM.</p>
+</div>
+<div class="flex items-start gap-3 mt-3">
+<span class="material-symbols-outlined text-tertiary mt-0.5">visibility</span>
+<p class="font-body-md text-body-md text-on-surface-variant">Monitor adjacent tomato rows for early blight symptoms over the next 48 hours.</p>
+</div>
+</div>
+<div class="mt-4 z-10 flex gap-3">
+<button class="bg-surface-variant border border-glass-stroke text-on-surface hover:bg-primary hover:text-on-primary font-body-sm text-body-sm px-4 py-2 rounded-full transition-colors">Acknowledge</button>
+<button class="bg-transparent border border-glass-stroke text-on-surface-variant hover:text-on-surface font-body-sm text-body-sm px-4 py-2 rounded-full transition-colors">View Details</button>
+</div>
+</div>
+<!-- Charts Area (Weather & Market split) -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<!-- Weather Timeline -->
+<div class="glass-panel rounded-xl p-card-padding flex flex-col gap-4">
+<h3 class="font-headline-md text-body-lg text-on-surface">Weather Forecast</h3>
+<div class="flex justify-between items-end h-32 border-b border-glass-stroke pb-2 relative">
+<!-- Faux chart lines -->
+<div class="absolute inset-0 flex flex-col justify-between opacity-10 pointer-events-none">
+<div class="w-full border-t border-white"></div>
+<div class="w-full border-t border-white"></div>
+<div class="w-full border-t border-white"></div>
+</div>
+<!-- Bars/Points -->
+<div class="flex flex-col items-center gap-2 z-10">
+<span class="font-label-md text-label-md text-on-surface-variant">Now</span>
+<span class="material-symbols-outlined text-tertiary text-sm">clear_day</span>
+<div class="w-2 bg-tertiary rounded-t-full h-16"></div>
+</div>
+<div class="flex flex-col items-center gap-2 z-10">
+<span class="font-label-md text-label-md text-on-surface-variant">12 PM</span>
+<span class="material-symbols-outlined text-tertiary text-sm">partly_cloudy_day</span>
+<div class="w-2 bg-tertiary/70 rounded-t-full h-20"></div>
+</div>
+<div class="flex flex-col items-center gap-2 z-10">
+<span class="font-label-md text-label-md text-on-surface-variant">4 PM</span>
+<span class="material-symbols-outlined text-on-surface-variant text-sm">cloud</span>
+<div class="w-2 bg-surface-variant rounded-t-full h-14"></div>
+</div>
+<div class="flex flex-col items-center gap-2 z-10">
+<span class="font-label-md text-label-md text-on-surface-variant">8 PM</span>
+<span class="material-symbols-outlined text-primary text-sm">rainy</span>
+<div class="w-2 bg-primary rounded-t-full h-8"></div>
+</div>
+</div>
+</div>
+<!-- Market Trends -->
+<div class="glass-panel rounded-xl p-card-padding flex flex-col gap-4">
+<h3 class="font-headline-md text-body-lg text-on-surface">Market Trends</h3>
+<div class="flex-1 relative border-b border-glass-stroke pb-2 h-32">
+<!-- Faux Chart Area -->
+<div class="absolute inset-0 flex flex-col justify-between opacity-10 pointer-events-none">
+<div class="w-full border-t border-white"></div>
+<div class="w-full border-t border-white"></div>
+<div class="w-full border-t border-white"></div>
+</div>
+<!-- Trend Line (Visual Fake using SVG) -->
+<svg class="absolute inset-0 h-full w-full" preserveAspectRatio="none">
+<path d="M0,80 C30,60 50,90 80,40 C110,-10 150,50 200,20" fill="none" stroke="#4edea3" stroke-width="2" vector-effect="non-scaling-stroke"></path>
+<circle cx="200" cy="20" fill="#10b981" r="4"></circle>
+</svg>
+</div>
+<div class="flex justify-between items-center mt-1">
+<span class="font-label-md text-label-md text-on-surface-variant">Cotton</span>
+<span class="font-label-md text-label-md text-primary">+3.2% Today</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Col (Narrower) -->
+<div class="md:col-span-4 flex flex-col gap-gutter">
+<!-- Quick Actions Grid -->
+<div class="glass-panel rounded-xl p-card-padding flex flex-col gap-4">
+<h3 class="font-headline-md text-body-lg text-on-surface">Quick Actions</h3>
+<div class="grid grid-cols-2 gap-3">
+<button class="bg-surface-variant/50 hover:bg-surface-variant border border-glass-stroke rounded-lg p-3 flex flex-col items-center justify-center gap-2 transition-all hover:border-primary/50 group">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">document_scanner</span>
+<span class="font-label-md text-label-md text-on-surface">Scan Crop</span>
+</button>
+<button class="bg-surface-variant/50 hover:bg-surface-variant border border-glass-stroke rounded-lg p-3 flex flex-col items-center justify-center gap-2 transition-all hover:border-primary/50 group">
+<span class="material-symbols-outlined text-tertiary group-hover:scale-110 transition-transform">bar_chart</span>
+<span class="font-label-md text-label-md text-on-surface">Yield Predict</span>
+</button>
+<button class="bg-surface-variant/50 hover:bg-surface-variant border border-glass-stroke rounded-lg p-3 flex flex-col items-center justify-center gap-2 transition-all hover:border-primary/50 group">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:scale-110 transition-transform">cloud</span>
+<span class="font-label-md text-label-md text-on-surface">Weather</span>
+</button>
+<button class="bg-surface-variant/50 hover:bg-surface-variant border border-glass-stroke rounded-lg p-3 flex flex-col items-center justify-center gap-2 transition-all hover:border-primary/50 group">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:scale-110 transition-transform">storefront</span>
+<span class="font-label-md text-label-md text-on-surface">Market</span>
+</button>
+</div>
+</div>
+<!-- Recent Scans -->
+<div class="glass-panel rounded-xl p-card-padding flex flex-col gap-4 flex-1">
+<div class="flex justify-between items-center">
+<h3 class="font-headline-md text-body-lg text-on-surface">Recent Scans</h3>
+<button class="font-label-md text-label-md text-primary hover:underline">View All</button>
+</div>
+<div class="flex flex-col gap-3">
+<!-- Scan Item 1 -->
+<div class="flex items-center gap-3 p-2 rounded-lg hover:bg-surface-variant/30 transition-colors border border-transparent hover:border-glass-stroke">
+<div class="w-12 h-12 rounded-md bg-surface-dark overflow-hidden shrink-0 border border-glass-stroke">
+<img alt="Tomato Leaf" class="w-full h-full object-cover" data-alt="A close up, macro photography shot of a single green tomato leaf displaying dark concentric rings and spots indicative of early blight disease. The lighting is bright and scientific, set against a dark contrasting background to highlight the texture and damage on the leaf surface. The overall style is high-resolution, technical agricultural imagery." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8Uhi-VqPEUaLDqhJjACOY2NBsxm_mu1h1Bn7ZHH_6RYl7iEjY1bmGzCnRkbpJqzL21jJqqgIyaGNV6IYUhK6CB_7Ys8JJzITKwxWpO1j2xuFJFPVQ-7ONuqYUMHC8ZjOrOjQxPn-3THcJPkFSdv5INUB2pPhXM-GXzkA0OdELhH0F_1hj-SX19NoQgVw0O7mOye5r5bisYvUOML0wb8kf4PbghZZTXLX6ID5-Zfohfsb5XIYDnD1SsBox-CgRtYDkYF9U2hPDEOR7">
+</div>
+<div class="flex-1 min-w-0">
+<div class="font-body-sm text-body-sm text-on-surface truncate">Tomato Sector 4</div>
+<div class="font-label-md text-label-md text-error flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[14px]">warning</span> Early Blight
+                                </div>
+</div>
+<div class="bg-error-container/20 text-error px-2 py-1 rounded text-xs font-medium">87%</div>
+</div>
+<!-- Scan Item 2 -->
+<div class="flex items-center gap-3 p-2 rounded-lg hover:bg-surface-variant/30 transition-colors border border-transparent hover:border-glass-stroke">
+<div class="w-12 h-12 rounded-md bg-surface-dark overflow-hidden shrink-0 border border-glass-stroke">
+<img alt="Potato Field" class="w-full h-full object-cover" data-alt="A wide, beautifully lit shot of lush, healthy green potato plant leaves in a farm field under bright sunlight. The leaves are vibrant, showing no signs of disease or stress. The image style is optimistic, high-quality agricultural photography with a slightly shallow depth of field blurring the distant soil." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpgxj67LHrVxAnOEySHt9CCvT7DLeuPg3Zwwpkc8xNHrcepQyS6Vz23v3G12uN7DCvutrUloCFbvDWGE5RWe0xSxSr3eGI5EVyrgRZnS8XKIus5U_FhExiSQJxThzbykrdEHOI9pqQ3iyNZnIESm1jMVLsnHflPmXmi5ajpAiHOsCuXr5nyZ-f4Kb7iAWVjS0nXdmbPc8h95TmkMj2gSEgn3izvxiT9j7nK3d_sSkXYuFv-X-hq28Lc4PsD9lzDc8AdzEUVP7Qe0x0">
+</div>
+<div class="flex-1 min-w-0">
+<div class="font-body-sm text-body-sm text-on-surface truncate">Potato Sector 1</div>
+<div class="font-label-md text-label-md text-primary flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> Healthy
+                                </div>
+</div>
+<div class="bg-primary/10 text-primary px-2 py-1 rounded text-xs font-medium">96%</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 flex justify-around items-center px-4 pb-safe h-20 bg-surface-container/80 backdrop-blur-2xl border-t border-glass-stroke shadow-lg shadow-primary/5">
+<!-- Active Tab: Home -->
+<a class="flex flex-col items-center justify-center text-primary bg-primary/10 rounded-xl py-1 px-3 transform scale-90 duration-200" href="#">
+<span class="material-symbols-outlined icon-fill">home_max</span>
+<span class="font-label-md text-label-md mt-1">Home</span>
+</a>
+<!-- Inactive Tab: Detection -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined">sensors</span>
+<span class="font-label-md text-label-md mt-1">Detection</span>
+</a>
+<!-- Inactive Tab: Intelligence -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-md text-label-md mt-1">Intelligence</span>
+</a>
+<!-- Inactive Tab: Settings -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md mt-1">Settings</span>
+</a>
+</nav>
+</body></html>

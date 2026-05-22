@@ -1,0 +1,325 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>KrishiDrishti - Disease Detection</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-tint": "#4edea3",
+                        "surface-variant": "#333538",
+                        "secondary-fixed-dim": "#bac8d7",
+                        "on-primary-fixed-variant": "#005236",
+                        "tertiary-fixed-dim": "#96ccff",
+                        "on-secondary": "#24323e",
+                        "on-secondary-fixed": "#0f1d28",
+                        "on-background": "#e2e2e6",
+                        "primary": "#4edea3",
+                        "tertiary-container": "#4ca9f1",
+                        "on-surface": "#e2e2e6",
+                        "surface-container-highest": "#333538",
+                        "surface-container-low": "#1a1c1f",
+                        "outline-variant": "#3c4a42",
+                        "on-secondary-fixed-variant": "#3b4855",
+                        "glass-stroke": "rgba(255, 255, 255, 0.1)",
+                        "surface-dark": "#1E1E1E",
+                        "inverse-primary": "#006c49",
+                        "secondary-fixed": "#d6e4f4",
+                        "on-primary-fixed": "#002113",
+                        "surface-bright": "#37393c",
+                        "on-tertiary-fixed": "#001d32",
+                        "on-primary": "#003824",
+                        "secondary-container": "#3b4855",
+                        "on-error-container": "#ffdad6",
+                        "surface-container": "#1e2023",
+                        "surface": "#111416",
+                        "error": "#ffb4ab",
+                        "primary-container": "#10b981",
+                        "on-primary-container": "#00422b",
+                        "text-muted": "#A9B7C6",
+                        "inverse-on-surface": "#2f3034",
+                        "surface-container-high": "#282a2d",
+                        "on-tertiary-fixed-variant": "#004a75",
+                        "surface-dim": "#111416",
+                        "background": "#111416",
+                        "on-tertiary": "#003353",
+                        "surface-container-lowest": "#0c0e11",
+                        "outline": "#86948a",
+                        "error-container": "#93000a",
+                        "inverse-surface": "#e2e2e6",
+                        "tertiary-fixed": "#cee5ff",
+                        "primary-fixed": "#6ffbbe",
+                        "on-error": "#690005",
+                        "primary-fixed-dim": "#4edea3",
+                        "on-secondary-container": "#a9b7c6",
+                        "on-surface-variant": "#bbcabf",
+                        "tertiary": "#96ccff",
+                        "on-tertiary-container": "#003c60",
+                        "secondary": "#bac8d7"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "8px",
+                        "section-gap": "40px",
+                        "margin-desktop": "32px",
+                        "card-padding": "18px",
+                        "margin-mobile": "16px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "display-lg": ["60px", { "lineHeight": "60px", "letterSpacing": "-0.025em", "fontWeight": "500" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "300" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        /* Bounded Glassy Card Style */
+        .glass-panel {
+            position: relative;
+            background: rgba(43, 45, 48, 0.4);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-radius: 16px; /* 16px corner radius */
+        }
+        .glass-panel::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+        
+        .glow-primary {
+            box-shadow: 0 0 24px rgba(16, 185, 129, 0.05);
+        }
+
+        .scanner-reticle {
+            background: linear-gradient(to right, #10b981 2px, transparent 2px) 0 0,
+                        linear-gradient(to right, #10b981 2px, transparent 2px) 100% 0,
+                        linear-gradient(to left, #10b981 2px, transparent 2px) 0 100%,
+                        linear-gradient(to left, #10b981 2px, transparent 2px) 100% 100%,
+                        linear-gradient(to bottom, #10b981 2px, transparent 2px) 0 0,
+                        linear-gradient(to bottom, #10b981 2px, transparent 2px) 100% 0,
+                        linear-gradient(to top, #10b981 2px, transparent 2px) 0 100%,
+                        linear-gradient(to top, #10b981 2px, transparent 2px) 100% 100%;
+            background-repeat: no-repeat;
+            background-size: 40px 40px;
+        }
+        .scan-line {
+            width: 100%;
+            height: 2px;
+            background: #10b981;
+            box-shadow: 0 0 10px #10b981;
+            animation: scan 3s linear infinite;
+        }
+        @keyframes scan {
+            0% { transform: translateY(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(calc(100cqh - 40px)); opacity: 0; }
+        }
+        
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md text-body-md antialiased min-h-screen flex flex-col selection:bg-[#10b981]/30 selection:text-[#10b981]">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-margin-mobile md:px-margin-desktop h-16 bg-surface/70 backdrop-blur-xl border-b border-glass-stroke shadow-none transition-transform duration-150">
+<div class="flex items-center">
+<span class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-[#10b981] tracking-tight font-bold">KrishiDrishti</span>
+</div>
+<!-- Web Navigation Cluster (Hidden on Mobile) -->
+<nav class="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
+<a class="text-on-surface-variant hover:text-[#10b981] transition-all font-label-md text-label-md flex items-center gap-2" href="#">
+<span class="material-symbols-outlined text-[20px]">home_max</span> Home
+            </a>
+<a class="text-[#10b981] font-bold hover:text-[#10b981] transition-all font-label-md text-label-md flex items-center gap-2 bg-[#10b981]/10 py-1.5 px-4 rounded-full" href="#">
+<span class="material-symbols-outlined text-[20px] icon-fill">sensors</span> Detection
+            </a>
+<a class="text-on-surface-variant hover:text-[#10b981] transition-all font-label-md text-label-md flex items-center gap-2" href="#">
+<span class="material-symbols-outlined text-[20px]">analytics</span> Intelligence
+            </a>
+<a class="text-on-surface-variant hover:text-[#10b981] transition-all font-label-md text-label-md flex items-center gap-2" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span> Settings
+            </a>
+</nav>
+<div class="flex items-center gap-4">
+<button aria-label="translate" class="text-on-surface-variant hover:text-primary-fixed transition-colors">
+<span class="material-symbols-outlined">translate</span>
+</button>
+<button aria-label="account_circle" class="text-on-surface-variant hover:text-primary-fixed transition-colors">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow pt-24 pb-32 md:pb-24 px-margin-mobile md:px-margin-desktop max-w-[1200px] w-full mx-auto grid grid-cols-4 md:grid-cols-12 gap-gutter">
+<!-- Left Column / Top Section: Scanner Context -->
+<div class="col-span-4 md:col-span-7 flex flex-col gap-6">
+<!-- Scanner Viewfinder -->
+<div class="relative w-full aspect-[4/5] md:aspect-[4/3] glass-panel overflow-hidden flex flex-col items-center justify-center container group glow-primary">
+<!-- Blurred background simulating camera feed -->
+<div class="absolute inset-0 bg-cover bg-center opacity-40 blur-sm transition-all duration-700 group-hover:blur-0 group-hover:opacity-60" data-alt="A close-up view of a diseased agricultural crop leaf, likely a tomato or potato plant, showing signs of blight or chlorosis. The image is captured from a top-down perspective, mimicking a smartphone camera scanning a plant in a field. The lighting is bright and natural, indicating outdoor sunlight. The overall aesthetic is gritty yet highly detailed, emphasizing the texture of the organic matter within a dark, sophisticated digital interface environment." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB4iPur9a7qxIvTDO-oTpYw41lufiXYJSi2pNGwGIMcH_9GMzzAyx1n5h5dCGwjDrNlhLcBw3Wyarah5HmC2GyAPQqr-zbNLBfUefzWdqqdtknTh2EzViN_-F1KtSR9X-90H0DY53UhOO5e1VYxtSkmSsyKIWcMx2Vsp5KadDeRxpuSJQssveUoL_ib_dA9ERLrXO0PUoLuAbb9zLMTTdlU68hzgnFt4U89ro-Cny8M0_86Yv1Tw_AOWnwquyyDRGZ5tosxU82bF3F_');">
+</div>
+<!-- Reticle Overlay -->
+<div class="absolute inset-8 scanner-reticle pointer-events-none">
+<div class="scan-line"></div>
+</div>
+<!-- Central Prompt -->
+<div class="z-10 text-center px-4 flex flex-col items-center gap-3">
+<span class="material-symbols-outlined text-4xl text-[#10b981] animate-pulse">center_focus_strong</span>
+<h2 class="font-display-lg text-headline-lg text-on-surface">Position leaf in frame</h2>
+<p class="font-body-md text-body-md text-text-muted max-w-sm">Ensure the affected area is clearly visible and well-lit for accurate analysis.</p>
+</div>
+</div>
+<!-- Primary Actions (Camera/Gallery) & CTA -->
+<div class="glass-panel p-card-padding flex flex-col sm:flex-row gap-4 items-center justify-between">
+<div class="flex gap-4 w-full sm:w-auto">
+<button class="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-[#2B2D30] hover:bg-surface-variant text-white transition-all duration-300 rounded-full px-6 py-3 font-body-md text-body-md active:scale-95 border border-glass-stroke">
+<span class="material-symbols-outlined text-[#10b981]">photo_camera</span>
+<span>Camera</span>
+</button>
+<button class="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-[#2B2D30] hover:bg-surface-variant text-white transition-all duration-300 rounded-full px-6 py-3 font-body-md text-body-md active:scale-95 border border-glass-stroke">
+<span class="material-symbols-outlined text-[#10b981]">photo_library</span>
+<span>Gallery</span>
+</button>
+</div>
+<!-- Main CTA -->
+<button class="w-full sm:w-auto bg-[#10b981] text-[#00422b] hover:bg-[#0e9f6e] transition-all duration-300 rounded-full px-8 py-4 font-headline-md text-body-lg active:scale-95 shadow-[0_0_24px_rgba(16,185,129,0.2)] flex items-center justify-center gap-3 group font-bold">
+<span class="material-symbols-outlined group-hover:animate-spin-slow text-[#00422b]">document_scanner</span>
+                    Analyse Crop
+                </button>
+</div>
+</div>
+<!-- Right Column / Bottom Section: Guidance & Data -->
+<div class="col-span-4 md:col-span-5 flex flex-col gap-6">
+<!-- Visual Guide Bento Grid -->
+<div class="glass-panel p-card-padding flex flex-col gap-4">
+<h3 class="font-body-lg text-body-lg text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-[#10b981]">rule</span>
+                    Visual Guide
+                </h3>
+<div class="grid grid-cols-3 gap-3">
+<div class="bg-surface-variant/50 rounded-lg p-3 flex flex-col items-center justify-center text-center gap-2 border border-glass-stroke hover:border-[#10b981]/50 hover:bg-surface-variant transition-all">
+<span class="material-symbols-outlined text-[#10b981]">crop</span>
+<span class="font-label-md text-label-md text-text-muted leading-tight">Leaf fills 70%</span>
+</div>
+<div class="bg-surface-variant/50 rounded-lg p-3 flex flex-col items-center justify-center text-center gap-2 border border-glass-stroke hover:border-[#10b981]/50 hover:bg-surface-variant transition-all">
+<span class="material-symbols-outlined text-[#10b981]">light_mode</span>
+<span class="font-label-md text-label-md text-text-muted leading-tight">Natural light</span>
+</div>
+<div class="bg-surface-variant/50 rounded-lg p-3 flex flex-col items-center justify-center text-center gap-2 border border-glass-stroke hover:border-[#10b981]/50 hover:bg-surface-variant transition-all">
+<span class="material-symbols-outlined text-[#10b981]">blur_off</span>
+<span class="font-label-md text-label-md text-text-muted leading-tight">No blur</span>
+</div>
+</div>
+</div>
+<!-- Supported Crops -->
+<div class="glass-panel p-card-padding flex flex-col gap-4 flex-grow">
+<div class="flex items-center justify-between">
+<h3 class="font-body-lg text-body-lg text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-[#10b981]">grass</span>
+                        Supported Crops
+                    </h3>
+<span class="font-label-md text-label-md text-[#10b981] bg-[#10b981]/10 px-2 py-0.5 rounded text-[10px]">8 Supported</span>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="bg-surface-variant/50 border border-glass-stroke text-on-surface-variant font-label-md text-label-md px-3 py-1.5 rounded-full flex items-center gap-1 cursor-default">
+<span class="material-symbols-outlined text-[16px]">local_florist</span> Tomato
+                    </span>
+<span class="bg-surface-variant/50 border border-glass-stroke text-on-surface-variant font-label-md text-label-md px-3 py-1.5 rounded-full flex items-center gap-1 cursor-default">
+<span class="material-symbols-outlined text-[16px]">eco</span> Potato
+                    </span>
+<span class="bg-surface-variant/50 border border-glass-stroke text-on-surface-variant font-label-md text-label-md px-3 py-1.5 rounded-full flex items-center gap-1 cursor-default">
+<span class="material-symbols-outlined text-[16px]">grass</span> Rice
+                    </span>
+<span class="bg-surface-variant/50 border border-glass-stroke text-on-surface-variant font-label-md text-label-md px-3 py-1.5 rounded-full flex items-center gap-1 cursor-default">
+<span class="material-symbols-outlined text-[16px]">agriculture</span> Wheat
+                    </span>
+<span class="bg-surface-variant/50 border border-glass-stroke text-on-surface-variant font-label-md text-label-md px-3 py-1.5 rounded-full flex items-center gap-1 cursor-default">
+<span class="material-symbols-outlined text-[16px]">cloud</span> Cotton
+                    </span>
+<span class="bg-surface-variant/50 border border-glass-stroke text-on-surface-variant font-label-md text-label-md px-3 py-1.5 rounded-full flex items-center gap-1 cursor-default">
+<span class="material-symbols-outlined text-[16px]">compost</span> Maize
+                    </span>
+<span class="bg-surface-variant/50 border border-glass-stroke text-on-surface-variant font-label-md text-label-md px-3 py-1.5 rounded-full flex items-center gap-1 cursor-default">
+<span class="material-symbols-outlined text-[16px]">spa</span> Soybean
+                    </span>
+<span class="bg-surface-variant/50 border border-glass-stroke text-on-surface-variant font-label-md text-label-md px-3 py-1.5 rounded-full flex items-center gap-1 cursor-default">
+<span class="material-symbols-outlined text-[16px]">lens</span> Onion
+                    </span>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 flex justify-around items-center px-4 pb-safe h-20 bg-surface-container/80 backdrop-blur-2xl border-t border-glass-stroke shadow-lg shadow-primary/5">
+<!-- Inactive Tab: Home -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined">home_max</span>
+<span class="font-label-md text-label-md mt-1">Home</span>
+</a>
+<!-- Active Tab: Detection -->
+<a class="flex flex-col items-center justify-center text-[#10b981] bg-[#10b981]/10 rounded-xl py-1 px-3 transform scale-90 duration-200" href="#">
+<span class="material-symbols-outlined icon-fill">sensors</span>
+<span class="font-label-md text-label-md mt-1">Detection</span>
+</a>
+<!-- Inactive Tab: Intelligence -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-md text-label-md mt-1">Intelligence</span>
+</a>
+<!-- Inactive Tab: Settings -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md mt-1">Settings</span>
+</a>
+</nav>
+</body></html>

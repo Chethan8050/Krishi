@@ -1,10 +1,16 @@
-from fastapi import FastAPI, File, UploadFile, HTTPException
+from fastapi import FastAPI, File, UploadFile, HTTPException, Header
 from fastapi.middleware.cors import CORSMiddleware
 import io
+import os
 from PIL import Image
 import numpy as np
 import tensorflow as tf
 from tensorflow.keras.layers import DepthwiseConv2D
+
+def verify_api_key(x_api_key: str = Header(None)):
+    """Verify API key for protected endpoints"""
+    if x_api_key != API_KEY:
+        raise HTTPException(status_code=403, detail="Invalid API key")
 
 # ── COMPATIBILITY FIX ──
 # Fixes the 'Unrecognized keyword arguments passed to DepthwiseConv2D: {'groups': 1}' error
@@ -16,14 +22,24 @@ class FixedDepthwiseConv2D(DepthwiseConv2D):
 
 app = FastAPI(title="KisanAI Custom Model Server")
 
-# Allow requests from the Next.js frontend
+# Security: Allowed origins (replace with your actual frontend URL in production)
+ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "http://localhost:3001",
+]
+
+# Add CORS middleware with restricted origins
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=ALLOWED_ORIGINS,
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["GET", "POST"],
+    allow_headers=["Content-Type", "Authorization"],
 )
+
+# API Key protection (for production)
+API_KEY = os.environ.get("KISANAI_API_KEY", "dev-key-12345")
 
 print("Loading ML model... (Deep Load Strategy)")
 model = None
@@ -96,7 +112,7 @@ def read_root():
     }
 
 @app.post("/predict")
-async def predict_crop_disease(file: UploadFile = File(...)):
+async def predict_crop_disease(file: UploadFile = File(...), x_api_key: str = Header(None)):
     if not file.content_type.startswith('image/'):
         raise HTTPException(status_code=400, detail="File provided is not an image.")
 

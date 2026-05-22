@@ -1,54 +1,42 @@
 'use client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { motion } from 'framer-motion';
 import { useAppStore } from '../app/store/useAppStore';
 import { createT } from '../lib/i18n';
 
 export default function BottomNav() {
   const pathname = usePathname();
   const { language } = useAppStore();
-  const t = createT(language);
 
   const navItems = [
-    { icon: 'home', label: t('nav.home'), href: '/dashboard' },
-    { icon: 'document_scanner', label: t('nav.scan'), href: '/scan' },
-    { icon: 'menu_book', label: t('nav.library'), href: '/library' },
-    { icon: 'chat', label: t('nav.chat'), href: '/chat' },
-    { icon: 'settings', label: t('nav.settings'), href: '/settings' },
+    { icon: 'home_max', label: 'Home', href: '/' },
+    { icon: 'sensors', label: 'Detection', href: '/scan' },
+    { icon: 'analytics', label: 'Yield', href: '/yield' },
+    { icon: 'chat', label: 'Chat', href: '/chat' },
   ];
 
   return (
-    <nav className="bottom-nav bg-[var(--color-surface)] dark:bg-[var(--color-surface-container)] border-t border-slate-100 dark:border-slate-800">
+    <nav className="md:hidden fixed bottom-0 w-full z-50 flex justify-around items-center px-4 pb-safe h-20 bg-surface-container/80 backdrop-blur-2xl border-t border-glass-stroke shadow-lg shadow-primary/5 rounded-t-xl">
       {navItems.map((item) => {
-        const isActive = pathname === item.href;
+        // Simple logic for active: active if path starts with href (except for exact /)
+        const isActive = item.href === '/' ? pathname === '/' : pathname.startsWith(item.href);
+
         return (
           <Link
             key={item.href}
             href={item.href}
-            className={`bottom-nav-item ${isActive ? 'active' : ''} text-slate-500 dark:text-slate-400`}
+            className={`flex flex-col items-center justify-center transition-all duration-200 w-16 ${
+              isActive
+                ? 'text-primary bg-primary/10 rounded-xl py-1 px-3 transform scale-90'
+                : 'text-on-surface-variant hover:text-primary active:scale-90'
+            }`}
           >
-            <div className="relative flex items-center justify-center">
-              {isActive && (
-                <motion.div
-                  layoutId="activeTab"
-                  className="absolute inset-0 bg-[var(--color-primary-fixed)] rounded-2xl w-16 h-8 -z-10"
-                  transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
-                />
-              )}
-              <div className="icon-wrapper">
-                <span 
-                  className="material-symbols-outlined transition-all duration-300" 
-                  style={{
-                    fontVariationSettings: isActive ? "'FILL' 1" : "'FILL' 0",
-                    color: isActive ? 'var(--color-primary)' : 'inherit'
-                  }}
-                >
-                  {item.icon}
-                </span>
-              </div>
-            </div>
-            <span className={`label transition-colors duration-300 ${isActive ? 'text-[var(--color-primary)]' : ''}`}>
+            <span
+              className={`material-symbols-outlined mb-1 ${isActive ? 'icon-fill' : ''}`}
+            >
+              {item.icon}
+            </span>
+            <span className={`font-label-md text-label-md text-[10px] ${isActive ? 'font-bold' : ''}`}>
               {item.label}
             </span>
           </Link>

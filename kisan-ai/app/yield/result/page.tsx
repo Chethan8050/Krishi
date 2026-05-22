@@ -1,18 +1,15 @@
 'use client';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
 import { useAppStore } from '../../store/useAppStore';
-import { createT } from '../../../lib/i18n';
 
 export default function YieldResultPage() {
   const router = useRouter();
   const [mounted, setMounted] = useState(false);
-  const { recentYieldResult, yieldInputs, language, theme, toggleTheme } = useAppStore();
-  const t = createT(language);
+  const { recentYieldResult, yieldInputs } = useAppStore();
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
     if (!recentYieldResult) {
       router.push('/yield');
@@ -26,191 +23,148 @@ export default function YieldResultPage() {
   const grade = recentYieldResult?.grade || '-';
 
   return (
-    <div className="bg-[var(--color-background)] text-[var(--color-on-background)] min-h-screen flex flex-col font-[var(--font-inter)]">
-      {/* Premium Header */}
-      <header className="sticky top-0 w-full z-50 glass px-6 py-5 flex justify-between items-center border-b border-slate-200/50">
-        <div className="flex items-center gap-4">
-          <button 
-            onClick={() => router.back()} 
-            className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-slate-600 dark:text-slate-300"
-          >
-            <span className="material-symbols-outlined">arrow_back</span>
-          </button>
-          <h1 className="text-xl font-black tracking-tight text-[var(--color-primary)] font-[var(--font-outfit)]">{t('yield.resultTitle')}</h1>
+    <div className="bg-background text-on-surface font-body-md min-h-screen pt-16 pb-24 md:pb-8 selection:bg-primary/30 selection:text-primary">
+      {/* Main Canvas */}
+      <main className="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop py-section-gap w-full pt-24 md:pt-28">
+        {/* Page Context Header */}
+        <div className="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <div>
+            <p className="font-label-md text-label-md text-primary tracking-widest uppercase mb-2 flex items-center gap-2">
+              <span className="material-symbols-outlined text-[16px]">analytics</span>
+              Intelligence Report
+            </p>
+            <h1 className="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-surface">
+              Yield Result Analysis
+            </h1>
+          </div>
+          <p className="font-body-sm text-body-sm text-on-surface-variant">
+            Generated based on {yieldInputs.district} Multi-Spectral Data
+          </p>
         </div>
-        <div className="flex items-center gap-2">
-          <button 
-            onClick={toggleTheme}
-            className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-slate-600 dark:text-slate-300"
-          >
-            <span className="material-symbols-outlined text-[20px]">
-              {theme === 'dark' ? 'light_mode' : 'dark_mode'}
-            </span>
-          </button>
-          <button className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-slate-400">
-            <span className="material-symbols-outlined">share</span>
-          </button>
-        </div>
-      </header>
 
-      <main className="flex-grow px-6 py-8 space-y-8 pb-40 max-w-2xl mx-auto w-full">
-        {/* Result Hero Card - High Fidelity */}
-        <motion.section 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="relative overflow-hidden rounded-[48px] bg-gradient-to-br from-[#065f46] to-[#047857] p-10 text-white shadow-2xl shadow-emerald-900/30"
-        >
-          <div className="absolute top-0 right-0 p-8 opacity-10">
-            <span className="material-symbols-outlined !text-[120px]">agriculture</span>
+        {/* Bento Grid Layout */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+          {/* HERO METRIC: Prediction (Large) */}
+          <div className="col-span-1 md:col-span-8 glass-panel rounded-xl p-6 md:p-8 flex flex-col justify-between relative overflow-hidden group">
+            {/* Ambient Glow */}
+            <div className="absolute -top-32 -right-32 w-96 h-96 bg-primary/20 blur-[120px] rounded-full pointer-events-none transition-opacity duration-700 group-hover:opacity-100 opacity-60"></div>
+            <div className="flex justify-between items-start mb-12 relative z-10">
+              <div className="font-body-lg text-body-lg text-on-surface-variant flex items-center gap-2">
+                <span className="material-symbols-outlined text-primary">monitoring</span>
+                Primary Prediction
+              </div>
+              <div className="bg-primary/10 border border-primary/30 rounded-full px-4 py-1.5 flex items-center gap-2">
+                <span className="material-symbols-outlined text-primary text-[18px]" style={{ fontVariationSettings: "'FILL' 1" }}>verified</span>
+                <span className="font-label-md text-label-md text-primary font-bold">GRADE {grade}</span>
+              </div>
+            </div>
+            
+            <div className="relative z-10 flex items-baseline gap-3">
+              <span className="font-display-lg text-[64px] md:text-[96px] leading-none tracking-tighter text-on-surface">{estimate}</span>
+              <span className="font-headline-md text-headline-md text-primary">Quintals/Acre</span>
+            </div>
+            
+            <div className="mt-4 relative z-10">
+              <p className="font-body-sm text-body-sm text-on-surface-variant max-w-md">
+                Based on current soil moisture, rainfall history, and expected season trends, the crop is tracking towards a high-efficiency harvest.
+              </p>
+            </div>
           </div>
-          
-          <div className="relative z-10 space-y-8">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/10">
-                 <span className="material-symbols-outlined text-emerald-300 text-xl" style={{ fontVariationSettings: "'FILL' 1" }}>potted_plant</span>
-              </div>
-              <span className="font-black text-xs uppercase tracking-[0.25em] text-emerald-100">{t('yield.estYield')}</span>
-            </div>
 
-            <div className="flex flex-col items-start gap-1">
-              <div className="flex items-baseline gap-3">
-                <span className="font-black text-8xl leading-none font-[var(--font-outfit)] tracking-tighter">{estimate}</span>
-                <span className="font-black text-xl text-emerald-200 uppercase tracking-widest">Q/Acre</span>
-              </div>
-              <p className="text-emerald-100/60 font-medium text-sm ml-1">Predicted yield based on Mandya region benchmarks.</p>
+          {/* TOTAL EXPECTED (Medium) */}
+          <div className="col-span-1 md:col-span-4 glass-panel rounded-xl p-6 flex flex-col justify-between">
+            <div className="font-body-md text-body-md text-on-surface-variant flex items-center gap-2 mb-8">
+              <span className="material-symbols-outlined text-secondary">inventory_2</span>
+              Total Projected Volume
             </div>
-
-            <div className="grid grid-cols-3 gap-6 pt-10 border-t border-white/10">
-              <div className="space-y-1">
-                <p className="font-black text-[10px] uppercase tracking-[0.2em] text-emerald-200/50">{t('history.total')}</p>
-                <p className="font-black text-lg tracking-tight">{total} <span className="text-[10px] font-bold">QUINTALS</span></p>
+            <div>
+              <div className="font-headline-lg text-headline-lg text-on-surface mb-1">
+                {total.toFixed(2)} Q
               </div>
-              <div className="space-y-1">
-                <p className="font-black text-[10px] uppercase tracking-[0.2em] text-emerald-200/50">GRADE</p>
-                <div className="flex items-center gap-2">
-                   <p className="font-black text-lg tracking-tight">{grade}</p>
-                   <span className="w-2 h-2 bg-emerald-300 rounded-full"></span>
+              <p className="font-body-sm text-body-sm text-on-surface-variant border-t border-glass-stroke pt-4 mt-4">
+                Estimated absolute yield across the selected {yieldInputs.area} Acre parcel. Prepare logistics for bulk transport.
+              </p>
+            </div>
+          </div>
+
+          {/* COMPARISON METRICS (Wide) */}
+          <div className="col-span-1 md:col-span-7 glass-panel rounded-xl p-6">
+            <div className="flex justify-between items-center mb-6">
+              <div className="font-body-md text-body-md text-on-surface flex items-center gap-2">
+                <span className="material-symbols-outlined text-on-surface-variant">stacked_bar_chart</span>
+                Regional Comparison
+              </div>
+              <div className="bg-surface-container rounded-full px-3 py-1 flex items-center gap-1">
+                <span className="material-symbols-outlined text-primary text-[16px]">trending_up</span>
+                <span className="font-label-md text-label-md text-primary font-bold">{recentYieldResult?.comparisonToAverage || '+12%'}</span>
+              </div>
+            </div>
+            <div className="space-y-6 mt-8">
+              {/* Bar 1: District Avg */}
+              <div>
+                <div className="flex justify-between mb-2">
+                  <span className="font-body-sm text-body-sm text-on-surface-variant">District Average</span>
+                  <span className="font-label-md text-label-md text-on-surface">22 Q/Acre</span>
+                </div>
+                <div className="h-2 w-full bg-surface-container-highest rounded-full overflow-hidden">
+                  <div className="h-full bg-secondary/50 rounded-full" style={{ width: '77%' }}></div>
                 </div>
               </div>
-              <div className="space-y-1">
-                <p className="font-black text-[10px] uppercase tracking-[0.2em] text-emerald-200/50">{t('yield.season')}</p>
-                <p className="font-black text-lg tracking-tight uppercase">{yieldInputs.season}</p>
-              </div>
-            </div>
-          </div>
-          
-          <div className="absolute bottom-0 left-0 w-full h-1 bg-white/20">
-             <motion.div 
-               initial={{ width: 0 }}
-               animate={{ width: "100%" }}
-               transition={{ duration: 2, ease: "easeInOut" }}
-               className="h-full bg-emerald-400 shadow-[0_0_10px_#34d399]"
-             />
-          </div>
-        </motion.section>
-
-        {/* Comparison Section - Modern Visuals */}
-        <section className="bg-[var(--color-surface)] dark:bg-[var(--color-surface-variant)] border border-slate-100 dark:border-slate-800 rounded-[40px] p-8 shadow-premium">
-          <div className="flex justify-between items-center mb-10">
-            <h3 className="font-black text-lg text-slate-800 dark:text-slate-200 tracking-tight">{t('yield.regionalComp')}</h3>
-            <div className="px-4 py-1.5 bg-emerald-50 dark:bg-emerald-900/20 rounded-full flex items-center gap-2">
-               <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span>
-               <span className="text-emerald-600 dark:text-emerald-400 font-black text-[10px] uppercase tracking-widest">
-                 {recentYieldResult?.comparisonToAverage || '+12%'} {t('yield.aboveAvg')}
-               </span>
-            </div>
-          </div>
-          
-          <div className="space-y-8">
-            <div className="space-y-3">
-              <div className="flex justify-between font-black text-[10px] uppercase tracking-widest text-slate-400 dark:text-slate-500">
-                <span>{t('yield.yourEst')}</span>
-                <span className="text-emerald-600 dark:text-emerald-400">{estimate} Q/A</span>
-              </div>
-              <div className="h-4 w-full bg-slate-50 dark:bg-slate-800 rounded-full overflow-hidden p-1 shadow-inner">
-                <motion.div 
-                  initial={{ width: 0 }}
-                  animate={{ width: '100%' }}
-                  className="h-full bg-emerald-500 rounded-full"
-                />
-              </div>
-            </div>
-            <div className="space-y-3">
-              <div className="flex justify-between font-black text-[10px] uppercase tracking-widest text-slate-400 dark:text-slate-500">
-                <span>{t('yield.districtAvg')} ({yieldInputs.district})</span>
-                <span className="text-slate-600 dark:text-slate-400">22.0 Q/A</span>
-              </div>
-              <div className="h-4 w-full bg-slate-50 dark:bg-slate-800 rounded-full overflow-hidden p-1 shadow-inner">
-                <motion.div 
-                  initial={{ width: 0 }}
-                  animate={{ width: '77%' }}
-                  className="h-full bg-slate-200 dark:bg-slate-700 rounded-full"
-                />
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Inputs Summary - Refined Cards */}
-        <section className="bg-[var(--color-surface)] dark:bg-[var(--color-surface-variant)] border border-slate-100 dark:border-slate-800 rounded-[40px] overflow-hidden shadow-premium">
-          <div className="px-8 py-4 border-b border-slate-50 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/50 flex justify-between items-center">
-            <span className="font-black text-[10px] uppercase tracking-[0.2em] text-slate-400 dark:text-slate-500">{t('yield.inputParams')}</span>
-            <Link href="/yield" className="text-[var(--color-primary)] font-black text-[10px] uppercase tracking-widest hover:underline">RE-CALCULATE</Link>
-          </div>
-          <div className="p-8 grid grid-cols-2 gap-8">
-            {[
-              { icon: 'water_drop', label: t('yield.rainfall'), val: `${yieldInputs.rainfall} mm`, color: 'text-blue-500 bg-blue-50 dark:bg-blue-900/20' },
-              { icon: 'compost', label: t('yield.soilType'), val: yieldInputs.soilType, color: 'text-amber-600 bg-amber-50 dark:bg-amber-900/20' },
-              { icon: 'straighten', label: t('yield.farmArea'), val: `${yieldInputs.area} Acres`, color: 'text-emerald-600 bg-emerald-50 dark:bg-emerald-900/20' },
-              { icon: 'category', label: t('yield.selectCrop'), val: yieldInputs.crop, color: 'text-indigo-600 bg-indigo-50 dark:bg-indigo-900/20' },
-            ].map(i => (
-              <div key={i.label} className="flex items-center gap-4">
-                <div className={`w-12 h-12 rounded-2xl ${i.color} flex items-center justify-center`}>
-                  <span className="material-symbols-outlined text-xl">{i.icon}</span>
+              {/* Bar 2: Your Yield */}
+              <div>
+                <div className="flex justify-between mb-2">
+                  <span className="font-body-sm text-body-sm text-primary font-medium">Your Prediction</span>
+                  <span className="font-label-md text-label-md text-primary font-bold">{estimate} Q/Acre</span>
                 </div>
-                <div>
-                  <p className="font-black text-[10px] text-slate-300 dark:text-slate-600 uppercase tracking-widest">{i.label}</p>
-                  <p className="font-black text-slate-800 dark:text-slate-200 tracking-tight">{i.val}</p>
+                <div className="h-2 w-full bg-surface-container-highest rounded-full overflow-hidden relative">
+                  <div className="absolute top-0 left-0 h-full w-full bg-primary blur-[4px] opacity-30"></div>
+                  <div className="h-full bg-primary rounded-full relative z-10 shadow-[0_0_10px_rgba(78,222,163,0.5)]" style={{ width: '100%' }}></div>
                 </div>
               </div>
-            ))}
+            </div>
           </div>
-        </section>
 
-        {/* AI Insight Card - Premium Chat Bubble style */}
-        <section className="bg-emerald-50 dark:bg-emerald-900/10 rounded-[40px] p-10 border border-emerald-100/50 dark:border-emerald-800/50 relative shadow-sm overflow-hidden">
-          <div className="absolute top-0 right-0 p-6 opacity-10">
-             <span className="material-symbols-outlined text-emerald-900 dark:text-emerald-100 !text-[100px]">auto_awesome</span>
+          {/* RECOMMENDATION (Actionable Insight) */}
+          <div className="col-span-1 md:col-span-5 glass-panel rounded-xl p-6 relative overflow-hidden bg-surface-container-high">
+            <div className="absolute inset-0 opacity-5 pointer-events-none" style={{ backgroundImage: 'radial-gradient(#ffffff 1px, transparent 1px)', backgroundSize: '16px 16px' }}></div>
+            <div className="font-body-md text-body-md text-on-surface mb-4 flex items-center gap-2">
+              <span className="material-symbols-outlined text-primary" style={{ fontVariationSettings: "'FILL' 1" }}>eco</span>
+              Agronomic Recommendation
+            </div>
+            <h3 className="font-headline-md text-headline-md text-on-surface mb-3">
+              Excellent season expected.
+            </h3>
+            <p className="font-body-sm text-body-sm text-on-surface-variant mb-6 leading-relaxed">
+              {recentYieldResult?.insights || 'Canopy health indicators are well above regional baselines. Maintain current irrigation schedules. Consider scheduling early harvest contractors to avoid end-of-season logistical bottlenecks.'}
+            </p>
+            <button className="w-full py-3 rounded-full bg-surface-container border border-glass-stroke font-label-md text-label-md text-on-surface hover:bg-primary hover:text-on-primary hover:border-primary transition-all duration-300 flex items-center justify-center gap-2">
+              <span className="material-symbols-outlined text-[18px]">calendar_add_on</span>
+              Schedule Harvest Tasks
+            </button>
           </div>
-          <div className="flex gap-6 relative z-10">
-             <div className="w-16 h-16 bg-white dark:bg-slate-800 rounded-[24px] flex items-center justify-center shadow-sm shrink-0">
-                <span className="material-symbols-outlined text-emerald-600 dark:text-emerald-400 text-3xl">psychology</span>
-             </div>
-             <div className="space-y-3">
-                <h4 className="font-black text-[10px] text-emerald-800 dark:text-emerald-200 uppercase tracking-[0.2em]">{t('yield.aiInsights')}</h4>
-                <p className="text-emerald-900/80 dark:text-emerald-100/80 font-medium text-lg leading-relaxed italic">
-                  "{recentYieldResult?.insights || 'Your crop health and soil metrics indicate an exceptionally strong harvest season ahead.'}"
-                </p>
-             </div>
-          </div>
-        </section>
-
-        {/* Actions - High Impact */}
-        <div className="flex flex-col gap-4 pt-6">
-          <motion.button 
-            whileHover={{ scale: 1.01 }}
-            whileTap={{ scale: 0.98 }}
-            className="w-full bg-[var(--color-primary)] text-white py-6 rounded-[32px] font-black text-xl flex items-center justify-center gap-4 shadow-2xl shadow-emerald-900/30 transition-all"
-          >
-            <span className="material-symbols-outlined">volume_up</span>
-            {t('result.hearDiag')}
-          </motion.button>
-          
-          <Link href="/yield" className="w-full py-4 text-center text-slate-400 dark:text-slate-600 font-black text-xs uppercase tracking-[0.2em] hover:text-slate-600 dark:hover:text-slate-400 transition-colors">
-            {t('yield.tryDifferent')}
-          </Link>
         </div>
       </main>
+
+      <style jsx>{`
+        /* Glassmorphic border utility */
+        .glass-panel {
+            background: rgba(40, 42, 45, 0.7);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid transparent;
+            background-clip: padding-box;
+            position: relative;
+        }
+        .glass-panel::before {
+            content: "";
+            position: absolute;
+            top: 0; right: 0; bottom: 0; left: 0;
+            z-index: -1;
+            margin: -1px;
+            border-radius: inherit;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+        }
+      `}</style>
     </div>
   );
 }

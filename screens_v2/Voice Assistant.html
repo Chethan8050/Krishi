@@ -1,0 +1,229 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Voice Assistant - KrishiDrishti</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Theme Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-dim": "#111416",
+                        "surface-container-high": "#282a2d",
+                        "secondary": "#bac8d7",
+                        "on-tertiary-fixed-variant": "#004a75",
+                        "error-container": "#93000a",
+                        "surface-container-highest": "#333538",
+                        "surface": "#111416",
+                        "tertiary-container": "#4ca9f1",
+                        "error": "#ffb4ab",
+                        "tertiary-fixed": "#cee5ff",
+                        "on-secondary": "#24323e",
+                        "background": "#111416",
+                        "on-primary-fixed-variant": "#005236",
+                        "inverse-primary": "#006c49",
+                        "surface-tint": "#4edea3",
+                        "on-tertiary": "#003353",
+                        "secondary-container": "#3b4855",
+                        "on-error-container": "#ffdad6",
+                        "glass-stroke": "rgba(255, 255, 255, 0.1)",
+                        "surface-dark": "#1E1E1E",
+                        "on-error": "#690005",
+                        "outline-variant": "#3c4a42",
+                        "on-secondary-container": "#a9b7c6",
+                        "on-tertiary-fixed": "#001d32",
+                        "text-muted": "#A9B7C6",
+                        "surface-container-lowest": "#0c0e11",
+                        "primary": "#4edea3",
+                        "outline": "#86948a",
+                        "secondary-fixed-dim": "#bac8d7",
+                        "tertiary": "#96ccff",
+                        "surface-bright": "#37393c",
+                        "primary-container": "#10b981",
+                        "surface-container": "#1e2023",
+                        "tertiary-fixed-dim": "#96ccff",
+                        "surface-variant": "#333538",
+                        "on-background": "#e2e2e6",
+                        "secondary-fixed": "#d6e4f4",
+                        "inverse-surface": "#e2e2e6",
+                        "inverse-on-surface": "#2f3034",
+                        "primary-fixed": "#6ffbbe",
+                        "on-surface-variant": "#bbcabf",
+                        "on-primary-fixed": "#002113",
+                        "surface-container-low": "#1a1c1f",
+                        "on-primary-container": "#00422b",
+                        "on-tertiary-container": "#003c60",
+                        "primary-fixed-dim": "#4edea3",
+                        "on-secondary-fixed": "#0f1d28",
+                        "on-secondary-fixed-variant": "#3b4855",
+                        "on-primary": "#003824",
+                        "on-surface": "#e2e2e6"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "card-padding": "18px",
+                        "margin-desktop": "32px",
+                        "gutter": "16px",
+                        "base": "8px",
+                        "section-gap": "40px",
+                        "margin-mobile": "16px"
+                    },
+                    fontFamily: {
+                        "body-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "display-lg": ["Inter"]
+                    },
+                    fontSize: {
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "300" }],
+                        "display-lg": ["60px", { "lineHeight": "60px", "letterSpacing": "-0.025em", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Custom Keyframes for Voice Pulse Effect */
+        @keyframes voice-ripple {
+            0% {
+                transform: scale(0.8);
+                opacity: 0.8;
+                border-width: 2px;
+            }
+            100% {
+                transform: scale(3.5);
+                opacity: 0;
+                border-width: 0px;
+            }
+        }
+        .animate-voice-ripple {
+            animation: voice-ripple 2.5s cubic-bezier(0.1, 0.7, 0.3, 1) infinite;
+        }
+        .delay-1 { animation-delay: 0.8s; }
+        .delay-2 { animation-delay: 1.6s; }
+        
+        /* Glass gradient highlight */
+        .glass-gradient-border {
+            background: linear-gradient(to bottom right, rgba(255,255,255,0.1), transparent);
+            padding: 1px;
+            border-radius: inherit;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col overflow-hidden">
+<!-- TopAppBar (Shared Component) -->
+<!-- Applying style commands directly from JSON -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-margin-mobile h-16 bg-surface/70 backdrop-blur-xl border-b border-glass-stroke">
+<!-- Brand / Leading -->
+<div class="flex items-center gap-4">
+<!-- Task-Focused Back Navigation (Implicit departure from main nav flow) -->
+<button class="p-2 rounded-full hover:bg-surface-variant transition-colors text-on-surface-variant hover:text-primary-fixed">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">close</span>
+</button>
+<img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXYGUrQ4Y_k6ooxvbPIE1rHQUeVwurTnct8PhR9FGQRk_0jrsGzb3vmdi1n7872loEklsZCU_2lmeXCA3PPbipt9eJOlYIe5tRcc53G6lZfrmflhS2wkJnCaQvqpNOda5KbLFy6xTJrNctI9zcZpiozsp-5G-ThFilxqHRiSGebShZ6hTUprbPdVoe-0u6kAzc1FNQK7ok2BWIP3zqnAbhzPmcLmec-MLbUfPiMbWeb8vN0GYkZVO7RzIrD3xx8XrJ-K2hJJm0XYit" alt="KrishiDrishti Logo" class="h-10 w-auto object-contain">
+</div>
+<!-- Trailing Actions -->
+<div class="flex items-center gap-2">
+<button class="p-2 rounded-full text-on-surface-variant hover:text-primary-fixed transition-colors hover:bg-surface-variant">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">translate</span>
+</button>
+<button class="p-2 rounded-full text-on-surface-variant hover:text-primary-fixed transition-colors hover:bg-surface-variant">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Main Canvas: Focused Task Area (BottomNav suppressed due to transactional/tool nature) -->
+<main class="flex-1 mt-16 flex flex-col justify-between items-center px-margin-mobile md:px-margin-desktop py-10 relative">
+<!-- Ambient Background Glow -->
+<div class="absolute inset-0 pointer-events-none flex justify-center items-center opacity-20">
+<div class="w-[80vw] h-[80vw] max-w-[600px] max-h-[600px] bg-primary rounded-full blur-[120px]"></div>
+</div>
+<!-- Top Spacer for visual balance -->
+<div class="w-full flex-1 flex flex-col justify-center items-center relative z-10 mt-12">
+<!-- Voice Visualizer Core -->
+<div class="relative flex justify-center items-center w-32 h-32 mb-16">
+<!-- Ripples -->
+<div class="absolute inset-0 rounded-full border border-primary animate-voice-ripple"></div>
+<div class="absolute inset-0 rounded-full border border-primary animate-voice-ripple delay-1"></div>
+<div class="absolute inset-0 rounded-full border border-primary animate-voice-ripple delay-2"></div>
+<!-- Central Mic Button/Status -->
+<div class="relative z-10 w-24 h-24 bg-surface-container-high rounded-full flex items-center justify-center shadow-[0_0_40px_rgba(16,185,129,0.3)] border border-glass-stroke">
+<span class="material-symbols-outlined text-primary text-[48px]" style="font-variation-settings: 'FILL' 1;">mic</span>
+</div>
+<!-- Active Indicator Text -->
+<span class="absolute -bottom-10 whitespace-nowrap text-primary font-label-md text-label-md uppercase tracking-widest animate-pulse">
+                    Listening...
+                </span>
+</div>
+<!-- Transcript Panel (Glassmorphic Bento Style) -->
+<div class="w-full max-w-2xl relative rounded-2xl glass-gradient-border shadow-2xl">
+<div class="bg-surface-container/80 backdrop-blur-[24px] rounded-2xl p-card-padding md:p-margin-desktop flex flex-col gap-6">
+<!-- Language Indicator Tag -->
+<div class="flex items-center gap-2">
+<span class="px-3 py-1 bg-primary/10 text-primary rounded-full font-label-md text-label-md border border-primary/20 flex items-center gap-1 w-max">
+<span class="material-symbols-outlined text-[14px]">language</span>
+                            Kannada Detected
+                        </span>
+</div>
+<!-- Transcriptions -->
+<div class="flex flex-col gap-4">
+<!-- Original -->
+<div>
+<p class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">
+                                "ನನ್ನ ಟೊಮ್ಯಾಟೊ ಎಲೆ ಹಳದಿಯಾಗುತ್ತಿದೆ"
+                            </p>
+</div>
+<!-- Divider -->
+<div class="w-full h-px bg-glass-stroke"></div>
+<!-- Translation -->
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-text-muted mt-1" style="font-variation-settings: 'FILL' 0;">subtitles</span>
+<p class="font-body-lg text-body-lg text-text-muted">
+                                "My tomato leaves turning yellow"
+                            </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Area -->
+<div class="w-full max-w-2xl flex flex-col items-center gap-6 mt-12 relative z-10 pb-8">
+<!-- Primary Action -->
+<button class="w-full md:w-auto relative group overflow-hidden rounded-full p-[1px]">
+<span class="absolute inset-0 bg-gradient-to-r from-primary to-primary-fixed rounded-full opacity-70 group-hover:opacity-100 transition-opacity duration-300"></span>
+<div class="relative bg-surface-dark px-10 py-4 rounded-full flex items-center justify-center gap-3 transition-all duration-300 group-hover:bg-opacity-0">
+<span class="material-symbols-outlined text-primary group-hover:text-surface-dim transition-colors" style="font-variation-settings: 'FILL' 1;">analytics</span>
+<span class="font-headline-md text-headline-md text-primary group-hover:text-surface-dim transition-colors">Analyse Request</span>
+</div>
+</button>
+<!-- Secondary / Fallback Action -->
+<button class="flex items-center gap-2 text-text-muted hover:text-primary transition-colors py-2 px-4 rounded-lg hover:bg-surface-variant">
+<span class="material-symbols-outlined text-[20px]">keyboard</span>
+<span class="font-body-md text-body-md">Type Instead</span>
+</button>
+</div>
+</main>
+
+
+</body></html>

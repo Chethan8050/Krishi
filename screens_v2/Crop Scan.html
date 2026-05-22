@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KrishiDrishti - Disease Detection</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container": "#1e2023",
+                        "on-tertiary-container": "#003c60",
+                        "surface-variant": "#333538",
+                        "inverse-on-surface": "#2f3034",
+                        "surface": "#111416",
+                        "on-primary-container": "#00422b",
+                        "surface-container-low": "#1a1c1f",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-fixed-variant": "#004a75",
+                        "on-secondary-fixed-variant": "#3b4855",
+                        "tertiary": "#96ccff",
+                        "on-background": "#e2e2e6",
+                        "surface-container-high": "#282a2d",
+                        "primary-fixed": "#6ffbbe",
+                        "background": "#111416",
+                        "on-primary": "#003824",
+                        "inverse-surface": "#e2e2e6",
+                        "on-tertiary-fixed": "#001d32",
+                        "tertiary-fixed-dim": "#96ccff",
+                        "surface-container-lowest": "#0c0e11",
+                        "on-secondary-fixed": "#0f1d28",
+                        "glass-stroke": "rgba(255, 255, 255, 0.1)",
+                        "error-container": "#93000a",
+                        "on-secondary": "#24323e",
+                        "secondary-container": "#3b4855",
+                        "on-secondary-container": "#a9b7c6",
+                        "text-muted": "#A9B7C6",
+                        "secondary-fixed": "#d6e4f4",
+                        "primary-container": "#10b981",
+                        "error": "#ffb4ab",
+                        "on-primary-fixed-variant": "#005236",
+                        "surface-dark": "#1E1E1E",
+                        "on-primary-fixed": "#002113",
+                        "surface-dim": "#111416",
+                        "primary": "#4edea3",
+                        "on-tertiary": "#003353",
+                        "outline": "#86948a",
+                        "outline-variant": "#3c4a42",
+                        "tertiary-container": "#4ca9f1",
+                        "on-surface": "#e2e2e6",
+                        "tertiary-fixed": "#cee5ff",
+                        "primary-fixed-dim": "#4edea3",
+                        "inverse-primary": "#006c49",
+                        "on-surface-variant": "#bbcabf",
+                        "secondary-fixed-dim": "#bac8d7",
+                        "secondary": "#bac8d7",
+                        "on-error": "#690005",
+                        "surface-container-highest": "#333538",
+                        "surface-bright": "#37393c",
+                        "surface-tint": "#4edea3"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "card-padding": "18px",
+                        "gutter": "16px",
+                        "base": "8px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "32px",
+                        "section-gap": "40px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "300" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "display-lg": ["60px", { "lineHeight": "60px", "letterSpacing": "-0.025em", "fontWeight": "500" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Custom Utilities for Glassmorphism & Animations */
+        .glass-panel {
+            background: rgba(43, 45, 48, 0.7);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid transparent;
+            background-clip: padding-box;
+        }
+        .glass-panel::before {
+            content: '';
+            position: absolute;
+            top: 0; right: 0; bottom: 0; left: 0;
+            z-index: -1;
+            margin: -1px;
+            border-radius: inherit;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+        }
+        .scanner-reticle {
+            background: linear-gradient(to right, #4edea3 2px, transparent 2px) 0 0,
+                        linear-gradient(to right, #4edea3 2px, transparent 2px) 100% 0,
+                        linear-gradient(to left, #4edea3 2px, transparent 2px) 0 100%,
+                        linear-gradient(to left, #4edea3 2px, transparent 2px) 100% 100%,
+                        linear-gradient(to bottom, #4edea3 2px, transparent 2px) 0 0,
+                        linear-gradient(to bottom, #4edea3 2px, transparent 2px) 100% 0,
+                        linear-gradient(to top, #4edea3 2px, transparent 2px) 0 100%,
+                        linear-gradient(to top, #4edea3 2px, transparent 2px) 100% 100%;
+            background-repeat: no-repeat;
+            background-size: 40px 40px;
+        }
+        .scan-line {
+            width: 100%;
+            height: 2px;
+            background: #4edea3;
+            box-shadow: 0 0 10px #4edea3;
+            animation: scan 3s linear infinite;
+        }
+        @keyframes scan {
+            0% { transform: translateY(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(calc(100cqh - 40px)); opacity: 0; }
+        }
+        
+        /* Hide scrollbar for clean horizontal lists */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md text-body-md antialiased min-h-screen flex flex-col selection:bg-primary selection:text-on-primary">
+<!-- TopAppBar -->
+<!-- Removed border-b per Shell Border Ban, relying on tonal shift/shadow if needed, here just backdrop blur -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-margin-mobile md:px-margin-desktop h-16 bg-surface/70 backdrop-blur-xl flat no shadows">
+<div class="font-display-lg text-headline-lg-mobile md:text-headline-lg text-primary tracking-tight">KrishiDrishti</div>
+<!-- Web Navigation Cluster (Hidden on Mobile) -->
+<nav class="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
+<a class="text-on-surface-variant hover:text-primary transition-all font-label-md text-label-md flex items-center gap-2" href="#">
+<span class="material-symbols-outlined text-[20px]">home_max</span> Home
+            </a>
+<a class="text-primary font-bold hover:text-primary transition-all font-label-md text-label-md flex items-center gap-2 bg-primary/10 py-1.5 px-4 rounded-full" href="#">
+<span class="material-symbols-outlined text-[20px]">sensors</span> Detection
+            </a>
+<a class="text-on-surface-variant hover:text-primary transition-all font-label-md text-label-md flex items-center gap-2" href="#">
+<span class="material-symbols-outlined text-[20px]">analytics</span> Intelligence
+            </a>
+<a class="text-on-surface-variant hover:text-primary transition-all font-label-md text-label-md flex items-center gap-2" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span> Settings
+            </a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-primary-fixed transition-colors active:scale-95 duration-150 p-2">
+<span class="material-symbols-outlined" data-weight="fill" style="font-variation-settings: 'FILL' 0;">translate</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary-fixed transition-colors active:scale-95 duration-150 p-2">
+<span class="material-symbols-outlined" data-weight="fill" style="font-variation-settings: 'FILL' 0;">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow pt-24 pb-32 md:pb-24 px-margin-mobile md:px-margin-desktop max-w-[1200px] w-full mx-auto grid grid-cols-4 md:grid-cols-12 gap-gutter">
+<!-- Left Column / Top Section: Scanner Context -->
+<div class="col-span-4 md:col-span-7 flex flex-col gap-6">
+<!-- Scanner Viewfinder -->
+<div class="relative w-full aspect-[4/5] md:aspect-[4/3] rounded-2xl glass-panel overflow-hidden flex flex-col items-center justify-center container group">
+<!-- Blurred background simulating camera feed -->
+<div class="absolute inset-0 bg-cover bg-center opacity-40 blur-sm transition-all duration-700 group-hover:blur-0 group-hover:opacity-60" data-alt="A close-up view of a diseased agricultural crop leaf, likely a tomato or potato plant, showing signs of blight or chlorosis. The image is captured from a top-down perspective, mimicking a smartphone camera scanning a plant in a field. The lighting is bright and natural, indicating outdoor sunlight. The overall aesthetic is gritty yet highly detailed, emphasizing the texture of the organic matter within a dark, sophisticated digital interface environment." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB4iPur9a7qxIvTDO-oTpYw41lufiXYJSi2pNGwGIMcH_9GMzzAyx1n5h5dCGwjDrNlhLcBw3Wyarah5HmC2GyAPQqr-zbNLBfUefzWdqqdtknTh2EzViN_-F1KtSR9X-90H0DY53UhOO5e1VYxtSkmSsyKIWcMx2Vsp5KadDeRxpuSJQssveUoL_ib_dA9ERLrXO0PUoLuAbb9zLMTTdlU68hzgnFt4U89ro-Cny8M0_86Yv1Tw_AOWnwquyyDRGZ5tosxU82bF3F_');">
+</div>
+<!-- Reticle Overlay -->
+<div class="absolute inset-8 scanner-reticle pointer-events-none">
+<div class="scan-line"></div>
+</div>
+<!-- Central Prompt -->
+<div class="z-10 text-center px-4 flex flex-col items-center gap-3">
+<span class="material-symbols-outlined text-4xl text-primary/80 animate-pulse">center_focus_strong</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Position leaf in frame</h2>
+<p class="font-body-sm text-body-sm text-text-muted max-w-xs">Ensure the affected area is clearly visible and well-lit for accurate analysis.</p>
+</div>
+</div>
+<!-- Primary Actions (Camera/Gallery) & CTA -->
+<div class="glass-panel rounded-2xl p-card-padding flex flex-col sm:flex-row gap-4 items-center justify-between">
+<div class="flex gap-4 w-full sm:w-auto">
+<button class="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-surface-container hover:bg-primary hover:text-on-primary text-on-surface border border-glass-stroke transition-all duration-300 rounded-full px-6 py-3 font-body-sm text-body-sm active:scale-95 group">
+<span class="material-symbols-outlined group-hover:text-on-primary text-primary transition-colors">photo_camera</span>
+<span>Camera</span>
+</button>
+<button class="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-surface-container hover:bg-primary hover:text-on-primary text-on-surface border border-glass-stroke transition-all duration-300 rounded-full px-6 py-3 font-body-sm text-body-sm active:scale-95 group">
+<span class="material-symbols-outlined group-hover:text-on-primary text-primary transition-colors">photo_library</span>
+<span>Gallery</span>
+</button>
+</div>
+<!-- Main CTA -->
+<button class="w-full sm:w-auto bg-surface-container border border-glass-stroke text-on-surface hover:bg-primary hover:text-on-primary transition-all duration-300 rounded-full px-8 py-4 font-headline-md text-headline-md active:scale-95 shadow-[0_0_20px_rgba(78,222,163,0.15)] flex items-center justify-center gap-3 group">
+<span class="material-symbols-outlined group-hover:animate-spin-slow">document_scanner</span>
+                    Analyse Crop
+                </button>
+</div>
+</div>
+<!-- Right Column / Bottom Section: Guidance & Data -->
+<div class="col-span-4 md:col-span-5 flex flex-col gap-6">
+<!-- Visual Guide Bento Grid -->
+<div class="glass-panel rounded-2xl p-card-padding flex flex-col gap-4">
+<h3 class="font-body-lg text-body-lg text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">rule</span>
+                    Visual Guide
+                </h3>
+<div class="grid grid-cols-3 gap-3">
+<div class="bg-surface-container/50 rounded-xl p-3 flex flex-col items-center justify-center text-center gap-2 border border-glass-stroke hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-tertiary">crop</span>
+<span class="font-label-md text-label-md text-text-muted leading-tight">Leaf fills 70%</span>
+</div>
+<div class="bg-surface-container/50 rounded-xl p-3 flex flex-col items-center justify-center text-center gap-2 border border-glass-stroke hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-tertiary">light_mode</span>
+<span class="font-label-md text-label-md text-text-muted leading-tight">Natural light</span>
+</div>
+<div class="bg-surface-container/50 rounded-xl p-3 flex flex-col items-center justify-center text-center gap-2 border border-glass-stroke hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-tertiary">blur_off</span>
+<span class="font-label-md text-label-md text-text-muted leading-tight">No blur</span>
+</div>
+</div>
+</div>
+<!-- Supported Crops -->
+<div class="glass-panel rounded-2xl p-card-padding flex flex-col gap-4 flex-grow">
+<div class="flex items-center justify-between">
+<h3 class="font-body-lg text-body-lg text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">grass</span>
+                        Supported Crops
+                    </h3>
+<span class="font-label-md text-label-md text-primary bg-primary/10 px-2 py-0.5 rounded text-[10px]">8 Supported</span>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="bg-surface-container border border-glass-stroke text-on-surface-variant font-label-md text-label-md px-3 py-1.5 rounded-full flex items-center gap-1 hover:border-primary/50 transition-colors cursor-default">
+<span class="material-symbols-outlined text-[16px]">local_florist</span> Tomato
+                    </span>
+<span class="bg-surface-container border border-glass-stroke text-on-surface-variant font-label-md text-label-md px-3 py-1.5 rounded-full flex items-center gap-1 hover:border-primary/50 transition-colors cursor-default">
+<span class="material-symbols-outlined text-[16px]">eco</span> Potato
+                    </span>
+<span class="bg-surface-container border border-glass-stroke text-on-surface-variant font-label-md text-label-md px-3 py-1.5 rounded-full flex items-center gap-1 hover:border-primary/50 transition-colors cursor-default">
+<span class="material-symbols-outlined text-[16px]">grass</span> Rice
+                    </span>
+<span class="bg-surface-container border border-glass-stroke text-on-surface-variant font-label-md text-label-md px-3 py-1.5 rounded-full flex items-center gap-1 hover:border-primary/50 transition-colors cursor-default">
+<span class="material-symbols-outlined text-[16px]">agriculture</span> Wheat
+                    </span>
+<span class="bg-surface-container border border-glass-stroke text-on-surface-variant font-label-md text-label-md px-3 py-1.5 rounded-full flex items-center gap-1 hover:border-primary/50 transition-colors cursor-default">
+<span class="material-symbols-outlined text-[16px]">cloud</span> Cotton
+                    </span>
+<span class="bg-surface-container border border-glass-stroke text-on-surface-variant font-label-md text-label-md px-3 py-1.5 rounded-full flex items-center gap-1 hover:border-primary/50 transition-colors cursor-default">
+<span class="material-symbols-outlined text-[16px]">compost</span> Maize
+                    </span>
+<span class="bg-surface-container border border-glass-stroke text-on-surface-variant font-label-md text-label-md px-3 py-1.5 rounded-full flex items-center gap-1 hover:border-primary/50 transition-colors cursor-default">
+<span class="material-symbols-outlined text-[16px]">spa</span> Soybean
+                    </span>
+<span class="bg-surface-container border border-glass-stroke text-on-surface-variant font-label-md text-label-md px-3 py-1.5 rounded-full flex items-center gap-1 hover:border-primary/50 transition-colors cursor-default">
+<span class="material-symbols-outlined text-[16px]">lens</span> Onion
+                    </span>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<!-- Removed border-t per Shell Border Ban, relying on shadow-lg -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 flex justify-around items-center px-4 pb-safe h-20 bg-surface-container/80 backdrop-blur-2xl rounded-t-xl shadow-lg shadow-black/50">
+<!-- Home (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all active:scale-90 duration-200 w-16" href="#">
+<span class="material-symbols-outlined mb-1">home_max</span>
+<span class="font-label-md text-label-md text-[10px]">Home</span>
+</a>
+<!-- Detection (Active) -->
+<a class="flex flex-col items-center justify-center text-primary bg-primary/10 rounded-xl py-1 px-3 active:scale-90 duration-200 w-20" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">sensors</span>
+<span class="font-label-md text-label-md text-[10px] font-bold">Detection</span>
+</a>
+<!-- Intelligence (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all active:scale-90 duration-200 w-16" href="#">
+<span class="material-symbols-outlined mb-1">analytics</span>
+<span class="font-label-md text-label-md text-[10px]">Intelligence</span>
+</a>
+<!-- Settings (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all active:scale-90 duration-200 w-16" href="#">
+<span class="material-symbols-outlined mb-1">settings</span>
+<span class="font-label-md text-label-md text-[10px]">Settings</span>
+</a>
+</nav>
+</body></html>

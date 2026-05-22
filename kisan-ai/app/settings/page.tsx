@@ -4,17 +4,31 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { useAppStore } from '../store/useAppStore';
-import { createT } from '../../lib/i18n';
+import { supabase } from '../lib/supabase';
 
 export default function Settings() {
   const router = useRouter();
-  const { language, theme, toggleTheme } = useAppStore();
-  const t = createT(language);
+  const { language, theme, toggleTheme, user, logout } = useAppStore();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => { setMounted(true); }, []);
 
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    logout();
+    router.push('/login');
+  };
+
   if (!mounted) return null;
+
+  const t = (key: string) => {
+    const translations: Record<string, Record<string, string>> = {
+      settings: { title: 'Settings', profile: 'Profile', notifications: 'Notifications', help: 'Help & Support', about: 'About', logout: 'Log Out' },
+      hi: { settings: { title: 'सेटिंग्स', profile: 'प्रोफ़ाइल', notifications: 'सूचनाएं', help: 'सहायता', about: 'के बारे में', logout: 'लॉग आउट' } },
+      kn: { settings: { title: 'ಸೆಟ್ಟಿಂಗ್‌ಗಳು', profile: 'ಪ್ರೊಫೈಲ್', notifications: 'ಅಧಿಸೂಚನೆಗಳು', help: 'ಸಹಾಯ', about: 'ಬಗ್ಗೆ', logout: 'ಲಾಗ್ ಔಟ್' } },
+    };
+    return translations[language]?.[key] || translations['en']?.[key] || key;
+  };
 
   const settingsItems = [
     { icon: 'person', label: t('settings.profile'), href: '/profile', color: 'bg-emerald-50 text-emerald-600' },
@@ -28,6 +42,14 @@ export default function Settings() {
     },
     { icon: 'help', label: t('settings.help'), href: '/support', color: 'bg-blue-50 text-blue-600' },
     { icon: 'info', label: t('settings.about'), href: '/about', color: 'bg-slate-50 text-slate-600' },
+  ];
+
+  const hackathonFeatures = [
+    { icon: 'insights', label: 'Impact Dashboard', href: '/impact', color: 'bg-green-50 text-green-600', badge: 'LIVE' },
+    { icon: 'compare', label: 'Competitor Analysis', href: '/compare', color: 'bg-blue-50 text-blue-600', badge: 'NEW' },
+    { icon: 'handshake', label: 'Partner Program', href: '/partners', color: 'bg-purple-50 text-purple-600', badge: 'B2B' },
+    { icon: 'park', label: 'Sustainability', href: '/sustainability', color: 'bg-emerald-50 text-emerald-600', badge: 'SDG' },
+    { icon: 'wifi_off', label: 'Offline Mode Demo', href: '/offline-demo', color: 'bg-amber-50 text-amber-600', badge: 'DEMO' },
   ];
 
   return (
@@ -53,11 +75,17 @@ export default function Settings() {
           className="bg-[var(--color-surface)] dark:bg-[var(--color-surface-variant)] border border-slate-100 dark:border-slate-800 rounded-[32px] p-6 flex items-center gap-5 shadow-premium"
         >
           <div className="w-20 h-20 rounded-[28px] bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center text-white shadow-lg shadow-emerald-900/20">
-             <span className="text-3xl font-black font-[var(--font-outfit)]">P</span>
+             <span className="text-3xl font-black font-[var(--font-outfit)]">
+               {user?.fullName?.charAt(0).toUpperCase() || user?.phone?.slice(-2) || 'U'}
+             </span>
           </div>
           <div className="flex-1">
-            <h2 className="font-black text-xl text-slate-800 dark:text-slate-200 tracking-tight">Preetham S.M</h2>
-            <p className="text-sm font-medium text-slate-400 dark:text-slate-500 uppercase tracking-widest mt-1">+91 98765 43210</p>
+            <h2 className="font-black text-xl text-slate-800 dark:text-slate-200 tracking-tight">
+              {user?.fullName || 'Farmer'}
+            </h2>
+            <p className="text-sm font-medium text-slate-400 dark:text-slate-500 uppercase tracking-widest mt-1">
+              {user?.phone || '+91 ••••• •••••'}
+            </p>
           </div>
           <button className="w-12 h-12 rounded-2xl bg-slate-50 dark:bg-slate-800 flex items-center justify-center text-slate-400 dark:text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
             <span className="material-symbols-outlined">edit</span>
@@ -105,8 +133,35 @@ export default function Settings() {
           ))}
         </section>
 
+        {/* Hackathon Features - These win competitions! */}
+        <section className="space-y-3">
+          <h3 className="font-black text-xs uppercase tracking-[0.25em] text-slate-400 px-2">🏆 Hackathon Features</h3>
+          {hackathonFeatures.map((item, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.3 + index * 0.05 }}
+            >
+              <Link 
+                href={item.href}
+                className="flex items-center gap-5 p-5 bg-gradient-to-r from-white to-slate-50 dark:from-slate-800 dark:to-slate-800/50 border border-slate-100 dark:border-slate-700 rounded-[24px] hover:border-emerald-300 dark:hover:border-emerald-600 transition-all shadow-sm active:scale-[0.98]"
+              >
+                <div className={`w-12 h-12 rounded-2xl ${item.color} flex items-center justify-center flex-shrink-0`}>
+                  <span className="material-symbols-outlined">{item.icon}</span>
+                </div>
+                <span className="font-bold text-slate-700 dark:text-slate-200 flex-1">{item.label}</span>
+                <span className="text-xs font-black px-2 py-1 bg-slate-800 text-white rounded-full">{item.badge}</span>
+              </Link>
+            </motion.div>
+          ))}
+        </section>
+
         {/* Logout Button */}
-        <button className="w-full bg-red-50 dark:bg-red-900/10 text-red-600 dark:text-red-400 py-5 rounded-[24px] font-black tracking-tight flex items-center justify-center gap-3 active:scale-95 transition-all border border-red-100/50 dark:border-red-900/50 shadow-sm">
+        <button 
+          onClick={handleLogout}
+          className="w-full bg-red-50 dark:bg-red-900/10 text-red-600 dark:text-red-400 py-5 rounded-[24px] font-black tracking-tight flex items-center justify-center gap-3 active:scale-95 transition-all border border-red-100/50 dark:border-red-900/50 shadow-sm"
+        >
           <span className="material-symbols-outlined">logout</span>
           {t('settings.logout')}
         </button>

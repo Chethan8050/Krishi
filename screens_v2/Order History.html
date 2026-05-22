@@ -1,0 +1,263 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Order History - KrishiDrishti</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Gradient Border Shell utility */
+        .glass-panel {
+            position: relative;
+            background: rgba(43, 45, 48, 0.4); /* Subtler than the 0.7 max to allow layering */
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-radius: 0.75rem; /* xl */
+        }
+        .glass-panel::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-primary": "#003824",
+                      "inverse-surface": "#e2e2e6",
+                      "on-tertiary-fixed": "#001d32",
+                      "error-container": "#93000a",
+                      "tertiary-fixed-dim": "#96ccff",
+                      "surface-container-lowest": "#0c0e11",
+                      "on-secondary-fixed": "#0f1d28",
+                      "glass-stroke": "rgba(255, 255, 255, 0.1)",
+                      "on-secondary": "#24323e",
+                      "secondary-container": "#3b4855",
+                      "primary-container": "#10b981",
+                      "on-secondary-container": "#a9b7c6",
+                      "text-muted": "#A9B7C6",
+                      "secondary-fixed": "#d6e4f4",
+                      "on-primary-fixed-variant": "#005236",
+                      "error": "#ffb4ab",
+                      "surface-dark": "#1E1E1E",
+                      "surface-container": "#1e2023",
+                      "on-tertiary-container": "#003c60",
+                      "surface-variant": "#333538",
+                      "inverse-on-surface": "#2f3034",
+                      "surface": "#111416",
+                      "on-primary-container": "#00422b",
+                      "surface-container-low": "#1a1c1f",
+                      "on-error-container": "#ffdad6",
+                      "on-tertiary-fixed-variant": "#004a75",
+                      "on-secondary-fixed-variant": "#3b4855",
+                      "on-background": "#e2e2e6",
+                      "tertiary": "#96ccff",
+                      "background": "#111416",
+                      "surface-container-high": "#282a2d",
+                      "primary-fixed": "#6ffbbe",
+                      "tertiary-fixed": "#cee5ff",
+                      "inverse-primary": "#006c49",
+                      "primary-fixed-dim": "#4edea3",
+                      "secondary-fixed-dim": "#bac8d7",
+                      "on-surface-variant": "#bbcabf",
+                      "on-error": "#690005",
+                      "secondary": "#bac8d7",
+                      "surface-container-highest": "#333538",
+                      "surface-bright": "#37393c",
+                      "surface-tint": "#4edea3",
+                      "on-primary-fixed": "#002113",
+                      "surface-dim": "#111416",
+                      "primary": "#4edea3",
+                      "on-tertiary": "#003353",
+                      "outline-variant": "#3c4a42",
+                      "outline": "#86948a",
+                      "tertiary-container": "#4ca9f1",
+                      "on-surface": "#e2e2e6"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "card-padding": "18px",
+                      "base": "8px",
+                      "gutter": "16px",
+                      "margin-mobile": "16px",
+                      "margin-desktop": "32px",
+                      "section-gap": "40px"
+              },
+              "fontFamily": {
+                      "display-lg": ["Inter", "sans-serif"],
+                      "headline-lg-mobile": ["Inter", "sans-serif"],
+                      "headline-lg": ["Inter", "sans-serif"],
+                      "body-sm": ["Inter", "sans-serif"],
+                      "body-lg": ["Inter", "sans-serif"],
+                      "label-md": ["Inter", "sans-serif"],
+                      "headline-md": ["Inter", "sans-serif"],
+                      "body-md": ["Inter", "sans-serif"]
+              },
+              "fontSize": {
+                      "display-lg": ["60px", { "lineHeight": "60px", "letterSpacing": "-0.025em", "fontWeight": "500" }],
+                      "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                      "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                      "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                      "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                      "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "400" }],
+                      "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                      "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "300" }]
+              }
+            }
+          }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md antialiased min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-margin-mobile md:px-margin-desktop h-16 bg-surface/70 backdrop-blur-xl border-b border-glass-stroke">
+<div class="flex items-center gap-4">
+<!-- Back Action for task-focused page -->
+<button class="text-on-surface-variant hover:text-primary-fixed transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="font-display-lg text-headline-lg-mobile md:text-headline-lg text-primary tracking-tight">KrishiDrishti</h1>
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant">
+<button class="hover:text-primary-fixed transition-colors flex items-center justify-center active:scale-95 duration-150">
+<span class="material-symbols-outlined">translate</span>
+</button>
+<button class="hover:text-primary-fixed transition-colors flex items-center justify-center active:scale-95 duration-150">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow pt-24 pb-safe px-margin-mobile md:px-margin-desktop max-w-4xl mx-auto w-full">
+<!-- Page Header -->
+<div class="mb-gutter">
+<h2 class="font-headline-md text-headline-md text-on-surface">Order History</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Review your recent procurement activity.</p>
+</div>
+<!-- Savings Card (Hero Element) -->
+<section class="glass-panel p-card-padding mb-section-gap relative overflow-hidden group">
+<!-- Subtle Emerald Glow -->
+<div class="absolute -top-10 -right-10 w-32 h-32 bg-primary/20 rounded-full blur-[40px] pointer-events-none transition-opacity duration-500 opacity-70 group-hover:opacity-100"></div>
+<div class="flex items-center justify-between relative z-10">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">eco</span>
+<h3 class="font-label-md text-label-md text-primary uppercase tracking-wider">Direct Procurement Yield</h3>
+</div>
+<div class="font-display-lg text-headline-lg text-on-surface mt-2">
+                        ₹1840 <span class="font-body-sm text-body-sm text-on-surface-variant line-through ml-2">₹2100</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Total saved across all direct farm orders.</p>
+</div>
+<div class="hidden md:flex h-16 w-16 rounded-full bg-primary/10 border border-primary/20 items-center justify-center">
+<span class="material-symbols-outlined text-primary text-3xl">trending_down</span>
+</div>
+</div>
+</section>
+<!-- Filters -->
+<nav class="flex gap-3 mb-gutter overflow-x-auto no-scrollbar pb-2">
+<button class="whitespace-nowrap px-4 py-2 rounded-full font-label-md text-label-md border transition-all duration-200 bg-primary/10 text-primary border-primary shadow-[0_0_12px_rgba(16,185,129,0.15)]">
+                All Orders
+            </button>
+<button class="whitespace-nowrap px-4 py-2 rounded-full font-label-md text-label-md border border-glass-stroke text-on-surface-variant bg-surface-container/50 hover:bg-surface-container hover:text-on-surface transition-all duration-200">
+                Completed
+            </button>
+<button class="whitespace-nowrap px-4 py-2 rounded-full font-label-md text-label-md border border-glass-stroke text-on-surface-variant bg-surface-container/50 hover:bg-surface-container hover:text-on-surface transition-all duration-200">
+                Pending
+            </button>
+</nav>
+<!-- Order List (Bento-style stacked) -->
+<section class="flex flex-col gap-4">
+<!-- Order 1: Completed -->
+<article class="glass-panel p-card-padding flex flex-col md:flex-row gap-4 items-start md:items-center hover:bg-surface-container-high/40 transition-colors cursor-pointer group">
+<div class="w-full md:w-20 h-20 rounded-lg bg-surface-container overflow-hidden shrink-0 border border-glass-stroke relative">
+<img alt="Organic Roma Tomatoes" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" data-alt="Close up photography of vibrant red, freshly harvested organic Roma tomatoes resting on dark, fertile soil. The lighting is natural, slightly overcast, creating a rich, moody agricultural aesthetic. Focus is sharp on the water droplets on the tomato skin, conveying freshness against a dark, minimal background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQBeCSJFLaSWFPmBgHvspXF2buhbyq2Axzn3ymcuD9LhzSolTMP72rmsODrubNxR96XnSxRhBAIBjcpw1yNI9ckztQrZoVJLRg5G4zpUNTlcwnr0vhwX8zFxYTbutHK1tlI_MJXICRtuWQ3Ci_-YKGEr4w_KwvsxzL74J6xVFpx3E7cBmEQatszCLXR2W0nhE40qkb-iJRxGOCW8CNvqHyTHoivAk2m4aiAOKOZqaC2cGZ6MKOGsAC7n0l_6ffOxWzSvFkwsUFfUTq">
+</div>
+<div class="flex-grow w-full">
+<div class="flex justify-between items-start mb-1">
+<h4 class="font-headline-md text-body-lg text-on-surface font-medium">Organic Roma Tomatoes</h4>
+<span class="font-headline-md text-body-lg text-primary">₹400</span>
+</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant mb-3 flex gap-4">
+<span>Qty: 10kg</span>
+<span>•</span>
+<span>Farm ID: #TR-492</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<span class="font-label-md text-label-md text-primary">Completed (Yesterday)</span>
+</div>
+</div>
+<div class="hidden md:flex pl-4 border-l border-glass-stroke ml-2 h-full items-center">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">chevron_right</span>
+</div>
+</article>
+<!-- Order 2: Pending -->
+<article class="glass-panel p-card-padding flex flex-col md:flex-row gap-4 items-start md:items-center hover:bg-surface-container-high/40 transition-colors cursor-pointer group">
+<div class="w-full md:w-20 h-20 rounded-lg bg-surface-container overflow-hidden shrink-0 border border-glass-stroke relative">
+<img alt="Russet Potatoes" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" data-alt="Rustic still life of raw Russet potatoes in a woven basket resting on a dark wooden surface. Soft, low-key lighting highlights the rough texture and earthy brown tones of the potatoes. The atmosphere is industrial and utilitarian, fitting a dark mode data-driven interface with subtle emerald accents off-camera." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUwzUPkFsJRNenRT-6JSMzeTd4GjHFnrMzfTfAgGEh6MTQS0HpbiEQhXSAXCkwOBbG84NdTWabhu5ofyPcICBbvZPw04z9EvWyoYnrqPXd9OhI4GZYCi3JbTB_zx6IuFSWIdd3fTCVgYt0mPcPeDA90QvIS6gORNKNL1iISJT8p7YgEF65OjUG2DT4KMqxwzbaKBh771imVtS4Mjh1kC6eCry1t4aCvUjcbWr79Hj5L_9TTzmMXdd9ICLfA6PwsXcwvd7kuX8FFJLi">
+</div>
+<div class="flex-grow w-full">
+<div class="flex justify-between items-start mb-1">
+<h4 class="font-headline-md text-body-lg text-on-surface font-medium">Russet Potatoes</h4>
+<span class="font-headline-md text-body-lg text-on-surface">₹500</span>
+</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant mb-3 flex gap-4">
+<span>Qty: 20kg</span>
+<span>•</span>
+<span>Farm ID: #PT-118</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-tertiary"></div>
+<span class="font-label-md text-label-md text-tertiary">Pending Pickup</span>
+</div>
+</div>
+<div class="hidden md:flex pl-4 border-l border-glass-stroke ml-2 h-full items-center">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">chevron_right</span>
+</div>
+</article>
+<!-- Order 3: Cancelled -->
+<article class="glass-panel p-card-padding flex flex-col md:flex-row gap-4 items-start md:items-center hover:bg-surface-container-high/40 transition-colors cursor-pointer group opacity-75 grayscale-[0.3]">
+<div class="w-full md:w-20 h-20 rounded-lg bg-surface-container overflow-hidden shrink-0 border border-glass-stroke relative">
+<img alt="Basmati Rice" class="w-full h-full object-cover opacity-60" data-alt="Macro shot of premium long-grain Basmati rice cascading out of a coarse burlap sack. The lighting is cool and clinical, emphasizing the pristine white texture of the grains against the dark shadows of the sack. The overall tone is minimalist and premium, suitable for an enterprise agricultural platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPOZ6UMHGP7tyb_UWVmKgM69NJsXkF1FaTDsXtDJfPgSjj-9yGjSGu4CBqC5CyTCBH2xlkJPc1gzeksWIa0jTo2CZPI5zixsLn8M6vvK8x7vd8ywgMA7cTvKHgOsZEX-AK-G9YrmFaQGFRCyTZSorrQhv2d8c89i7DVPgHLuzjXSKK-wJzM4tJOHFJjfEtJvpZ2FbAaPyzuFKKSq_sSot8B7jzx36PCxxxR_KuAyiOA2HzFisbVxnUcJhbh6mbrCnCWfXKxcCSgtUF">
+</div>
+<div class="flex-grow w-full">
+<div class="flex justify-between items-start mb-1">
+<h4 class="font-headline-md text-body-lg text-on-surface-variant font-medium line-through">Premium Basmati Rice</h4>
+<span class="font-headline-md text-body-lg text-on-surface-variant line-through">₹6000</span>
+</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant mb-3 flex gap-4">
+<span>Qty: 50kg</span>
+<span>•</span>
+<span>Farm ID: #RC-802</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-error"></div>
+<span class="font-label-md text-label-md text-error">Cancelled</span>
+</div>
+</div>
+<div class="hidden md:flex pl-4 border-l border-glass-stroke ml-2 h-full items-center">
+<span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
+</div>
+</article>
+</section>
+</main>
+</body></html>

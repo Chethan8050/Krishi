@@ -1,0 +1,309 @@
+<!DOCTYPE html><html class="dark" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>KrishiDrishti - Yield Input</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-dim": "#111416",
+                        "surface-container-high": "#282a2d",
+                        "secondary": "#bac8d7",
+                        "on-tertiary-fixed-variant": "#004a75",
+                        "error-container": "#93000a",
+                        "surface-container-highest": "#333538",
+                        "surface": "#111416",
+                        "tertiary-container": "#4ca9f1",
+                        "error": "#ffb4ab",
+                        "tertiary-fixed": "#cee5ff",
+                        "on-secondary": "#24323e",
+                        "background": "#111416",
+                        "on-primary-fixed-variant": "#005236",
+                        "inverse-primary": "#006c49",
+                        "surface-tint": "#4edea3",
+                        "on-tertiary": "#003353",
+                        "secondary-container": "#3b4855",
+                        "on-error-container": "#ffdad6",
+                        "glass-stroke": "rgba(255, 255, 255, 0.1)",
+                        "surface-dark": "#1E1E1E",
+                        "on-error": "#690005",
+                        "outline-variant": "#3c4a42",
+                        "on-secondary-container": "#a9b7c6",
+                        "on-tertiary-fixed": "#001d32",
+                        "text-muted": "#A9B7C6",
+                        "surface-container-lowest": "#0c0e11",
+                        "primary": "#4edea3",
+                        "outline": "#86948a",
+                        "secondary-fixed-dim": "#bac8d7",
+                        "tertiary": "#96ccff",
+                        "surface-bright": "#37393c",
+                        "primary-container": "#10b981",
+                        "surface-container": "#1e2023",
+                        "tertiary-fixed-dim": "#96ccff",
+                        "surface-variant": "#333538",
+                        "on-background": "#e2e2e6",
+                        "secondary-fixed": "#d6e4f4",
+                        "inverse-surface": "#e2e2e6",
+                        "inverse-on-surface": "#2f3034",
+                        "primary-fixed": "#6ffbbe",
+                        "on-surface-variant": "#bbcabf",
+                        "on-primary-fixed": "#002113",
+                        "surface-container-low": "#1a1c1f",
+                        "on-primary-container": "#00422b",
+                        "on-tertiary-container": "#003c60",
+                        "primary-fixed-dim": "#4edea3",
+                        "on-secondary-fixed": "#0f1d28",
+                        "on-secondary-fixed-variant": "#3b4855",
+                        "on-primary": "#003824",
+                        "on-surface": "#e2e2e6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "card-padding": "18px",
+                        "margin-desktop": "32px",
+                        "gutter": "16px",
+                        "base": "8px",
+                        "section-gap": "40px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "display-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "300" }],
+                        "display-lg": ["60px", { "lineHeight": "60px", "letterSpacing": "-0.025em", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-panel {
+            background-color: rgba(43, 45, 48, 0.7);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid;
+            border-image-source: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+            border-image-slice: 1;
+        }
+        .glow-primary:focus-within {
+            box-shadow: 0 0 24px rgba(16, 185, 129, 0.2);
+            border-color: rgba(16, 185, 129, 0.5);
+        }
+        /* Custom scrollbar for dropdowns if needed */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #1a1c1f; }
+        ::-webkit-scrollbar-thumb { background: #3b4855; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #4edea3; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen font-body-md overflow-x-hidden pt-16 pb-24 md:pb-8">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-margin-mobile h-16 bg-surface/70 backdrop-blur-xl border-b border-glass-stroke">
+<div class="flex items-center gap-2"><img src="https://lh3.googleusercontent.com/aida/ADBb0uj7r0xSLVtSYHFEjOD7O1mxsByPLFqN_1dAAouHvqBNESejIkmAfxTR7p5g6kCqISb1pjkyIZmaGFo-DM1qzZ3oKVD8_tqVCxol0KQ2V36C7erO9HP7ZUlu1PN5TMEu8YF6aCdwLGvCOFaP3oRN1-7b-UeWjjj91dHPup_ni9iBsDuuh3ZEpcou0JbV-nVP9eufeAPUQlv7hmzLgDwgdV19ulVajykqlwwA6fiOJiTsKmWze1jizwo4W4tG" alt="KrishiDrishti Logo" class="h-12 w-auto object-contain"></div>
+<div class="flex items-center gap-4">
+<button aria-label="Translate" class="text-on-surface-variant hover:text-primary-fixed transition-colors hover:scale-95 duration-150">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">translate</span>
+</button>
+<button aria-label="Profile" class="text-on-surface-variant hover:text-primary-fixed transition-colors hover:scale-95 duration-150">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Main Content -->
+<main class="max-w-[1200px] mx-auto px-margin-mobile md:px-margin-desktop py-section-gap">
+<!-- Header Section -->
+<div class="mb-section-gap">
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-on-surface mb-2">Yield Prediction Model</h1>
+<p class="font-body-md text-on-surface-variant max-w-2xl">Enter field parameters to generate an AI-driven yield estimate based on historical data and current conditions.</p>
+</div>
+<!-- Bento Grid Layout for Inputs -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter mb-section-gap">
+<!-- Left Column: Core Parameters -->
+<div class="md:col-span-8 flex flex-col gap-gutter">
+<div class="glass-panel rounded-xl p-card-padding">
+<h2 class="font-headline-md text-primary mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">eco</span>
+                        Crop &amp; Location
+                    </h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+<!-- Crop Selection -->
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-text-muted">Target Crop</label>
+<div class="relative glow-primary transition-all rounded-lg">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">grass</span>
+<select class="w-full bg-surface-dark border-b border-glass-stroke border-x-0 border-t-0 text-on-surface font-body-md pl-10 pr-4 py-3 focus:ring-0 focus:border-primary focus:bg-surface-container transition-colors appearance-none rounded-t-lg">
+<option selected="" value="tomato">Tomato</option>
+<option value="wheat">Wheat</option>
+<option value="rice">Rice</option>
+<option value="corn">Corn</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+</div>
+<!-- District Selection -->
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-text-muted">District</label>
+<div class="relative glow-primary transition-all rounded-lg">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">location_on</span>
+<select class="w-full bg-surface-dark border-b border-glass-stroke border-x-0 border-t-0 text-on-surface font-body-md pl-10 pr-4 py-3 focus:ring-0 focus:border-primary focus:bg-surface-container transition-colors appearance-none rounded-t-lg">
+<option selected="" value="mandya">Mandya</option>
+<option value="mysuru">Mysuru</option>
+<option value="hassan">Hassan</option>
+<option value="tumkur">Tumkur</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+</div>
+<!-- Area Input -->
+<div class="flex flex-col gap-2 sm:col-span-2">
+<label class="font-label-md text-text-muted">Cultivated Area</label>
+<div class="relative glow-primary transition-all rounded-lg flex items-center bg-surface-dark border-b border-glass-stroke focus-within:border-primary focus-within:bg-surface-container rounded-t-lg">
+<span class="material-symbols-outlined pl-3 text-on-surface-variant">square_foot</span>
+<input class="w-full bg-transparent border-none text-on-surface font-body-md px-3 py-3 focus:ring-0" placeholder="Enter area" step="0.1" type="number" value="2.5">
+<span class="pr-4 text-on-surface-variant font-body-sm">Acres</span>
+</div>
+</div>
+</div>
+</div>
+<div class="glass-panel rounded-xl p-card-padding">
+<h2 class="font-headline-md text-tertiary-container mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary-container">landscape</span>
+                        Environmental Factors
+                    </h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+<!-- Soil Type -->
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-text-muted">Soil Profile</label>
+<div class="relative glow-primary transition-all rounded-lg">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">layers</span>
+<select class="w-full bg-surface-dark border-b border-glass-stroke border-x-0 border-t-0 text-on-surface font-body-md pl-10 pr-4 py-3 focus:ring-0 focus:border-primary focus:bg-surface-container transition-colors appearance-none rounded-t-lg">
+<option selected="" value="black">Black Soil</option>
+<option value="red">Red Soil</option>
+<option value="alluvial">Alluvial Soil</option>
+<option value="laterite">Laterite Soil</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+</div>
+<!-- Season -->
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-text-muted">Growing Season</label>
+<div class="relative glow-primary transition-all rounded-lg">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">calendar_month</span>
+<select class="w-full bg-surface-dark border-b border-glass-stroke border-x-0 border-t-0 text-on-surface font-body-md pl-10 pr-4 py-3 focus:ring-0 focus:border-primary focus:bg-surface-container transition-colors appearance-none rounded-t-lg">
+<option selected="" value="kharif">Kharif (Monsoon)</option>
+<option value="rabi">Rabi (Winter)</option>
+<option value="zaid">Zaid (Summer)</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+</div>
+<!-- Rainfall Input -->
+<div class="flex flex-col gap-2 sm:col-span-2">
+<label class="font-label-md text-text-muted">Expected/Historical Rainfall</label>
+<div class="relative glow-primary transition-all rounded-lg flex items-center bg-surface-dark border-b border-glass-stroke focus-within:border-primary focus-within:bg-surface-container rounded-t-lg">
+<span class="material-symbols-outlined pl-3 text-on-surface-variant">water_drop</span>
+<input class="w-full bg-transparent border-none text-on-surface font-body-md px-3 py-3 focus:ring-0" placeholder="Enter rainfall" type="number" value="850">
+<span class="pr-4 text-on-surface-variant font-body-sm">mm</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Summary & CTA -->
+<div class="md:col-span-4 flex flex-col gap-gutter h-full">
+<div class="glass-panel rounded-xl p-card-padding flex flex-col justify-between h-full bg-gradient-to-b from-surface-container-high/80 to-surface-dim/80">
+<div>
+<h3 class="font-headline-md text-on-surface mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant">summarize</span>
+                            Input Summary
+                        </h3>
+<div class="space-y-4">
+<div class="flex justify-between items-center py-2 border-b border-white/5">
+<span class="font-body-sm text-text-muted">Crop</span>
+<span class="font-body-md text-on-surface">Tomato</span>
+</div>
+<div class="flex justify-between items-center py-2 border-b border-white/5">
+<span class="font-body-sm text-text-muted">Location</span>
+<span class="font-body-md text-on-surface">Mandya</span>
+</div>
+<div class="flex justify-between items-center py-2 border-b border-white/5">
+<span class="font-body-sm text-text-muted">Soil</span>
+<span class="font-body-md text-on-surface">Black</span>
+</div>
+<div class="flex justify-between items-center py-2 border-b border-white/5">
+<span class="font-body-sm text-text-muted">Season</span>
+<span class="font-body-md text-on-surface">Kharif</span>
+</div>
+<div class="flex justify-between items-center py-2 border-b border-white/5">
+<span class="font-body-sm text-text-muted">Area</span>
+<span class="font-body-md text-on-surface">2.5 Acres</span>
+</div>
+<div class="flex justify-between items-center py-2">
+<span class="font-body-sm text-text-muted">Rainfall</span>
+<span class="font-body-md text-on-surface">850 mm</span>
+</div>
+</div>
+</div>
+<div class="mt-8">
+<button class="w-full bg-surface-container border border-glass-stroke text-on-surface font-headline-md py-4 px-6 rounded-full hover:bg-primary hover:text-on-primary hover:border-primary-fixed transition-all duration-300 flex items-center justify-center gap-2 group shadow-[0_0_15px_rgba(16,185,129,0.1)] hover:shadow-[0_0_25px_rgba(16,185,129,0.4)]">
+<span class="material-symbols-outlined group-hover:animate-pulse">analytics</span>
+                            Predict Yield
+                        </button>
+<p class="text-center font-label-md text-text-muted mt-3">Model accuracy approx. 92% based on regional datasets.</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 flex justify-around items-center px-4 pb-safe h-20 bg-surface-container/80 backdrop-blur-2xl border-t border-glass-stroke shadow-lg shadow-primary/5 rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">home_max</span>
+<span class="font-label-md text-label-md mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">sensors</span>
+<span class="font-label-md text-label-md mt-1">Detection</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary bg-primary/10 rounded-xl py-1 px-3 transform scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">analytics</span>
+<span class="font-label-md text-label-md mt-1">Intelligence</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">settings</span>
+<span class="font-label-md text-label-md mt-1">Settings</span>
+</a>
+</nav>
+<!-- Safe area padding utility for mobile -->
+<style>
+        .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+    </style>
+
+
+</body></html>

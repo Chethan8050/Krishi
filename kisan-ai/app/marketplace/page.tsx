@@ -2,219 +2,321 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { motion } from 'framer-motion';
 import { useAppStore } from '../store/useAppStore';
-import { createT } from '../../lib/i18n';
 
 const products = [
   {
     id: 1,
-    name: { en: 'Organic Fertilizers', kn: 'ಸಾವಯವ ಗೊಬ್ಬರಗಳು', hi: 'जैविक उर्वरक' },
-    price: '₹450/bag',
-    seller: 'Green Agri Co.',
+    name: { en: 'Roma Tomatoes', kn: 'ರೊಮಾ ಟೊಮೆಟೊ', hi: 'रोमा टमाटर' },
+    price: '₹40/kg',
+    seller: 'Ramesh Farm',
     rating: 4.8,
-    img: 'https://images.unsplash.com/photo-1592982537447-7440770cbfc9?auto=format&fit=crop&q=80&w=400'
+    img: 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&q=80&w=400',
+    distance: '2.4 km',
+    initial: 'R',
+    bg: 'bg-secondary-container text-on-surface'
   },
   {
     id: 2,
-    name: { en: 'High Yield Seeds', kn: 'ಹೆಚ್ಚಿನ ಇಳುವರಿ ಬೀಜಗಳು', hi: 'उच्च उपज वाले बीज' },
-    price: '₹1200/kg',
-    seller: 'Mandya Seeds',
+    name: { en: 'Russet Potatoes', kn: 'ಆಲೂಗಡ್ಡೆ', hi: 'आलू' },
+    price: '₹25/kg',
+    seller: 'Valley Agrics',
     rating: 4.5,
-    img: 'https://images.unsplash.com/photo-1505230408221-356620980144?auto=format&fit=crop&q=80&w=400'
+    img: 'https://images.unsplash.com/photo-1518977673343-a4a623f54d4e?auto=format&fit=crop&q=80&w=400',
+    distance: '3.1 km',
+    initial: 'V',
+    bg: 'bg-tertiary-container text-on-tertiary-container'
   },
   {
     id: 3,
-    name: { en: 'Drip Irrigation Kit', kn: 'ಹನಿ ನೀರಾವರಿ ಕಿಟ್', hi: 'ड्रिप सिंचाई kit' },
-    price: '₹5500',
-    seller: 'Agro Tools',
+    name: { en: 'Baby Spinach', kn: 'ಪಾಲಕ್', hi: 'पालक' },
+    price: '₹60/kg',
+    seller: 'GreenTech Farm',
     rating: 4.9,
-    img: 'https://images.unsplash.com/photo-1622383563227-04401ab4e5ea?auto=format&fit=crop&q=80&w=400'
+    img: 'https://images.unsplash.com/photo-1576045057995-568f588f82fb?auto=format&fit=crop&q=80&w=400',
+    distance: '4.0 km',
+    initial: 'G',
+    bg: 'bg-primary-container text-on-primary-container'
   }
 ];
 
 export default function Marketplace() {
   const router = useRouter();
-  const { language, theme, toggleTheme } = useAppStore();
-  const t = createT(language);
+  const { language } = useAppStore();
   const [mounted, setMounted] = useState(false);
-  const [marketData, setMarketData] = useState<any>(null);
 
   useEffect(() => { 
     setMounted(true); 
-    fetch('/api/market?commodity=Tomato&district=Mandya')
-      .then(res => res.json())
-      .then(data => setMarketData(data));
   }, []);
 
   if (!mounted) return null;
 
   return (
-    <div className="bg-[var(--color-background)] text-[var(--color-on-background)] min-h-screen flex flex-col font-[var(--font-inter)]">
-      {/* Premium Header */}
-      <header className="sticky top-0 w-full z-50 glass px-6 py-5 flex justify-between items-center border-b border-slate-200/50">
-        <div className="flex items-center gap-4">
-          <button 
-            onClick={() => router.back()} 
-            className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-slate-600 dark:text-slate-300"
-          >
-            <span className="material-symbols-outlined">arrow_back</span>
-          </button>
-          <h1 className="text-xl font-black tracking-tight text-[var(--color-primary)] font-[var(--font-outfit)]">{t('marketplace.title')}</h1>
+    <div className="bg-background text-on-surface min-h-screen flex flex-col font-body-md overflow-x-hidden pb-safe md:pb-0">
+      {/* TopAppBar (Mobile) */}
+      <header className="md:hidden fixed top-0 w-full z-50 flex justify-between items-center px-margin-mobile h-16 bg-surface/70 backdrop-blur-xl border-b border-glass-stroke">
+        <div className="h-8 w-auto font-display-lg text-headline-lg-mobile text-primary tracking-tight font-bold">
+          KrishiDrishti
         </div>
-        <div className="flex gap-2">
-          <button 
-            onClick={toggleTheme}
-            className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-slate-600 dark:text-slate-300"
-          >
-            <span className="material-symbols-outlined text-[20px]">
-              {theme === 'dark' ? 'light_mode' : 'dark_mode'}
-            </span>
+        <div className="flex gap-4">
+          <button className="text-on-surface-variant hover:text-primary-fixed transition-colors active:scale-95 duration-150">
+            <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 0" }}>translate</span>
           </button>
-          <button className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-slate-400">
-            <span className="material-symbols-outlined">shopping_cart</span>
-          </button>
-          <button className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-slate-400">
-            <span className="material-symbols-outlined">search</span>
+          <button className="text-on-surface-variant hover:text-primary-fixed transition-colors active:scale-95 duration-150">
+            <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 0" }}>account_circle</span>
           </button>
         </div>
       </header>
 
-      <main className="flex-1 px-6 py-8 space-y-10 pb-40 max-w-4xl mx-auto w-full">
-        {/* Modern Banner - Glassmorphism & High Contrast */}
-        <motion.section 
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="bg-gradient-to-br from-[#065f46] to-[#047857] rounded-[48px] p-8 md:p-12 text-white flex flex-col md:flex-row justify-between items-center overflow-hidden relative shadow-2xl shadow-emerald-900/30"
-        >
-          <div className="z-10 text-center md:text-left space-y-6">
-            <div className="inline-flex items-center px-4 py-1.5 bg-white/10 rounded-full text-[10px] font-black uppercase tracking-[0.2em] backdrop-blur-md border border-white/10">
-               New Season Sale
+      {/* SideNav (Desktop) */}
+      <aside className="hidden md:flex flex-col w-64 fixed h-full bg-surface-container/80 backdrop-blur-2xl border-r border-glass-stroke z-40 px-6 py-8">
+        <div className="mb-12 font-display-lg text-headline-md text-primary tracking-tight font-bold">
+          KrishiDrishti
+        </div>
+        <nav className="flex-1 flex flex-col gap-4">
+          <a onClick={() => router.push('/dashboard')} className="flex items-center gap-3 text-on-surface-variant hover:text-primary transition-all py-3 px-4 font-body-md hover:bg-surface-variant/50 rounded-xl cursor-pointer">
+            <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 0" }}>home_max</span>
+            Home
+          </a>
+          <a onClick={() => router.push('/scan')} className="flex items-center gap-3 text-on-surface-variant hover:text-primary transition-all py-3 px-4 font-body-md hover:bg-surface-variant/50 rounded-xl cursor-pointer">
+            <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 0" }}>sensors</span>
+            Detection
+          </a>
+          <a onClick={() => router.push('/yield')} className="flex items-center gap-3 text-on-surface-variant hover:text-primary transition-all py-3 px-4 font-body-md hover:bg-surface-variant/50 rounded-xl cursor-pointer">
+            <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 0" }}>analytics</span>
+            Intelligence
+          </a>
+          <a className="flex items-center gap-3 text-primary bg-primary/10 rounded-xl py-3 px-4 font-body-md font-bold transition-all glow-active cursor-pointer">
+            <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>storefront</span>
+            Marketplace
+          </a>
+        </nav>
+      </aside>
+
+      {/* Main Content Canvas */}
+      <main className="flex-1 w-full mt-16 md:mt-0 md:ml-64 p-margin-mobile md:p-margin-desktop overflow-y-auto max-w-7xl">
+        {/* Header Section */}
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-section-gap gap-4">
+          <div>
+            <h1 className="font-headline-lg text-headline-lg text-white">Marketplace Overview</h1>
+            <p className="font-body-md text-body-md text-text-muted mt-1">FarmDirect Intelligence</p>
+          </div>
+          <div className="flex gap-3 w-full md:w-auto">
+            <button className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-[#1a1c1f] px-6 py-3 rounded-full border border-glass-stroke hover:border-primary/50 hover:bg-surface-variant transition-all font-body-sm text-body-sm text-white">
+              <span className="material-symbols-outlined text-primary text-[20px]">add</span>
+              New Listing
+            </button>
+            <button className="flex items-center justify-center bg-primary text-white px-6 py-3 rounded-full hover:brightness-110 transition-all font-body-sm text-body-sm font-semibold shadow-[0_0_20px_rgba(16,185,129,0.4)]">
+              Market Intel
+            </button>
+          </div>
+        </div>
+
+        {/* Bento Grid Layout */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-gutter md:gap-gutter">
+          {/* Revenue Metrics (Farmer View) */}
+          <div className="md:col-span-8 glass-panel rounded-xl p-card-padding flex flex-col justify-between">
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="font-headline-md text-headline-md text-on-surface">Revenue Forecast</h2>
+              <div className="flex gap-2 bg-surface-dark rounded-full p-1 border border-glass-stroke">
+                <button className="px-4 py-1 rounded-full bg-surface-variant text-on-surface font-label-md text-label-md">7D</button>
+                <button className="px-4 py-1 rounded-full text-text-muted hover:text-on-surface font-label-md text-label-md transition-colors">30D</button>
+              </div>
             </div>
-            <h2 className="text-4xl md:text-6xl font-black leading-[1.1] tracking-tight font-[var(--font-outfit)] max-w-xl">
-              Direct from <br className="hidden md:block" /> Farm to Table
-            </h2>
-            <p className="text-emerald-50/80 font-medium text-lg leading-relaxed max-w-sm md:max-w-md">
-              The modern bridge between farmers and premium marketplaces.
-            </p>
-            <div className="pt-2">
-              <button className="bg-white text-emerald-900 px-12 py-4.5 rounded-[24px] font-black text-sm uppercase tracking-widest shadow-xl hover:scale-105 active:scale-95 transition-all">
-                Get Started
-              </button>
+            <div className="flex flex-col md:flex-row gap-6 mb-6">
+              <div className="flex-1">
+                <p className="font-body-sm text-body-sm text-text-muted mb-4 line-clamp-1">Total Sales</p>
+                <p className="font-display-lg text-[40px] leading-tight text-primary">₹45,200</p>
+                <div className="flex items-center gap-1 text-primary-fixed-dim mt-1 bg-primary/10 w-fit px-2 py-0.5 rounded-full">
+                  <span className="material-symbols-outlined text-[14px]">trending_up</span>
+                  <span className="font-label-md text-label-md">+12.5%</span>
+                </div>
+              </div>
+              <div className="flex-1 border-t md:border-t-0 md:border-l border-glass-stroke pt-4 md:pt-0 md:pl-6">
+                <p className="font-body-sm text-body-sm text-text-muted mb-4 line-clamp-1">Active Orders</p>
+                <p className="font-display-lg text-[40px] leading-tight text-on-surface">14</p>
+                <p className="font-body-sm text-body-sm text-text-muted mb-4 line-clamp-1">3 pending pickup</p>
+              </div>
+            </div>
+
+            {/* Abstract Chart Visual */}
+            <div className="h-32 w-full mt-auto relative">
+              <div className="absolute inset-0 flex flex-col justify-between opacity-10">
+                <div className="border-b border-white w-full"></div>
+                <div className="border-b border-white w-full"></div>
+                <div className="border-b border-white w-full"></div>
+                <div className="border-b border-white w-full"></div>
+              </div>
+              <svg className="w-full h-full preserve-3d" preserveAspectRatio="none" viewBox="0 0 100 100">
+                <defs>
+                  <linearGradient id="lineGrad" x1="0" x2="0" y1="0" y2="1">
+                    <stop offset="0%" stopColor="#10b981" stopOpacity="0.3"></stop>
+                    <stop offset="100%" stopColor="#10b981" stopOpacity="0"></stop>
+                  </linearGradient>
+                </defs>
+                <path d="M0,80 Q20,60 40,70 T80,30 T100,20 L100,100 L0,100 Z" fill="url(#lineGrad)"></path>
+                <path d="M0,80 Q20,60 40,70 T80,30 T100,20" fill="none" stroke="#10b981" strokeWidth="2" vectorEffect="non-scaling-stroke"></path>
+                <circle cx="40" cy="70" fill="#111416" r="3" stroke="#10b981" strokeWidth="2"></circle>
+                <circle cx="80" cy="30" fill="#111416" r="3" stroke="#10b981" strokeWidth="2"></circle>
+                <circle cx="100" cy="20" fill="#111416" r="3" stroke="#10b981" strokeWidth="2"></circle>
+              </svg>
             </div>
           </div>
-          <motion.div 
-            animate={{ y: [0, -10, 0] }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-            className="hidden md:block"
-          >
-            <span className="material-symbols-outlined text-white/10 text-[200px]">local_shipping</span>
-          </motion.div>
-          <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-20 -mt-20 blur-3xl"></div>
-        </motion.section>
 
-        {/* Action Category Cards */}
-        <section className="grid grid-cols-2 gap-6">
-          <motion.button 
-            whileHover={{ y: -5 }}
-            whileTap={{ scale: 0.98 }}
-            className="bg-[var(--color-surface)] dark:bg-[var(--color-surface-variant)] border-2 border-slate-50 dark:border-slate-800 rounded-[40px] p-8 flex flex-col items-center gap-4 transition-all shadow-premium"
-          >
-            <div className="w-16 h-16 rounded-[24px] bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shadow-inner">
-              <span className="material-symbols-outlined text-3xl">shopping_bag</span>
-            </div>
-            <span className="font-black text-slate-800 dark:text-slate-200 uppercase tracking-widest text-xs">{t('marketplace.buy')}</span>
-          </motion.button>
-          <motion.button 
-            whileHover={{ y: -5 }}
-            whileTap={{ scale: 0.98 }}
-            className="bg-[var(--color-surface)] dark:bg-[var(--color-surface-variant)] border-2 border-slate-50 dark:border-slate-800 rounded-[40px] p-8 flex flex-col items-center gap-4 transition-all shadow-premium"
-          >
-            <div className="w-16 h-16 rounded-[24px] bg-amber-50 dark:bg-amber-900/20 text-amber-600 dark:text-amber-400 flex items-center justify-center shadow-inner">
-              <span className="material-symbols-outlined text-3xl">sell</span>
-            </div>
-            <span className="font-black text-slate-800 dark:text-slate-200 uppercase tracking-widest text-xs">{t('marketplace.sell')}</span>
-          </motion.button>
-        </section>
-
-        {/* Real-time Mandi Prices - Premium Card */}
-        <section className="space-y-4">
-          <div className="flex justify-between items-center px-2">
-            <h3 className="font-black text-xs uppercase tracking-[0.2em] text-slate-400 dark:text-slate-500">Market Intelligence</h3>
-            <div className="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 text-[10px] font-black uppercase tracking-widest">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-              Live: Mandya Mandi
-            </div>
-          </div>
-          {marketData ? (
-            <motion.div 
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              className="bg-[var(--color-surface)] dark:bg-[var(--color-surface-variant)] border border-slate-100 dark:border-slate-800 rounded-[40px] p-8 shadow-premium-lg flex flex-col md:flex-row justify-between items-center relative overflow-hidden group"
-            >
-              <div className="z-10 flex flex-col md:flex-row items-center gap-8 text-center md:text-left">
-                <div className="w-20 h-20 bg-emerald-50 dark:bg-emerald-900/20 rounded-[32px] flex items-center justify-center shadow-inner group-hover:scale-110 transition-transform">
-                   <span className="material-symbols-outlined text-emerald-600 dark:text-emerald-400 text-4xl">inventory_2</span>
+          {/* Quick Actions & Status */}
+          <div className="md:col-span-4 flex flex-col gap-gutter">
+            <div className="glass-panel rounded-xl p-card-padding flex items-center justify-between cursor-pointer hover:bg-surface-variant/30 transition-colors group">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full bg-tertiary/10 flex items-center justify-center text-tertiary">
+                  <span className="material-symbols-outlined">inventory_2</span>
                 </div>
                 <div>
-                  <p className="text-xs font-black text-slate-400 dark:text-slate-500 uppercase tracking-[0.3em] mb-1">{marketData.commodity}</p>
-                  <p className="text-4xl font-black text-slate-800 dark:text-slate-100 font-[var(--font-outfit)]">₹{marketData.prices.modal} <span className="text-sm font-medium text-slate-300 dark:text-slate-600">/ {marketData.prices.unit}</span></p>
-                  <p className="text-xs font-bold text-slate-400 dark:text-slate-500 mt-2">
-                    Market Range: <span className="text-slate-600 dark:text-slate-400">₹{marketData.prices.min} - ₹{marketData.prices.max}</span>
-                  </p>
+                  <h3 className="font-body-lg text-body-lg text-white font-medium group-hover:text-primary transition-colors">My Listings</h3>
+                  <p className="font-body-sm text-body-sm text-text-muted mb-4 line-clamp-1">Manage 8 active items</p>
                 </div>
               </div>
-              <div className="z-10 mt-8 md:mt-0 bg-emerald-50 dark:bg-emerald-900/20 px-6 py-3 rounded-full border border-emerald-100/50 dark:border-emerald-800/50">
-                <div className="flex items-center gap-2 text-emerald-600 dark:text-emerald-400">
-                  <span className="material-symbols-outlined font-black">trending_up</span>
-                  <span className="text-lg font-black">+4.2%</span>
+              <span className="material-symbols-outlined text-text-muted group-hover:text-tertiary transition-colors">chevron_right</span>
+            </div>
+            
+            <div className="glass-panel rounded-xl p-card-padding flex items-center justify-between cursor-pointer hover:bg-surface-variant/30 transition-colors group">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                  <span class="material-symbols-outlined">local_shipping</span>
+                </div>
+                <div>
+                  <h3 className="font-body-lg text-body-lg text-white font-medium group-hover:text-primary transition-colors">Order Fulfillment</h3>
+                  <p className="font-body-sm text-body-sm text-text-muted mb-4 line-clamp-1">2 requires attention</p>
                 </div>
               </div>
-              <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-50/50 dark:bg-emerald-900/10 rounded-full blur-2xl -mr-16 -mt-16"></div>
-            </motion.div>
-          ) : (
-            <div className="h-32 bg-slate-50 dark:bg-slate-800 animate-pulse rounded-[40px]"></div>
-          )}
-        </section>
-
-        {/* Featured Products - High Fidelity Gallery */}
-        <section className="space-y-6">
-          <div className="flex justify-between items-center px-2">
-            <h3 className="font-black text-xs uppercase tracking-[0.2em] text-slate-400 dark:text-slate-500">{t('marketplace.featured')}</h3>
-            <button className="text-[var(--color-primary)] font-black text-[10px] uppercase tracking-widest hover:underline">{t('dash.viewAll')}</button>
-          </div>
-          <div className="flex overflow-x-auto gap-6 pb-6 scrollbar-hide -mx-6 px-6">
-            {products.map((product, idx) => (
-              <motion.div 
-                key={product.id} 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: idx * 0.1 }}
-                className="min-w-[280px] bg-[var(--color-surface)] dark:bg-[var(--color-surface-variant)] border border-slate-50 dark:border-slate-800 rounded-[40px] overflow-hidden flex flex-col shadow-premium group hover:border-emerald-200 dark:hover:border-emerald-800 transition-all"
-              >
-                <div className="h-44 w-full relative overflow-hidden">
-                   <img src={product.img} alt={product.name.en} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                   <div className="absolute top-4 right-4 w-10 h-10 glass rounded-2xl flex items-center justify-center text-white/80">
-                      <span className="material-symbols-outlined text-[20px]" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
-                   </div>
-                </div>
-                <div className="p-6 space-y-4">
-                  <div>
-                    <p className="font-black text-lg text-slate-800 dark:text-slate-200 tracking-tight leading-tight">{product.name[language] || product.name.en}</p>
-                    <p className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mt-1">{product.seller}</p>
+              <span className="material-symbols-outlined text-text-muted group-hover:text-primary transition-colors">chevron_right</span>
+            </div>
+            
+            {/* Weather/Crop Condition Widget */}
+            <div className="glass-panel rounded-xl p-card-padding flex-1 relative overflow-hidden flex flex-col justify-end min-h-[140px]">
+              <div className="absolute inset-0 bg-gradient-to-br from-surface-dark to-transparent opacity-80 z-0"></div>
+              <div className="relative z-10 flex justify-between items-end">
+                <div>
+                  <div className="flex items-center gap-2 text-secondary mb-1">
+                    <span className="material-symbols-outlined text-[18px]">partly_cloudy_day</span>
+                    <span className="font-label-md text-label-md tracking-wider">TODAY</span>
                   </div>
-                  <div className="flex justify-between items-center pt-2 border-t border-slate-50 dark:border-slate-800">
-                    <span className="font-black text-xl text-emerald-600 dark:text-emerald-400">{product.price}</span>
-                    <div className="flex items-center gap-1.5 px-3 py-1.5 bg-amber-50 dark:bg-amber-900/20 rounded-full text-amber-600 dark:text-amber-400">
-                      <span className="text-xs font-black">{product.rating}</span>
+                  <h3 className="font-headline-md text-headline-md text-on-surface">Optimal Harvest</h3>
+                  <p className="font-body-sm text-body-sm text-text-muted mb-4 line-clamp-1">Tomatoes · Humidity 65%</p>
+                </div>
+                <div className="w-10 h-10 rounded-full border border-glass-stroke bg-surface-container flex items-center justify-center text-primary backdrop-blur-md">
+                  <span className="material-symbols-outlined">notifications_active</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Nearby Produce (Buyer View Integration) */}
+          <div className="md:col-span-12 glass-panel rounded-xl p-card-padding mt-4 bg-surface-container-lowest">
+            <div className="flex justify-between items-center mb-6">
+              <div>
+                <h2 className="font-headline-md text-headline-md text-on-surface">Local Harvest Radar</h2>
+                <p className="font-body-sm text-body-sm text-text-muted mb-4 line-clamp-1">Produce available within 5km radius</p>
+              </div>
+              <button className="text-primary hover:text-primary-fixed transition-colors font-body-sm text-body-sm flex items-center gap-1">
+                View Map <span className="material-symbols-outlined text-[16px]">map</span>
+              </button>
+            </div>
+            
+            <div className="flex overflow-x-auto gap-4 pb-4 scrollbar-hide snap-x">
+              {products.map(product => (
+                <div key={product.id} className="min-w-[280px] w-[280px] snap-start bg-surface-container-low rounded-lg border border-glass-stroke overflow-hidden hover:border-primary/50 transition-all group">
+                  <div className="h-32 bg-surface-container-lowest relative">
+                    <div className="absolute inset-0 bg-cover bg-center opacity-60 group-hover:opacity-100 transition-opacity" style={{ backgroundImage: `url('${product.img}')` }}></div>
+                    <div className="absolute top-3 right-3 bg-surface/80 backdrop-blur-md px-2 py-1 rounded-md border border-glass-stroke flex items-center gap-1">
+                      <span className="material-symbols-outlined text-primary text-[14px]">location_on</span>
+                      <span className="font-label-md text-label-md text-on-surface">{product.distance}</span>
+                    </div>
+                  </div>
+                  <div className="p-4">
+                    <div className="flex justify-between items-start mb-2">
+                      <h3 className="font-body-lg text-body-lg text-white font-medium group-hover:text-primary transition-colors">{product.name[language] || product.name.en}</h3>
+                      <div className="bg-primary/10 text-primary px-2 py-0.5 rounded text-[12px] font-medium border border-primary/20">{product.price}</div>
+                    </div>
+                    <p className="font-body-sm text-body-sm text-text-muted mb-4 line-clamp-1">Freshly picked, organic certified.</p>
+                    <div className="flex items-center justify-between border-t border-glass-stroke pt-3 mt-auto">
+                      <div className="flex items-center gap-2">
+                        <div className={`w-6 h-6 rounded-full ${product.bg} flex items-center justify-center text-[10px] font-bold`}>{product.initial}</div>
+                        <span className="font-label-md text-label-md text-on-surface-variant">{product.seller}</span>
+                      </div>
+                      <div className="flex items-center gap-1 text-tertiary">
+                        <span className="material-symbols-outlined text-[14px]" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
+                        <span className="font-label-md text-label-md">{product.rating}</span>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </motion.div>
-            ))}
+              ))}
+            </div>
           </div>
-        </section>
+        </div>
+        
+        {/* Spacer for mobile nav */}
+        <div className="h-24 md:h-8 w-full"></div>
       </main>
+
+      {/* Floating Action Button */}
+      <button className="fixed bottom-24 md:bottom-8 right-8 z-40 bg-primary hover:bg-primary-fixed-dim text-on-primary rounded-full px-6 py-4 flex items-center gap-3 shadow-lg shadow-primary/20 transition-all hover:scale-105 active:scale-95">
+        <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>add_circle</span>
+        <span className="font-label-md text-label-md font-bold">Add Listing</span>
+      </button>
+
+      {/* BottomNavBar (Mobile) */}
+      <nav className="md:hidden fixed bottom-0 w-full z-50 flex justify-around items-center px-4 pb-safe h-20 bg-surface-container/80 backdrop-blur-2xl border-t border-glass-stroke shadow-lg shadow-primary/5">
+        <button onClick={() => router.push('/dashboard')} className="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all py-1 px-3">
+          <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 0" }}>home_max</span>
+          <span className="font-label-md text-label-md mt-1">Home</span>
+        </button>
+        <button onClick={() => router.push('/scan')} className="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all py-1 px-3">
+          <span className="material-symbols-outlined">sensors</span>
+          <span className="font-label-md text-label-md mt-1">Detection</span>
+        </button>
+        <button onClick={() => router.push('/yield')} className="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all py-1 px-3">
+          <span className="material-symbols-outlined">analytics</span>
+          <span className="font-label-md text-label-md mt-1">Intelligence</span>
+        </button>
+        <button className="flex flex-col items-center justify-center text-primary bg-primary/10 rounded-xl py-1 px-3 transform scale-90 duration-200 glow-active">
+          <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>storefront</span>
+          <span className="font-label-md text-[10px] font-bold">Market</span>
+        </button>
+      </nav>
+
+      <style jsx>{`
+        .glass-panel {
+            background-color: rgba(12, 14, 17, 0.85);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            position: relative;
+            border: 0.67px solid rgba(16, 185, 129, 0.1);
+        }
+        .glass-panel::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 0.67px;
+            background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.15), transparent);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+        .glow-active {
+            box-shadow: 0 0 24px rgba(16, 185, 129, 0.3);
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .pb-safe { padding-bottom: env(safe-area-inset-bottom, 16px); }
+      `}</style>
     </div>
   );
 }

@@ -13,6 +13,7 @@ interface WeatherData {
     humidity: number;
     rainfall: number;
     windSpeed: number;
+    description?: string;
   };
   risk: {
     level: 'High' | 'Medium' | 'Low';
@@ -137,7 +138,7 @@ export default function WeatherAlertPage() {
           <div className="flex justify-between items-start mb-4">
             <div>
               <h2 className="text-[18px] font-bold text-[#1a1c1c]">{t('weather.today')}</h2>
-              <p className="text-[14px] text-[#41493e] capitalize">{weather.today.description || 'Partly Cloudy'}</p>
+              <p className="text-[14px] text-[#41493e] capitalize">{weather.today?.description || 'Partly cloudy'}</p>
             </div>
             <span className="material-symbols-outlined text-[#1b5e20] text-[40px]" style={{ fontVariationSettings: "'FILL' 1" }}>{getWeatherIcon()}</span>
           </div>

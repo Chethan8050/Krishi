@@ -1,26 +1,30 @@
 'use client';
 import { useRouter } from 'next/navigation';
-import { useRef, useState } from 'react';
-import { motion } from 'framer-motion';
+import { useRef, useState, useEffect } from 'react';
 import { useAppStore } from '../store/useAppStore';
-import { createT } from '../../lib/i18n';
 
 export default function ScanPage() {
   const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const { setSelectedImage, selectedImage, language } = useAppStore();
-  const t = createT(language);
+  const { setSelectedImage, selectedImage } = useAppStore();
   const [preview, setPreview] = useState<string | null>(null);
-  const crops = ['Tomato', 'Potato', 'Corn', 'Wheat', 'Rice', 'Soybean'];
+  const [mounted, setMounted] = useState(false);
+  
+  useEffect(() => {
+    setMounted(true);
+    if (selectedImage) {
+      const reader = new FileReader();
+      reader.onloadend = () => setPreview(reader.result as string);
+      reader.readAsDataURL(selectedImage);
+    }
+  }, [selectedImage]);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       setSelectedImage(file);
       const reader = new FileReader();
-      reader.onloadend = () => {
-        setPreview(reader.result as string);
-      };
+      reader.onloadend = () => setPreview(reader.result as string);
       reader.readAsDataURL(file);
     }
   };
@@ -29,25 +33,12 @@ export default function ScanPage() {
     fileInputRef.current?.click();
   };
 
-  return (
-    <div className="bg-[#f8fafc] text-[#0f172a] min-h-screen flex flex-col font-[var(--font-inter)]">
-      {/* Premium Header */}
-      <header className="sticky top-0 w-full z-50 glass px-4 py-4 flex justify-between items-center border-b border-slate-200/50">
-        <div className="flex items-center gap-4">
-          <button 
-            onClick={() => router.back()} 
-            className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-100 transition-colors text-slate-600"
-          >
-            <span className="material-symbols-outlined">arrow_back</span>
-          </button>
-          <h1 className="text-xl font-black tracking-tight text-[#065f46] font-[var(--font-outfit)]">{t('scan.title')}</h1>
-        </div>
-        <button className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-100 transition-colors text-slate-400">
-          <span className="material-symbols-outlined">info</span>
-        </button>
-      </header>
+  if (!mounted) return null;
 
-      <main className="flex-grow px-6 py-8 flex flex-col gap-10 max-w-2xl mx-auto w-full pb-40">
+  return (
+    <div className="flex flex-col min-h-screen">
+      {/* Main Content Canvas */}
+      <main className="flex-grow pt-24 pb-32 md:pb-24 px-margin-mobile md:px-margin-desktop max-w-[1200px] w-full mx-auto grid grid-cols-4 md:grid-cols-12 gap-gutter">
         {/* Hidden File Input */}
         <input 
           type="file" 
@@ -57,91 +48,107 @@ export default function ScanPage() {
           className="hidden" 
         />
 
-        {/* Upload Zone */}
-        <section className="space-y-6">
-          <motion.div 
-            whileHover={{ scale: 1.01 }}
-            whileTap={{ scale: 0.99 }}
+        {/* Left Column / Top Section: Scanner Context */}
+        <div className="col-span-4 md:col-span-7 flex flex-col gap-6">
+          {/* Scanner Viewfinder */}
+          <div 
+            className="relative w-full aspect-[4/5] md:aspect-[4/3] rounded-2xl glass-panel overflow-hidden flex flex-col items-center justify-center container group cursor-pointer"
             onClick={triggerUpload}
-            className="relative border-2 border-dashed border-emerald-200 rounded-[32px] h-[320px] bg-white flex flex-col items-center justify-center text-center p-4 cursor-pointer overflow-hidden shadow-premium hover:border-emerald-400 transition-all group"
           >
-            {preview ? (
-              <div className="relative w-full h-full">
-                <img src={preview} alt="Preview" className="w-full h-full object-cover rounded-[24px]" />
-                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-all flex items-center justify-center">
-                   <span className="material-symbols-outlined text-white text-4xl opacity-0 group-hover:opacity-100 transition-opacity">sync</span>
-                </div>
-              </div>
-            ) : (
-              <div className="space-y-4">
-                <div className="w-20 h-20 bg-emerald-50 rounded-full flex items-center justify-center mx-auto group-hover:bg-emerald-100 transition-colors">
-                  <span className="material-symbols-outlined text-[#065f46] text-[40px] group-hover:scale-110 transition-transform">photo_camera</span>
-                </div>
-                <div>
-                  <p className="font-black text-lg text-slate-800">{t('scan.takePhoto')}</p>
-                  <p className="text-sm text-slate-400 font-medium">{t('scan.fileHint')}</p>
-                </div>
+            <div 
+              className={`absolute inset-0 bg-cover bg-center transition-all duration-700 ${preview ? 'opacity-100' : 'opacity-40 blur-sm group-hover:blur-0 group-hover:opacity-60'}`}
+              style={{ backgroundImage: `url('${preview || "https://lh3.googleusercontent.com/aida-public/AB6AXuB4iPur9a7qxIvTDO-oTpYw41lufiXYJSi2pNGwGIMcH_9GMzzAyx1n5h5dCGwjDrNlhLcBw3Wyarah5HmC2GyAPQqr-zbNLBfUefzWdqqdtknTh2EzViN_-F1KtSR9X-90H0DY53UhOO5e1VYxtSkmSsyKIWcMx2Vsp5KadDeRxpuSJQssveUoL_ib_dA9ERLrXO0PUoLuAbb9zLMTTdlU68hzgnFt4U89ro-Cny8M0_86Yv1Tw_AOWnwquyyDRGZ5tosxU82bF3F_" }')` }}
+            ></div>
+            <div className="absolute inset-8 scanner-reticle pointer-events-none">
+              <div className="scan-line"></div>
+            </div>
+            {!preview && (
+              <div className="z-10 text-center px-4 flex flex-col items-center gap-3">
+                <span className="material-symbols-outlined text-4xl text-primary/80 animate-pulse">center_focus_strong</span>
+                <h2 className="text-headline-md text-on-surface font-display-lg font-medium tracking-tight">Position leaf in frame</h2>
+                <p className="font-body-sm text-body-sm text-text-muted max-w-xs">Ensure the affected area is clearly visible and well-lit for accurate analysis.</p>
               </div>
             )}
-          </motion.div>
-          
-          <div className="grid grid-cols-1 gap-4">
-            <div className="flex gap-4">
-              <button onClick={triggerUpload} className="flex-1 flex items-center justify-center gap-3 bg-white border border-slate-200 text-slate-700 font-bold text-sm py-5 rounded-[24px] hover:bg-slate-50 transition-all shadow-premium active:scale-95">
-                <span className="material-symbols-outlined text-emerald-600">camera_alt</span> {t('scan.camera')}
+          </div>
+
+          {/* Primary Actions (Camera/Gallery) & CTA */}
+          <div className="glass-panel rounded-2xl p-card-padding flex flex-col sm:flex-row gap-4 items-center justify-between">
+            <div className="flex gap-4 w-full sm:w-auto">
+              <button onClick={triggerUpload} className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-surface-container hover:bg-primary hover:text-on-primary text-on-surface border border-glass-stroke transition-all duration-300 rounded-full px-6 py-3 font-body-sm text-body-sm active:scale-95 group">
+                <span className="material-symbols-outlined group-hover:text-on-primary text-primary transition-colors">photo_camera</span>
+                <span>Camera</span>
               </button>
-              <button onClick={triggerUpload} className="flex-1 flex items-center justify-center gap-3 bg-white border border-slate-200 text-slate-700 font-bold text-sm py-5 rounded-[24px] hover:bg-slate-50 transition-all shadow-premium active:scale-95">
-                <span className="material-symbols-outlined text-emerald-600">image</span> {t('scan.gallery')}
+              <button onClick={triggerUpload} className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-surface-container hover:bg-primary hover:text-on-primary text-on-surface border border-glass-stroke transition-all duration-300 rounded-full px-6 py-3 font-body-sm text-body-sm active:scale-95 group">
+                <span className="material-symbols-outlined group-hover:text-on-primary text-primary transition-colors">photo_library</span>
+                <span>Gallery</span>
               </button>
             </div>
             
             <button 
-              onClick={() => router.push('/scan/voice')} 
-              className="w-full flex items-center justify-center gap-3 bg-emerald-50 text-emerald-700 font-black text-sm py-5 rounded-[24px] hover:bg-emerald-100 transition-all border border-emerald-100/50 active:scale-95"
+              onClick={() => {
+                if (selectedImage) router.push('/scan/analyzing');
+                else triggerUpload();
+              }}
+              className="w-full sm:w-auto bg-primary text-surface font-bold rounded-full px-8 py-4 font-headline-md active:scale-95 shadow-[0_0_20px_rgba(16,185,129,0.3)] flex items-center justify-center gap-3 group transition-all duration-300 hover:brightness-110"
             >
-              <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>mic</span> {t('scan.voiceDiagnosis')}
+              <span className="material-symbols-outlined">document_scanner</span>
+              Analyse Crop
             </button>
           </div>
-        </section>
+        </div>
 
-        {/* Supported Crops */}
-        <section className="space-y-4">
-          <h2 className="text-xs font-black text-slate-400 uppercase tracking-[0.2em] px-1">{t('scan.supported')}</h2>
-          <div className="flex flex-wrap gap-2 px-1">
-            {crops.map(crop => (
-              <span key={crop} className="bg-white border border-slate-100 text-slate-600 px-5 py-2 rounded-full text-xs font-bold shadow-sm">{crop}</span>
-            ))}
+        {/* Right Column / Bottom Section: Guidance & Data */}
+        <div className="col-span-4 md:col-span-5 flex flex-col gap-8">
+          {/* Visual Guide Bento Grid */}
+          <div className="glass-panel rounded-2xl p-card-padding flex flex-col gap-4">
+            <h3 className="font-body-lg text-body-lg text-on-surface flex items-center gap-2">
+              <span className="material-symbols-outlined text-primary">rule</span>
+              Visual Guide
+            </h3>
+            <div className="grid grid-cols-3 gap-3">
+              <div className="bg-surface-container/50 rounded-xl p-3 flex flex-col items-center justify-center text-center gap-2 border border-glass-stroke hover:bg-surface-container transition-colors">
+                <span className="material-symbols-outlined text-tertiary">crop</span>
+                <span className="font-label-md text-label-md text-text-muted leading-tight">Leaf fills 70%</span>
+              </div>
+              <div className="bg-surface-container/50 rounded-xl p-3 flex flex-col items-center justify-center text-center gap-2 border border-glass-stroke hover:bg-surface-container transition-colors">
+                <span className="material-symbols-outlined text-tertiary">light_mode</span>
+                <span className="font-label-md text-label-md text-text-muted leading-tight">Natural light</span>
+              </div>
+              <div className="bg-surface-container/50 rounded-xl p-3 flex flex-col items-center justify-center text-center gap-2 border border-glass-stroke hover:bg-surface-container transition-colors">
+                <span className="material-symbols-outlined text-tertiary">blur_off</span>
+                <span className="font-label-md text-label-md text-text-muted leading-tight">No blur</span>
+              </div>
+            </div>
           </div>
-        </section>
 
-        {/* Tip Card - Modernized */}
-        <section className="bg-gradient-to-br from-amber-50 to-orange-50 p-6 rounded-[32px] flex gap-5 border border-amber-100/50 shadow-premium">
-          <div className="w-12 h-12 bg-amber-400 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg shadow-amber-900/20">
-            <span className="material-symbols-outlined text-amber-900" style={{ fontVariationSettings: "'FILL' 1" }}>lightbulb</span>
+          {/* Supported Crops */}
+          <div className="glass-panel rounded-2xl p-card-padding flex flex-col gap-4 flex-grow">
+            <div className="flex items-center justify-between">
+              <h3 className="font-body-lg text-body-lg text-on-surface flex items-center gap-2">
+                <span className="material-symbols-outlined text-primary">grass</span>
+                Supported Crops
+              </h3>
+              <span className="font-label-md text-label-md text-primary bg-primary/10 px-2 py-0.5 rounded text-[10px]">8 Supported</span>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {[
+                { icon: 'local_florist', name: 'Tomato' },
+                { icon: 'eco', name: 'Potato' },
+                { icon: 'grass', name: 'Rice' },
+                { icon: 'agriculture', name: 'Wheat' },
+                { icon: 'cloud', name: 'Cotton' },
+                { icon: 'compost', name: 'Maize' },
+                { icon: 'spa', name: 'Soybean' },
+                { icon: 'lens', name: 'Onion' },
+              ].map(crop => (
+                <span key={crop.name} className="bg-surface-container border border-glass-stroke text-on-surface-variant font-label-md text-label-md px-3 py-1.5 rounded-full flex items-center gap-1 hover:border-primary/50 transition-colors cursor-default">
+                  <span className="material-symbols-outlined text-[16px]">{crop.icon}</span> {crop.name}
+                </span>
+              ))}
+            </div>
           </div>
-          <div className="space-y-1">
-            <p className="font-black text-amber-900 tracking-tight">{t('scan.tipTitle')}</p>
-            <p className="text-sm text-amber-800/80 font-medium leading-relaxed">{t('scan.tipBody')}</p>
-          </div>
-        </section>
+        </div>
       </main>
-
-      {/* Bottom CTA - Floating Style */}
-      <div className="fixed bottom-0 left-0 w-full p-6 z-40 bg-gradient-to-t from-[#f8fafc] via-[#f8fafc] to-transparent">
-        <motion.button 
-          whileHover={{ y: -2 }}
-          whileTap={{ scale: 0.98 }}
-          onClick={() => router.push('/scan/analyzing')} 
-          disabled={!selectedImage}
-          className={`w-full py-5 rounded-[24px] font-black text-lg tracking-tight shadow-2xl transition-all ${
-            selectedImage 
-              ? 'bg-[#065f46] text-white shadow-emerald-900/30' 
-              : 'bg-slate-200 text-slate-400 cursor-not-allowed'
-          }`}
-        >
-          {selectedImage ? t('scan.analyse') : t('scan.selectImage')}
-        </motion.button>
-      </div>
     </div>
   );
 }

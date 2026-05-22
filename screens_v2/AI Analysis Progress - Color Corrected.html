@@ -1,0 +1,317 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>AI Analysis Loading - KrishiDrishti</title>
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "secondary-fixed-dim": "#bac8d7",
+                "secondary": "#bac8d7",
+                "surface-container-low": "#1a1c1f",
+                "outline": "#86948a",
+                "surface-dark": "#1E1E1E",
+                "inverse-surface": "#e2e2e6",
+                "on-surface": "#FFFFFF",
+                "on-tertiary-fixed": "#001d32",
+                "inverse-on-surface": "#2f3034",
+                "background": "#111416",
+                "surface-dim": "#111416",
+                "on-background": "#e2e2e6",
+                "on-primary-fixed-variant": "#005236",
+                "primary-fixed-dim": "#4edea3",
+                "on-error": "#690005",
+                "glass-stroke": "rgba(255, 255, 255, 0.1)",
+                "surface-container-high": "#282a2d",
+                "on-tertiary-fixed-variant": "#004a75",
+                "text-muted": "#A9B7C6",
+                "on-primary-fixed": "#002113",
+                "surface-tint": "#4edea3",
+                "on-primary": "#003824",
+                "on-surface-variant": "#A9B7C6",
+                "outline-variant": "#3c4a42",
+                "on-tertiary-container": "#003c60",
+                "on-secondary-fixed": "#0f1d28",
+                "secondary-fixed": "#d6e4f4",
+                "on-primary-container": "#10B981",
+                "surface-container-lowest": "#0c0e11",
+                "surface-container": "#1e2023",
+                "on-secondary-fixed-variant": "#3b4855",
+                "inverse-primary": "#006c49",
+                "surface": "#111416",
+                "primary": "#4edea3",
+                "on-tertiary": "#003353",
+                "tertiary": "#96ccff",
+                "primary-fixed": "#6ffbbe",
+                "on-error-container": "#ffdad6",
+                "error": "#ffb4ab",
+                "tertiary-fixed-dim": "#96ccff",
+                "surface-variant": "#333538",
+                "surface-container-highest": "#333538",
+                "surface-bright": "#37393c",
+                "primary-container": "#10b981",
+                "secondary-container": "#3b4855",
+                "tertiary-fixed": "#cee5ff",
+                "error-container": "#93000a",
+                "on-secondary-container": "#a9b7c6",
+                "tertiary-container": "#4ca9f1",
+                "on-secondary": "#24323e"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+        },
+        "spacing": {
+                "gutter": "16px",
+                "margin-mobile": "16px",
+                "card-padding": "18px",
+                "margin-desktop": "32px",
+                "section-gap": "40px",
+                "base": "8px"
+        },
+        "fontFamily": {
+                "headline-lg-mobile": [
+                        "Inter"
+                ],
+                "display-lg": [
+                        "Inter"
+                ],
+                "body-sm": [
+                        "Inter"
+                ],
+                "body-md": [
+                        "Inter"
+                ],
+                "label-md": [
+                        "Inter"
+                ],
+                "headline-lg": [
+                        "Inter"
+                ],
+                "body-lg": [
+                        "Inter"
+                ],
+                "headline-md": [
+                        "Inter"
+                ]
+        },
+        "fontSize": {
+                "headline-lg-mobile": [
+                        "28px",
+                        {
+                                "lineHeight": "36px",
+                                "fontWeight": "600"
+                        }
+                ],
+                "display-lg": [
+                        "60px",
+                        {
+                                "lineHeight": "60px",
+                                "letterSpacing": "-0.025em",
+                                "fontWeight": "500"
+                        }
+                ],
+                "body-sm": [
+                        "14px",
+                        {
+                                "lineHeight": "20px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "body-md": [
+                        "16px",
+                        {
+                                "lineHeight": "24px",
+                                "fontWeight": "300"
+                        }
+                ],
+                "label-md": [
+                        "12px",
+                        {
+                                "lineHeight": "16px",
+                                "letterSpacing": "0.05em",
+                                "fontWeight": "400"
+                        }
+                ],
+                "headline-lg": [
+                        "32px",
+                        {
+                                "lineHeight": "40px",
+                                "letterSpacing": "-0.01em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "body-lg": [
+                        "18px",
+                        {
+                                "lineHeight": "28px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "headline-md": [
+                        "24px",
+                        {
+                                "lineHeight": "32px",
+                                "fontWeight": "600"
+                        }
+                ]
+        }
+},
+    },
+  }
+</script>
+<style>
+        /* Custom Animations & Styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: theme('colors.background');
+        }
+
+        .glass-panel {
+            background: rgba(43, 45, 48, 0.8);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 0.67px solid theme('colors.glass-stroke');
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        .gradient-border-shell {
+            position: relative;
+        }
+        .gradient-border-shell::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1px;
+            background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.1), transparent);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        .glow-active {
+            box-shadow: 0 0 24px rgba(16, 185, 129, 0.2);
+        }
+
+        .progress-bar-fill {
+            animation: fillProgress 4s ease-in-out infinite;
+        }
+
+        @keyframes fillProgress {
+            0% { width: 45%; }
+            50% { width: 75%; }
+            100% { width: 45%; }
+        }
+
+        .pulse-ring {
+            animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+        }
+
+        @keyframes pulse-ring {
+            0% { transform: scale(0.8); opacity: 0.5; }
+            80% { transform: scale(2); opacity: 0; }
+            100% { transform: scale(2); opacity: 0; }
+        }
+    </style>
+</head>
+<body class="min-h-screen text-on-surface flex items-center justify-center relative overflow-hidden antialiased bg-[#111416]">
+<!-- Background Atmospheric Image / Overlay -->
+<div class="absolute inset-0 z-0 opacity-20 pointer-events-none bg-cover bg-center" data-alt="A macro, out-of-focus background shot of a lush green agricultural field at dusk, overlaid with subtle glowing digital hex grids. The aesthetic is highly technical and glassmorphic, utilizing a dark mode palette with deep shadows and vibrant emerald green light accents. The mood is advanced, mysterious, and precision-driven." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA2acqPwxj2O1IzXHWuj4mHZXw5XNsslzvNRXe0wVqHzD6RAVihax3_bAR_wCFUjzJhxqIHF6wmngW1qwg7D0p4vdRvvYidY0KLO_jlz86huXwIXUILHig2vYSZ0aIruirdUfMVKn40dtLOYPNs1PF_KlRl9Wf76usJS2VBCQuNvceWNkqCEoYzCBdZWOfTj2TLb2tgaqrBoOWDcslswsDNVXLAF4j4kHnTcnt_Xs_Gz9Zxg1gFux_TQs2o7LkKXLwfwFFbS69T0hC6');">
+</div>
+<!-- Radial Glow Behind Card -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#10b981]/5 rounded-full blur-[100px] pointer-events-none z-0"></div>
+<!-- Main Loading Canvas -->
+<main class="relative z-10 w-full max-w-md px-margin-mobile md:px-0">
+<div class="glass-panel gradient-border-shell rounded-2xl p-6 md:p-8 flex flex-col items-center">
+<!-- Header -->
+<div class="flex flex-col items-center text-center space-y-4 mb-8">
+<div class="relative w-16 h-16 rounded-full bg-surface-container flex items-center justify-center border border-glass-stroke glow-active mb-2">
+<!-- Pulsing ring effect -->
+<div class="absolute inset-0 rounded-full border-2 border-primary-container pulse-ring pointer-events-none"></div>
+<span class="material-symbols-outlined text-primary-container text-3xl" style="font-variation-settings: 'FILL' 1;">
+                        memory
+                    </span>
+</div>
+<div>
+<h1 class="font-display-lg text-display-lg text-[#FFFFFF] tracking-tight mb-2">Processing Data</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">KrishiDrishti AI Core</p>
+</div>
+</div>
+<!-- Central Progress Bar -->
+<div class="w-full mb-8">
+<div class="flex justify-between items-end mb-2">
+<span class="font-label-md text-label-md text-[#10B981] tracking-wider uppercase">Running</span>
+<span class="font-label-md text-label-md text-on-surface-variant">65%</span>
+</div>
+<div class="w-full h-1.5 bg-surface-variant rounded-full overflow-hidden relative">
+<div class="absolute top-0 left-0 h-full bg-[#10B981] progress-bar-fill rounded-full shadow-[0_0_12px_rgba(16,185,129,0.8)]"></div>
+</div>
+</div>
+<!-- Stepper List -->
+<div class="w-full space-y-0 relative">
+<!-- Vertical Line Background -->
+<div class="absolute left-[15px] top-[20px] bottom-[20px] w-[2px] bg-surface-variant z-0"></div>
+<!-- Vertical Line Active Fill -->
+<div class="absolute left-[15px] top-[20px] h-[50%] w-[2px] bg-[#10B981] z-0 shadow-[0_0_8px_rgba(16,185,129,0.5)]"></div>
+<!-- Step 1: Complete -->
+<div class="flex items-start gap-4 relative z-10 pb-6">
+<div class="w-8 h-8 rounded-full bg-surface-container border border-primary-container flex items-center justify-center flex-shrink-0 mt-0.5 shadow-[0_0_8px_rgba(16,185,129,0.3)]">
+<span class="material-symbols-outlined text-[#10B981] text-sm" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div class="flex flex-col pt-1">
+<span class="font-body-md text-body-md text-[#A9B7C6]">Upload complete</span>
+</div>
+</div>
+<!-- Step 2: Complete -->
+<div class="flex items-start gap-4 relative z-10 pb-6">
+<div class="w-8 h-8 rounded-full bg-surface-container border border-primary-container flex items-center justify-center flex-shrink-0 mt-0.5 shadow-[0_0_8px_rgba(16,185,129,0.3)]">
+<span class="material-symbols-outlined text-[#10B981] text-sm" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div class="flex flex-col pt-1">
+<span class="font-body-md text-body-md text-[#A9B7C6]">Preprocessing</span>
+</div>
+</div>
+<!-- Step 3: Active -->
+<div class="flex items-start gap-4 relative z-10 pb-6">
+<div class="w-8 h-8 rounded-full bg-primary-container/20 border border-primary-container flex items-center justify-center flex-shrink-0 mt-0.5 shadow-[0_0_15px_rgba(16,185,129,0.4)]">
+<div class="w-2.5 h-2.5 bg-[#10B981] rounded-full animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.8)]"></div>
+</div>
+<div class="flex flex-col pt-1">
+<span class="font-body-md text-body-md text-[#10B981] font-medium">Disease model running</span>
+</div>
+</div>
+<!-- Step 4: Pending -->
+<div class="flex items-start gap-4 relative z-10">
+<div class="w-8 h-8 rounded-full bg-surface-container border border-surface-variant flex items-center justify-center flex-shrink-0 mt-0.5">
+<div class="w-2 h-2 bg-surface-variant rounded-full"></div>
+</div>
+<div class="flex flex-col pt-1">
+<span class="font-body-md text-body-md text-on-surface-variant">Treatment generation</span>
+</div>
+</div>
+</div>
+<!-- Footer Estimate -->
+<div class="mt-8 pt-6 w-full border-t border-glass-stroke text-center">
+<span class="font-label-md text-label-md text-on-surface-variant flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+                    Estimated time: 3–5 seconds
+                </span>
+</div>
+</div>
+</main>
+</body></html>

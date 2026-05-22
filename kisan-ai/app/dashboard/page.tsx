@@ -2,232 +2,237 @@
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
-import { useAppStore } from '../store/useAppStore';
-import { createT } from '../../lib/i18n';
-
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1
-    }
-  }
-};
-
-const item = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0 }
-};
 
 export default function Dashboard() {
   const router = useRouter();
   const [mounted, setMounted] = useState(false);
-  const { language, theme, toggleTheme } = useAppStore();
-  const t = createT(language);
-
-  const [weatherTemp, setWeatherTemp] = useState<number | null>(null);
-  const [weatherIcon, setWeatherIcon] = useState('partly_cloudy_day');
-
+  
   useEffect(() => { setMounted(true); }, []);
-
-  useEffect(() => {
-    fetch('/api/weather?lat=12.52&lon=76.90&location=Mandya,+Karnataka')
-      .then(res => res.json())
-      .then(data => {
-        if (data.today) {
-          setWeatherTemp(data.today.temp);
-          if (data.today.rainfall > 10) setWeatherIcon('rainy');
-          else if (data.today.rainfall > 2) setWeatherIcon('grain');
-          else if (data.today.temp > 35) setWeatherIcon('sunny');
-          else setWeatherIcon('partly_cloudy_day');
-        }
-      })
-      .catch(() => {});
-  }, []);
-
-  const getGreeting = () => {
-    if (!mounted) return 'Hello, Farmer 👋';
-    const hour = new Date().getHours();
-    if (language === 'kn') return hour < 12 ? 'ಶುಭೋದಯ 👋' : hour < 17 ? 'ಶುಭ ಮಧ್ಯಾಹ್ನ 👋' : 'ಶುಭ ಸಂಜೆ 👋';
-    if (language === 'hi') return hour < 12 ? 'सुप्रभात 👋' : hour < 17 ? 'शुभ दोपहर 👋' : 'शुभ संध्या 👋';
-    return hour < 12 ? 'Good Morning 👋' : hour < 17 ? 'Good Afternoon 👋' : 'Good Evening 👋';
-  };
-
-  const getDateStr = () => {
-    if (!mounted) return '';
-    return new Date().toLocaleDateString(language === 'kn' ? 'kn-IN' : language === 'hi' ? 'hi-IN' : 'en-IN', { 
-      month: 'long', day: 'numeric' 
-    });
-  };
-
-  const quickActions = [
-    { icon: 'document_scanner', label: t('dash.scanCrop'), href: '/scan', color: 'bg-emerald-500' },
-    { icon: 'menu_book', label: t('nav.library'), href: '/library', color: 'bg-amber-500' },
-    { icon: 'chat', label: t('nav.chat'), href: '/chat', color: 'bg-blue-500' },
-    { icon: 'bar_chart', label: t('dash.yieldPredict'), href: '/yield', color: 'bg-purple-500' },
-  ];
 
   if (!mounted) return null;
 
   return (
-    <div className="bg-[var(--color-background)] text-[var(--color-on-background)] min-h-screen flex flex-col font-[var(--font-inter)]">
-      {/* Premium Header */}
-      <header className="sticky top-0 w-full z-50 glass px-6 py-4 flex justify-between items-center border-b border-slate-200/50">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-[var(--color-primary)] rounded-xl flex items-center justify-center shadow-lg shadow-emerald-900/20">
-            <span className="material-symbols-outlined text-white text-[24px]" style={{ fontVariationSettings: "'FILL' 1" }}>eco</span>
-          </div>
-          <h1 className="text-xl font-black tracking-tight text-[var(--color-primary)] font-[var(--font-outfit)]">KisanAI</h1>
+    <div className="flex flex-col min-h-screen">
+      {/* TopAppBar */}
+      <header className="fixed top-0 w-full z-50 flex justify-between items-center px-margin-mobile h-16 bg-surface/70 backdrop-blur-xl border-b border-glass-stroke shadow-none transition-transform duration-150">
+        <div className="flex items-center">
+          <span className="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-primary tracking-tight font-bold">KrishiDrishti</span>
         </div>
-        <div className="flex items-center gap-2">
-          <button 
-            onClick={toggleTheme}
-            className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-slate-600 dark:text-slate-300"
-          >
-            <span className="material-symbols-outlined text-[22px]">
-              {theme === 'dark' ? 'light_mode' : 'dark_mode'}
-            </span>
+        <div className="flex items-center gap-4">
+          <button aria-label="translate" className="text-on-surface-variant hover:text-primary-fixed transition-colors">
+            <span className="material-symbols-outlined">translate</span>
           </button>
-          <Link href="/language" className="glass px-3 py-1.5 rounded-full flex items-center gap-2 hover:bg-white dark:hover:bg-slate-700 transition-all border border-slate-200 dark:border-slate-700">
-            <span className="text-xs font-bold text-slate-600 dark:text-slate-300">{language.toUpperCase()}</span>
-            <span className="material-symbols-outlined text-slate-400 text-[18px]">translate</span>
-          </Link>
-          <Link href="/alerts" className="relative w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
-            <span className="material-symbols-outlined text-slate-600 dark:text-slate-300">notifications</span>
-            <span className="absolute top-2.5 right-2.5 w-2 h-2 bg-red-500 rounded-full border-2 border-white dark:border-slate-900"></span>
-          </Link>
+          <button aria-label="account_circle" className="text-on-surface-variant hover:text-primary-fixed transition-colors">
+            <span className="material-symbols-outlined">account_circle</span>
+          </button>
         </div>
       </header>
 
-      <main className="flex-1 px-6 py-8 space-y-10 pb-32 w-full">
-        {/* Greeting Card — Glassmorphism & Gradient */}
-        <motion.section 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="bg-gradient-to-br from-[#065f46] to-[#047857] rounded-[48px] p-8 md:p-12 text-white relative overflow-hidden shadow-2xl shadow-emerald-900/30"
-        >
-          <div className="z-10 relative space-y-6">
-            <div className="space-y-1">
-              <h2 className="text-3xl md:text-5xl font-black tracking-tight font-[var(--font-outfit)]">{getGreeting()}</h2>
-              <div className="flex items-center gap-2 text-emerald-100/80 font-bold text-sm">
-                <span className="material-symbols-outlined text-sm">location_on</span>
-                Mandya, Karnataka • {getDateStr()}
-              </div>
-            </div>
-            
-            {/* Quick Weather Inline */}
-            <div className="flex items-center gap-4 bg-white/10 backdrop-blur-md rounded-[32px] px-6 py-4 border border-white/10 w-fit">
-               <span className="material-symbols-outlined text-emerald-200 text-3xl">{weatherIcon}</span>
-               <div className="flex flex-col">
-                  <span className="text-2xl font-black leading-none">{weatherTemp || '--'}°</span>
-                  <span className="text-[10px] font-black uppercase tracking-widest text-emerald-200/60">Cloudy</span>
-               </div>
-            </div>
+      {/* Main Content Canvas */}
+      <main className="pt-24 px-margin-mobile md:px-margin-desktop max-w-7xl mx-auto flex flex-col gap-section-gap w-full">
+        {/* Header Section */}
+        <section className="flex flex-col gap-2">
+          <h1 className="font-display-lg text-[40px] leading-[40px] md:text-[60px] md:leading-[60px] text-on-surface font-medium tracking-[-0.025em]">Dashboard Overview</h1>
+          <p className="font-body-md text-body-md text-on-surface-variant">Real-time intelligence for your fields.</p>
+        </section>
 
-            <div className="flex items-center gap-3 bg-[#10b981]/20 p-4 rounded-[24px] border border-white/10 backdrop-blur-sm">
-              <div className="w-8 h-8 bg-amber-400 rounded-full flex items-center justify-center shrink-0">
-                <span className="material-symbols-outlined text-emerald-900 text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>lightbulb</span>
-              </div>
-              <p className="text-xs font-bold text-emerald-50 leading-tight">High heat alert: Water your crops in early morning.</p>
+        {/* Top Metrics Grid */}
+        <section className="grid grid-cols-2 md:grid-cols-4 gap-gutter">
+          {/* Metric 1: Farm Health */}
+          <div className="glass-panel rounded-xl p-card-padding flex flex-col gap-3 glow-primary">
+            <div className="flex justify-between items-start">
+              <span className="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Farm Health</span>
+              <span className="material-symbols-outlined text-primary">monitor_heart</span>
+            </div>
+            <div className="flex items-end gap-2">
+              <span className="font-display-lg text-headline-lg text-primary leading-none font-semibold">82</span>
+              <span className="font-body-sm text-body-sm text-on-surface-variant pb-1">/100</span>
+            </div>
+            <div className="w-full bg-surface-variant h-1 rounded-full overflow-hidden mt-1">
+              <div className="bg-primary h-full rounded-full" style={{ width: '82%' }}></div>
             </div>
           </div>
-          <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl -mr-32 -mt-32"></div>
-        </motion.section>
+          {/* Metric 2: Weather */}
+          <div className="glass-panel rounded-xl p-card-padding flex flex-col justify-between gap-3">
+            <div className="flex justify-between items-start">
+              <span className="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Weather</span>
+              <span className="material-symbols-outlined text-tertiary">clear_day</span>
+            </div>
+            <div>
+              <div className="font-display-lg text-headline-lg text-on-surface leading-none font-semibold">32°C</div>
+              <div className="font-body-sm text-body-sm text-tertiary mt-1">Sunny &amp; Clear</div>
+            </div>
+          </div>
+          {/* Metric 3: Alerts */}
+          <div className="glass-panel rounded-xl p-card-padding flex flex-col justify-between gap-3 border border-error-container/30">
+            <div className="flex justify-between items-start">
+              <span className="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Active Alerts</span>
+              <span className="material-symbols-outlined text-error">warning</span>
+            </div>
+            <div>
+              <div className="font-display-lg text-headline-lg text-error leading-none font-semibold">2</div>
+              <div className="font-body-sm text-body-sm text-error/80 mt-1">Disease Detected</div>
+            </div>
+          </div>
+          {/* Metric 4: Market */}
+          <div className="glass-panel rounded-xl p-card-padding flex flex-col justify-between gap-3">
+            <div className="flex justify-between items-start">
+              <span className="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Market Opp</span>
+              <span className="material-symbols-outlined text-primary">trending_up</span>
+            </div>
+            <div>
+              <div className="font-display-lg text-headline-lg text-on-surface leading-none font-semibold">+₹600</div>
+              <div className="font-body-sm text-body-sm text-primary mt-1">Cotton / Quintal</div>
+            </div>
+          </div>
+        </section>
 
-        {/* Quick Actions Grid */}
-        <section className="space-y-6">
-          <h3 className="font-black text-xs uppercase tracking-[0.25em] text-slate-400 dark:text-slate-500 px-2">Quick Actions</h3>
-          <motion.div 
-            variants={container}
-            initial="hidden"
-            animate="show"
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"
-          >
-            {quickActions.map((action, idx) => (
-              <motion.div key={idx} variants={item}>
-                <Link 
-                  href={action.href}
-                  className="flex flex-col items-center gap-6 p-8 bg-[var(--color-surface)] dark:bg-[var(--color-surface-variant)] border border-slate-50 dark:border-slate-800 rounded-[40px] shadow-premium card-interactive group"
-                >
-                  <div className={`w-16 h-16 rounded-[24px] ${action.color} text-white flex items-center justify-center shadow-lg transition-transform group-hover:scale-110 group-hover:rotate-3`}>
-                    <span className="material-symbols-outlined text-3xl">{action.icon}</span>
+        {/* Bento Layout: Main Content */}
+        <section className="grid grid-cols-1 md:grid-cols-12 gap-gutter mb-12">
+          {/* Left Col (Wider) */}
+          <div className="md:col-span-8 flex flex-col gap-gutter">
+            {/* AI Recommendation Priority Card */}
+            <div className="glass-panel rounded-xl p-card-padding glow-primary flex flex-col gap-4 relative overflow-hidden">
+              <div className="absolute -right-20 -top-20 w-64 h-64 bg-primary/5 rounded-full blur-3xl pointer-events-none"></div>
+              <div className="flex items-center gap-3 z-10">
+                <div className="bg-primary/10 p-2 rounded-lg">
+                  <span className="material-symbols-outlined text-primary icon-fill">neurology</span>
+                </div>
+                <h2 className="font-headline-md text-headline-md text-on-surface font-semibold">Intelligence Insight</h2>
+              </div>
+              <div className="z-10 pl-1">
+                <p className="font-body-lg text-body-lg text-on-surface mb-2">High humidity detected in Sector B. Optimal conditions for fungal spread.</p>
+                <div className="flex items-start gap-3 mt-4">
+                  <span className="material-symbols-outlined text-tertiary mt-0.5">check_circle</span>
+                  <p className="font-body-md text-body-md text-on-surface-variant">Recommended Action: Initiate foliar spray application tomorrow morning between 06:00 and 08:00 AM.</p>
+                </div>
+                <div className="flex items-start gap-3 mt-3">
+                  <span className="material-symbols-outlined text-tertiary mt-0.5">visibility</span>
+                  <p className="font-body-md text-body-md text-on-surface-variant">Monitor adjacent tomato rows for early blight symptoms over the next 48 hours.</p>
+                </div>
+              </div>
+              <div className="mt-4 z-10 flex gap-3">
+                <button className="bg-surface-variant border border-glass-stroke text-on-surface hover:bg-primary hover:text-on-primary font-body-sm text-body-sm px-4 py-2 rounded-full transition-colors">Acknowledge</button>
+                <button className="bg-transparent border border-glass-stroke text-on-surface-variant hover:text-on-surface font-body-sm text-body-sm px-4 py-2 rounded-full transition-colors">View Details</button>
+              </div>
+            </div>
+
+            {/* Charts Area */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+              {/* Weather Timeline */}
+              <div className="glass-panel rounded-xl p-card-padding flex flex-col gap-4">
+                <h3 className="font-headline-md text-[18px] font-semibold text-on-surface">Weather Forecast</h3>
+                <div className="flex justify-between items-end h-32 border-b border-glass-stroke pb-2 relative">
+                  <div className="absolute inset-0 flex flex-col justify-between opacity-10 pointer-events-none">
+                    <div className="w-full border-t border-white"></div>
+                    <div className="w-full border-t border-white"></div>
+                    <div className="w-full border-t border-white"></div>
                   </div>
-                  <span className="font-black text-slate-800 dark:text-slate-200 uppercase tracking-widest text-xs">{action.label}</span>
+                  <div className="flex flex-col items-center gap-2 z-10">
+                    <span className="font-label-md text-label-md text-on-surface-variant">Now</span>
+                    <span className="material-symbols-outlined text-tertiary text-sm">clear_day</span>
+                    <div className="w-2 bg-tertiary rounded-t-full h-16"></div>
+                  </div>
+                  <div className="flex flex-col items-center gap-2 z-10">
+                    <span className="font-label-md text-label-md text-on-surface-variant">12 PM</span>
+                    <span className="material-symbols-outlined text-tertiary text-sm">partly_cloudy_day</span>
+                    <div className="w-2 bg-tertiary/70 rounded-t-full h-20"></div>
+                  </div>
+                  <div className="flex flex-col items-center gap-2 z-10">
+                    <span className="font-label-md text-label-md text-on-surface-variant">4 PM</span>
+                    <span className="material-symbols-outlined text-on-surface-variant text-sm">cloud</span>
+                    <div className="w-2 bg-surface-variant rounded-t-full h-14"></div>
+                  </div>
+                  <div className="flex flex-col items-center gap-2 z-10">
+                    <span className="font-label-md text-label-md text-on-surface-variant">8 PM</span>
+                    <span className="material-symbols-outlined text-primary text-sm">rainy</span>
+                    <div className="w-2 bg-primary rounded-t-full h-8"></div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Market Trends */}
+              <div className="glass-panel rounded-xl p-card-padding flex flex-col gap-4">
+                <h3 className="font-headline-md text-[18px] font-semibold text-on-surface">Market Trends</h3>
+                <div className="flex-1 relative border-b border-glass-stroke pb-2 h-32">
+                  <div className="absolute inset-0 flex flex-col justify-between opacity-10 pointer-events-none">
+                    <div className="w-full border-t border-white"></div>
+                    <div className="w-full border-t border-white"></div>
+                    <div className="w-full border-t border-white"></div>
+                  </div>
+                  <svg className="absolute inset-0 h-full w-full" preserveAspectRatio="none">
+                    <path d="M0,80 C30,60 50,90 80,40 C110,-10 150,50 200,20" fill="none" stroke="#4edea3" strokeWidth="2" vectorEffect="non-scaling-stroke"></path>
+                    <circle cx="200" cy="20" fill="#10b981" r="4"></circle>
+                  </svg>
+                </div>
+                <div className="flex justify-between items-center mt-1">
+                  <span className="font-label-md text-label-md text-on-surface-variant">Cotton</span>
+                  <span className="font-label-md text-label-md text-primary">+3.2% Today</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Col */}
+          <div className="md:col-span-4 flex flex-col gap-gutter">
+            {/* Quick Actions Grid */}
+            <div className="glass-panel rounded-xl p-card-padding flex flex-col gap-4">
+              <h3 className="font-headline-md text-[18px] font-semibold text-on-surface">Quick Actions</h3>
+              <div className="grid grid-cols-2 gap-3">
+                <Link href="/scan" className="bg-surface-variant/50 hover:bg-surface-variant border border-glass-stroke rounded-lg p-3 flex flex-col items-center justify-center gap-2 transition-all hover:border-primary/50 group">
+                  <span className="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">document_scanner</span>
+                  <span className="font-label-md text-label-md text-on-surface">Scan Crop</span>
                 </Link>
-              </motion.div>
-            ))}
-          </motion.div>
-        </section>
-        {/* Recent Scans Carousel */}
-        <section className="space-y-6">
-          <div className="flex justify-between items-center px-1">
-            <h3 className="text-sm font-black text-slate-400 dark:text-slate-500 uppercase tracking-[0.2em]">{t('dash.recentScans')}</h3>
-            <Link href="/history" className="text-[var(--color-primary)] font-bold text-sm flex items-center gap-1 group">
-              {t('dash.viewAll')}
-              <span className="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
-            </Link>
-          </div>
-          <div className="flex overflow-x-auto gap-5 pb-4 px-1 scrollbar-hide">
-            {[
-              { name: 'Tomato Leaf', status: t('history.healthy'), statusClass: 'bg-emerald-100 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-400', img: 'https://images.unsplash.com/photo-1592419044706-39796d40f98c?w=400&q=80' },
-              { name: 'Potato Tuber', status: 'Blight Detected', statusClass: 'bg-red-100 dark:bg-red-900/20 text-red-700 dark:text-red-400', img: 'https://images.unsplash.com/photo-1518977676601-b53f02ac6d31?w=400&q=80' },
-              { name: 'Maize', status: t('history.healthy'), statusClass: 'bg-emerald-100 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-400', img: 'https://images.unsplash.com/photo-1551727041-5b347d65b633?w=400&q=80' },
-            ].map(scan => (
-              <motion.div 
-                key={scan.name}
-                whileHover={{ y: -5 }}
-                className="min-w-[200px] bg-[var(--color-surface)] dark:bg-[var(--color-surface-variant)] rounded-[32px] overflow-hidden border border-slate-50 dark:border-slate-800 shadow-premium card-interactive"
-              >
-                <div className="h-32 relative">
-                  <img src={scan.img} alt={scan.name} className="w-full h-full object-cover" />
-                  <div className="absolute top-3 right-3">
-                    <span className={`${scan.statusClass} text-[10px] px-3 py-1 rounded-full font-black backdrop-blur-md shadow-sm uppercase tracking-widest`}>
-                      {scan.status}
-                    </span>
+                <Link href="/yield" className="bg-surface-variant/50 hover:bg-surface-variant border border-glass-stroke rounded-lg p-3 flex flex-col items-center justify-center gap-2 transition-all hover:border-primary/50 group">
+                  <span className="material-symbols-outlined text-tertiary group-hover:scale-110 transition-transform">bar_chart</span>
+                  <span className="font-label-md text-label-md text-on-surface">Yield Predict</span>
+                </Link>
+                <button className="bg-surface-variant/50 hover:bg-surface-variant border border-glass-stroke rounded-lg p-3 flex flex-col items-center justify-center gap-2 transition-all hover:border-primary/50 group">
+                  <span className="material-symbols-outlined text-on-surface-variant group-hover:scale-110 transition-transform">cloud</span>
+                  <span className="font-label-md text-label-md text-on-surface">Weather</span>
+                </button>
+                <Link href="/marketplace" className="bg-surface-variant/50 hover:bg-surface-variant border border-glass-stroke rounded-lg p-3 flex flex-col items-center justify-center gap-2 transition-all hover:border-primary/50 group">
+                  <span className="material-symbols-outlined text-on-surface-variant group-hover:scale-110 transition-transform">storefront</span>
+                  <span className="font-label-md text-label-md text-on-surface">Market</span>
+                </Link>
+              </div>
+            </div>
+
+            {/* Recent Scans */}
+            <div className="glass-panel rounded-xl p-card-padding flex flex-col gap-4 flex-1">
+              <div className="flex justify-between items-center">
+                <h3 className="font-headline-md text-[18px] font-semibold text-on-surface">Recent Scans</h3>
+                <Link href="/history" className="font-label-md text-label-md text-primary hover:underline">View All</Link>
+              </div>
+              <div className="flex flex-col gap-3">
+                <div className="flex items-center gap-3 p-2 rounded-lg hover:bg-surface-variant/30 transition-colors border border-transparent hover:border-glass-stroke">
+                  <div className="w-12 h-12 rounded-md bg-surface-dark overflow-hidden shrink-0 border border-glass-stroke">
+                    <img alt="Tomato Leaf" className="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8Uhi-VqPEUaLDqhJjACOY2NBsxm_mu1h1Bn7ZHH_6RYl7iEjY1bmGzCnRkbpJqzL21jJqqgIyaGNV6IYUhK6CB_7Ys8JJzITKwxWpO1j2xuFJFPVQ-7ONuqYUMHC8ZjOrOjQxPn-3THcJPkFSdv5INUB2pPhXM-GXzkA0OdELhH0F_1hj-SX19NoQgVw0O7mOye5r5bisYvUOML0wb8kf4PbghZZTXLX6ID5-Zfohfsb5XIYDnD1SsBox-CgRtYDkYF9U2hPDEOR7" />
                   </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="font-body-sm text-body-sm text-on-surface truncate">Tomato Sector 4</div>
+                    <div className="font-label-md text-label-md text-error flex items-center gap-1 mt-0.5">
+                      <span className="material-symbols-outlined text-[14px]">warning</span> Early Blight
+                    </div>
+                  </div>
+                  <div className="bg-error-container/20 text-error px-2 py-1 rounded text-xs font-medium">87%</div>
                 </div>
-                <div className="p-5">
-                  <p className="font-black text-slate-800 dark:text-slate-200 tracking-tight">{scan.name}</p>
-                  <p className="text-[10px] text-slate-400 dark:text-slate-500 font-black uppercase tracking-widest mt-1">Scanned 2h ago</p>
+
+                <div className="flex items-center gap-3 p-2 rounded-lg hover:bg-surface-variant/30 transition-colors border border-transparent hover:border-glass-stroke">
+                  <div className="w-12 h-12 rounded-md bg-surface-dark overflow-hidden shrink-0 border border-glass-stroke">
+                    <img alt="Potato Field" className="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpgxj67LHrVxAnOEySHt9CCvT7DLeuPg3Zwwpkc8xNHrcepQyS6Vz23v3G12uN7DCvutrUloCFbvDWGE5RWe0xSxSr3eGI5EVyrgRZnS8XKIus5U_FhExiSQJxThzbykrdEHOI9pqQ3iyNZnIESm1jMVLsnHflPmXmi5ajpAiHOsCuXr5nyZ-f4Kb7iAWVjS0nXdmbPc8h95TmkMj2gSEgn3izvxiT9j7nK3d_sSkXYuFv-X-hq28Lc4PsD9lzDc8AdzEUVP7Qe0x0" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="font-body-sm text-body-sm text-on-surface truncate">Potato Sector 1</div>
+                    <div className="font-label-md text-label-md text-primary flex items-center gap-1 mt-0.5">
+                      <span className="material-symbols-outlined text-[14px]">check_circle</span> Healthy
+                    </div>
+                  </div>
+                  <div className="bg-primary/10 text-primary px-2 py-1 rounded text-xs font-medium">96%</div>
                 </div>
-              </motion.div>
-            ))}
+              </div>
+            </div>
           </div>
-        </section>
-
-        {/* Community & Market Cards */}
-        <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <Link href="/community" className="bg-[var(--color-surface)] dark:bg-[var(--color-surface-variant)] border border-slate-100 dark:border-slate-800 rounded-[28px] p-6 flex items-center justify-between shadow-premium card-interactive">
-            <div className="flex items-center gap-5">
-              <div className="w-16 h-16 rounded-2xl bg-indigo-50 dark:bg-indigo-900/20 flex items-center justify-center">
-                <span className="material-symbols-outlined text-indigo-600 dark:text-indigo-400 text-3xl">hub</span>
-              </div>
-              <div>
-                <h4 className="font-black text-slate-800 dark:text-slate-200 tracking-tight">{t('nav.community')}</h4>
-                <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">{t('dash.communityMap')}</p>
-              </div>
-            </div>
-            <div className="w-10 h-10 rounded-full bg-slate-50 dark:bg-slate-800 flex items-center justify-center text-slate-400 dark:text-slate-600">
-              <span className="material-symbols-outlined">chevron_right</span>
-            </div>
-          </Link>
-
-          <Link href="/marketplace" className="bg-[var(--color-surface)] dark:bg-[var(--color-surface-variant)] border border-slate-100 dark:border-slate-800 rounded-[28px] p-6 flex items-center justify-between shadow-premium card-interactive">
-            <div className="flex items-center gap-5">
-              <div className="w-16 h-16 rounded-2xl bg-orange-50 dark:bg-orange-900/20 flex items-center justify-center">
-                <span className="material-symbols-outlined text-orange-600 dark:text-orange-400 text-3xl">shopping_bag</span>
-              </div>
-              <div>
-                <h4 className="font-black text-slate-800 dark:text-slate-200 tracking-tight">{t('nav.marketplace')}</h4>
-                <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">{t('dash.farmMarket')}</p>
-              </div>
-            </div>
-            <div className="w-10 h-10 rounded-full bg-slate-50 dark:bg-slate-800 flex items-center justify-center text-slate-400 dark:text-slate-600">
-              <span className="material-symbols-outlined">chevron_right</span>
-            </div>
-          </Link>
         </section>
       </main>
     </div>

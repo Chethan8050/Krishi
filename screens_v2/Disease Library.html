@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Disease Library - KrishiDrishti</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-dim": "#111416",
+                        "background": "#111416",
+                        "surface-container-high": "#282a2d",
+                        "on-tertiary-fixed-variant": "#004a75",
+                        "tertiary-fixed": "#cee5ff",
+                        "inverse-surface": "#e2e2e6",
+                        "on-tertiary": "#003353",
+                        "surface-container-lowest": "#0c0e11",
+                        "outline": "#86948a",
+                        "error-container": "#93000a",
+                        "on-secondary-container": "#a9b7c6",
+                        "on-surface-variant": "#bbcabf",
+                        "primary-fixed": "#6ffbbe",
+                        "on-error": "#690005",
+                        "primary-fixed-dim": "#4edea3",
+                        "tertiary": "#96ccff",
+                        "on-tertiary-container": "#003c60",
+                        "secondary": "#bac8d7",
+                        "on-primary-fixed-variant": "#005236",
+                        "secondary-fixed-dim": "#bac8d7",
+                        "tertiary-fixed-dim": "#96ccff",
+                        "on-secondary": "#24323e",
+                        "surface-tint": "#4edea3",
+                        "surface-variant": "#333538",
+                        "surface-container-highest": "#333538",
+                        "surface-container-low": "#1a1c1f",
+                        "outline-variant": "#3c4a42",
+                        "tertiary-container": "#4ca9f1",
+                        "on-surface": "#e2e2e6",
+                        "on-secondary-fixed": "#0f1d28",
+                        "on-background": "#e2e2e6",
+                        "primary": "#4edea3",
+                        "on-primary-fixed": "#002113",
+                        "secondary-container": "#3b4855",
+                        "surface-bright": "#37393c",
+                        "on-tertiary-fixed": "#001d32",
+                        "on-primary": "#003824",
+                        "on-secondary-fixed-variant": "#3b4855",
+                        "surface-dark": "#1E1E1E",
+                        "inverse-primary": "#006c49",
+                        "secondary-fixed": "#d6e4f4",
+                        "glass-stroke": "rgba(255, 255, 255, 0.1)",
+                        "primary-container": "#10b981",
+                        "text-muted": "#A9B7C6",
+                        "inverse-on-surface": "#2f3034",
+                        "on-primary-container": "#00422b",
+                        "on-error-container": "#ffdad6",
+                        "surface-container": "#1e2023",
+                        "surface": "#111416",
+                        "error": "#ffb4ab"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "32px",
+                        "card-padding": "18px",
+                        "section-gap": "40px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "headline-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "300" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "display-lg": ["60px", { "lineHeight": "60px", "letterSpacing": "-0.025em", "fontWeight": "500" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-card {
+            background-color: rgba(43, 45, 48, 0.7);
+            backdrop-filter: blur(24px);
+            border: 1px solid;
+            border-image-source: linear-gradient(to bottom right, rgba(255,255,255,0.1), transparent);
+            border-image-slice: 1;
+        }
+        .glow-effect {
+            box-shadow: 0 0 24px rgba(16, 185, 129, 0.15);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen font-body-md pb-24 md:pb-0 pt-16">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-margin-mobile md:px-margin-desktop h-16 bg-surface/70 backdrop-blur-xl border-b border-glass-stroke">
+<div class="font-display-lg text-headline-lg-mobile md:text-headline-lg text-primary tracking-tight">
+            KrishiDrishti
+        </div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface hover:text-primary-fixed transition-colors cursor-pointer active:scale-95 duration-150">translate</span>
+<span class="material-symbols-outlined text-on-surface hover:text-primary-fixed transition-colors cursor-pointer active:scale-95 duration-150">account_circle</span>
+</div>
+</header>
+<main class="px-margin-mobile md:px-margin-desktop py-section-gap max-w-7xl mx-auto space-y-section-gap">
+<!-- Search and Filter Section -->
+<section class="space-y-6">
+<div class="relative w-full max-w-2xl mx-auto">
+<span class="material-symbols-outlined absolute left-4 top-1/2 transform -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-surface-dark border-b border-surface-variant text-on-surface pl-12 pr-4 py-4 font-body-md focus:outline-none focus:border-primary transition-colors focus:glow-effect rounded-t-lg rounded-b-none" placeholder="Search disease database..." type="text"/>
+</div>
+<div class="flex flex-wrap gap-3 justify-center">
+<button class="px-4 py-1.5 rounded-full bg-primary/10 text-primary border border-primary/20 font-label-md hover:bg-primary/20 transition-colors">All Crops</button>
+<button class="px-4 py-1.5 rounded-full bg-surface-container text-on-surface-variant border border-glass-stroke font-label-md hover:bg-surface-container-high transition-colors">Tomato</button>
+<button class="px-4 py-1.5 rounded-full bg-surface-container text-on-surface-variant border border-glass-stroke font-label-md hover:bg-surface-container-high transition-colors">Wheat</button>
+<button class="px-4 py-1.5 rounded-full bg-surface-container text-on-surface-variant border border-glass-stroke font-label-md hover:bg-surface-container-high transition-colors">Rice</button>
+<button class="px-4 py-1.5 rounded-full bg-surface-container text-on-surface-variant border border-glass-stroke font-label-md hover:bg-surface-container-high transition-colors">Potato</button>
+</div>
+</section>
+<!-- Disease Grid -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Card 1 -->
+<article class="glass-card rounded-xl overflow-hidden hover:glow-effect transition-shadow cursor-pointer group">
+<div class="h-48 bg-surface-dark relative">
+<img alt="Close up of a tomato leaf showing distinct dark concentric circular spots indicative of Early Blight fungal infection. The leaf is set against a dark, technical background with subtle grid lines, emphasizing a scientific and analytical visual style." class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" data-alt="Close up of a tomato leaf showing distinct dark concentric circular spots indicative of Early Blight fungal infection. The leaf is set against a dark, technical background with subtle grid lines, emphasizing a scientific and analytical visual style. Lighting is precise and clinical." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBugIyV-IzJEaslHk4EU_2c4pF4ZYKHdMX0dgVXgZZvHFxQD625YgN2U1fyhutebfHisbKmBe_lMh4iI6PMwu9-LmsQI66f2bmoxsVGGhQJLIiXvgnfmbcioaI3_9QRoU-ZWH9J4DIR-BX673d0p2cRjhC3u8jzd0UY_HvVjx4j3PDKLf2lHOM449rM-H4y1KDFmZY6NS4C7bJkkQzzlWcRv7tkT5GryA7XGpNFZb3Yl6PO4fcF1odJp2L8rPLZneHTxIzckjL5DPri"/>
+<div class="absolute top-3 right-3 px-2 py-1 rounded-full bg-error/10 text-error font-label-md backdrop-blur-md border border-error/20">High Risk</div>
+</div>
+<div class="p-card-padding space-y-4">
+<div class="space-y-1">
+<span class="text-primary font-label-md uppercase tracking-wider">Tomato</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">Early Blight</h3>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">Alternaria solani infection causing characteristic "bullseye" patterned dark spots on lower leaves, stems, and fruit.</p>
+<div class="flex items-center gap-2 pt-2 border-t border-glass-stroke">
+<span class="material-symbols-outlined text-on-surface-variant text-sm">visibility</span>
+<span class="font-label-md text-on-surface-variant">View Details</span>
+</div>
+</div>
+</article>
+<!-- Card 2 -->
+<article class="glass-card rounded-xl overflow-hidden hover:glow-effect transition-shadow cursor-pointer group">
+<div class="h-48 bg-surface-dark relative">
+<img alt="Macro shot of wheat stalks exhibiting orange-brown pustules typical of Wheat Rust. The image is styled with a deep dark glassmorphic overlay and technical precision, highlighting the disease symptoms clearly against a muted background." class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" data-alt="Macro shot of wheat stalks exhibiting orange-brown pustules typical of Wheat Rust. The image is styled with a deep dark glassmorphic overlay and technical precision, highlighting the disease symptoms clearly against a muted background. High contrast, sharp focus on the infected areas." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSYKO4fb0UmVM1VIhjm1ZEQomhpH9SJYOREGqSQHYGwV2ymcUyilxZuYR7Ojy837w6I_yiZfH32jpkEyG6tlJvI8RKhKfrCF8veQBsgAndi86Em9eNFSOpmYl3AX1Pa60xQk6N1LAz3_kNhzpnTzl4PK6U6SAmeu3kb9Xsw7p7J2tWwci5i_eHjWHQJXwrPx6iydf2kLVExN30rtn-XgB8dgM7V4aa2w1elDaDFqtkf_2xYxZjNvyMbxe1SLKUL1La7KfsbyLQKfhD"/>
+<div class="absolute top-3 right-3 px-2 py-1 rounded-full bg-surface-tint/10 text-surface-tint font-label-md backdrop-blur-md border border-surface-tint/20">Medium Risk</div>
+</div>
+<div class="p-card-padding space-y-4">
+<div class="space-y-1">
+<span class="text-primary font-label-md uppercase tracking-wider">Wheat</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">Leaf Rust</h3>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">Puccinia triticina causing small, circular to oval, orange-brown pustules predominantly on the upper leaf surfaces.</p>
+<div class="flex items-center gap-2 pt-2 border-t border-glass-stroke">
+<span class="material-symbols-outlined text-on-surface-variant text-sm">visibility</span>
+<span class="font-label-md text-on-surface-variant">View Details</span>
+</div>
+</div>
+</article>
+<!-- Card 3 -->
+<article class="glass-card rounded-xl overflow-hidden hover:glow-effect transition-shadow cursor-pointer group">
+<div class="h-48 bg-surface-dark relative">
+<img alt="Detailed view of rice leaves showing spindle-shaped spots with grey centers, diagnostic of Rice Blast. Visuals are highly technical and data-driven, set against a dark industrial aesthetic with subtle emerald green data point accents." class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" data-alt="Detailed view of rice leaves showing spindle-shaped spots with grey centers, diagnostic of Rice Blast. Visuals are highly technical and data-driven, set against a dark industrial aesthetic with subtle emerald green data point accents. Clinical lighting, macro detail." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKtEqLSNlzleyDmlHKv3ux07pUgnI2BaEze4t9pqvf9HUe7_KSGmJfleQICavQaSXan9LzETa5ixbGItqzsVXKNQtKWPX91AlTVUDOZyuuWsfBo8Nmx1y8pssXFiM1-tGaN2jlZZvtH34WEtFRODuhb8C-nI5NQrLRIeaLWy-tsnw7trnhN3Vunhz6j3AN3KBOSR1WafGauVkgW-pM4pbziOGYdUc3O69f0yf3TF85gzU3f24pQ6s8SXYzb390qEvnoA8GeR0bddDw"/>
+<div class="absolute top-3 right-3 px-2 py-1 rounded-full bg-error/10 text-error font-label-md backdrop-blur-md border border-error/20">High Risk</div>
+</div>
+<div class="p-card-padding space-y-4">
+<div class="space-y-1">
+<span class="text-primary font-label-md uppercase tracking-wider">Rice</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">Rice Blast</h3>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">Magnaporthe oryzae fungal infection presenting as diamond-shaped lesions with gray centers and dark borders.</p>
+<div class="flex items-center gap-2 pt-2 border-t border-glass-stroke">
+<span class="material-symbols-outlined text-on-surface-variant text-sm">visibility</span>
+<span class="font-label-md text-on-surface-variant">View Details</span>
+</div>
+</div>
+</article>
+</section>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 flex justify-around items-center px-4 pb-safe h-20 bg-surface-container/80 backdrop-blur-2xl rounded-t-xl border-t border-glass-stroke shadow-lg shadow-primary/5">
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all">
+<span class="material-symbols-outlined text-2xl">home_max</span>
+<span class="font-label-md text-label-md mt-1">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all">
+<span class="material-symbols-outlined text-2xl">sensors</span>
+<span class="font-label-md text-label-md mt-1">Detection</span>
+</div>
+<div class="flex flex-col items-center justify-center text-primary bg-primary/10 rounded-xl py-1 px-3 transform scale-90 duration-200">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">analytics</span>
+<span class="font-label-md text-label-md mt-1">Intelligence</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all">
+<span class="material-symbols-outlined text-2xl">settings</span>
+<span class="font-label-md text-label-md mt-1">Settings</span>
+</div>
+</nav>
+</body></html>

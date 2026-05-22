@@ -1,0 +1,278 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>About - KrishiDrishti</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-dim": "#111416",
+                      "surface-container-high": "#282a2d",
+                      "secondary": "#bac8d7",
+                      "on-tertiary-fixed-variant": "#004a75",
+                      "error-container": "#93000a",
+                      "surface-container-highest": "#333538",
+                      "surface": "#111416",
+                      "tertiary-container": "#4ca9f1",
+                      "error": "#ffb4ab",
+                      "tertiary-fixed": "#cee5ff",
+                      "on-secondary": "#24323e",
+                      "background": "#111416",
+                      "on-primary-fixed-variant": "#005236",
+                      "inverse-primary": "#006c49",
+                      "surface-tint": "#4edea3",
+                      "on-tertiary": "#003353",
+                      "secondary-container": "#3b4855",
+                      "on-error-container": "#ffdad6",
+                      "glass-stroke": "rgba(255, 255, 255, 0.1)",
+                      "surface-dark": "#1E1E1E",
+                      "on-error": "#690005",
+                      "outline-variant": "#3c4a42",
+                      "on-secondary-container": "#a9b7c6",
+                      "on-tertiary-fixed": "#001d32",
+                      "text-muted": "#A9B7C6",
+                      "surface-container-lowest": "#0c0e11",
+                      "primary": "#4edea3",
+                      "outline": "#86948a",
+                      "secondary-fixed-dim": "#bac8d7",
+                      "tertiary": "#96ccff",
+                      "surface-bright": "#37393c",
+                      "primary-container": "#10b981",
+                      "surface-container": "#1e2023",
+                      "tertiary-fixed-dim": "#96ccff",
+                      "surface-variant": "#333538",
+                      "on-background": "#e2e2e6",
+                      "secondary-fixed": "#d6e4f4",
+                      "inverse-surface": "#e2e2e6",
+                      "inverse-on-surface": "#2f3034",
+                      "primary-fixed": "#6ffbbe",
+                      "on-surface-variant": "#bbcabf",
+                      "on-primary-fixed": "#002113",
+                      "surface-container-low": "#1a1c1f",
+                      "on-primary-container": "#00422b",
+                      "on-tertiary-container": "#003c60",
+                      "primary-fixed-dim": "#4edea3",
+                      "on-secondary-fixed": "#0f1d28",
+                      "on-secondary-fixed-variant": "#3b4855",
+                      "on-primary": "#003824",
+                      "on-surface": "#e2e2e6"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "card-padding": "18px",
+                      "margin-desktop": "32px",
+                      "gutter": "16px",
+                      "base": "8px",
+                      "section-gap": "40px",
+                      "margin-mobile": "16px"
+              },
+              "fontFamily": {
+                      "body-sm": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "headline-lg-mobile": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "label-md": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "body-md": ["Inter"],
+                      "display-lg": ["Inter"]
+              },
+              "fontSize": {
+                      "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "400"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "300"}],
+                      "display-lg": ["60px", {"lineHeight": "60px", "letterSpacing": "-0.025em", "fontWeight": "500"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111416; /* surface */
+            color: #e2e2e6; /* on-surface */
+        }
+        
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.filled {
+            font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+
+        /* Glassmorphic Utilities */
+        .glass-panel {
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            background-color: rgba(43, 45, 48, 0.7); /* Custom glass fill matching style guide */
+            position: relative;
+        }
+        
+        .glass-border::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1px;
+            background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.1), transparent);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        .glow-hover:hover {
+            box-shadow: 0 0 24px rgba(16, 185, 129, 0.15); /* primary-container glow */
+            border-color: rgba(78, 222, 163, 0.3); /* primary */
+        }
+        
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-margin-mobile h-16 bg-surface/70 backdrop-blur-xl border-b border-glass-stroke">
+<div class="flex items-center"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAouVukyFsmO43gK-ZIcNi3AycUnZPNFfoP47X_WKoMwmL-_q8UfFwm7ffTX5S4vsXjr2qOWHdA02bwgDKF6rjhtyuh523Rwamko9BrTSMZBrzIcZB-_IYOHnx3AOOtUPTnZStLzSdpkhlgDuq2YJW_VqZMhV8IEqjBPwF5QlLQZmzmvclwOwyFZ_j3taKVkefB_Kfu-UQ5m0PFML-fkTV_3cmpS03Qr1fvY2O0t4t1s_ZRoAY2jej0_84LVtBhbX0Ibdyc_F01nsp_" alt="KrishiDrishti Logo" class="h-10 w-auto object-contain"></div>
+<div class="flex items-center gap-4 text-on-surface-variant"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAouVukyFsmO43gK-ZIcNi3AycUnZPNFfoP47X_WKoMwmL-_q8UfFwm7ffTX5S4vsXjr2qOWHdA02bwgDKF6rjhtyuh523Rwamko9BrTSMZBrzIcZB-_IYOHnx3AOOtUPTnZStLzSdpkhlgDuq2YJW_VqZMhV8IEqjBPwF5QlLQZmzmvclwOwyFZ_j3taKVkefB_Kfu-UQ5m0PFML-fkTV_3cmpS03Qr1fvY2O0t4t1s_ZRoAY2jej0_84LVtBhbX0Ibdyc_F01nsp_" alt="KrishiDrishti Logo" class="h-10 w-auto object-contain"></div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow pt-24 pb-20 px-margin-mobile md:px-margin-desktop max-w-7xl mx-auto w-full space-y-section-gap">
+<!-- Hero Section -->
+<section class="relative rounded-2xl overflow-hidden glass-panel glass-border p-8 md:p-12 min-h-[400px] flex items-end">
+<!-- Background Image -->
+<div class="absolute inset-0 z-0">
+<div class="absolute inset-0 bg-gradient-to-t from-surface-dim via-surface-dim/80 to-transparent z-10"></div>
+<img alt="Agricultural field at dawn" class="w-full h-full object-cover opacity-60 mix-blend-luminosity" data-alt="A breathtaking, hyper-realistic aerial view of a meticulously organized farm at early dawn, bathed in a soft, volumetric atmospheric light. The image features a subtle, sophisticated dark-mode glassmorphic digital overlay, incorporating faint neon emerald grid lines and floating technical readouts that suggest advanced artificial intelligence analyzing the crops. The mood is highly professional, futuristic, and serene, blending the raw organic texture of vibrant green agriculture with the sleek, high-performance aesthetic of a modern developer environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJooEkkKk_DeOM2RLi-C7zeGesFc6kES1BDHXvlR6iGSHcs5ynlfTDzhmxFHsiav9C-LCdw6IdZgdvlyoY9tsKywi4Tbn6_YtIQH9X4Ul1_WwZewRrPuphDNW9hDsl4LshT4L9BnTUYciFRV6TMNXWCzbbWXqZczhlhqiS6ohHniYM6C6lwPRBcb4GTNMV93rLukoGEvpr29NZ7jw5TLLSzKlOM6CWUIfKvlzAJriDuaSAvtjnUN8xr-a706NHdeNy6_FStEqN8Vav">
+</div>
+<div class="relative z-20 max-w-2xl">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-4">
+<span class="material-symbols-outlined text-primary text-sm filled" data-icon="rocket_launch">rocket_launch</span>
+<span class="font-label-md text-label-md text-primary uppercase tracking-wider">Our Mission</span>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-surface mb-4">
+                    Democratizing <span class="text-primary">AI</span> for Every Farmer
+                </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl">
+                    KrishiDrishti is engineered to bridge the gap between advanced developer environments and the organic vitality of the field, providing precision agricultural intelligence seamlessly.
+                </p>
+</div>
+</section>
+<!-- Metrics Bento Grid -->
+<section>
+<div class="mb-6">
+<h2 class="font-headline-md text-headline-md text-on-surface">Platform Impact</h2>
+<p class="font-body-md text-body-md text-text-muted mt-1">Measurable precision delivered directly to the field.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Metric 1 -->
+<div class="glass-panel glass-border rounded-xl p-card-padding flex flex-col justify-between min-h-[160px] transition-all duration-300 glow-hover group">
+<div class="flex justify-between items-start">
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center border border-glass-stroke group-hover:border-primary/50 transition-colors">
+<span class="material-symbols-outlined text-primary text-2xl" data-icon="coronavirus">coronavirus</span>
+</div>
+</div>
+<div class="mt-4">
+<div class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-1">38</div>
+<div class="font-label-md text-label-md text-on-surface-variant uppercase">Diseases Detected</div>
+</div>
+</div>
+<!-- Metric 2 -->
+<div class="glass-panel glass-border rounded-xl p-card-padding flex flex-col justify-between min-h-[160px] transition-all duration-300 glow-hover group">
+<div class="flex justify-between items-start">
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center border border-glass-stroke group-hover:border-tertiary/50 transition-colors">
+<span class="material-symbols-outlined text-tertiary text-2xl" data-icon="translate">translate</span>
+</div>
+</div>
+<div class="mt-4">
+<div class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-1">3</div>
+<div class="font-label-md text-label-md text-on-surface-variant uppercase">Languages Supported</div>
+</div>
+</div>
+<!-- Metric 3 -->
+<div class="glass-panel glass-border rounded-xl p-card-padding flex flex-col justify-between min-h-[160px] transition-all duration-300 glow-hover group md:col-span-1">
+<div class="flex justify-between items-start">
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center border border-glass-stroke group-hover:border-primary-container/50 transition-colors">
+<span class="material-symbols-outlined text-primary-container text-2xl" data-icon="currency_rupee">currency_rupee</span>
+</div>
+<span class="px-2 py-1 rounded-full bg-primary/10 text-primary font-label-md text-label-md border border-primary/20">Free Forever</span>
+</div>
+<div class="mt-4">
+<div class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-1">₹0</div>
+<div class="font-label-md text-label-md text-on-surface-variant uppercase">Cost to Farmers</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Tech Stack -->
+<section>
+<div class="mb-6">
+<h2 class="font-headline-md text-headline-md text-on-surface">Core Infrastructure</h2>
+<p class="font-body-md text-body-md text-text-muted mt-1">The technological foundation powering our precision intelligence.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- Tech 1 -->
+<div class="glass-panel glass-border rounded-lg p-card-padding flex items-center gap-4 hover:bg-surface-container-highest transition-colors cursor-default">
+<div class="w-10 h-10 rounded-full bg-surface flex items-center justify-center border border-glass-stroke">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="visibility">visibility</span>
+</div>
+<div>
+<div class="font-body-lg text-body-lg text-on-surface">AI Vision</div>
+<div class="font-label-md text-label-md text-text-muted">Edge-based Inference</div>
+</div>
+</div>
+<!-- Tech 2 -->
+<div class="glass-panel glass-border rounded-lg p-card-padding flex items-center gap-4 hover:bg-surface-container-highest transition-colors cursor-default">
+<div class="w-10 h-10 rounded-full bg-surface flex items-center justify-center border border-glass-stroke">
+<span class="material-symbols-outlined text-tertiary text-xl" data-icon="local_florist">local_florist</span>
+</div>
+<div>
+<div class="font-body-lg text-body-lg text-on-surface">PlantVillage</div>
+<div class="font-label-md text-label-md text-text-muted">Verified Datasets</div>
+</div>
+</div>
+<!-- Tech 3 -->
+<div class="glass-panel glass-border rounded-lg p-card-padding flex items-center gap-4 hover:bg-surface-container-highest transition-colors cursor-default">
+<div class="w-10 h-10 rounded-full bg-surface flex items-center justify-center border border-glass-stroke">
+<span class="material-symbols-outlined text-secondary text-xl" data-icon="partly_cloudy_day">partly_cloudy_day</span>
+</div>
+<div>
+<div class="font-body-lg text-body-lg text-on-surface">Weather API</div>
+<div class="font-label-md text-label-md text-text-muted">Real-time Metrics</div>
+</div>
+</div>
+<!-- Tech 4 -->
+<div class="glass-panel glass-border rounded-lg p-card-padding flex items-center gap-4 hover:bg-surface-container-highest transition-colors cursor-default">
+<div class="w-10 h-10 rounded-full bg-surface flex items-center justify-center border border-glass-stroke">
+<span class="material-symbols-outlined text-primary-container text-xl" data-icon="map">map</span>
+</div>
+<div>
+<div class="font-body-lg text-body-lg text-on-surface">Maps &amp; Spatial</div>
+<div class="font-label-md text-label-md text-text-muted">Geospatial Tracking</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Suppressed BottomNavBar as this is an informational destination page, 
+         prioritizing the content canvas over global navigation loops as per rules. -->
+
+
+</body></html>

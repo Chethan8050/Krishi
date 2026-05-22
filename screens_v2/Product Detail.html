@@ -1,0 +1,286 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Organic Tomatoes - KrishiDrishti</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#37393c",
+                        "on-primary-fixed": "#002113",
+                        "on-surface": "#e2e2e6",
+                        "inverse-primary": "#006c49",
+                        "surface-dim": "#111416",
+                        "primary-container": "#10b981",
+                        "secondary": "#bac8d7",
+                        "inverse-surface": "#e2e2e6",
+                        "glass-stroke": "rgba(255, 255, 255, 0.1)",
+                        "surface-container-low": "#1a1c1f",
+                        "on-tertiary-fixed-variant": "#004a75",
+                        "on-background": "#e2e2e6",
+                        "on-error": "#690005",
+                        "surface-container": "#1e2023",
+                        "inverse-on-surface": "#2f3034",
+                        "on-secondary-container": "#a9b7c6",
+                        "on-primary-fixed-variant": "#005236",
+                        "primary-fixed-dim": "#4edea3",
+                        "secondary-container": "#3b4855",
+                        "on-tertiary-container": "#003c60",
+                        "on-tertiary-fixed": "#001d32",
+                        "background": "#111416",
+                        "on-primary-container": "#00422b",
+                        "surface-tint": "#4edea3",
+                        "tertiary": "#96ccff",
+                        "secondary-fixed": "#d6e4f4",
+                        "error-container": "#93000a",
+                        "on-secondary-fixed": "#0f1d28",
+                        "on-primary": "#003824",
+                        "secondary-fixed-dim": "#bac8d7",
+                        "surface-container-high": "#282a2d",
+                        "surface": "#111416",
+                        "error": "#ffb4ab",
+                        "on-secondary-fixed-variant": "#3b4855",
+                        "on-tertiary": "#003353",
+                        "surface-variant": "#333538",
+                        "surface-container-highest": "#333538",
+                        "tertiary-fixed-dim": "#96ccff",
+                        "text-muted": "#A9B7C6",
+                        "tertiary-container": "#4ca9f1",
+                        "on-secondary": "#24323e",
+                        "surface-container-lowest": "#0c0e11",
+                        "outline": "#86948a",
+                        "surface-dark": "#1E1E1E",
+                        "on-error-container": "#ffdad6",
+                        "primary-fixed": "#6ffbbe",
+                        "tertiary-fixed": "#cee5ff",
+                        "primary": "#4edea3",
+                        "on-surface-variant": "#bbcabf",
+                        "outline-variant": "#3c4a42"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "section-gap": "40px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "32px",
+                        "card-padding": "18px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "display-lg": ["60px", { "lineHeight": "60px", "letterSpacing": "-0.025em", "fontWeight": "500" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "300" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+        }
+        .glass-panel {
+            background: rgba(43, 45, 48, 0.7);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid theme('colors.glass-stroke');
+            position: relative;
+        }
+        .glass-panel::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1px;
+            background: linear-gradient(to bottom right, rgba(255,255,255,0.1), transparent);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+        .text-gradient {
+            background: linear-gradient(to right, theme('colors.primary'), theme('colors.primary-fixed-dim'));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col pt-16 pb-20 md:pb-0">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-margin-mobile md:px-margin-desktop h-16 bg-surface/70 backdrop-blur-xl border-b border-glass-stroke">
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center p-2 rounded-full hover:bg-surface-variant/50">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<span class="font-display-lg text-headline-lg-mobile md:text-headline-lg text-primary tracking-tight">KrishiDrishti</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-primary-fixed transition-colors active:scale-95 duration-150">
+<span class="material-symbols-outlined" data-icon="translate">translate</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary-fixed transition-colors active:scale-95 duration-150">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</header>
+<main class="flex-grow w-full max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop py-section-gap grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Left Column: Images & Gallery -->
+<div class="lg:col-span-7 flex flex-col gap-gutter">
+<div class="glass-panel rounded-xl overflow-hidden aspect-[4/3] md:aspect-video relative group">
+<img alt="Fresh Organic Tomatoes" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A vibrant, high-resolution close-up of freshly harvested, plump organic tomatoes resting in a woven wooden basket. The tomatoes are a deep, rich crimson red, with droplets of morning dew clinging to their skin, catching the light. The setting is a rustic farm environment, illuminated by soft, natural sunlight that enhances the fresh, organic aesthetic. The overall mood is earthy, wholesome, and professional, perfectly aligning with a premium dark emerald agricultural technology platform theme." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_AfWPI-TdDrlhFY38l1zd7Ssu_U5qRbE8H1z68-7rafnAAL7RsmYmeTOMuqYbkj3XkH7rwv2p1OFpetWSbdVnBgPk05cFXn50vUMICuoVy_tdqaQ8wKAVdUfjwCGs36X06IIalVLxkDnb-jCQwpCfKLQO7-LvxAeb_wyETU7yZ08HxbSQuzeFGmZF7013It8C55aPHwlhDzRbV6Kp_hW21RZqOVG1ZVKHzneMcLKQpVm7s4ldaKnYtsrFR-3tjF_pol9YmrqdRWTS">
+<div class="absolute top-4 left-4 flex gap-2">
+<span class="bg-primary-container/20 backdrop-blur-md border border-primary/30 text-primary px-3 py-1 rounded-full font-label-md text-label-md flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="verified">verified</span>
+                        Verified Organic
+                    </span>
+<span class="bg-surface-variant/80 backdrop-blur-md border border-glass-stroke text-on-surface px-3 py-1 rounded-full font-label-md text-label-md flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="local_shipping">local_shipping</span>
+                        Ships Today
+                    </span>
+</div>
+</div>
+<!-- Thumbnail Gallery -->
+<div class="flex gap-4 overflow-x-auto hide-scrollbar py-2">
+<div class="w-24 h-24 rounded-lg glass-panel overflow-hidden shrink-0 border-primary border-2 cursor-pointer">
+<img alt="Thumbnail 1" class="w-full h-full object-cover" data-alt="Thumbnail view of fresh red organic tomatoes in a basket. Soft natural lighting highlights the dew on their surface. Part of a dark emerald high-tech farm marketplace design." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-paSpQnduzi16AGQmp7SGyDVyXn0xL5AEEgmsqtzHgQPzYYCnyxYjYdL-qCr_smjtnfyO-eXb-UzUtcpooMTvBKKGoBtBX8PeHjCD7fumTb7BkfiGjMk8WfeirlWdHhPOPRkE0SVRdMnrkQBl3E_zVMlNLzMOYNEATevg9QsOI1fGjd3yPWXn3URLEhCAbRsp7KK6DO8HpYKJ3VvtZzo4iff8nDIvHjmH9VlRkpqT6AY1HJ5gMdbKijdFQVITOSvkeZQSAuFqeHw3">
+</div>
+<div class="w-24 h-24 rounded-lg glass-panel overflow-hidden shrink-0 opacity-70 hover:opacity-100 transition-opacity cursor-pointer">
+<img alt="Thumbnail 2" class="w-full h-full object-cover" data-alt="Thumbnail view showing tomatoes on the vine in a greenhouse. Green foliage visible in the background. Part of a dark emerald high-tech farm marketplace design." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFnh4jPyL0vjGvXrbN_wIkjx6aAmRTkiYTebsSZYvZCVr_GbIq4Xnzz86NaHzF1kG9ixy1VNzdD7DqZpzfoufFRoGw0oMxFh04_5GhRXcgcabsdI5hF7HrSysr9bJ82HL0EfocdF-tZmScq18QzJyvVRUQnvdGC3yhKb4vmmHnTKVV4uPGwnvKXZsZuVCfUscoZIUNM5KXNxZqPAvJE6u6or2hGIgRJW2SvSWrkjuM3wMHKBRo0KdKliOG7LWQ5-dF68fulHn2CawH">
+</div>
+<div class="w-24 h-24 rounded-lg glass-panel overflow-hidden shrink-0 opacity-70 hover:opacity-100 transition-opacity cursor-pointer flex items-center justify-center bg-surface-container">
+<span class="material-symbols-outlined text-3xl text-on-surface-variant">add_photo_alternate</span>
+</div>
+</div>
+</div>
+<!-- Right Column: Product Details & Actions -->
+<div class="lg:col-span-5 flex flex-col gap-6">
+<!-- Header Info -->
+<div class="glass-panel p-card-padding rounded-xl flex flex-col gap-4">
+<div>
+<h1 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-2">Organic Roma Tomatoes</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Premium quality, pesticide-free tomatoes harvested daily from the fertile plains of Punjab. Ideal for purees, salads, and commercial cooking.</p>
+</div>
+<div class="flex items-end justify-between border-t border-glass-stroke pt-4 mt-2">
+<div>
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider block mb-1">Market Price</span>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-lg text-headline-lg text-primary">₹40</span>
+<span class="font-body-md text-body-md text-on-surface-variant">/ kg</span>
+</div>
+</div>
+<div class="text-right">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider block mb-1">Available Stock</span>
+<span class="font-headline-md text-headline-md text-secondary">50 kg</span>
+</div>
+</div>
+</div>
+<!-- Farmer Profile -->
+<div class="glass-panel p-card-padding rounded-xl flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full overflow-hidden border border-glass-stroke relative">
+<img alt="Ravi Kumar" class="w-full h-full object-cover" data-alt="Portrait of an experienced Indian farmer wearing a simple light shirt, smiling subtly. The background is slightly blurred out farmland. Professional, warm, and trustworthy mood, fitting a dark emerald agricultural tech aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3cOzrZkfKrWPyzk7B7PnozUtGgiXimFVpIozR59S68xXYQy_s7EIGRA198NtZIih8f8ojsdu8U3yHtjVUWPA7YRHs1W_Gr5F4k103vXlDbeb0NDmnYkBsvBWYRhs6lbqCVS7aDqMTOf7CE4XhZisSK1mqQA6eme_mifzg7voAr3q2UeDMCY7Xr55y00wlKITkpAZhGauIYYOyov2hJngIPhZJCJA-XAVY2WSWQritxXKGl2jKTIod8y7Zvo7i9EUeFUdSvf8AylUQ">
+<div class="absolute bottom-0 right-0 w-3 h-3 bg-primary rounded-full border-2 border-surface"></div>
+</div>
+<div>
+<h3 class="font-headline-md text-body-lg text-on-surface">Ravi Kumar</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-tertiary">location_on</span>
+                            Green Acres Farm, Ludhiana
+                        </p>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<div class="flex items-center gap-1 text-yellow-400">
+<span class="font-headline-md text-body-lg">4.8</span>
+<span class="material-symbols-outlined text-[18px]" data-weight="fill">star</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant">124 Reviews</span>
+</div>
+</div>
+<!-- Farm Specs Bento -->
+<div class="grid grid-cols-2 gap-4">
+<div class="glass-panel p-4 rounded-xl flex flex-col gap-2">
+<span class="material-symbols-outlined text-tertiary">water_drop</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Irrigation</span>
+<span class="font-body-sm text-body-sm text-on-surface">Drip System</span>
+</div>
+<div class="glass-panel p-4 rounded-xl flex flex-col gap-2">
+<span class="material-symbols-outlined text-primary">eco</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Fertilizer</span>
+<span class="font-body-sm text-body-sm text-on-surface">100% Vermicompost</span>
+</div>
+<div class="glass-panel p-4 rounded-xl flex flex-col gap-2">
+<span class="material-symbols-outlined text-secondary">calendar_month</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Harvest Date</span>
+<span class="font-body-sm text-body-sm text-on-surface">Today, 06:00 AM</span>
+</div>
+<div class="glass-panel p-4 rounded-xl flex flex-col gap-2">
+<span class="material-symbols-outlined text-on-surface-variant">straighten</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Avg. Size</span>
+<span class="font-body-sm text-body-sm text-on-surface">60-80 grams</span>
+</div>
+</div>
+<!-- Actions -->
+<div class="mt-auto flex flex-col gap-3 pt-4">
+<div class="flex items-center justify-between glass-panel p-2 rounded-lg mb-2">
+<span class="font-body-sm text-body-sm text-on-surface-variant pl-2">Quantity (kg)</span>
+<div class="flex items-center gap-4 bg-surface-container-high rounded-md p-1 border border-glass-stroke">
+<button class="w-8 h-8 flex items-center justify-center text-on-surface hover:text-primary transition-colors">
+<span class="material-symbols-outlined">remove</span>
+</button>
+<span class="font-headline-md text-body-lg text-on-surface w-8 text-center">10</span>
+<button class="w-8 h-8 flex items-center justify-center text-on-surface hover:text-primary transition-colors">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</div>
+<button class="w-full bg-primary text-on-primary font-headline-md text-body-lg py-3 rounded-full hover:bg-primary-fixed transition-colors flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(16,185,129,0.3)] hover:shadow-[0_0_25px_rgba(16,185,129,0.5)]">
+<span class="material-symbols-outlined">shopping_cart</span>
+                    Add to Cart (₹400)
+                </button>
+<button class="w-full bg-transparent border border-glass-stroke text-on-surface font-headline-md text-body-lg py-3 rounded-full hover:border-primary/50 hover:bg-primary/5 transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">event_available</span>
+                    Prebook Future Harvest
+                </button>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Hidden on Web, visible on Mobile for Destinations) -->
+<!-- Suppressed here as this is a focused Detail/Transactional page with a back button, 
+         following the rule: "Task-Focused: Any sub-page featuring a 'Close' or 'Back' action 
+         that implies a temporary departure from the main navigation flow." -->
+</body></html>

@@ -1,15 +1,12 @@
 'use client';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAppStore } from '../../../store/useAppStore';
 import { useEffect, useState } from 'react';
-import { createT } from '../../../../lib/i18n';
 
 export default function ResultHealthyPage() {
   const router = useRouter();
   const [mounted, setMounted] = useState(false);
-  const { recentScanResult, selectedImage, language } = useAppStore();
-  const t = createT(language);
+  const { recentScanResult, selectedImage } = useAppStore();
   const [imageUrl, setImageUrl] = useState<string>('');
 
   useEffect(() => {
@@ -28,95 +25,115 @@ export default function ResultHealthyPage() {
   const speakResult = () => {
     if (!recentScanResult) return;
     const utterance = new SpeechSynthesisUtterance();
-    utterance.text = `${recentScanResult.crop}. ${t('result.healthy')}. ${recentScanResult.message}. ${t('result.careTips')}: ${recentScanResult.tips.join('. ')}`;
-    utterance.lang = language === 'kn' ? 'kn-IN' : language === 'hi' ? 'hi-IN' : 'en-IN';
+    utterance.text = `${recentScanResult.crop}. Healthy. ${recentScanResult.message}. Care Tips: ${recentScanResult.tips.join('. ')}`;
     window.speechSynthesis.speak(utterance);
   };
 
   if (!mounted || !recentScanResult) return (
-    <div className="bg-[#f9f9f9] min-h-screen flex items-center justify-center">
-      <span className="material-symbols-outlined text-[#00450d] text-[48px] animate-spin">sync</span>
+    <div className="bg-background min-h-screen flex items-center justify-center">
+      <span className="material-symbols-outlined text-primary text-[48px] animate-spin">sync</span>
     </div>
   );
 
   return (
-    <div className="bg-[#f9f9f9] text-[#1a1c1c] min-h-screen pb-32">
-      <nav className="sticky top-0 w-full z-50 flex justify-between items-center px-4 py-2 bg-white border-b border-[#c0c9bb] shadow-sm">
-        <div className="flex items-center gap-4">
-          <button onClick={() => router.back()} className="material-symbols-outlined text-[#00450d] hover:bg-[#f3f3f4] p-2 rounded-full transition-colors active:opacity-80">arrow_back</button>
-          <h1 className="font-bold text-[24px] text-[#00450d]">{t('result.title')}</h1>
-        </div>
-        <button className="material-symbols-outlined text-[#00450d] hover:bg-[#f3f3f4] p-2 rounded-full transition-colors">share</button>
-      </nav>
-
-      <main className="px-4 mt-6 space-y-6 max-w-2xl mx-auto">
-        {/* Image */}
-        <div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden border border-[#c0c9bb] bg-[#eeeeee] shadow-sm">
-          <img className="w-full h-full object-cover"
-            src={imageUrl || "https://images.unsplash.com/photo-1592419044706-39796d40f98c?auto=format&fit=crop&q=80&w=800"}
-            alt="Scanned crop" />
-          <div className="absolute top-4 left-4">
-            <span className="bg-[#00450d]/90 text-white px-4 py-1 rounded-full font-bold text-[14px] shadow-sm backdrop-blur-sm">{recentScanResult.crop}</span>
+    <div className="bg-background text-on-surface min-h-screen pb-[100px] md:pb-0 overflow-x-hidden antialiased flex flex-col">
+      {/* Main Canvas */}
+      <main className="flex-grow pt-24 md:pt-28 px-margin-mobile md:px-margin-desktop max-w-7xl mx-auto space-y-section-gap w-full">
+        {/* Result Overview Area */}
+        <section className="flex flex-col items-center justify-center text-center space-y-6 py-8">
+          <div className="relative inline-flex items-center justify-center w-32 h-32 rounded-full glass-panel glow-effect">
+            <div className="absolute inset-0 rounded-full bg-primary/20 animate-pulse"></div>
+            <span className="material-symbols-outlined text-primary" style={{ fontSize: '64px', fontVariationSettings: "'FILL' 1" }}>verified</span>
           </div>
-        </div>
-
-        {/* Healthy Result */}
-        <div className="bg-[#bdefbe]/30 border border-[#426e47]/20 p-6 rounded-2xl flex flex-col items-center text-center space-y-4 shadow-sm">
-          <div className="w-16 h-16 bg-[#00450d] rounded-full flex items-center justify-center text-white shadow-lg">
-            <span className="material-symbols-outlined text-[40px]" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
+          <div className="space-y-2">
+            <h2 className="font-display-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">Healthy Plant</h2>
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20">
+              <span className="material-symbols-outlined text-primary text-[18px]">psychology</span>
+              <span className="font-label-md text-body-sm text-primary">Confidence {Math.round(recentScanResult.confidence * 100)}%</span>
+            </div>
           </div>
-          <div>
-            <h2 className="font-bold text-[24px] text-[#00450d]">{t('result.healthy')}</h2>
-            <p className="text-[16px] text-[#41493e] leading-relaxed">{recentScanResult.message}</p>
-          </div>
-          <span className="bg-[#acf4a4] text-[#002203] px-6 py-1 rounded-full font-bold text-[14px] shadow-sm">
-            {Math.round(recentScanResult.confidence * 100)}% {t('result.confident')}
-          </span>
-        </div>
+          <p className="font-body-md text-body-md text-on-surface-variant max-w-md mx-auto">
+            {recentScanResult.message}
+          </p>
+        </section>
 
-        {/* Care Tips */}
-        <div className="bg-white border border-[#c0c9bb] p-6 rounded-2xl space-y-4 shadow-sm">
-          <div className="flex items-center gap-2 mb-2">
-            <span className="material-symbols-outlined text-[#00450d]">potted_plant</span>
-            <h3 className="font-bold text-[20px] text-[#00450d]">{t('result.careTips')}</h3>
+        {/* Bento Grid Layout for Details & Tips */}
+        <section className="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+          {/* Analyzed Image */}
+          <div className="md:col-span-5 glass-panel rounded-xl overflow-hidden min-h-[300px] flex flex-col">
+            <div className="p-4 border-b border-glass-stroke flex justify-between items-center bg-surface-container/50">
+              <h3 className="font-headline-md text-body-md text-on-surface flex items-center gap-2">
+                <span className="material-symbols-outlined text-[20px]">image</span>
+                Analyzed Sample
+              </h3>
+              <span className="font-label-md text-label-md text-on-surface-variant uppercase bg-surface-variant/50 px-2 py-1 rounded">{recentScanResult.crop}</span>
+            </div>
+            <div className="flex-grow bg-surface relative min-h-[250px]">
+              <img 
+                alt="Analyzed crop" 
+                className="absolute inset-0 w-full h-full object-cover opacity-80" 
+                src={imageUrl || "https://images.unsplash.com/photo-1592419044706-39796d40f98c?auto=format&fit=crop&q=80&w=800"} 
+              />
+              <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:20px_20px] pointer-events-none"></div>
+              <div className="absolute top-4 right-4 flex gap-2">
+                <span className="w-2 h-2 rounded-full bg-primary animate-ping"></span>
+              </div>
+            </div>
           </div>
-          <ul className="space-y-4">
-            {recentScanResult.tips.map((tip: string) => (
-              <li key={tip} className="flex items-start gap-4">
-                <span className="material-symbols-outlined text-[#00450d] mt-1 text-[20px]" style={{ fontVariationSettings: "'FILL' 1" }}>check</span>
-                <p className="text-[16px] text-[#41493e] leading-relaxed">{tip}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
 
-        {/* Audio */}
-        <div className="space-y-4 pt-2">
-          <button onClick={speakResult} className="w-full bg-[#00450d] text-white rounded-full py-5 flex items-center justify-center gap-4 active:scale-[0.98] transition-transform shadow-lg">
-            <span className="material-symbols-outlined">volume_up</span>
-            <span className="font-bold text-[16px]">{t('result.hearLocal')}</span>
+          {/* Care Tips */}
+          <div className="md:col-span-7 flex flex-col gap-gutter">
+            <div className="glass-panel rounded-xl p-card-padding flex-grow flex flex-col">
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="font-headline-md text-headline-md text-on-surface flex items-center gap-2">
+                  <span className="material-symbols-outlined text-primary">spa</span>
+                  Maintenance Protocol
+                </h3>
+                <button onClick={speakResult} className="inline-flex items-center gap-2 bg-surface border border-glass-stroke hover:bg-primary/10 hover:border-primary/50 text-on-surface hover:text-primary transition-all rounded-full px-4 py-2 font-label-md text-body-sm group">
+                  <span className="material-symbols-outlined group-hover:text-primary">volume_up</span>
+                  Hear Care Tips
+                </button>
+              </div>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-grow">
+                {recentScanResult.tips.map((tip: string, idx: number) => {
+                  const icons = ['water_drop', 'science', 'calendar_month', 'cut'];
+                  const colors = ['text-tertiary', 'text-primary', 'text-on-surface', 'text-error'];
+                  return (
+                    <div key={idx} className="bg-surface-container/50 border border-glass-stroke rounded-lg p-4 flex gap-4 items-start hover:border-primary/30 transition-colors">
+                      <div className="w-10 h-10 rounded-full bg-surface flex items-center justify-center shrink-0">
+                        <span className={`material-symbols-outlined ${colors[idx % colors.length]}`}>{icons[idx % icons.length]}</span>
+                      </div>
+                      <div>
+                        <h4 className="font-headline-md text-body-md text-on-surface mb-1">Protocol {idx + 1}</h4>
+                        <p className="font-body-md text-body-sm text-on-surface-variant">{tip}</p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Actions */}
+        <section className="flex justify-center gap-4 py-8">
+          <button className="bg-surface border border-glass-stroke hover:bg-surface-container text-on-surface px-6 py-3 rounded-full font-headline-md text-body-md transition-colors flex items-center gap-2">
+            <span className="material-symbols-outlined">history</span>
+            Save to Log
           </button>
-        </div>
-
-        <button onClick={() => router.push('/scan')} className="w-full border-2 border-[#00450d] text-[#00450d] rounded-full py-5 flex items-center justify-center gap-4 hover:bg-[#f3f3f4] transition-colors active:opacity-80">
-          <span className="material-symbols-outlined">document_scanner</span>
-          <span className="font-bold text-[16px]">{t('result.scanAnother')}</span>
-        </button>
+          <button onClick={() => router.push('/scan')} className="bg-primary hover:bg-primary/90 text-background border border-transparent px-6 py-3 rounded-full font-headline-md text-body-md transition-all flex items-center gap-2">
+            <span className="material-symbols-outlined">add_a_photo</span>
+            New Scan
+          </button>
+        </section>
       </main>
 
-      <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] z-50 flex justify-around items-center px-1 py-3 bg-white border-t border-[#c0c9bb] shadow-[0_-4px_16px_rgba(0,0,0,0.05)]">
-        {[
-          { icon: 'home', label: t('nav.home'), href: '/dashboard' },
-          { icon: 'document_scanner', label: t('nav.scan'), href: '/scan', active: true },
-          { icon: 'bar_chart', label: t('nav.yield'), href: '/yield' },
-          { icon: 'more_horiz', label: t('nav.more'), href: '/community' },
-        ].map(item => (
-          <Link key={item.label} href={item.href} className={`flex flex-col items-center justify-center px-4 py-1 active:scale-95 transition-transform rounded-full ${item.active ? 'bg-[#bdefbe] text-[#426e47]' : 'text-[#41493e]'}`}>
-            <span className="material-symbols-outlined">{item.icon}</span>
-            <span className="text-[12px] font-medium">{item.label}</span>
-          </Link>
-        ))}
-      </nav>
+      <style jsx>{`
+        .glow-effect {
+            box-shadow: 0 0 24px rgba(16, 185, 129, 0.15);
+        }
+      `}</style>
     </div>
   );
 }

@@ -3,8 +3,8 @@ import os
 import urllib.request
 import re
 
-json_path = r"C:\Users\Preetham S.M\.gemini\antigravity\brain\3c9975e0-ea43-4fe6-87ce-0ebe4ae9196c\.system_generated\steps\13\output.txt"
-output_dir = r"c:\Users\Preetham S.M\Downloads\hackathon\Krishidrishthi\screens"
+json_path = r"C:\Users\Preetham S.M\.gemini\antigravity-ide\brain\b034d8db-a335-4459-8d5a-e9c9eb48ab96\.system_generated\steps\12\output.txt"
+output_dir = r"c:\Users\Preetham S.M\Downloads\hackathon\Krishidrishthi\screens_v2"
 
 if not os.path.exists(output_dir):
     os.makedirs(output_dir)

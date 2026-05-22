@@ -3,7 +3,21 @@ import { persist } from 'zustand/middleware';
 
 export type Language = 'en' | 'hi' | 'kn';
 
+interface User {
+  id: string;
+  phone: string;
+  email?: string;
+  fullName?: string;
+  district?: string;
+}
+
 interface AppState {
+  // Auth
+  user: User | null;
+  isAuthenticated: boolean;
+  setUser: (user: User | null) => void;
+  logout: () => void;
+  
   // Global Settings
   language: Language;
   setLanguage: (lang: Language) => void;
@@ -37,6 +51,13 @@ interface AppState {
 export const useAppStore = create<AppState>()(
   persist(
     (set) => ({
+      // Auth
+      user: null,
+      isAuthenticated: false,
+      setUser: (user) => set({ user, isAuthenticated: !!user }),
+      logout: () => set({ user: null, isAuthenticated: false, hasCompletedOnboarding: false }),
+
+      // Global Settings
       language: 'en',
       setLanguage: (lang) => set({ language: lang }),
       hasCompletedOnboarding: false,
@@ -63,7 +84,7 @@ export const useAppStore = create<AppState>()(
       toggleTheme: () => set((state) => ({ theme: state.theme === 'light' ? 'dark' : 'light' })),
     }),
     {
-      name: 'kisan-ai-storage', // local storage key
+      name: 'kisan-ai-storage',
       partialize: (state) => {
         const { selectedImage, ...persistedState } = state;
         return persistedState;

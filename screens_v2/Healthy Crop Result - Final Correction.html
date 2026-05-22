@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KrishiDrishti - Healthy Result</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "inverse-surface": "#e2e2e6",
+                "tertiary-fixed": "#cee5ff",
+                "surface-container-lowest": "#0c0e11",
+                "outline": "#86948a",
+                "error-container": "#93000a",
+                "on-tertiary": "#003353",
+                "background": "#111416",
+                "surface-dim": "#111416",
+                "on-tertiary-fixed-variant": "#004a75",
+                "surface-container-high": "#282a2d",
+                "secondary": "#bac8d7",
+                "on-tertiary-container": "#003c60",
+                "tertiary": "#96ccff",
+                "on-surface-variant": "#bbcabf",
+                "on-secondary-container": "#a9b7c6",
+                "primary-fixed-dim": "#4edea3",
+                "on-error": "#690005",
+                "primary-fixed": "#6ffbbe",
+                "tertiary-container": "#4ca9f1",
+                "on-surface": "#e2e2e6",
+                "surface-container-low": "#1a1c1f",
+                "outline-variant": "#3c4a42",
+                "surface-container-highest": "#333538",
+                "primary": "#10b981",
+                "on-background": "#e2e2e6",
+                "on-secondary-fixed": "#0f1d28",
+                "on-secondary": "#24323e",
+                "tertiary-fixed-dim": "#96ccff",
+                "secondary-fixed-dim": "#bac8d7",
+                "on-primary-fixed-variant": "#005236",
+                "surface-variant": "#333538",
+                "surface-tint": "#4edea3",
+                "on-primary-container": "#00422b",
+                "inverse-on-surface": "#2f3034",
+                "text-muted": "#A9B7C6",
+                "primary-container": "#10b981",
+                "error": "#ffb4ab",
+                "surface-container": "#1e2023",
+                "surface": "#111416",
+                "on-error-container": "#ffdad6",
+                "on-primary": "#003824",
+                "surface-bright": "#37393c",
+                "on-tertiary-fixed": "#001d32",
+                "secondary-container": "#3b4855",
+                "on-primary-fixed": "#002113",
+                "glass-stroke": "rgba(255, 255, 255, 0.1)",
+                "secondary-fixed": "#d6e4f4",
+                "surface-dark": "#1E1E1E",
+                "inverse-primary": "#006c49",
+                "on-secondary-fixed-variant": "#3b4855"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+        },
+        "spacing": {
+                "margin-desktop": "32px",
+                "card-padding": "24px",
+                "section-gap": "40px",
+                "base": "8px",
+                "gutter": "16px",
+                "margin-mobile": "16px"
+        },
+        "fontFamily": {
+                "display-lg": [
+                        "Inter"
+                ],
+                "headline-lg": [
+                        "Inter"
+                ],
+                "headline-lg-mobile": [
+                        "Inter"
+                ],
+                "body-lg": [
+                        "Inter"
+                ],
+                "body-md": [
+                        "Inter"
+                ],
+                "label-md": [
+                        "Inter"
+                ],
+                "headline-md": [
+                        "Inter"
+                ],
+                "body-sm": [
+                        "Inter"
+                ]
+        },
+        "fontSize": {
+                "display-lg": [
+                        "60px",
+                        {
+                                "lineHeight": "60px",
+                                "letterSpacing": "-0.025em",
+                                "fontWeight": "500"
+                        }
+                ],
+                "headline-lg": [
+                        "32px",
+                        {
+                                "lineHeight": "40px",
+                                "letterSpacing": "-0.01em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-lg-mobile": [
+                        "28px",
+                        {
+                                "lineHeight": "36px",
+                                "fontWeight": "600"
+                        }
+                ],
+                "body-lg": [
+                        "18px",
+                        {
+                                "lineHeight": "28px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "body-md": [
+                        "16px",
+                        {
+                                "lineHeight": "24px",
+                                "fontWeight": "300"
+                        }
+                ],
+                "label-md": [
+                        "12px",
+                        {
+                                "lineHeight": "16px",
+                                "letterSpacing": "0.05em",
+                                "fontWeight": "400"
+                        }
+                ],
+                "headline-md": [
+                        "24px",
+                        {
+                                "lineHeight": "32px",
+                                "fontWeight": "600"
+                        }
+                ],
+                "body-sm": [
+                        "14px",
+                        {
+                                "lineHeight": "20px",
+                                "fontWeight": "400"
+                        }
+                ]
+        }
+},
+    },
+  }
+</script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.filled {
+            font-variation-settings: 'FILL' 1;
+        }
+        
+        /* Glassmorphism utility classes */
+        .glass-panel {
+            background-color: rgba(43, 45, 48, 0.8);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 0.67px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        .glow-effect {
+            box-shadow: 0 0 24px rgba(16, 185, 129, 0.15);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen pb-[100px] md:pb-0 overflow-x-hidden antialiased">
+<!-- Header (Web) -->
+<header class="hidden md:flex bg-surface/70 backdrop-blur-xl border-b border-glass-stroke fixed top-0 w-full z-50 justify-between items-center px-margin-desktop h-16">
+<div class="flex items-center gap-gutter">
+<img alt="KrishiDrishti Logo" class="w-8 h-8 object-contain" src="https://lh3.googleusercontent.com/aida/ADBb0uhK_PKJK8NzipA0TUbAk6ihUmwDw_YGbUwDfTbIZUG8CNUrRU7VFsGHiJ_kNcxBvuMhiHz22rFEng4a4XRTprkaBmOJZmIWHKU4OIjf489Bl7G7DfKYEOumJRqz6zD9mhaPQ_Dk5FrTa1Er5peEbDPZ75FhvPZ7NtmUuGayOKRcM-UtCkT_rIrN26Zo35iPupkgbNtqLKwfncvAh4rvL2CYiGI9FJKlsITj36712jMoTeiJIC2xkbFd5Tz2"/>
+<h1 class="font-display-lg text-headline-md text-primary tracking-tight">KrishiDrishti</h1>
+</div>
+<nav class="flex gap-gutter">
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md px-3 py-2" href="#">Home</a>
+<a class="text-primary font-bold hover:text-primary transition-colors font-label-md text-label-md px-3 py-2 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-primary" href="#">Detection</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md px-3 py-2" href="#">Intelligence</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md px-3 py-2" href="#">Settings</a>
+</nav>
+<div class="flex gap-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined">translate</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Header (Mobile) -->
+<header class="md:hidden bg-surface/70 backdrop-blur-xl border-b border-glass-stroke fixed top-0 w-full z-50 flex justify-between items-center px-margin-mobile h-16">
+<div class="flex items-center gap-2">
+<img alt="KrishiDrishti Logo" class="w-8 h-8 object-contain" src="https://lh3.googleusercontent.com/aida/ADBb0uhK_PKJK8NzipA0TUbAk6ihUmwDw_YGbUwDfTbIZUG8CNUrRU7VFsGHiJ_kNcxBvuMhiHz22rFEng4a4XRTprkaBmOJZmIWHKU4OIjf489Bl7G7DfKYEOumJRqz6zD9mhaPQ_Dk5FrTa1Er5peEbDPZ75FhvPZ7NtmUuGayOKRcM-UtCkT_rIrN26Zo35iPupkgbNtqLKwfncvAh4rvL2CYiGI9FJKlsITj36712jMoTeiJIC2xkbFd5Tz2"/>
+<h1 class="font-display-lg text-headline-lg-mobile text-primary tracking-tight">KrishiDrishti</h1>
+</div>
+<div class="flex gap-3">
+<button class="text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined">translate</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="pt-24 md:pt-28 px-margin-mobile md:px-margin-desktop max-w-7xl mx-auto space-y-section-gap">
+<!-- Result Overview Area (Hero-like) -->
+<section class="flex flex-col items-center justify-center text-center space-y-6 py-8">
+<!-- Success Avatar/Icon with Glow -->
+<div class="relative inline-flex items-center justify-center w-32 h-32 rounded-full glass-panel glow-effect">
+<div class="absolute inset-0 rounded-full bg-primary/20 animate-pulse"></div>
+<span class="material-symbols-outlined filled text-primary" style="font-size: 64px;">verified</span>
+</div>
+<div class="space-y-2">
+<h2 class="font-display-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">Healthy Plant</h2>
+<div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20">
+<span class="material-symbols-outlined text-primary text-[18px]">psychology</span>
+<span class="font-label-md text-body-sm text-primary">Confidence 96%</span>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-md mx-auto">
+                No signs of disease or pest infestation detected. Your crop is currently thriving under current conditions.
+            </p>
+</section>
+<!-- Bento Grid Layout for Details & Tips -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Analyzed Image (Visual Anchor) -->
+<div class="md:col-span-5 glass-panel rounded-xl overflow-hidden min-h-[300px] flex flex-col">
+<div class="p-4 border-b border-glass-stroke flex justify-between items-center bg-surface-container/50">
+<h3 class="font-headline-md text-body-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">image</span>
+                        Analyzed Sample
+                    </h3>
+<span class="font-label-md text-label-md text-on-surface-variant">Today, 10:42 AM</span>
+</div>
+<div class="flex-grow bg-surface relative">
+<!-- Placeholder for the crop image -->
+<img alt="A high-resolution, extreme close-up photograph of a vibrant, healthy green crop leaf set against a dark, moody agricultural background. The lighting is dramatic and natural, highlighting the intricate vein structures and the glossy texture of the leaf surface. The overall aesthetic is hyper-realistic and deeply organic, embodying a sense of vitality and robust agricultural health within a professional, cinematic style." class="absolute inset-0 w-full h-full object-cover opacity-80" data-alt="A high-resolution, extreme close-up photograph of a vibrant, healthy green crop leaf set against a dark, moody agricultural background. The lighting is dramatic and natural, highlighting the intricate vein structures and the glossy texture of the leaf surface. The overall aesthetic is hyper-realistic and deeply organic, embodying a sense of vitality and robust agricultural health within a professional, cinematic style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4GrjFYluRjVBqUxmyHlexdCLryXN1xH1sro5EaXm0IMmL2Nos6zyGHWau0Giya2Lt7BLZCaIAvhBrMnUDYg7zVLkmQxgeMJiBd_PxdPwGZUGEYZ3If2FHWsbsEO3Q70CdwLBrLGyl6IU7TshFOrvYGkQ5he5Go3U8JofJsKO3RPt5AhxK5vBhtfd9PKF5HnotbwS9F3ZSyUBnJ9TO_UWaA6mSVziflplf24VUOELd48F9w7yRhoTmBMx1cxshWt_2IFddkKZFt2XQ"/>
+<!-- Overlay Grid for "Analysis" feel -->
+<div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:20px_20px] pointer-events-none"></div>
+<!-- Scan lines/indicators -->
+<div class="absolute top-4 right-4 flex gap-2">
+<span class="w-2 h-2 rounded-full bg-primary animate-ping"></span>
+</div>
+</div>
+</div>
+<!-- Care Tips (Actionable Intelligence) -->
+<div class="md:col-span-7 flex flex-col gap-gutter">
+<div class="glass-panel rounded-xl p-card-padding flex-grow flex flex-col">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-headline-md text-headline-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">spa</span>
+                            Maintenance Protocol
+                        </h3>
+<!-- Audio CTA -->
+<button class="inline-flex items-center gap-2 bg-surface border border-glass-stroke hover:bg-primary/10 hover:border-primary/50 text-on-surface hover:text-primary transition-all rounded-full px-4 py-2 font-label-md text-body-sm group">
+<span class="material-symbols-outlined group-hover:filled">volume_up</span>
+                            Hear Care Tips
+                        </button>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-grow">
+<!-- Tip 1 -->
+<div class="bg-surface-container/50 border border-glass-stroke rounded-lg p-4 flex gap-4 items-start hover:border-primary/30 transition-colors">
+<div class="w-10 h-10 rounded-full bg-surface flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-tertiary">water_drop</span>
+</div>
+<div>
+<h4 class="font-headline-md text-body-md text-on-surface mb-1">Regular Watering</h4>
+<p class="font-body-md text-body-sm text-on-surface-variant">Maintain current moisture levels. Avoid waterlogging roots.</p>
+</div>
+</div>
+<!-- Tip 2 -->
+<div class="bg-surface-container/50 border border-glass-stroke rounded-lg p-4 flex gap-4 items-start hover:border-primary/30 transition-colors">
+<div class="w-10 h-10 rounded-full bg-surface flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary">science</span>
+</div>
+<div>
+<h4 class="font-headline-md text-body-md text-on-surface mb-1">Balanced Fertiliser</h4>
+<p class="font-body-md text-body-sm text-on-surface-variant">Continue scheduled NPK application. No deficiencies detected.</p>
+</div>
+</div>
+<!-- Tip 3 -->
+<div class="bg-surface-container/50 border border-glass-stroke rounded-lg p-4 flex gap-4 items-start hover:border-primary/30 transition-colors">
+<div class="w-10 h-10 rounded-full bg-surface flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-surface">calendar_month</span>
+</div>
+<div>
+<h4 class="font-headline-md text-body-md text-on-surface mb-1">Weekly Monitoring</h4>
+<p class="font-body-md text-body-sm text-on-surface-variant">Schedule next scan in 7 days to track growth progress.</p>
+</div>
+</div>
+<!-- Tip 4 -->
+<div class="bg-surface-container/50 border border-glass-stroke rounded-lg p-4 flex gap-4 items-start hover:border-primary/30 transition-colors">
+<div class="w-10 h-10 rounded-full bg-surface flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-error">cut</span>
+</div>
+<div>
+<h4 class="font-headline-md text-body-md text-on-surface mb-1">Weed Removal</h4>
+<p class="font-body-md text-body-sm text-on-surface-variant">Keep a 2-foot radius clear around the base to prevent competition.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Actions -->
+<section class="flex justify-center gap-4 py-8">
+<button class="bg-surface border border-glass-stroke hover:bg-surface-container text-on-surface px-6 py-3 rounded-full font-headline-md text-body-md transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined">history</span>
+                Save to Log
+            </button>
+<button class="bg-primary hover:bg-primary/90 text-background border border-transparent px-6 py-3 rounded-full font-headline-md text-body-md transition-all flex items-center gap-2">
+<span class="material-symbols-outlined">add_a_photo</span>
+                New Scan
+            </button>
+</section>
+</main>
+<!-- Bottom Nav Bar (Mobile) -->
+<nav class="md:hidden bg-surface-container/80 backdrop-blur-2xl border-t border-glass-stroke shadow-lg shadow-primary/5 fixed bottom-0 w-full z-50 flex justify-around items-center px-4 pb-safe h-20">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">home_max</span>
+<span class="font-label-md text-label-md mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary bg-primary/10 rounded-xl py-1 px-3 transform scale-95 transition-all" href="#">
+<span class="material-symbols-outlined filled">sensors</span>
+<span class="font-label-md text-label-md mt-1 font-semibold">Detection</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">analytics</span>
+<span class="font-label-md text-label-md mt-1">Intelligence</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">settings</span>
+<span class="font-label-md text-label-md mt-1">Settings</span>
+</a>
+</nav>
+</body></html>

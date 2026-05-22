@@ -1,0 +1,171 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Onboarding - Disease Detection</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-dim": "#111416",
+                      "secondary": "#bac8d7",
+                      "on-secondary-container": "#a9b7c6",
+                      "error": "#ffb4ab",
+                      "surface-bright": "#37393c",
+                      "surface-dark": "#1E1E1E",
+                      "tertiary-container": "#4ca9f1",
+                      "primary-fixed": "#6ffbbe",
+                      "primary": "#4edea3",
+                      "surface-container-highest": "#333538",
+                      "on-surface-variant": "#bbcabf",
+                      "on-background": "#e2e2e6",
+                      "outline-variant": "#3c4a42",
+                      "inverse-primary": "#006c49",
+                      "tertiary-fixed": "#cee5ff",
+                      "surface-container-high": "#282a2d",
+                      "outline": "#86948a",
+                      "surface": "#111416",
+                      "on-secondary": "#24323e",
+                      "glass-stroke": "rgba(255, 255, 255, 0.1)",
+                      "on-tertiary-fixed-variant": "#004a75",
+                      "on-error-container": "#ffdad6",
+                      "inverse-surface": "#e2e2e6",
+                      "secondary-fixed-dim": "#bac8d7",
+                      "inverse-on-surface": "#2f3034",
+                      "surface-variant": "#333538",
+                      "on-secondary-fixed": "#0f1d28",
+                      "on-primary-fixed-variant": "#005236",
+                      "surface-container-lowest": "#0c0e11",
+                      "on-tertiary-fixed": "#001d32",
+                      "on-surface": "#e2e2e6",
+                      "primary-fixed-dim": "#4edea3",
+                      "surface-container-low": "#1a1c1f",
+                      "on-secondary-fixed-variant": "#3b4855",
+                      "on-error": "#690005",
+                      "error-container": "#93000a",
+                      "primary-container": "#10b981",
+                      "tertiary": "#96ccff",
+                      "on-primary-fixed": "#002113",
+                      "secondary-fixed": "#d6e4f4",
+                      "surface-tint": "#4edea3",
+                      "on-tertiary-container": "#003c60",
+                      "on-primary-container": "#00422b",
+                      "background": "#111416",
+                      "surface-container": "#1e2023",
+                      "text-muted": "#A9B7C6",
+                      "tertiary-fixed-dim": "#96ccff",
+                      "on-tertiary": "#003353",
+                      "on-primary": "#003824",
+                      "secondary-container": "#3b4855"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "margin-mobile": "16px",
+                      "margin-desktop": "32px",
+                      "base": "8px",
+                      "section-gap": "40px",
+                      "card-padding": "18px",
+                      "gutter": "16px",
+                      "safe": "env(safe-area-inset-bottom, 24px)"
+              },
+              "fontFamily": {
+                      "display-lg": ["Inter"],
+                      "body-md": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "body-sm": ["Inter"],
+                      "label-md": ["Inter"],
+                      "headline-lg-mobile": ["Inter"]
+              },
+              "fontSize": {
+                      "display-lg": ["60px", {"lineHeight": "60px", "letterSpacing": "-0.025em", "fontWeight": "500"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "300"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "400"}],
+                      "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}]
+              }
+            }
+          }
+        }
+    </script>
+<style type="text/tailwindcss">
+        @layer utilities {
+            .bg-hero-image {
+                background-image: url('https://images.unsplash.com/photo-1592982537447-6f2c6e18fbf7?q=80&w=800&auto=format&fit=crop');
+            }
+        }
+        
+        @keyframes scan {
+            0% { transform: translateY(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(50vh); opacity: 0; }
+        }
+        
+        .animate-scan {
+            animation: scan 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+    </style>
+</head>
+<body class="bg-surface-dim text-on-surface h-screen w-full flex flex-col relative overflow-hidden font-body-md antialiased selection:bg-primary selection:text-on-primary">
+<button class="absolute top-6 right-6 z-50 text-on-surface-variant hover:text-primary transition-colors duration-200">
+<span class="font-label-md text-label-md uppercase tracking-wider">Skip</span>
+</button>
+<div class="absolute -top-[10%] -left-[20%] w-[140%] h-[70%] bg-primary/10 blur-[100px] rounded-full pointer-events-none z-0"></div>
+<div class="absolute inset-0 z-0 h-[665px] w-full bg-cover bg-center bg-no-repeat bg-hero-image" data-alt="A cinematic, high-quality digital illustration of a farmer's hands holding a modern smartphone, actively scanning a close-up of a vibrant green tomato leaf that shows early signs of fungal disease. The smartphone screen displays a high-tech, futuristic augmented reality grid overlaying the leaf, illuminated in bright glowing emerald green (#10B981) against a dark, moody agricultural background. The overall aesthetic is professional, highly detailed glassmorphic minimalism, blending organic agriculture with advanced digital precision.">
+<div class="absolute inset-0 bg-gradient-to-b from-surface-dim/20 via-surface-dim/50 to-surface-dim"></div>
+<div class="absolute top-0 left-0 w-full flex justify-center overflow-hidden h-[665px]">
+<div class="w-full max-w-lg h-[2px] bg-primary shadow-[0_0_20px_#10B981] animate-scan relative z-10">
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-[1px] bg-white/50 blur-[1px]"></div>
+</div>
+<div class="absolute inset-0 max-w-lg mx-auto pointer-events-none opacity-20 bg-[linear-gradient(rgba(16,185,129,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(16,185,129,0.1)_1px,transparent_1px)] bg-[size:20px_20px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_40%,#000_70%,transparent_100%)]"></div>
+</div>
+</div>
+<main class="relative z-10 w-full px-margin-mobile md:px-margin-desktop h-full flex flex-col justify-end pb-safe mb-8">
+<div class="rounded-3xl bg-gradient-to-br from-white/15 to-white/0 p-[1px] w-full max-w-lg mx-auto shadow-2xl shadow-black/80 relative group">
+<div class="absolute -inset-1 bg-primary/20 blur-xl rounded-[32px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 -z-10"></div>
+<div class="bg-surface/75 backdrop-blur-[24px] rounded-[calc(1.5rem-1px)] p-card-padding md:p-8 flex flex-col gap-8 relative z-10 overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-bl-full blur-2xl -z-10"></div>
+<div class="flex gap-2 items-center justify-center">
+<div class="w-8 h-1.5 rounded-full bg-primary shadow-[0_0_12px_rgba(16,185,129,0.6)]"></div>
+<div class="w-2 h-1.5 rounded-full bg-surface-container-highest transition-colors duration-300"></div>
+<div class="w-2 h-1.5 rounded-full bg-surface-container-highest transition-colors duration-300"></div>
+</div>
+<div class="text-center flex flex-col gap-4">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-primary-fixed drop-shadow-[0_2px_10px_rgba(16,185,129,0.2)]">
+                        Detect Crop Disease Instantly
+                    </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-[280px] mx-auto leading-relaxed">
+                        Take a photo. AI identifies disease. Treatment generated.
+                    </p>
+</div>
+<button class="w-full rounded-full py-4 bg-surface-bright/50 border border-glass-stroke flex items-center justify-center gap-2 hover:bg-primary-container hover:text-on-primary-container hover:border-primary-container transition-all duration-300 group shadow-lg shadow-black/20 hover:shadow-primary/20 mt-2">
+<span class="font-label-md text-label-md tracking-wider uppercase text-on-surface group-hover:text-on-primary-container transition-colors">Next</span>
+<span class="material-symbols-outlined text-[20px] text-primary group-hover:text-on-primary-container group-hover:translate-x-1 transition-all">arrow_forward</span>
+</button>
+</div>
+</div>
+</main>
+<script>
+        document.querySelector('button.w-full').addEventListener('click', function() {
+            this.style.transform = 'scale(0.98)';
+            setTimeout(() => {
+                this.style.transform = 'scale(1)';
+            }, 150);
+        });
+    </script>
+</body></html>

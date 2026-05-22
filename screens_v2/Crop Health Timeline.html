@@ -1,0 +1,337 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>KrishiDrishti - Crop Health Timeline</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-dim": "#111416",
+                        "surface-container-high": "#282a2d",
+                        "secondary": "#bac8d7",
+                        "on-tertiary-fixed-variant": "#004a75",
+                        "error-container": "#93000a",
+                        "surface-container-highest": "#333538",
+                        "surface": "#111416",
+                        "tertiary-container": "#4ca9f1",
+                        "error": "#ffb4ab",
+                        "tertiary-fixed": "#cee5ff",
+                        "on-secondary": "#24323e",
+                        "background": "#111416",
+                        "on-primary-fixed-variant": "#005236",
+                        "inverse-primary": "#006c49",
+                        "surface-tint": "#4edea3",
+                        "on-tertiary": "#003353",
+                        "secondary-container": "#3b4855",
+                        "on-error-container": "#ffdad6",
+                        "glass-stroke": "rgba(255, 255, 255, 0.1)",
+                        "surface-dark": "#1E1E1E",
+                        "on-error": "#690005",
+                        "outline-variant": "#3c4a42",
+                        "on-secondary-container": "#a9b7c6",
+                        "on-tertiary-fixed": "#001d32",
+                        "text-muted": "#A9B7C6",
+                        "surface-container-lowest": "#0c0e11",
+                        "primary": "#4edea3",
+                        "outline": "#86948a",
+                        "secondary-fixed-dim": "#bac8d7",
+                        "tertiary": "#96ccff",
+                        "surface-bright": "#37393c",
+                        "primary-container": "#10b981",
+                        "surface-container": "#1e2023",
+                        "tertiary-fixed-dim": "#96ccff",
+                        "surface-variant": "#333538",
+                        "on-background": "#e2e2e6",
+                        "secondary-fixed": "#d6e4f4",
+                        "inverse-surface": "#e2e2e6",
+                        "inverse-on-surface": "#2f3034",
+                        "primary-fixed": "#6ffbbe",
+                        "on-surface-variant": "#bbcabf",
+                        "on-primary-fixed": "#002113",
+                        "surface-container-low": "#1a1c1f",
+                        "on-primary-container": "#00422b",
+                        "on-tertiary-container": "#003c60",
+                        "primary-fixed-dim": "#4edea3",
+                        "on-secondary-fixed": "#0f1d28",
+                        "on-secondary-fixed-variant": "#3b4855",
+                        "on-primary": "#003824",
+                        "on-surface": "#e2e2e6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "card-padding": "18px",
+                        "margin-desktop": "32px",
+                        "gutter": "16px",
+                        "base": "8px",
+                        "section-gap": "40px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "display-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "300" }],
+                        "display-lg": ["60px", { "lineHeight": "60px", "letterSpacing": "-0.025em", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(43, 45, 48, 0.7);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            position: relative;
+        }
+        .glass-panel::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: inherit;
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+        
+        /* Grid background for charts */
+        .chart-grid {
+            background-image: 
+                linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        /* SVG Line Animation */
+        .path-animate {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: drawLine 2s ease-out forwards;
+        }
+        
+        @keyframes drawLine {
+            to { stroke-dashoffset: 0; }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md antialiased overflow-x-hidden pt-20 pb-28 md:pb-8">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-margin-mobile md:px-margin-desktop h-16 bg-surface/70 backdrop-blur-xl border-b border-glass-stroke">
+<div class="flex items-center gap-4">
+<h1 class="font-display-lg text-headline-lg-mobile md:text-headline-lg text-primary tracking-tight"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuB57XKlggPHXmve63TZ_Fbh9tk6TNP6qRjU-RgMJLE2tQNB5fObLXkJ9UoW83uMbsqgeK3F7shBCPX33iQ3oOgdUySSWl9p84zfbvWkmcfPdOv6h_mU7i61P0BmpiYJ_E58uGcR1TtZVDMluSvKh0WsnOb8FVtQocQSh2KsXBKoiUhJeMBTMrpRZhqlTs1JhsoGoo_bLndK9QiE1D4wbD_xd3y_eAqKjphLxOqiUYjzfAbFPoIamAnOM9k5F5NZNkVqfrg6PIb2YyQo" alt="KrishiDrishti Logo" class="h-10 md:h-12 w-auto object-contain"></h1>
+</div>
+<!-- Desktop Nav -->
+<nav class="hidden md:flex items-center gap-8">
+<a class="font-body-md text-on-surface-variant hover:text-primary-fixed transition-colors" href="#">Home</a>
+<a class="font-body-md text-on-surface-variant hover:text-primary-fixed transition-colors" href="#">Detection</a>
+<a class="font-body-md text-primary font-bold hover:text-primary-fixed transition-colors" href="#">Intelligence</a>
+<a class="font-body-md text-on-surface-variant hover:text-primary-fixed transition-colors" href="#">Settings</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-primary-fixed transition-colors Active: scale-95 duration-150">
+<span class="material-symbols-outlined" data-icon="translate">translate</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary-fixed transition-colors Active: scale-95 duration-150">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop mt-section-gap">
+<!-- Header Section -->
+<div class="mb-section-gap">
+<div class="flex items-center gap-3 mb-4">
+<a class="text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center w-10 h-10 rounded-full bg-surface-container border border-glass-stroke" href="#">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</a>
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Crop Health Timeline</h2>
+<p class="font-body-sm text-body-sm text-text-muted">Field Alpha • Sector 7</p>
+</div>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Key Metrics Card - Span 4 -->
+<div class="md:col-span-4 flex flex-col gap-gutter">
+<div class="glass-panel rounded-xl p-card-padding flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-2">
+<span class="font-label-md text-label-md text-text-muted uppercase tracking-wider">Current Status</span>
+<span class="material-symbols-outlined text-primary" data-icon="trending_up">trending_up</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-primary">Improving</h3>
+</div>
+<div class="mt-4 pt-4 border-t border-glass-stroke">
+<div class="flex justify-between items-center">
+<span class="font-body-sm text-body-sm text-text-muted">Severity Drop</span>
+<div class="flex items-center gap-1 text-primary-container">
+<span class="material-symbols-outlined" data-icon="arrow_downward" style="font-variation-settings: 'FILL' 1;">arrow_downward</span>
+<span class="font-headline-md text-headline-md">35%</span>
+</div>
+</div>
+</div>
+</div>
+<div class="glass-panel rounded-xl p-card-padding flex-grow relative overflow-hidden group">
+<div class="absolute inset-0 z-0">
+<img alt="Field View" class="w-full h-full object-cover opacity-30 mix-blend-overlay grayscale group-hover:grayscale-0 transition-all duration-700" data-alt="A high-altitude aerial view of vast agricultural fields demonstrating precision farming patterns. The fields are divided into geometric blocks of varying shades of deep green and dark soil, illuminated by stark, low-angle morning sunlight that casts long shadows. The overall aesthetic is high-tech, precise, and organic, styled in a dark mode palette with emerald green accents to emphasize crop vitality against a sleek, modern digital interface background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0qqz4aShiyoWDUwdObgsvFxhBoP4G2OU7yepuW19s0ZvVnQDS6kHltlqXNgSVFndJFHq5lEobj6TLgU3k6Lr7E6rlhNzrW8mYd96uxUJj2FoOrqoVRbjTZiuAiPLmAmAi2B6ByK0ObPXLd-npFGSWnQ02hPiG0vGdcN_ve-gX6rOK6HWS1--0j137GX1ctT8R0wfV__p1fj6TeIg1V5GNKDOFRkOgNvHWbep1jxHwpEJjXS-Ul1GVvKeKNGLc2BWelAXLtwe-qjkE">
+</div>
+<div class="relative z-10">
+<span class="font-label-md text-label-md text-text-muted uppercase tracking-wider mb-2 block">Latest Capture</span>
+<div class="inline-flex items-center gap-2 bg-surface-container/80 backdrop-blur-md px-3 py-1.5 rounded-full border border-glass-stroke">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="font-body-sm text-body-sm text-on-surface">May 21, 08:30 AM</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Visualization Main Card - Span 8 -->
+<div class="md:col-span-8 glass-panel rounded-xl p-card-padding flex flex-col min-h-[400px]">
+<div class="flex justify-between items-center mb-6">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Severity Trend</h3>
+<p class="font-body-sm text-body-sm text-text-muted">Disease progression over last 7 days</p>
+</div>
+<div class="flex gap-2">
+<span class="px-3 py-1 rounded-full bg-primary/10 text-primary border border-primary/20 font-label-md text-label-md flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-primary"></span> Live
+                        </span>
+</div>
+</div>
+<!-- Chart Area -->
+<div class="flex-grow chart-grid rounded-lg relative overflow-hidden flex items-end pl-8 pb-8">
+<!-- Y Axis Labels -->
+<div class="absolute left-0 top-0 bottom-8 w-8 flex flex-col justify-between text-right pr-2 py-4">
+<span class="font-label-md text-label-md text-text-muted">100%</span>
+<span class="font-label-md text-label-md text-text-muted">75%</span>
+<span class="font-label-md text-label-md text-text-muted">50%</span>
+<span class="font-label-md text-label-md text-text-muted">25%</span>
+<span class="font-label-md text-label-md text-text-muted">0%</span>
+</div>
+<!-- X Axis Labels -->
+<div class="absolute left-8 right-0 bottom-0 h-8 flex justify-between items-center px-4">
+<span class="font-label-md text-label-md text-text-muted">May 17</span>
+<span class="font-label-md text-label-md text-text-muted">May 19</span>
+<span class="font-label-md text-label-md text-text-muted">May 21</span>
+</div>
+<!-- SVG Line Chart -->
+<svg class="w-full h-full absolute inset-0 left-8 bottom-8 pt-4 pb-0 pr-4 pl-0" preserveAspectRatio="none" viewBox="0 0 100 100">
+<!-- Trend Line (May 17: 78%, May 19: 51%, May 21: 32%) -->
+<!-- Y is inverted in SVG, so 100 - value -->
+<path class="path-animate" d="M 0 22 C 30 22, 40 49, 50 49 C 70 49, 80 68, 100 68" fill="none" stroke="url(#gradient)" stroke-linecap="round" stroke-width="3"></path>
+<!-- Area under the curve -->
+<path d="M 0 22 C 30 22, 40 49, 50 49 C 70 49, 80 68, 100 68 L 100 100 L 0 100 Z" fill="url(#area-gradient)" opacity="0.3"></path>
+<!-- Data Points -->
+<circle class="animate-pulse" cx="0" cy="22" fill="#ffb4ab" r="2" style="animation-delay: 0s;"></circle>
+<circle class="animate-pulse" cx="50" cy="49" fill="#4edea3" r="2" style="animation-delay: 0.5s;"></circle>
+<circle class="animate-pulse" cx="100" cy="68" fill="#10b981" r="2" style="animation-delay: 1s;"></circle>
+<!-- Gradients -->
+<defs>
+<linearGradient id="gradient" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0%" stop-color="#ffb4ab"></stop> <!-- Error color for 78% -->
+<stop offset="50%" stop-color="#4edea3"></stop> <!-- Primary for 51% -->
+<stop offset="100%" stop-color="#10b981"></stop> <!-- Primary Container for 32% -->
+</linearGradient>
+<linearGradient id="area-gradient" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#10b981" stop-opacity="0.5"></stop>
+<stop offset="100%" stop-color="#10b981" stop-opacity="0"></stop>
+</linearGradient>
+</defs>
+</svg>
+<!-- Hover Tooltips (Static for design demonstration) -->
+<div class="absolute left-[0%] top-[22%] -translate-y-full -translate-x-1/2 pb-2 hidden md:block">
+<div class="bg-surface-container-high border border-glass-stroke rounded px-2 py-1 flex flex-col items-center shadow-lg">
+<span class="font-label-md text-label-md text-error">78%</span>
+</div>
+</div>
+<div class="absolute left-[50%] top-[49%] -translate-y-full -translate-x-1/2 pb-2">
+<div class="bg-surface-container-high border border-glass-stroke rounded px-2 py-1 flex flex-col items-center shadow-lg">
+<span class="font-label-md text-label-md text-primary">51%</span>
+</div>
+</div>
+<div class="absolute left-[100%] top-[68%] -translate-y-full -translate-x-[110%] pb-2">
+<div class="bg-surface-container-high border border-glass-stroke rounded px-2 py-1 flex flex-col items-center shadow-lg">
+<span class="font-label-md text-label-md text-primary-container">32%</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Timeline Detail List - Span 12 -->
+<div class="md:col-span-12 mt-4 glass-panel rounded-xl p-card-padding">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-6">Intervention Log</h3>
+<div class="relative border-l border-glass-stroke ml-4 pl-6 space-y-8">
+<!-- Event 1 -->
+<div class="relative">
+<div class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-surface border-2 border-primary-container z-10"></div>
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-2">
+<div>
+<h4 class="font-body-lg text-body-lg text-on-surface">Precision Spraying</h4>
+<p class="font-body-sm text-body-sm text-text-muted">Targeted fungicide application complete.</p>
+</div>
+<span class="font-label-md text-label-md text-text-muted bg-surface-container px-2 py-1 rounded">May 20 • Drone Fleet A</span>
+</div>
+</div>
+<!-- Event 2 -->
+<div class="relative">
+<div class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-surface border-2 border-primary z-10"></div>
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-2">
+<div>
+<h4 class="font-body-lg text-body-lg text-on-surface">Anomaly Detected</h4>
+<p class="font-body-sm text-body-sm text-text-muted">High severity blight signs identified in Sector 7.</p>
+</div>
+<span class="font-label-md text-label-md text-text-muted bg-surface-container px-2 py-1 rounded">May 17 • Satellite Scan</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 flex justify-around items-center px-4 pb-safe h-20 bg-surface-container/80 backdrop-blur-2xl rounded-t-xl border-t border-glass-stroke shadow-lg shadow-primary/5">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all group" href="#">
+<span class="material-symbols-outlined mb-1 group-hover:scale-110 transition-transform" data-icon="home_max">home_max</span>
+<span class="font-label-md text-label-md">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all group" href="#">
+<span class="material-symbols-outlined mb-1 group-hover:scale-110 transition-transform" data-icon="sensors">sensors</span>
+<span class="font-label-md text-label-md">Detection</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary bg-primary/10 rounded-xl py-1 px-3 transform scale-90 duration-200" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="analytics" style="font-variation-settings: 'FILL' 1;">analytics</span>
+<span class="font-label-md text-label-md font-bold">Intelligence</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all group" href="#">
+<span class="material-symbols-outlined mb-1 group-hover:scale-110 transition-transform" data-icon="settings">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+</nav>
+
+
+</body></html>
