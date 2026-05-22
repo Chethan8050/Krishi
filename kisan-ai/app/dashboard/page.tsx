@@ -187,10 +187,10 @@ export default function Dashboard() {
                   <span className="material-symbols-outlined text-tertiary group-hover:scale-110 transition-transform">bar_chart</span>
                   <span className="font-label-md text-label-md text-on-surface">Yield Predict</span>
                 </Link>
-                <button className="bg-surface-variant/50 hover:bg-surface-variant border border-glass-stroke rounded-lg p-3 flex flex-col items-center justify-center gap-2 transition-all hover:border-primary/50 group">
+                <Link href="/weather" className="bg-surface-variant/50 hover:bg-surface-variant border border-glass-stroke rounded-lg p-3 flex flex-col items-center justify-center gap-2 transition-all hover:border-primary/50 group">
                   <span className="material-symbols-outlined text-on-surface-variant group-hover:scale-110 transition-transform">cloud</span>
                   <span className="font-label-md text-label-md text-on-surface">Weather</span>
-                </button>
+                </Link>
                 <Link href="/marketplace" className="bg-surface-variant/50 hover:bg-surface-variant border border-glass-stroke rounded-lg p-3 flex flex-col items-center justify-center gap-2 transition-all hover:border-primary/50 group">
                   <span className="material-symbols-outlined text-on-surface-variant group-hover:scale-110 transition-transform">storefront</span>
                   <span className="font-label-md text-label-md text-on-surface">Market</span>
