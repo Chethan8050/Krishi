@@ -76,9 +76,9 @@ export default function HeatmapPage() {
   if (loadError) return <div className="p-8 text-error">Error loading maps</div>;
 
   return (
-    <div className="flex flex-col h-screen bg-surface">
+    <div className="flex flex-col h-[100dvh] bg-surface">
       {/* Header matching dashboard aesthetic */}
-      <header className="fixed top-0 w-full z-50 flex items-center px-4 md:px-6 h-16 bg-surface/70 backdrop-blur-xl border-b border-glass-stroke shadow-none">
+      <header className="w-full shrink-0 z-50 flex items-center px-4 md:px-6 h-16 bg-surface/70 backdrop-blur-xl border-b border-glass-stroke shadow-none">
         <button onClick={() => router.back()} className="p-2 -ml-2 text-on-surface-variant hover:text-primary rounded-full transition-colors">
           <span className="material-symbols-outlined">arrow_back</span>
         </button>
@@ -86,7 +86,7 @@ export default function HeatmapPage() {
       </header>
 
       {/* Main Map Container */}
-      <main className="flex-1 relative mt-16 overflow-hidden">
+      <main className="flex-1 relative overflow-hidden">
         {/* Map UI */}
         <div className="absolute inset-0 z-0">
           {!isLoaded ? (

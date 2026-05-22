@@ -90,13 +90,10 @@ export default function ChatPage() {
   };
 
   return (
-    <div className="flex flex-col h-[calc(100vh-4rem)] pt-16 pb-20 md:pb-0 bg-surface">
+    <div className="flex flex-col h-[100dvh] pb-20 md:pb-0 bg-surface">
       {/* Chat Header */}
       <div className="h-16 border-b border-glass-stroke bg-surface-container/50 backdrop-blur-md flex items-center justify-between px-4 md:px-6 shrink-0">
         <div className="flex items-center gap-3">
-          <button onClick={() => router.back()} className="md:hidden p-2 -ml-2 text-on-surface-variant hover:text-primary rounded-full transition-colors flex items-center justify-center">
-            <span className="material-symbols-outlined">arrow_back</span>
-          </button>
           <div className="relative hidden sm:block">
             <div className="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container font-bold text-lg border border-glass-stroke">
               S

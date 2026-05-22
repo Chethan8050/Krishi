@@ -6,6 +6,7 @@ import NavbarWrapper from "@/components/NavbarWrapper";
 import TopAppBar from "@/components/TopAppBar";
 import ThemeProvider from "@/components/ThemeProvider";
 import { AuthProvider } from "./components/AuthProvider";
+import GoogleTranslate from "@/components/GoogleTranslate";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -55,6 +56,7 @@ export default function RootLayout({
       <body className="bg-background text-on-surface antialiased min-h-screen selection:bg-primary/30 selection:text-primary pb-28 md:pb-0" suppressHydrationWarning>
         <ThemeProvider>
           <AuthProvider>
+            <GoogleTranslate />
             <TopAppBar />
             <PageTransition>
               {children}

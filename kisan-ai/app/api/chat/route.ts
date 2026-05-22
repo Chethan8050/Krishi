@@ -4,9 +4,10 @@ import { NextResponse } from 'next/server';
 // Key provided: sk-1234ijklmnop5678ijklmnop1234ijklmnop5678
 
 export async function POST(request: Request) {
+  let userMessages: any[] = [];
   try {
     const body = await request.json();
-    const userMessages = body.messages || [];
+    userMessages = body.messages || [];
 
     const apiKey = process.env.OPENAI_API_KEY;
 

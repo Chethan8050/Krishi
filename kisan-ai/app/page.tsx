@@ -166,8 +166,8 @@ export default function Home() {
 
         {/* Right Col (Narrower) */}
         <div className="md:col-span-4 flex flex-col gap-gutter">
-          {/* Quick Actions Grid */}
-          <div className="glass-panel rounded-xl p-card-padding flex flex-col gap-4">
+          {/* Quick Actions Grid - Hidden on Desktop since they are in the Sidebar */}
+          <div className="md:hidden glass-panel rounded-xl p-card-padding flex flex-col gap-4">
             <h3 className="font-headline-md text-body-lg text-on-surface">Quick Actions</h3>
             <div className="grid grid-cols-2 gap-3">
               <Link href="/scan" className="bg-surface-variant/50 hover:bg-surface-variant border border-glass-stroke rounded-lg p-3 flex flex-col items-center justify-center gap-2 transition-all hover:border-primary/50 group">

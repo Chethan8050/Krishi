@@ -5,6 +5,8 @@ import { usePathname } from 'next/navigation';
 export default function PageTransition({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
 
+  const hideSidebar = pathname === '/login' || pathname === '/onboarding' || pathname.startsWith('/onboarding/');
+
   return (
     <AnimatePresence mode="wait">
       <motion.div
@@ -13,7 +15,7 @@ export default function PageTransition({ children }: { children: React.ReactNode
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={{ opacity: 0, y: -10, scale: 1.01 }}
         transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-        className="flex-grow flex flex-col"
+        className={`flex-grow flex flex-col ${!hideSidebar ? 'md:pl-64' : ''}`}
       >
         {children}
       </motion.div>
