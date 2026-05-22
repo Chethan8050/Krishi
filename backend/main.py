@@ -186,7 +186,9 @@ async def predict_crop_disease(file: UploadFile = File(...), x_api_key: str = He
             
     except Exception as e:
         print(f"ERROR: {e}")
-        raise HTTPException(status_code=500, detail=str(e))
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=f"Prediction error: {str(e)}")
 
 if __name__ == "__main__":
     import uvicorn
