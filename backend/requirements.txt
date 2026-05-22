@@ -1,9 +1,9 @@
 fastapi==0.104.1
 uvicorn==0.24.0
 python-multipart==0.0.6
-Pillow==10.1.0
-numpy==1.26.2
+Pillow>=11.0.0
+numpy>=1.26.2
 
 # Uncomment the line below for the framework you decide to use for your custom model
-tensorflow==2.16.1
+tensorflow>=2.16.1
 # torch==2.1.1 torchvision==0.16.1

@@ -1,0 +1,25 @@
+{
+  "name": "krishi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev:full": "concurrently \"cd backend && python main.py\" \"cd kisan-ai && npm run dev\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Chethan8050/Krishi.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Chethan8050/Krishi/issues"
+  },
+  "homepage": "https://github.com/Chethan8050/Krishi#readme",
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}

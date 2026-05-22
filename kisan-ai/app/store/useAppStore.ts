@@ -5,7 +5,6 @@ export type Language = 'en' | 'hi' | 'kn';
 
 interface User {
   id: string;
-  phone: string;
   email?: string;
   fullName?: string;
   district?: string;
