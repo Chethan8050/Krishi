@@ -195,6 +195,14 @@ export default function Dashboard() {
                   <span className="material-symbols-outlined text-on-surface-variant group-hover:scale-110 transition-transform">storefront</span>
                   <span className="font-label-md text-label-md text-on-surface">Market</span>
                 </Link>
+                <Link href="/chat" className="bg-surface-variant/50 hover:bg-surface-variant border border-glass-stroke rounded-lg p-3 flex flex-col items-center justify-center gap-2 transition-all hover:border-primary/50 group">
+                  <span className="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">chat</span>
+                  <span className="font-label-md text-label-md text-on-surface">Farming AI</span>
+                </Link>
+                <Link href="/heatmap" className="bg-surface-variant/50 hover:bg-surface-variant border border-glass-stroke rounded-lg p-3 flex flex-col items-center justify-center gap-2 transition-all hover:border-primary/50 group">
+                  <span className="material-symbols-outlined text-error group-hover:scale-110 transition-transform">map</span>
+                  <span className="font-label-md text-label-md text-on-surface">Heatmaps</span>
+                </Link>
               </div>
             </div>
 

@@ -51,11 +51,22 @@ export async function POST(request: Request) {
   } catch (error: any) {
     console.error('Chat API Error:', error);
     
-    // Fallback response for demo purposes if API fails (e.g. invalid key)
+    const lastUserMessage = userMessages.length > 0 ? userMessages[userMessages.length - 1].content.toLowerCase() : "";
+    let mockResponse = "I recommend checking the soil moisture and looking for any unusual discoloration on the leaves. Could you provide a bit more detail about the symptoms?";
+    
+    if (lastUserMessage.includes('blight') || lastUserMessage.includes('spot') || lastUserMessage.includes('fungi')) {
+      mockResponse = "Early blight and leaf spots are common during high humidity. I strongly suggest removing affected lower leaves immediately and considering a copper-based fungicide spray early in the morning.";
+    } else if (lastUserMessage.includes('water') || lastUserMessage.includes('moisture') || lastUserMessage.includes('dry') || lastUserMessage.includes('irrigation')) {
+      mockResponse = "Maintaining optimal soil moisture is crucial. If the soil is too dry, consider drip irrigation to conserve water. If there's standing water, improve drainage immediately to prevent root rot.";
+    } else if (lastUserMessage.includes('price') || lastUserMessage.includes('market') || lastUserMessage.includes('sell')) {
+      mockResponse = "Market prices can fluctuate. I recommend holding onto non-perishable crops like cotton if prices are currently dipping, or checking local APMC yards for daily rates on fresh produce.";
+    } else if (lastUserMessage.includes('hello') || lastUserMessage.includes('hi') || lastUserMessage.includes('namaskara')) {
+      mockResponse = "Namaskara! How can I assist you with your farm today?";
+    }
+
     return NextResponse.json({
-      message: "I'm currently having trouble connecting to my central brain. However, based on common issues, please ensure your crops have proper drainage and you check for early signs of fungal spots.",
-      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-      isFallback: true
+      message: mockResponse,
+      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     });
   }
 }

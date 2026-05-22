@@ -14,7 +14,7 @@ export default function ChatPage() {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: 'assistant',
-      content: 'Namaskara! I am Dr. Somanna. How can I help you with your crops today?',
+      content: 'Namaskara! I am Kisan AI. How can I help you with your crops today?',
       time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     }
   ]);
@@ -105,7 +105,7 @@ export default function ChatPage() {
           </div>
           <div>
             <h2 className="font-headline-md text-body-md text-on-surface flex items-center gap-2">
-              Dr. Somanna
+              Kisan AI
               <span className="px-1.5 py-0.5 rounded text-[10px] bg-tertiary-container/20 text-tertiary font-label-md uppercase tracking-wider border border-tertiary/20">AI Expert</span>
             </h2>
             <p className="font-label-md text-label-md text-primary/80">Online now • KrishiDrishti</p>

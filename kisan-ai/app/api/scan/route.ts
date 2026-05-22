@@ -15,15 +15,28 @@ export async function POST(request: Request) {
     const mlFormData = new FormData();
     mlFormData.append('file', imageFile);
 
-    // ── Call the Python FastAPI Server ────────────────────────
-    const pythonResponse = await fetch('http://127.0.0.1:8000/predict', {
-      method: 'POST',
-      body: mlFormData,
-    });
+    // ── Call the Python FastAPI Server with Retry ─────────────
+    let pythonResponse: Response | null = null;
+    let retries = 2;
+    let lastError = null;
 
-    if (!pythonResponse.ok) {
-      const errorText = await pythonResponse.text();
-      throw new Error(`ML Server error: ${errorText}`);
+    while (retries >= 0) {
+      try {
+        pythonResponse = await fetch('http://127.0.0.1:8000/predict', {
+          method: 'POST',
+          body: mlFormData,
+        });
+        if (pythonResponse.ok) break;
+      } catch (err) {
+        lastError = err;
+      }
+      retries--;
+      if (retries >= 0) await new Promise(r => setTimeout(r, 1000)); // wait 1s before retry
+    }
+
+    if (!pythonResponse || !pythonResponse.ok) {
+      const errorText = pythonResponse ? await pythonResponse.text() : String(lastError);
+      throw new Error(`ML Server error: ${errorText}. Please make sure the backend server is running.`);
     }
 
     const pythonData = await pythonResponse.json();
