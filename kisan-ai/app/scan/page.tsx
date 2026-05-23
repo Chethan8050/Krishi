@@ -6,6 +6,7 @@ import { useAppStore } from '../store/useAppStore';
 export default function ScanPage() {
   const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const cameraInputRef = useRef<HTMLInputElement>(null);
   const { setSelectedImage, selectedImage } = useAppStore();
   const [preview, setPreview] = useState<string | null>(null);
   const [mounted, setMounted] = useState(false);
@@ -33,18 +34,30 @@ export default function ScanPage() {
     fileInputRef.current?.click();
   };
 
+  const triggerCamera = () => {
+    cameraInputRef.current?.click();
+  };
+
   if (!mounted) return null;
 
   return (
     <div className="flex flex-col min-h-screen">
       {/* Main Content Canvas */}
       <main className="flex-grow pt-24 pb-32 md:pb-24 px-margin-mobile md:px-margin-desktop max-w-[1200px] w-full mx-auto grid grid-cols-4 md:grid-cols-12 gap-gutter">
-        {/* Hidden File Input */}
+        {/* Hidden File Inputs */}
         <input 
           type="file" 
           ref={fileInputRef} 
           onChange={handleFileChange} 
           accept="image/*" 
+          className="hidden" 
+        />
+        <input 
+          type="file" 
+          ref={cameraInputRef} 
+          onChange={handleFileChange} 
+          accept="image/*" 
+          capture="environment"
           className="hidden" 
         />
 
@@ -53,7 +66,7 @@ export default function ScanPage() {
           {/* Scanner Viewfinder */}
           <div 
             className="relative w-full aspect-[4/5] md:aspect-[4/3] rounded-2xl glass-panel overflow-hidden flex flex-col items-center justify-center container group cursor-pointer"
-            onClick={triggerUpload}
+            onClick={triggerCamera}
           >
             <div 
               className={`absolute inset-0 bg-cover bg-center transition-all duration-700 ${preview ? 'opacity-100' : 'opacity-40 blur-sm group-hover:blur-0 group-hover:opacity-60'}`}
@@ -74,7 +87,7 @@ export default function ScanPage() {
           {/* Primary Actions (Camera/Gallery) & CTA */}
           <div className="glass-panel rounded-2xl p-card-padding flex flex-col sm:flex-row gap-4 items-center justify-between">
             <div className="flex gap-4 w-full sm:w-auto">
-              <button onClick={triggerUpload} className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-surface-container hover:bg-primary hover:text-on-primary text-on-surface border border-glass-stroke transition-all duration-300 rounded-full px-6 py-3 font-body-sm text-body-sm active:scale-95 group">
+              <button onClick={triggerCamera} className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-surface-container hover:bg-primary hover:text-on-primary text-on-surface border border-glass-stroke transition-all duration-300 rounded-full px-6 py-3 font-body-sm text-body-sm active:scale-95 group">
                 <span className="material-symbols-outlined group-hover:text-on-primary text-primary transition-colors">photo_camera</span>
                 <span>Camera</span>
               </button>

@@ -11,6 +11,7 @@ export default function SellProduceModal({ isOpen, onClose, onSubmit }: SellProd
   const [price, setPrice] = useState('');
   const [quantity, setQuantity] = useState('');
   const [date, setDate] = useState('Available Now');
+  const [sellType, setSellType] = useState('fixed');
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -41,7 +42,8 @@ export default function SellProduceModal({ isOpen, onClose, onSubmit }: SellProd
       quantity: quantity ? `${quantity} kg` : '0 kg',
       // Provide a fallback image if none was uploaded
       image: imagePreview || 'https://images.unsplash.com/photo-1592841200221-a6898f307baa?q=80&w=300&auto=format&fit=crop',
-      status: date === 'Available Now' ? 'available' : 'upcoming'
+      status: date === 'Available Now' ? 'available' : 'upcoming',
+      sellType: sellType
     };
 
     onSubmit(newListing);
@@ -51,6 +53,7 @@ export default function SellProduceModal({ isOpen, onClose, onSubmit }: SellProd
     setPrice('');
     setQuantity('');
     setDate('Available Now');
+    setSellType('fixed');
     setImagePreview(null);
   };
 
@@ -121,7 +124,19 @@ export default function SellProduceModal({ isOpen, onClose, onSubmit }: SellProd
 
           <div className="grid grid-cols-2 gap-4">
             <div className="flex flex-col gap-2">
-              <label htmlFor="price" className="font-label-md text-on-surface-variant uppercase tracking-wider text-[11px]">Price per kg (₹)</label>
+              <label htmlFor="sellType" className="font-label-md text-on-surface-variant uppercase tracking-wider text-[11px]">Sell Type</label>
+              <select 
+                id="sellType"
+                value={sellType}
+                onChange={(e) => setSellType(e.target.value)}
+                className="bg-surface-variant/30 border border-glass-stroke rounded-lg px-4 py-3 font-body-md text-on-surface focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/50 transition-all appearance-none"
+              >
+                <option className="bg-surface text-on-surface" value="fixed">Fixed Price</option>
+                <option className="bg-surface text-on-surface" value="bidding">Online Bidding</option>
+              </select>
+            </div>
+            <div className="flex flex-col gap-2">
+              <label htmlFor="price" className="font-label-md text-on-surface-variant uppercase tracking-wider text-[11px]">{sellType === 'bidding' ? 'Min Price (₹/kg)' : 'Price (₹/kg)'}</label>
               <input 
                 id="price"
                 type="number" 
@@ -132,18 +147,19 @@ export default function SellProduceModal({ isOpen, onClose, onSubmit }: SellProd
                 className="bg-surface-variant/30 border border-glass-stroke rounded-lg px-4 py-3 font-body-md text-on-surface focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/50 transition-all"
               />
             </div>
-            <div className="flex flex-col gap-2">
-              <label htmlFor="quantity" className="font-label-md text-on-surface-variant uppercase tracking-wider text-[11px]">Quantity (kg)</label>
-              <input 
-                id="quantity"
-                type="number" 
-                required
-                value={quantity}
-                onChange={(e) => setQuantity(e.target.value)}
-                placeholder="e.g., 50" 
-                className="bg-surface-variant/30 border border-glass-stroke rounded-lg px-4 py-3 font-body-md text-on-surface focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/50 transition-all"
-              />
-            </div>
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <label htmlFor="quantity" className="font-label-md text-on-surface-variant uppercase tracking-wider text-[11px]">Quantity (kg)</label>
+            <input 
+              id="quantity"
+              type="number" 
+              required
+              value={quantity}
+              onChange={(e) => setQuantity(e.target.value)}
+              placeholder="e.g., 50" 
+              className="bg-surface-variant/30 border border-glass-stroke rounded-lg px-4 py-3 font-body-md text-on-surface focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/50 transition-all"
+            />
           </div>
 
           <div className="flex flex-col gap-2">

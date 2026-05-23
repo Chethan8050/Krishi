@@ -4,7 +4,7 @@ import Link from 'next/link';
 import SellProduceModal from '@/components/SellProduceModal';
 
 export default function MarketPage() {
-  const [activeTab, setActiveTab] = useState<'trends' | 'farmdirect'>('trends');
+  const [activeTab, setActiveTab] = useState<'trends' | 'farmdirect' | 'oneshot'>('trends');
   const [isSellModalOpen, setIsSellModalOpen] = useState(false);
 
   const cropPrices = [
@@ -23,15 +23,38 @@ export default function MarketPage() {
   ];
 
   const [farmDirectListings, setFarmDirectListings] = useState([
-    { id: 1, crop: 'Organic Tomatoes', farmer: 'Ramesh Gowda', distance: '1.2 km away', price: '₹35/kg', date: 'Harvesting Tomorrow', quantity: '50 kg', image: '/crops/tomatoes.png', status: 'upcoming' },
-    { id: 2, crop: 'Fresh Potatoes', farmer: 'Suresh Patil', distance: '3.5 km away', price: '₹22/kg', date: 'Available Now', quantity: '200 kg', image: '/crops/potatoes.png', status: 'available' },
-    { id: 3, crop: 'Sweet Corn', farmer: 'Lakshmi N', distance: '5.0 km away', price: '₹15/piece', date: 'Harvesting in 3 Days', quantity: '100 pieces', image: '/crops/corn.png', status: 'upcoming' },
-    { id: 4, crop: 'Ragi (Finger Millet)', farmer: 'Kumar V', distance: '8.1 km away', price: '₹40/kg', date: 'Available Now', quantity: '500 kg', image: '/crops/ragi.png', status: 'available' },
+    { id: 1, crop: 'Organic Tomatoes', farmer: 'Ramesh Gowda', distance: '1.2 km away', price: '₹35/kg', date: 'Harvesting Tomorrow', quantity: '50 kg', image: '/crops/tomatoes.png', status: 'upcoming', sellType: 'fixed' },
+    { id: 2, crop: 'Fresh Potatoes', farmer: 'Suresh Patil', distance: '3.5 km away', price: '₹22/kg', date: 'Available Now', quantity: '200 kg', image: '/crops/potatoes.png', status: 'available', sellType: 'fixed' },
+    { id: 3, crop: 'Sweet Corn', farmer: 'Lakshmi N', distance: '5.0 km away', price: '₹15/piece', date: 'Harvesting in 3 Days', quantity: '100 pieces', image: '/crops/corn.png', status: 'upcoming', sellType: 'fixed' },
+    { id: 4, crop: 'Ragi (Finger Millet)', farmer: 'Kumar V', distance: '8.1 km away', price: '₹40/kg', date: 'Available Now', quantity: '500 kg', image: '/crops/ragi.png', status: 'available', sellType: 'fixed' },
+  ]);
+
+  const [oneShotListings, setOneShotListings] = useState([
+    { id: 101, crop: 'Bulk Wheat Harvest', farmer: 'Prakash Rao', distance: '12 km away', minPrice: '2300', currentBid: '2450', endsIn: '14h 23m', quantity: '50 Quintals', image: '/crops/wheat.png', status: 'auction' },
+    { id: 102, crop: 'Entire Onion Yield', farmer: 'Anil Kumar', distance: '8.5 km away', minPrice: '1500', currentBid: '1550', endsIn: '22h 10m', quantity: '100 Quintals', image: '/crops/onions.png', status: 'auction' },
   ]);
 
   const handlePostListing = (newListing: any) => {
     // Add the new listing to the top of the feed
     setFarmDirectListings([newListing, ...farmDirectListings]);
+    setIsSellModalOpen(false);
+  };
+
+  const handlePostOneShot = (newListing: any) => {
+    const rawPrice = newListing.price.replace(/[^0-9]/g, '') || '0';
+    const oneShotListing = {
+      id: Date.now(),
+      crop: newListing.crop,
+      farmer: 'You',
+      distance: '0 km away',
+      minPrice: rawPrice,
+      currentBid: rawPrice,
+      endsIn: '24h 00m', // 1 day duration
+      quantity: newListing.quantity,
+      image: newListing.image,
+      status: 'auction'
+    };
+    setOneShotListings([oneShotListing, ...oneShotListings]);
     setIsSellModalOpen(false);
   };
 
@@ -63,6 +86,13 @@ export default function MarketPage() {
           >
             FarmDirect <span className="material-symbols-outlined text-[14px]">storefront</span>
             {activeTab === 'farmdirect' && <div className="absolute bottom-0 left-0 w-full h-0.5 bg-primary rounded-t-full glow-primary"></div>}
+          </button>
+          <button 
+            onClick={() => setActiveTab('oneshot')}
+            className={`pb-3 font-body-md transition-colors relative flex items-center gap-1 ${activeTab === 'oneshot' ? 'text-primary font-semibold' : 'text-on-surface-variant hover:text-on-surface'}`}
+          >
+            One Shot <span className="material-symbols-outlined text-[14px]">local_shipping</span>
+            {activeTab === 'oneshot' && <div className="absolute bottom-0 left-0 w-full h-0.5 bg-primary rounded-t-full glow-primary"></div>}
           </button>
         </div>
       </header>
@@ -162,7 +192,7 @@ export default function MarketPage() {
               </div>
             </div>
           </>
-        ) : (
+        ) : activeTab === 'farmdirect' ? (
           <>
             {/* FarmDirect Hero */}
             <div className="glass-panel rounded-xl p-card-padding glow-primary flex flex-col md:flex-row justify-between items-start md:items-center gap-6 relative overflow-hidden">
@@ -203,7 +233,7 @@ export default function MarketPage() {
                       <img src={listing.image} alt={listing.crop} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                       <div className="absolute top-3 right-3">
                         <span className={`px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider ${listing.status === 'available' ? 'bg-primary/90 text-on-primary backdrop-blur-md' : 'bg-tertiary/90 text-on-tertiary backdrop-blur-md'}`}>
-                          {listing.status === 'available' ? 'Available' : 'Pre-Book'}
+                          {listing.sellType === 'bidding' ? 'Auction' : (listing.status === 'available' ? 'Available' : 'Pre-Book')}
                         </span>
                       </div>
                       <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-background to-transparent p-4 pb-2 pt-10">
@@ -226,7 +256,9 @@ export default function MarketPage() {
 
                       <div className="grid grid-cols-2 gap-2 mt-1">
                         <div className="bg-surface-variant/30 rounded-lg p-2 border border-glass-stroke/50">
-                          <p className="font-label-md text-[10px] text-on-surface-variant uppercase tracking-wider mb-1">Price</p>
+                          <p className="font-label-md text-[10px] text-on-surface-variant uppercase tracking-wider mb-1">
+                            {listing.sellType === 'bidding' ? 'Min Price' : 'Price'}
+                          </p>
                           <p className="font-body-md text-primary font-bold">{listing.price}</p>
                         </div>
                         <div className="bg-surface-variant/30 rounded-lg p-2 border border-glass-stroke/50">
@@ -246,13 +278,27 @@ export default function MarketPage() {
                           <span className="material-symbols-outlined text-sm">chat</span>
                           Chat
                         </button>
-                        {listing.status === 'available' ? (
-                          <button className="flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-primary/20 text-primary border border-primary/30 hover:bg-primary hover:text-on-primary transition-colors font-body-sm font-medium">
+                        {listing.sellType === 'bidding' ? (
+                          <button 
+                            onClick={() => {
+                              const bid = prompt(`Enter your bid for ${listing.crop} (Minimum ${listing.price}):`);
+                              if (bid) alert(`Bid of ₹${bid} placed successfully!`);
+                            }}
+                            className="flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-secondary/20 text-secondary border border-secondary/30 hover:bg-secondary hover:text-on-secondary transition-colors font-body-sm font-medium">
+                            <span className="material-symbols-outlined text-sm">gavel</span>
+                            Bid Now
+                          </button>
+                        ) : listing.status === 'available' ? (
+                          <button 
+                            onClick={() => alert(`Order placed successfully for ${listing.crop}!`)}
+                            className="flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-primary/20 text-primary border border-primary/30 hover:bg-primary hover:text-on-primary transition-colors font-body-sm font-medium">
                             <span className="material-symbols-outlined text-sm">shopping_cart</span>
                             Buy Now
                           </button>
                         ) : (
-                          <button className="flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-tertiary/20 text-tertiary border border-tertiary/30 hover:bg-tertiary hover:text-on-tertiary transition-colors font-body-sm font-medium">
+                          <button 
+                            onClick={() => alert(`Pre-booking accepted for ${listing.crop}!`)}
+                            className="flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-tertiary/20 text-tertiary border border-tertiary/30 hover:bg-tertiary hover:text-on-tertiary transition-colors font-body-sm font-medium">
                             <span className="material-symbols-outlined text-sm">bookmark</span>
                             Pre-Book
                           </button>
@@ -264,14 +310,98 @@ export default function MarketPage() {
               </div>
             </div>
           </>
-        )}
+        ) : activeTab === 'oneshot' ? (
+          <>
+            {/* One Shot Hero */}
+            <div className="glass-panel rounded-xl p-card-padding glow-primary flex flex-col md:flex-row justify-between items-start md:items-center gap-6 relative overflow-hidden bg-gradient-to-br from-surface to-surface-variant border-primary/20">
+              <div className="absolute -left-20 -bottom-20 w-64 h-64 bg-primary/10 rounded-full blur-3xl pointer-events-none"></div>
+              <div className="z-10 max-w-xl">
+                <div className="flex items-center gap-3 mb-2">
+                  <span className="material-symbols-outlined text-primary icon-fill text-3xl">local_shipping</span>
+                  <h2 className="font-display-lg text-headline-lg text-on-surface">One Shot Bulk Sale</h2>
+                </div>
+                <p className="font-body-md text-on-surface-variant">Sell your entire harvest in one go. Set a minimum price and let buyers bid for 24 hours. The highest bidder secures your produce!</p>
+              </div>
+              <div className="z-10 shrink-0">
+                <button 
+                  onClick={() => setIsSellModalOpen(true)}
+                  className="flex items-center gap-2 bg-primary text-on-primary font-headline-md text-body-md px-6 py-3 rounded-full hover:bg-primary-fixed-dim transition-colors shadow-lg shadow-primary/20 hover:shadow-primary/40"
+                >
+                  <span className="material-symbols-outlined">add_circle</span>
+                  Create Auction
+                </button>
+              </div>
+            </div>
+
+            {/* One Shot Feed */}
+            <div className="flex flex-col gap-4">
+              <div className="flex justify-between items-end mb-2">
+                <h3 className="font-headline-md text-headline-md text-on-surface">Active Bulk Auctions</h3>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-gutter">
+                {oneShotListings.map((listing) => (
+                  <div key={listing.id} className="glass-panel rounded-xl overflow-hidden flex flex-col group hover:border-primary/30 transition-colors border border-primary/10">
+                    <div className="flex flex-col md:flex-row h-full">
+                      <div className="w-full md:w-2/5 h-48 md:h-auto relative bg-surface-dark overflow-hidden">
+                        <img src={listing.image} alt={listing.crop} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                        <div className="absolute top-3 left-3">
+                          <span className="px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider bg-error/90 text-on-error backdrop-blur-md flex items-center gap-1">
+                            <span className="material-symbols-outlined text-[12px]">timer</span>
+                            {listing.endsIn}
+                          </span>
+                        </div>
+                      </div>
+                      <div className="p-4 flex flex-col gap-3 flex-1 w-full md:w-3/5">
+                        <h4 className="font-headline-md text-body-lg text-on-surface font-semibold">{listing.crop}</h4>
+                        <div className="flex items-center gap-2 text-on-surface-variant">
+                          <span className="material-symbols-outlined text-sm">person</span>
+                          <span className="font-body-sm">{listing.farmer} • {listing.distance}</span>
+                        </div>
+                        
+                        <div className="grid grid-cols-2 gap-2 mt-2">
+                          <div className="bg-surface-variant/30 rounded-lg p-2 border border-glass-stroke/50">
+                            <p className="font-label-md text-[10px] text-on-surface-variant uppercase tracking-wider mb-1">Quantity</p>
+                            <p className="font-body-md text-on-surface font-semibold">{listing.quantity}</p>
+                          </div>
+                          <div className="bg-primary/5 rounded-lg p-2 border border-primary/20">
+                            <p className="font-label-md text-[10px] text-primary uppercase tracking-wider mb-1">Current Bid</p>
+                            <p className="font-body-md text-primary font-bold">₹{listing.currentBid}</p>
+                          </div>
+                        </div>
+                        <div className="text-[11px] text-on-surface-variant text-right">
+                          Min Price: ₹{listing.minPrice}
+                        </div>
+                        <div className="mt-auto pt-3 border-t border-glass-stroke/50">
+                          <button 
+                            onClick={() => {
+                              const bid = prompt(`Enter your bid for ${listing.crop} (Must be > ₹${listing.currentBid}):`);
+                              if (bid && parseInt(bid) > parseInt(listing.currentBid)) {
+                                alert(`Bid of ₹${bid} placed successfully! You are now the highest bidder.`);
+                              } else if (bid) {
+                                alert('Bid must be higher than the current bid.');
+                              }
+                            }}
+                            className="w-full flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-lg bg-primary text-on-primary hover:bg-primary-fixed-dim transition-colors font-body-sm font-bold shadow-md shadow-primary/20">
+                            <span className="material-symbols-outlined text-sm">gavel</span>
+                            Place Bid
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </>
+        ) : null}
       </main>
       
       {/* Modal */}
       <SellProduceModal 
         isOpen={isSellModalOpen} 
         onClose={() => setIsSellModalOpen(false)} 
-        onSubmit={handlePostListing} 
+        onSubmit={activeTab === 'oneshot' ? handlePostOneShot : handlePostListing} 
       />
     </div>
   );
